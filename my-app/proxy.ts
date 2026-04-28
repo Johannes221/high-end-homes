@@ -1,19 +1,14 @@
-// Proxy (ehemals Middleware) – schützt /dashboard/* Routen
+// Proxy (Middleware) – schützt /dashboard/* Routen
 
+import { auth } from "@/lib/auth";
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-export function proxy(req: NextRequest) {
+export default auth((req: NextRequest & { auth: { user?: { id?: string } } | null }) => {
   const { pathname } = req.nextUrl;
+  const isLoggedIn = !!req.auth?.user;
 
-  // Session-Cookie prüfen (NextAuth v5 nutzt "authjs.session-token")
-  const sessionToken =
-    req.cookies.get("authjs.session-token")?.value ||
-    req.cookies.get("__Secure-authjs.session-token")?.value;
-
-  const isLoggedIn = !!sessionToken;
-
-  // Dashboard-Routen schützen
+  // Schützte Routen
   if (pathname.startsWith("/dashboard")) {
     if (!isLoggedIn) {
       const loginUrl = new URL("/login", req.url);
@@ -22,14 +17,14 @@ export function proxy(req: NextRequest) {
     }
   }
 
-  // Eingeloggte User von Login/Register wegschicken
+  // Eingeloggte User von Login/Register-Seite weiterleiten
   if ((pathname === "/login" || pathname === "/register") && isLoggedIn) {
     return NextResponse.redirect(new URL("/dashboard", req.url));
   }
 
   return NextResponse.next();
-}
+});
 
 export const config = {
-  matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
+  matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*))"],
 };

@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 4, "column": 0}, "map": {"version":3,"sources":["file:///Users/johan/high-end-homes/my-app/components/SessionProviderWrapper.tsx"],"sourcesContent":["\"use client\";\n\n// Wrapper für NextAuth SessionProvider (Client Component)\n\nimport { SessionProvider } from \"next-auth/react\";\n\nexport default function SessionProviderWrapper({\n  children,\n}: {\n  children: React.ReactNode;\n}) {\n  return <SessionProvider>{children}</SessionProvider>;\n}\n"],"names":["SessionProviderWrapper","children"],"mappings":";;;;;AAEA,0DAA0D;AAE1D;AAJA;;;AAMe,SAASA,uBAAuB,EAC7CC,QAAQ,EAGT;IACC,qBAAO,6LAAC,2JAAe;kBAAEA;;;;;;AAC3B;KANwBD"}}]
-}
