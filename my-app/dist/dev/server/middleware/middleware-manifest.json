@@ -1,0 +1,41 @@
+{
+  "sorted_middleware": [],
+  "middleware": {
+    "/": {
+      "files": [
+        "server/edge/chunks/node_modules_next_dist_074f_vw._.js",
+        "server/edge/chunks/node_modules_@auth_core_0ejd557._.js",
+        "server/edge/chunks/node_modules_jose_dist_webapi_02.0w_.._.js",
+        "server/edge/chunks/node_modules_@prisma_client_09rrjb6._.js",
+        "server/edge/chunks/node_modules_0dmbu1~._.js",
+        "server/edge/chunks/[root-of-the-server]__0736a8t._.js",
+        "server/edge/chunks/turbopack-node_modules_next_dist_esm_build_templates_edge-wrapper_0y4t2cm.js"
+      ],
+      "name": "middleware",
+      "page": "/",
+      "entrypoint": "server/edge/chunks/turbopack-node_modules_next_dist_esm_build_templates_edge-wrapper_0y4t2cm.js",
+      "matchers": [
+        {
+          "regexp": "/:nextData(_next/data/[^/]{1,})?/((?!api|_next/static|_next/image|favicon.ico).*){(\\\\.json)}?",
+          "originalSource": "/((?!api|_next/static|_next/image|favicon.ico).*)"
+        }
+      ],
+      "wasm": [
+        {
+          "name": "wasm_aab3702b0d04903290f192f33b07094a",
+          "filePath": "server/edge/chunks/node_modules__prisma_client_query_compiler_fast_bg_0656eb_.wasm"
+        }
+      ],
+      "assets": [],
+      "env": {
+        "__NEXT_BUILD_ID": "development",
+        "NEXT_SERVER_ACTIONS_ENCRYPTION_KEY": "ohyLEBmFwB2TxXoj91zuI8BD/ItLQLP6Mar7PapjBc8=",
+        "__NEXT_PREVIEW_MODE_ID": "659c1c37477ae1110d64435caaa28f03",
+        "__NEXT_PREVIEW_MODE_ENCRYPTION_KEY": "5473c7042a7924916450c36915823134496f1ba308da4dd3d06098ff348f8d02",
+        "__NEXT_PREVIEW_MODE_SIGNING_KEY": "159eb3cd206c618f9e41e80794615a7138f6d37bcfc17ce215ef10c87ece916b"
+      }
+    }
+  },
+  "instrumentation": null,
+  "functions": {}
+}

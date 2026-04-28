@@ -1,0 +1,62 @@
+// Prisma Schema für BauPreis Preisvergleich-App
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model User {
+  id            String          @id @default(cuid())
+  name          String?
+  email         String          @unique
+  password      String
+  emailAlerts   Boolean         @default(true)
+  createdAt     DateTime        @default(now())
+  searchHistory SearchHistory[]
+  favorites     Favorite[]
+  priceAlerts   PriceAlert[]
+}
+
+model SearchHistory {
+  id           String   @id @default(cuid())
+  userId       String
+  searchTerm   String
+  resultsCount Int
+  createdAt    DateTime @default(now())
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Favorite {
+  id           String         @id @default(cuid())
+  userId       String
+  productName  String
+  baumarkt     String
+  preis        Float
+  url          String
+  createdAt    DateTime       @default(now())
+  user         User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  priceHistory PriceHistory[]
+  alerts       PriceAlert[]
+}
+
+model PriceHistory {
+  id         String   @id @default(cuid())
+  favoriteId String
+  preis      Float
+  checkedAt  DateTime @default(now())
+  favorite   Favorite @relation(fields: [favoriteId], references: [id], onDelete: Cascade)
+}
+
+model PriceAlert {
+  id          String   @id @default(cuid())
+  userId      String
+  favoriteId  String
+  targetPreis Float
+  active      Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  favorite    Favorite @relation(fields: [favoriteId], references: [id], onDelete: Cascade)
+}

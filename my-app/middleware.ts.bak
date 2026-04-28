@@ -1,0 +1,30 @@
+// Middleware: Schützt alle /dashboard/* Routen vor nicht eingeloggten Nutzern
+
+import { auth } from "@/lib/auth";
+import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
+
+export default auth((req: NextRequest & { auth: { user?: { id?: string } } | null }) => {
+  const { pathname } = req.nextUrl;
+  const isLoggedIn = !!req.auth?.user;
+
+  // Schützte Routen
+  if (pathname.startsWith("/dashboard")) {
+    if (!isLoggedIn) {
+      const loginUrl = new URL("/login", req.url);
+      loginUrl.searchParams.set("callbackUrl", pathname);
+      return NextResponse.redirect(loginUrl);
+    }
+  }
+
+  // Eingeloggte User von Login/Register-Seite weiterleiten
+  if ((pathname === "/login" || pathname === "/register") && isLoggedIn) {
+    return NextResponse.redirect(new URL("/dashboard", req.url));
+  }
+
+  return NextResponse.next();
+});
+
+export const config = {
+  matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
+};
