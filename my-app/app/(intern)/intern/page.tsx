@@ -110,21 +110,11 @@ export default function DashboardPage() {
         </div>
       )}
 
-      {/* Willkommens-Zustand (noch keine Suche) */}
+      {/* Startzustand */}
       {!gesucht && !laedt && (
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {[
-            { emoji: "🏪", titel: "7 Baumärkte", text: "OBI, Bauhaus, Hornbach, Hagebau, Toom, Globus & Hellweg" },
-            { emoji: "💡", titel: "Echtzeit-Preise", text: "Aktuelle Preise direkt von den Webseiten der Baumärkte" },
-            { emoji: "⭐", titel: "Preisalarme", text: "Speichere Favoriten und lass dich bei Preisänderungen benachrichtigen" },
-          ].map((karte) => (
-            <div key={karte.titel} className="bg-white rounded-xl border border-gray-200 p-5 text-center">
-              <div className="text-3xl mb-3">{karte.emoji}</div>
-              <p className="font-semibold text-gray-900 text-sm mb-1">{karte.titel}</p>
-              <p className="text-gray-500 text-xs">{karte.text}</p>
-            </div>
-          ))}
-        </div>
+        <p className="text-sm text-gray-400">
+          OBI, Bauhaus, Hornbach, Hagebau, Toom, Globus Bau, Hellweg
+        </p>
       )}
     </div>
   );

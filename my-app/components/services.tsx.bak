@@ -77,11 +77,14 @@ const itemVariants = {
 
 export function Services() {
   return (
-    <section id="services" className="py-16 bg-[#0a0a0a]">
+    <section id="services" className="py-24 bg-[#0a0a0a]">
       <div className="section-padding max-w-7xl mx-auto">
         {/* Header */}
         <div
-          
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
           <span className="inline-block px-4 py-2 bg-[#c9a45c]/10 border border-[#c9a45c]/30 rounded-full text-[#c9a45c] text-sm font-medium mb-4">
@@ -99,6 +102,8 @@ export function Services() {
         <div
           
           
+          whileInView="visible"
+          viewport={{ once: true }}
           className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16"
         >
           {mainServices.map((service) => (
@@ -135,7 +140,10 @@ export function Services() {
 
         {/* Additional Services */}
         <div
-          
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.3 }}
           className="text-center mb-8"
         >
           <h3 className="text-2xl font-semibold mb-2">Zusätzliche Dienstleistungen</h3>
@@ -145,6 +153,8 @@ export function Services() {
         <div
           
           
+          whileInView="visible"
+          viewport={{ once: true }}
           className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4"
         >
           {additionalServices.map((service) => (
@@ -164,7 +174,10 @@ export function Services() {
 
         {/* CTA */}
         <div
-          
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.4 }}
           className="text-center mt-12"
         >
           <a 

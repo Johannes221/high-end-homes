@@ -48,9 +48,8 @@ function CustomTooltip({ active, payload, label }: CustomTooltipProps) {
 export default function PriceHistoryChart({ verlauf, zielPreis }: PriceHistoryChartProps) {
   if (verlauf.length === 0) {
     return (
-      <div className="flex flex-col items-center justify-center py-12 text-gray-400">
-        <span className="text-4xl mb-3">📊</span>
-        <p className="text-sm">Noch kein Preisverlauf – komm morgen wieder</p>
+      <div className="py-10 text-gray-400 text-sm">
+        Noch kein Preisverlauf vorhanden.
       </div>
     );
   }

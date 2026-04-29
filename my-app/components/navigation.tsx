@@ -1,7 +1,6 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { motion, AnimatePresence } from "framer-motion"
 import { Menu, X, Phone } from "lucide-react"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
@@ -27,14 +26,11 @@ export function Navigation() {
 
   return (
     <>
-      <motion.nav
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      <nav
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 backdrop-blur-2xl ${
           isScrolled
-            ? "bg-[#0a0a0a]/95 backdrop-blur-md border-b border-[#2a2a2a]"
-            : "bg-transparent"
+            ? "bg-[#0a0a0a]/20 border-b border-white/10"
+            : "bg-[#0a0a0a]/10"
         }`}
       >
         <div className="section-padding">
@@ -42,11 +38,11 @@ export function Navigation() {
             {/* Logo */}
             <a href="#hero" className="flex items-center gap-2">
               <Image
-                src="/logo-white.png"
+                src="/logo-white-nav.png"
                 alt="High-End Homes"
-                width={180}
-                height={60}
-                className="h-12 w-auto"
+                width={200}
+                height={70}
+                className="h-14 w-auto"
                 priority
               />
             </a>
@@ -84,18 +80,11 @@ export function Navigation() {
             </button>
           </div>
         </div>
-      </motion.nav>
+      </nav>
 
       {/* Mobile Menu */}
-      <AnimatePresence>
-        {isMobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-40 bg-[#0a0a0a] pt-24 md:hidden"
-          >
+      {isMobileMenuOpen && (
+        <div className="fixed inset-0 z-40 bg-[#0a0a0a] pt-24 md:hidden">
             <div className="section-padding py-8">
               <div className="flex flex-col gap-6">
                 {navLinks.map((link) => (
@@ -117,9 +106,8 @@ export function Navigation() {
                 </div>
               </div>
             </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+        </div>
+      )}
     </>
   )
 }

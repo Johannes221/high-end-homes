@@ -24,10 +24,8 @@ export default function ResultsTable({
 }: ResultsTableProps) {
   if (ergebnisse.length === 0) {
     return (
-      <div className="text-center py-16 text-gray-500">
-        <div className="text-5xl mb-4">🔍</div>
-        <p className="text-lg font-medium">Keine Ergebnisse gefunden</p>
-        <p className="text-sm mt-1">Versuche einen anderen Suchbegriff</p>
+      <div className="py-10 text-gray-400 text-sm">
+        Keine Ergebnisse gefunden – anderen Suchbegriff versuchen.
       </div>
     );
   }

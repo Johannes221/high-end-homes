@@ -49,7 +49,7 @@ export default function HistoryPage() {
   };
 
   const handleSucheWiederholen = (suchbegriff: string) => {
-    router.push(`/dashboard?q=${encodeURIComponent(suchbegriff)}`);
+    router.push(`/intern?q=${encodeURIComponent(suchbegriff)}`);
   };
 
   return (
@@ -62,10 +62,8 @@ export default function HistoryPage() {
       {laedt && <LoadingSpinner text="Suchverlauf wird geladen..." />}
 
       {!laedt && verlauf.length === 0 && (
-        <div className="bg-white rounded-xl border border-gray-200 p-12 text-center">
-          <div className="text-5xl mb-4">🔍</div>
-          <p className="text-lg font-medium text-gray-700 mb-2">Noch kein Suchverlauf</p>
-          <p className="text-sm text-gray-500">Suche nach Produkten um deinen Verlauf zu füllen.</p>
+        <div className="bg-white rounded-xl border border-gray-200 p-8">
+          <p className="text-sm text-gray-500">Noch kein Suchverlauf vorhanden.</p>
         </div>
       )}
 

@@ -1,0 +1,41 @@
+{
+  "type": "Entkernung",
+  "name": "Test User",
+  "email": "test@example.com",
+  "phone": "0123456789",
+  "company": "",
+  "address": "",
+  "squareMeters": "100",
+  "buildingType": "Büro",
+  "constructionYear": "",
+  "floor": "",
+  "elevator": "",
+  "materials": [],
+  "removalItems": [
+    "Deckenverkleidungen",
+    "Wandverkleidungen"
+  ],
+  "quantityEstimate": "",
+  "valuables": "",
+  "asbestosRequired": false,
+  "otherPollutants": false,
+  "disposalWanted": false,
+  "permitStatus": "",
+  "desiredDate": "",
+  "imageFileNames": [],
+  "notes": "",
+  "complexity": {
+    "score": 1,
+    "level": "Low",
+    "effortRange": "4–8h",
+    "flags": []
+  },
+  "estimate": {
+    "min": 2520,
+    "max": 3360,
+    "currency": "EUR",
+    "rationale": []
+  },
+  "databaseId": "cmoimoop100014ad3f85adj1f",
+  "createdAt": "2026-04-28T12:54:40.921Z"
+}

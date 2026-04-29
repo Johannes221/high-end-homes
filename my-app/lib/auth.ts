@@ -20,19 +20,29 @@ export const authConfig: NextAuthConfig = {
         const email = credentials.email as string;
         const password = credentials.password as string;
 
+        console.log("Auth authorize called for:", email);
+
         try {
           const user = await prisma.user.findUnique({ where: { email } });
-          if (!user) return null;
+          if (!user) {
+            console.log("User nicht gefunden:", email);
+            return null;
+          }
 
           const passwordKorrekt = await bcrypt.compare(password, user.password);
-          if (!passwordKorrekt) return null;
+          if (!passwordKorrekt) {
+            console.log("Passwort falsch für:", email);
+            return null;
+          }
 
+          console.log("Login erfolgreich für:", email);
           return {
             id: user.id,
             name: user.name,
             email: user.email,
           };
-        } catch {
+        } catch (error) {
+          console.error("Auth Fehler:", error);
           return null;
         }
       },

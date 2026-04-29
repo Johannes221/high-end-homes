@@ -60,3 +60,42 @@ model PriceAlert {
   user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   favorite    Favorite @relation(fields: [favoriteId], references: [id], onDelete: Cascade)
 }
+
+model QuoteRequest {
+  id                String   @id @default(cuid())
+  type              String
+  name              String
+  email             String
+  phone             String?
+  company           String?
+  address           String?
+  squareMeters      Int
+  buildingType      String
+  constructionYear  String?
+  floor             String?
+  elevator          String?
+  materialsJson     String
+  removalItemsJson  String
+  quantityEstimate  String?
+  valuables         String?
+  asbestosRequired  Boolean  @default(false)
+  otherPollutants   Boolean  @default(false)
+  disposalWanted    Boolean  @default(false)
+  permitStatus      String?
+  desiredDate       String?
+  imageFileNamesJson String
+  notes             String?
+  complexityScore   Int
+  complexityLevel   String
+  effortRange       String
+  complexityFlagsJson String
+  estimatedMinPrice Int
+  estimatedMaxPrice Int
+  approvalStatus    String   @default("pending")
+  approvedAt        DateTime?
+  approvedBy        String?
+  sharedAt          DateTime?
+  payloadJson       String
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+}

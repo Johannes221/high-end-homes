@@ -35,7 +35,7 @@ export default function SearchBar({ onSuche, laedt }: SearchBarProps) {
             onKeyDown={handleKeyDown}
             placeholder="Produkt suchen, z.B. Dachrinne, Bauholz, Zement..."
             disabled={laedt}
-            className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-50 disabled:text-gray-400"
+            className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg text-sm text-gray-900 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent disabled:bg-gray-50 disabled:text-gray-400"
           />
         </div>
         <button

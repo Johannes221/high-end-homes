@@ -14,10 +14,11 @@ interface NavbarProps {
 }
 
 const NAV_LINKS = [
-  { href: "/dashboard", label: "Dashboard" },
-  { href: "/dashboard/favorites", label: "Favoriten" },
-  { href: "/dashboard/history", label: "Verlauf" },
-  { href: "/dashboard/settings", label: "Einstellungen" },
+  { href: "/intern", label: "Preisvergleich" },
+  { href: "/intern/quotes", label: "Anfragen" },
+  { href: "/intern/favorites", label: "Favoriten" },
+  { href: "/intern/history", label: "Verlauf" },
+  { href: "/intern/settings", label: "Einstellungen" },
 ];
 
 function UserInitialen(name: string | null | undefined, email: string | null | undefined): string {
@@ -33,7 +34,7 @@ export default function Navbar({ userName, userEmail }: NavbarProps) {
   const [dropdownOffen, setDropdownOffen] = useState(false);
 
   const handleLogout = async () => {
-    await signOut({ callbackUrl: "/login" });
+    await signOut({ callbackUrl: "/intern/login" });
   };
 
   return (
@@ -41,8 +42,8 @@ export default function Navbar({ userName, userEmail }: NavbarProps) {
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="flex items-center justify-between h-14">
           {/* Logo */}
-          <Link href="/dashboard" className="flex items-center gap-2 font-bold text-blue-600 text-lg">
-            🏗️ BauPreis
+          <Link href="/intern" className="flex items-center gap-2 font-semibold text-gray-800 text-sm tracking-wide">
+            Preisvergleich
           </Link>
 
           {/* Desktop Navigation */}
@@ -83,7 +84,7 @@ export default function Navbar({ userName, userEmail }: NavbarProps) {
                     <p className="text-xs text-gray-500 truncate">{userEmail}</p>
                   </div>
                   <Link
-                    href="/dashboard/settings"
+                    href="/intern/settings"
                     onClick={() => setDropdownOffen(false)}
                     className="flex items-center gap-2 px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
                   >

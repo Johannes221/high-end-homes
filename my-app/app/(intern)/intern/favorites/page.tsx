@@ -73,17 +73,13 @@ export default function FavoritesPage() {
       )}
 
       {!laedt && !fehler && favoriten.length === 0 && (
-        <div className="bg-white rounded-xl border border-gray-200 p-12 text-center">
-          <div className="text-5xl mb-4">⭐</div>
-          <p className="text-lg font-medium text-gray-700 mb-2">Noch keine Favoriten</p>
-          <p className="text-sm text-gray-500 mb-5">
-            Suche nach Produkten und speichere Favoriten, um Preisverläufe zu verfolgen.
-          </p>
+        <div className="bg-white rounded-xl border border-gray-200 p-8">
+          <p className="text-sm text-gray-500 mb-3">Noch keine Favoriten gespeichert.</p>
           <Link
-            href="/dashboard"
-            className="inline-block px-5 py-2.5 bg-blue-600 text-white rounded-lg text-sm font-medium hover:bg-blue-700 transition-colors"
+            href="/intern"
+            className="text-sm text-gray-700 underline hover:text-gray-900"
           >
-            Jetzt suchen
+            Zur Suche
           </Link>
         </div>
       )}
