@@ -1,0 +1,54 @@
+{
+  "type": "Entkernung",
+  "name": "Test Kunde 2",
+  "email": "test2@example.com",
+  "phone": "+491234567890",
+  "company": "Test AG",
+  "address": "",
+  "squareMeters": "120",
+  "buildingType": "Mehrfamilienhaus",
+  "constructionYear": "1980",
+  "floor": "3.OG+",
+  "elevator": "Nein",
+  "materials": [],
+  "removalItems": [
+    "Böden",
+    "Sanitär (Bad/WC)",
+    "Heizung & Rohre"
+  ],
+  "quantityEstimate": "",
+  "valuables": "",
+  "asbestosRequired": true,
+  "otherPollutants": true,
+  "disposalWanted": true,
+  "permitStatus": "Ja",
+  "desiredDate": "2025-06-01",
+  "imageFileNames": [
+    "entkernung1.jpg"
+  ],
+  "notes": "Testanmerkung Entkernung",
+  "effortEstimate": "",
+  "complexity": {
+    "score": 5,
+    "level": "High",
+    "effortRange": "16h+",
+    "flags": [
+      "Asbestentsorgung erforderlich — Fachbetrieb einplanen.",
+      "Andere Schadstoffe angegeben — gesonderte Prüfung erforderlich.",
+      "Projektgröße über 100 m² — zusätzlicher Aufwand einplanen.",
+      "Höheres Stockwerk ohne Aufzug — Transportaufwand erhöht."
+    ]
+  },
+  "estimate": {
+    "min": 5746,
+    "max": 7661,
+    "currency": "EUR",
+    "rationale": [
+      "Asbestzuschlag berücksichtigt",
+      "Schadstoffzuschlag berücksichtigt",
+      "Transportzuschlag für höheres Stockwerk ohne Aufzug"
+    ]
+  },
+  "databaseId": "cmok2uxg000043fd3lb8iue8f",
+  "createdAt": "2026-04-29T13:15:11.956Z"
+}

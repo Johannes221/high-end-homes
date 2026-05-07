@@ -1,15 +1,16 @@
 "use client"
 
+import Link from "next/link"
 import { useState, useEffect } from "react"
 import { Menu, X, Phone } from "lucide-react"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 
 const navLinks = [
-  { href: "#hero", label: "Home" },
-  { href: "#quote", label: "Angebot" },
-  { href: "#services", label: "Leistungen" },
-  { href: "#about", label: "Über uns" },
+  { href: "/#hero", label: "Home" },
+  { href: "/#quote", label: "Angebot" },
+  { href: "/#services", label: "Leistungen" },
+  { href: "/#about", label: "Über uns" },
 ]
 
 export function Navigation() {
@@ -36,7 +37,7 @@ export function Navigation() {
         <div className="section-padding">
           <div className="flex items-center justify-between h-20">
             {/* Logo */}
-            <a href="#hero" className="flex items-center gap-2">
+            <Link href="/#hero" className="flex items-center gap-2">
               <Image
                 src="/logo-white-nav.png"
                 alt="High-End Homes"
@@ -45,18 +46,18 @@ export function Navigation() {
                 className="h-14 w-auto"
                 priority
               />
-            </a>
+            </Link>
 
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center gap-8">
               {navLinks.map((link) => (
-                <a
+                <Link
                   key={link.href}
                   href={link.href}
                   className="text-sm text-[#fafafa]/80 hover:text-[#c9a45c] transition-colors duration-300"
                 >
                   {link.label}
-                </a>
+                </Link>
               ))}
             </div>
 
@@ -67,7 +68,7 @@ export function Navigation() {
                 <span>Kontakt</span>
               </a>
               <Button asChild className="bg-[#c9a45c] text-[#0a0a0a] hover:bg-[#d4af37] font-semibold">
-                <a href="#quote">Angebot einholen</a>
+                <Link href="/#quote">Angebot einholen</Link>
               </Button>
             </div>
 
@@ -88,20 +89,20 @@ export function Navigation() {
             <div className="section-padding py-8">
               <div className="flex flex-col gap-6">
                 {navLinks.map((link) => (
-                  <a
+                  <Link
                     key={link.href}
                     href={link.href}
                     onClick={() => setIsMobileMenuOpen(false)}
                     className="text-2xl font-medium text-[#fafafa] hover:text-[#c9a45c] transition-colors"
                   >
                     {link.label}
-                  </a>
+                  </Link>
                 ))}
                 <div className="pt-6 border-t border-[#2a2a2a]">
                   <Button asChild className="w-full bg-[#c9a45c] text-[#0a0a0a] hover:bg-[#d4af37] font-semibold">
-                    <a href="#quote" onClick={() => setIsMobileMenuOpen(false)}>
+                    <Link href="/#quote" onClick={() => setIsMobileMenuOpen(false)}>
                       Angebot einholen
-                    </a>
+                    </Link>
                   </Button>
                 </div>
               </div>

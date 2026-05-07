@@ -8,10 +8,26 @@ const globalForPrisma = globalThis as unknown as {
   prisma: PrismaClient | undefined;
 };
 
+function resolveDatabaseUrl() {
+  const configuredUrl = process.env.DATABASE_URL?.trim();
+
+  if (configuredUrl) {
+    return configuredUrl;
+  }
+
+  if (process.env.NODE_ENV !== "production") {
+    return "file:./dev.db";
+  }
+
+  throw new Error("DATABASE_URL ist in Production erforderlich.");
+}
+
 function prismaErstellen(): PrismaClient {
-  const dbUrl = process.env.DATABASE_URL ?? "file:./dev.db";
-  const libsqlUrl = dbUrl.startsWith("file:") ? dbUrl : `file:${dbUrl}`;
-  const adapter = new PrismaLibSql({ url: libsqlUrl });
+  const dbUrl = resolveDatabaseUrl();
+  const authToken = process.env.DATABASE_AUTH_TOKEN?.trim() || undefined;
+  const adapter = dbUrl.startsWith("file:")
+    ? new PrismaLibSql({ url: dbUrl })
+    : new PrismaLibSql({ url: dbUrl, authToken });
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return new PrismaClient({ adapter } as any);
 }

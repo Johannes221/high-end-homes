@@ -62,7 +62,13 @@ export default function SettingsPage() {
   };
 
   useEffect(() => {
-    laden();
+    const timeoutId = window.setTimeout(() => {
+      void laden();
+    }, 0);
+
+    return () => {
+      window.clearTimeout(timeoutId);
+    };
   }, []);
 
   const handleProfilSpeichern = async (e: FormEvent) => {

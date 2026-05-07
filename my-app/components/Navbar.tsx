@@ -6,7 +6,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { signOut } from "next-auth/react";
-import { Menu, X, ChevronDown, LogOut, Settings, User } from "lucide-react";
+import { Menu, X, ChevronDown, LogOut, Settings } from "lucide-react";
 
 interface NavbarProps {
   userName: string | null | undefined;

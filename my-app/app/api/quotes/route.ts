@@ -2,7 +2,7 @@ import { NextResponse } from "next/server"
 
 import { auth } from "@/lib/auth"
 import { prisma } from "@/lib/prisma"
-import { parsePersistedQuotePayload, resolveQuotePricing } from "@/lib/quote"
+import { estimatePriceRange, evaluateComplexity, parsePersistedQuotePayload, resolveQuotePricing } from "@/lib/quote"
 
 function serializeQuote(quote: {
   id: string
@@ -43,14 +43,21 @@ function serializeQuote(quote: {
   updatedAt: Date
 }) {
   const payload = parsePersistedQuotePayload(quote.payloadJson)
+  const complexity = evaluateComplexity(payload)
+  const estimate = estimatePriceRange(payload, complexity)
   const pricingSummary = resolveQuotePricing(payload, payload.pricing)
 
   return {
     ...quote,
+    complexityScore: complexity.score,
+    complexityLevel: complexity.level,
+    effortRange: complexity.effortRange,
+    estimatedMinPrice: estimate.min,
+    estimatedMaxPrice: estimate.max,
     materials: JSON.parse(quote.materialsJson),
     removalItems: JSON.parse(quote.removalItemsJson),
     imageFileNames: JSON.parse(quote.imageFileNamesJson),
-    complexityFlags: JSON.parse(quote.complexityFlagsJson),
+    complexityFlags: complexity.flags,
     payload,
     pricing: payload.pricing ?? { lineItemOverrides: [], internalNotes: "", exportedAt: null },
     pricingSummary,

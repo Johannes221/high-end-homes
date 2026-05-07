@@ -12,6 +12,10 @@ const transporter = nodemailer.createTransport({
   },
 });
 
+function resolveAppUrl() {
+  return process.env.AUTH_URL || process.env.NEXTAUTH_URL || process.env.PUBLIC_APP_URL || "http://localhost:3000";
+}
+
 interface PreisAlarmDaten {
   user: { name: string | null; email: string };
   favorite: { productName: string; baumarkt: string; preis: number; url: string; id: string };
@@ -23,7 +27,7 @@ interface PreisAlarmDaten {
 function preisAlarmTemplate(daten: PreisAlarmDaten): string {
   const { user, favorite, aktuellerPreis, zielPreis } = daten;
   const ersparnis = (favorite.preis - aktuellerPreis).toFixed(2);
-  const deaktivierungsLink = `${process.env.NEXTAUTH_URL}/api/alerts/deactivate?favoriteId=${favorite.id}`;
+  const deaktivierungsLink = `${resolveAppUrl()}/api/alerts/deactivate?favoriteId=${favorite.id}`;
 
   return `
 <!DOCTYPE html>

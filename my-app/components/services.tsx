@@ -17,22 +17,22 @@ const mainServices = [
   {
     icon: Trash2,
     title: "Entrümpelung",
-    description: "Professionelle Entrümpelung von Wohnungen, Häusern und Gewerbeobjekten. Wir entsorgen Möbel, Elektrogeräte, Baumaterialien und mehr.",
+    description: "Professionelle Entrümpelung von Wohnungen, Häusern und Gewerbeobjekten in Heidelberg, Mannheim und Umgebung. Wir entsorgen Möbel, Elektrogeräte, Baumaterialien und mehr.",
     features: ["Komplette Wohnungsentrümpelung", "Keller- und Dachbodenräumung", "Gewerbeentrümpelung", "Recycling & Entsorgung"],
     badge: "Hauptleistung",
   },
   {
     icon: Building2,
     title: "Entkernung",
-    description: "Fachgerechte Entkernung von Gebäuden aller Art. Wir entfernen Trockenbau, Böden, Installationen und bereiten Ihr Objekt für die Sanierung vor.",
+    description: "Fachgerechte Entkernung von Gebäuden aller Art in Heidelberg, Mannheim und der Rhein-Neckar-Region. Wir entfernen Trockenbau, Böden, Installationen und bereiten Ihr Objekt für die Sanierung vor.",
     features: ["Wohnungsentkernung", "Gewerbeentkernung", "Trockenbau-Demontage", "Bodenbelag-Entfernung"],
     badge: "Hauptleistung",
   },
   {
     icon: Construction,
-    title: "Kernsanierung",
-    description: "Umfassende Kernsanierung für eine komplette Erneuerung Ihrer Räumlichkeiten. Von der Planung bis zur Ausführung.",
-    features: ["Komplettsanierung", "Neuaufteilung", "Installationen", "Qualitätskontrolle"],
+    title: "Hausauflösung",
+    description: "Diskrete und strukturierte Hausauflösungen mit besenreiner Übergabe. Ideal bei Umzug, Nachlass, Verkauf oder Eigentümerwechsel in Heidelberg, Mannheim und Umgebung.",
+    features: ["Komplette Hausauflösung", "Wohnungsauflösung", "Nachlassauflösung", "Besenreine Übergabe"],
     badge: "Hauptleistung",
   },
 ]
@@ -60,21 +60,6 @@ const additionalServices = [
   },
 ]
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.15,
-    },
-  },
-}
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0 },
-}
-
 export function Services() {
   return (
     <section id="services" className="py-16 bg-[#0a0a0a]">
@@ -88,10 +73,10 @@ export function Services() {
             Unsere Leistungen
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
-            Alles aus einer <span className="text-gold-gradient">Hand</span>
+            Entrümpelung, Hausauflösung und <span className="text-gold-gradient">Entkernung aus einer Hand</span>
           </h2>
           <p className="text-lg text-[#fafafa]/60 max-w-2xl mx-auto">
-            Von der Entrümpelung bis zur Kernsanierung - wir begleiten Sie durch jeden Schritt Ihres Projekts.
+            Von der Entrümpelung bis zur besenreinen Hausauflösung begleiten wir Projekte in Heidelberg, Mannheim und der gesamten Rhein-Neckar-Region.
           </p>
         </div>
 

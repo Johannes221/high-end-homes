@@ -1,0 +1,49 @@
+{
+  "type": "Entrümpelung",
+  "name": "Test Kunde",
+  "email": "test@example.com",
+  "phone": "+49123456789",
+  "company": "Test GmbH",
+  "address": "",
+  "squareMeters": "75",
+  "buildingType": "Einfamilienhaus",
+  "constructionYear": "",
+  "floor": "2.OG",
+  "elevator": "Nein",
+  "materials": [
+    "Möbel",
+    "Elektrogeräte"
+  ],
+  "removalItems": [],
+  "quantityEstimate": "Mittel",
+  "valuables": "Nein",
+  "asbestosRequired": false,
+  "otherPollutants": false,
+  "disposalWanted": false,
+  "permitStatus": "",
+  "desiredDate": "2025-05-15",
+  "imageFileNames": [
+    "test1.jpg",
+    "test2.jpg"
+  ],
+  "notes": "Testanmerkung für Backend-Test",
+  "effortEstimate": "",
+  "complexity": {
+    "score": 2,
+    "level": "Low",
+    "effortRange": "4–8h",
+    "flags": [
+      "Höheres Stockwerk ohne Aufzug — Transportaufwand erhöht."
+    ]
+  },
+  "estimate": {
+    "min": 1242,
+    "max": 1656,
+    "currency": "EUR",
+    "rationale": [
+      "Transportzuschlag für höheres Stockwerk ohne Aufzug"
+    ]
+  },
+  "databaseId": "cmok2uqaf00033fd3nr0cdg83",
+  "createdAt": "2026-04-29T13:15:02.681Z"
+}

@@ -183,6 +183,21 @@ function sanitizePayloadName(name: string) {
   return name.trim() || "Unbekannt"
 }
 
+const configuredBackendUrl = process.env.NEXT_PUBLIC_BACKEND_URL?.trim()
+
+function resolveBackendUrl(pathname: string) {
+  if (!configuredBackendUrl) {
+    return pathname
+  }
+
+  const normalizedBaseUrl = configuredBackendUrl.endsWith("/")
+    ? configuredBackendUrl.slice(0, -1)
+    : configuredBackendUrl
+  const normalizedPathname = pathname.startsWith("/") ? pathname : `/${pathname}`
+
+  return `${normalizedBaseUrl}${normalizedPathname}`
+}
+
 function FileUpload({
   id,
   files,
@@ -489,7 +504,7 @@ export function QuoteForm() {
     setClearanceSubmitting(true)
 
     try {
-      const response = await fetch("/api/quote", {
+      const response = await fetch(resolveBackendUrl("/api/quote"), {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -540,7 +555,7 @@ export function QuoteForm() {
     setGuttingSubmitting(true)
 
     try {
-      const response = await fetch("/api/quote", {
+      const response = await fetch(resolveBackendUrl("/api/quote"), {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -593,7 +608,7 @@ export function QuoteForm() {
     setCombinedSubmitting(true)
 
     try {
-      const response = await fetch("/api/quote", {
+      const response = await fetch(resolveBackendUrl("/api/quote"), {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

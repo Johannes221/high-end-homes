@@ -19,6 +19,41 @@ type MailSharePayload = {
   formUrl?: string
 }
 
+function resolveAppUrl() {
+  return normalizeString(process.env.AUTH_URL) || normalizeString(process.env.NEXTAUTH_URL) || "http://127.0.0.1:3000"
+}
+
+function resolveAllowedOrigin() {
+  return normalizeString(process.env.ALLOWED_ORIGIN) || normalizeString(process.env.FRONTEND_URL) || normalizeString(process.env.PUBLIC_APP_URL)
+}
+
+function buildCorsHeaders(request: Request) {
+  const headers = new Headers({
+    "Access-Control-Allow-Methods": "POST, PUT, OPTIONS",
+    "Access-Control-Allow-Headers": "Content-Type",
+  })
+  const requestOrigin = normalizeString(request.headers.get("origin"))
+  const allowedOrigin = resolveAllowedOrigin()
+
+  if (allowedOrigin && requestOrigin === allowedOrigin) {
+    headers.set("Access-Control-Allow-Origin", allowedOrigin)
+    headers.set("Vary", "Origin")
+  }
+
+  return headers
+}
+
+function jsonWithCors(request: Request, body: unknown, init?: ResponseInit) {
+  const response = NextResponse.json(body, init)
+  const corsHeaders = buildCorsHeaders(request)
+
+  corsHeaders.forEach((value, key) => {
+    response.headers.set(key, value)
+  })
+
+  return response
+}
+
 function buildTableRow(label: string, value: string) {
   return `
     <tr>
@@ -105,6 +140,84 @@ function createTransporter() {
   })
 }
 
+function canSendQuoteNotificationEmail() {
+  return Boolean(
+    process.env.SMTP_HOST &&
+      process.env.SMTP_PORT &&
+      process.env.SMTP_USER &&
+      process.env.SMTP_PASS &&
+      process.env.NOTIFICATION_EMAIL
+  )
+}
+
+async function sendQuoteNotificationEmail({
+  submission,
+  complexity,
+  estimate,
+}: {
+  submission: QuoteSubmission
+  complexity: ReturnType<typeof evaluateComplexity>
+  estimate: ReturnType<typeof estimatePriceRange>
+}) {
+  if (!canSendQuoteNotificationEmail()) {
+    return
+  }
+
+  const transporter = createTransporter()
+  const html = buildEmailHtml(
+    submission,
+    complexity.score,
+    complexity.level,
+    complexity.effortRange,
+    estimate.min,
+    estimate.max,
+    complexity.flags
+  )
+
+  try {
+    await transporter.sendMail({
+      from: process.env.SMTP_FROM || process.env.SMTP_USER,
+      to: process.env.NOTIFICATION_EMAIL,
+      subject: `Neues Angebot — ${submission.type || "Anfrage"} von ${submission.name}`,
+      html,
+    })
+  } catch (mailError) {
+    console.error("Quote notification email failed:", mailError)
+  }
+}
+
+function resolveQuoteArchiveDirectory() {
+  const configuredDirectory = normalizeString(process.env.QUOTE_ARCHIVE_DIR)
+
+  if (configuredDirectory) {
+    return configuredDirectory
+  }
+
+  if (process.env.NODE_ENV !== "production") {
+    return path.join(process.cwd(), "data", "quotes")
+  }
+
+  return ""
+}
+
+async function archiveQuoteSubmission(fileNameBase: string, payload: Record<string, unknown>) {
+  const quotesDirectory = resolveQuoteArchiveDirectory()
+
+  if (!quotesDirectory) {
+    return
+  }
+
+  await mkdir(quotesDirectory, { recursive: true })
+  await writeFile(path.join(quotesDirectory, createFileName(fileNameBase)), JSON.stringify(payload, null, 2), "utf8")
+}
+
+export async function OPTIONS(request: Request) {
+  return new NextResponse(null, {
+    status: 204,
+    headers: buildCorsHeaders(request),
+  })
+}
+
 export async function POST(request: Request) {
   try {
     const rawBody = await request.json()
@@ -113,7 +226,8 @@ export async function POST(request: Request) {
     console.log("Quote submission:", submission)
 
     if (!submission.name || !submission.email || !submission.squareMeters || !submission.buildingType) {
-      return NextResponse.json(
+      return jsonWithCors(
+        request,
         { success: false, error: "Bitte füllen Sie alle Pflichtfelder aus." },
         { status: 400 }
       )
@@ -121,15 +235,6 @@ export async function POST(request: Request) {
 
     const complexity = evaluateComplexity(submission)
     const estimate = estimatePriceRange(submission, complexity)
-    const html = buildEmailHtml(
-      submission,
-      complexity.score,
-      complexity.level,
-      complexity.effortRange,
-      estimate.min,
-      estimate.max,
-      complexity.flags
-    )
 
     const savedRequest = await prisma.quoteRequest.create({
       data: {
@@ -165,42 +270,21 @@ export async function POST(request: Request) {
       },
     })
 
-    // E-Mail-Versand deaktiviert - Daten werden nur im Backend gespeichert
-    // const transporter = createTransporter()
-    // try {
-    //   await transporter.sendMail({
-    //     from: process.env.SMTP_USER,
-    //     to: process.env.NOTIFICATION_EMAIL,
-    //     subject: `Neues Angebot — ${submission.type || "Anfrage"} von ${submission.name}`,
-    //     html,
-    //   })
-    // } catch (mailError) {
-    //   console.error("E-Mail Versand fehlgeschlagen (für Entwicklung okay):", mailError)
-    // }
+    await sendQuoteNotificationEmail({ submission, complexity, estimate })
 
-    const quotesDirectory = path.join(process.cwd(), "data", "quotes")
-    await mkdir(quotesDirectory, { recursive: true })
+    await archiveQuoteSubmission(submission.name, {
+      ...submission,
+      complexity,
+      estimate,
+      databaseId: savedRequest.id,
+      createdAt: new Date().toISOString(),
+    })
 
-    await writeFile(
-      path.join(quotesDirectory, createFileName(submission.name)),
-      JSON.stringify(
-        {
-          ...submission,
-          complexity,
-          estimate,
-          databaseId: savedRequest.id,
-          createdAt: new Date().toISOString(),
-        },
-        null,
-        2
-      ),
-      "utf8"
-    )
-
-    return NextResponse.json({ success: true, id: savedRequest.id, estimate, complexity })
+    return jsonWithCors(request, { success: true, id: savedRequest.id, estimate, complexity })
   } catch (error) {
     console.error("Quote API error:", error)
-    return NextResponse.json(
+    return jsonWithCors(
+      request,
       { success: false, error: "Die Anfrage konnte nicht verarbeitet werden." },
       { status: 500 }
     )
@@ -213,15 +297,15 @@ export async function PUT(request: Request) {
     const recipientEmail = normalizeString(body.recipientEmail)
 
     if (!recipientEmail) {
-      return NextResponse.json({ success: false, error: "Empfänger-E-Mail fehlt." }, { status: 400 })
+      return jsonWithCors(request, { success: false, error: "Empfänger-E-Mail fehlt." }, { status: 400 })
     }
 
     // E-Mail-Versand deaktiviert - Link wird nur zurückgegeben
-    const formUrl = normalizeString(body.formUrl) || process.env.NEXTAUTH_URL || "http://127.0.0.1:3000"
+    const formUrl = normalizeString(body.formUrl) || resolveAppUrl()
 
-    return NextResponse.json({ success: true, formUrl })
+    return jsonWithCors(request, { success: true, formUrl })
   } catch (error) {
     console.error("Quote share error:", error)
-    return NextResponse.json({ success: false, error: "Der Link konnte nicht generiert werden." }, { status: 500 })
+    return jsonWithCors(request, { success: false, error: "Der Link konnte nicht generiert werden." }, { status: 500 })
   }
 }

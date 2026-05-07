@@ -51,8 +51,16 @@ export type QuoteLineItemOverride = {
   included?: boolean
 }
 
+export type QuoteCustomLineItem = {
+  key: string
+  label: string
+  amount: number
+  details?: string
+}
+
 export type QuotePricingState = {
   lineItemOverrides?: QuoteLineItemOverride[]
+  customLineItems?: QuoteCustomLineItem[]
   internalNotes?: string
   exportedAt?: string
 }
@@ -73,26 +81,64 @@ export type PersistedQuotePayload = QuoteSubmission & {
   pricing?: QuotePricingState
 }
 
-const clearanceMaterialBaseRates: Record<string, number> = {
-  Möbel: 180,
-  Elektrogeräte: 140,
-  "Kleidung & Textilien": 60,
-  Holz: 120,
-  Metall: 130,
-  Kunststoff: 90,
-  Baumaterialien: 220,
-  Sondermüll: 380,
+type QuoteProjectMode = "clearance" | "gutting" | "combined"
+
+type ScopedRateConfig = {
+  ratePerSquareMeter: number
+  minimum: number
 }
 
-const guttingRemovalBaseRates: Record<string, number> = {
-  Böden: 12,
-  Deckenverkleidungen: 10,
-  "Wandverkleidungen & Putz": 18,
-  "Sanitär (Bad/WC)": 850,
-  Elektroinstallationen: 700,
-  "Fenster & Türen": 420,
-  "Heizung & Rohre": 1100,
-  Trennwände: 16,
+const clearanceMaterialRateConfig: Record<string, ScopedRateConfig> = {
+  Möbel: { ratePerSquareMeter: 2.2, minimum: 120 },
+  Elektrogeräte: { ratePerSquareMeter: 1.8, minimum: 110 },
+  "Kleidung & Textilien": { ratePerSquareMeter: 0.8, minimum: 60 },
+  Holz: { ratePerSquareMeter: 1.4, minimum: 80 },
+  Metall: { ratePerSquareMeter: 1.5, minimum: 90 },
+  Kunststoff: { ratePerSquareMeter: 1, minimum: 70 },
+  Baumaterialien: { ratePerSquareMeter: 3.2, minimum: 180 },
+  Sondermüll: { ratePerSquareMeter: 5.5, minimum: 320 },
+}
+
+const guttingRemovalRateConfig: Record<string, ScopedRateConfig> = {
+  Böden: { ratePerSquareMeter: 3.5, minimum: 200 },
+  Deckenverkleidungen: { ratePerSquareMeter: 3, minimum: 180 },
+  "Wandverkleidungen & Putz": { ratePerSquareMeter: 4.5, minimum: 280 },
+  "Sanitär (Bad/WC)": { ratePerSquareMeter: 3.5, minimum: 420 },
+  Elektroinstallationen: { ratePerSquareMeter: 3.5, minimum: 420 },
+  "Fenster & Türen": { ratePerSquareMeter: 3.5, minimum: 320 },
+  "Heizung & Rohre": { ratePerSquareMeter: 4.5, minimum: 520 },
+  Trennwände: { ratePerSquareMeter: 3.5, minimum: 260 },
+}
+
+const floorBaseSurcharges: Record<string, number> = {
+  "1.OG": 120,
+  "2.OG": 260,
+  "3.OG+": 420,
+  Keller: 140,
+}
+
+const quantityMultipliers: Record<string, number> = {
+  Wenig: 0.9,
+  Mittel: 1,
+  Viel: 1.15,
+}
+
+const projectSetupFees: Record<QuoteProjectMode, number> = {
+  clearance: 220,
+  gutting: 420,
+  combined: 560,
+}
+
+const clearanceBaseWorkRate: Record<QuoteProjectMode, number> = {
+  clearance: 16,
+  gutting: 0,
+  combined: 13,
+}
+
+const guttingBaseWorkRate: Record<QuoteProjectMode, number> = {
+  clearance: 0,
+  gutting: 18,
+  combined: 16,
 }
 
 function roundCurrency(value: number) {
@@ -103,44 +149,53 @@ function getSquareMeters(submission: QuoteSubmission) {
   return Math.max(Number(submission.squareMeters) || 0, 0)
 }
 
-function getFloorFactor(submission: QuoteSubmission) {
+function getProjectMode(submission: QuoteSubmission): QuoteProjectMode {
+  if (submission.type === "Entkernung") {
+    return "gutting"
+  }
+
+  if (submission.type === "Entkernung & Entrümpelung") {
+    return "combined"
+  }
+
+  return "clearance"
+}
+
+function getQuantityLabel(submission: QuoteSubmission) {
+  return submission.quantityEstimate || submission.effortEstimate || ""
+}
+
+function getQuantityMultiplier(submission: QuoteSubmission) {
+  return quantityMultipliers[getQuantityLabel(submission)] ?? 1
+}
+
+function getFloorSurcharge(submission: QuoteSubmission, mode: QuoteProjectMode) {
   if (submission.elevator === "Ja") {
     return 0
   }
 
-  if (submission.floor === "1.OG") {
-    return 120
+  const base = floorBaseSurcharges[submission.floor ?? ""] ?? 0
+  if (base === 0) {
+    return 0
   }
 
-  if (submission.floor === "2.OG") {
-    return 260
+  if (mode === "gutting") {
+    return roundCurrency(base * 1.3)
   }
 
-  if (submission.floor === "3.OG+") {
-    return 420
+  if (mode === "combined") {
+    return roundCurrency(base * 1.15)
   }
 
-  if (submission.floor === "Keller") {
-    return 140
-  }
-
-  return 0
+  return base
 }
 
-function getQuantityFactor(quantityEstimate?: string) {
-  if (quantityEstimate === "Viel") {
-    return 220
-  }
+function getScopedAmount(squareMeters: number, config: ScopedRateConfig) {
+  return roundCurrency(Math.max(Math.max(squareMeters, 1) * config.ratePerSquareMeter, config.minimum))
+}
 
-  if (quantityEstimate === "Mittel") {
-    return 120
-  }
-
-  if (quantityEstimate === "Wenig") {
-    return 40
-  }
-
-  return 0
+function sumLineItems(items: QuoteLineItem[]) {
+  return items.reduce((sum, item) => sum + item.amount, 0)
 }
 
 export function parsePersistedQuotePayload(payloadJson: string): PersistedQuotePayload {
@@ -154,81 +209,93 @@ export function parsePersistedQuotePayload(payloadJson: string): PersistedQuoteP
 
 export function buildQuoteLineItems(submission: QuoteSubmission): QuoteLineItem[] {
   const squareMeters = getSquareMeters(submission)
+  const normalizedSquareMeters = Math.max(squareMeters, 1)
   const lineItems: QuoteLineItem[] = []
-  const isClearance = submission.type === "Entrümpelung"
-  const isGutting = submission.type === "Entkernung"
-  const isCombined = submission.type === "Entkernung & Entrümpelung"
+  const mode = getProjectMode(submission)
+  const isClearance = mode === "clearance" || mode === "combined"
+  const isGutting = mode === "gutting" || mode === "combined"
 
-  if (isClearance || isCombined) {
-    lineItems.push({
-      key: "site-setup-clearance",
-      label: "Grundaufwand Entrümpelung",
-      amount: roundCurrency(Math.max(squareMeters, 1) * 6),
-      details: `${squareMeters || 1} m² kalkuliert`,
-    })
+  lineItems.push({
+    key: "project-setup",
+    label: "Baustelleneinrichtung / Anfahrt",
+    amount: projectSetupFees[mode],
+  })
+
+  if (isClearance) {
+    const clearanceBaseAmount = roundCurrency(normalizedSquareMeters * clearanceBaseWorkRate[mode])
+    const clearanceItems: QuoteLineItem[] = [
+      {
+        key: "base-clearance",
+        label: "Grundaufwand Entrümpelung",
+        amount: clearanceBaseAmount,
+        details: `${normalizedSquareMeters} m² × ${clearanceBaseWorkRate[mode]} €/m²`,
+      },
+    ]
 
     for (const material of submission.materials ?? []) {
-      const baseRate = clearanceMaterialBaseRates[material] ?? 100
-      const amount = material === "Sondermüll"
-        ? baseRate
-        : roundCurrency(baseRate + squareMeters * 0.9)
-
-      lineItems.push({
+      const config = clearanceMaterialRateConfig[material] ?? { ratePerSquareMeter: 1.5, minimum: 90 }
+      clearanceItems.push({
         key: `material-${material}`,
         label: `Entrümpelung: ${material}`,
-        amount,
+        amount: getScopedAmount(squareMeters, config),
+        details: `Auswahlabhängiger Zuschlag für ${material}`,
       })
     }
 
     if (submission.valuables === "Ja") {
-      lineItems.push({
+      clearanceItems.push({
         key: "valuables-check",
         label: "Sichtung Wertgegenstände",
-        amount: 80,
+        amount: 120,
       })
     }
 
-    const quantityFactor = getQuantityFactor(submission.quantityEstimate)
-    if (quantityFactor > 0) {
-      lineItems.push({
-        key: "quantity-factor",
-        label: `Mengenfaktor ${submission.quantityEstimate}`,
-        amount: quantityFactor,
+    const quantityMultiplier = getQuantityMultiplier(submission)
+    const clearanceSubtotal = sumLineItems(clearanceItems)
+    if (quantityMultiplier !== 1) {
+      clearanceItems.push({
+        key: "quantity-adjustment",
+        label: quantityMultiplier > 1 ? `Mehraufwand ${getQuantityLabel(submission)}` : `Abschlag ${getQuantityLabel(submission)}`,
+        amount: roundCurrency(clearanceSubtotal * (quantityMultiplier - 1)),
+        details: quantityMultiplier > 1 ? "Zusätzlicher Räum- und Sortieraufwand" : "Reduzierter Räumaufwand",
       })
     }
+
+    lineItems.push(...clearanceItems)
   }
 
-  if (isGutting || isCombined) {
-    lineItems.push({
-      key: "site-setup-gutting",
-      label: "Grundaufwand Entkernung",
-      amount: roundCurrency(Math.max(squareMeters, 1) * 10),
-      details: `${squareMeters || 1} m² kalkuliert`,
-    })
+  if (isGutting) {
+    const guttingItems: QuoteLineItem[] = [
+      {
+        key: "base-gutting",
+        label: "Grundaufwand Entkernung",
+        amount: roundCurrency(normalizedSquareMeters * guttingBaseWorkRate[mode]),
+        details: `${normalizedSquareMeters} m² × ${guttingBaseWorkRate[mode]} €/m²`,
+      },
+    ]
 
     for (const item of submission.removalItems ?? []) {
-      const baseRate = guttingRemovalBaseRates[item] ?? 250
-      const amount = item === "Sanitär (Bad/WC)" || item === "Elektroinstallationen" || item === "Heizung & Rohre"
-        ? baseRate
-        : roundCurrency(baseRate * Math.max(squareMeters, 1))
-
-      lineItems.push({
+      const config = guttingRemovalRateConfig[item] ?? { ratePerSquareMeter: 3, minimum: 220 }
+      guttingItems.push({
         key: `removal-${item}`,
         label: `Entkernung: ${item}`,
-        amount,
+        amount: getScopedAmount(squareMeters, config),
+        details: `Teilrückbau für ${item}`,
       })
     }
 
     if (submission.disposalWanted) {
-      lineItems.push({
+      guttingItems.push({
         key: "disposal-service",
         label: "Entsorgung des Rückbaumaterials",
-        amount: roundCurrency(Math.max(squareMeters, 1) * 4),
+        amount: roundCurrency(Math.max(280, normalizedSquareMeters * 3)),
       })
     }
+
+    lineItems.push(...guttingItems)
   }
 
-  const floorFactor = getFloorFactor(submission)
+  const floorFactor = getFloorSurcharge(submission, mode)
   if (floorFactor > 0) {
     lineItems.push({
       key: "floor-factor",
@@ -239,10 +306,11 @@ export function buildQuoteLineItems(submission: QuoteSubmission): QuoteLineItem[
   }
 
   if (submission.asbestosRequired) {
+    const asbestosRate = mode === "clearance" ? 7 : 9
     lineItems.push({
       key: "asbestos",
       label: "Asbest-Handling / Fachbetrieb",
-      amount: roundCurrency(Math.max(squareMeters, 1) * 8 + 350),
+      amount: roundCurrency(Math.max(1200, normalizedSquareMeters * asbestosRate)),
     })
   }
 
@@ -250,16 +318,7 @@ export function buildQuoteLineItems(submission: QuoteSubmission): QuoteLineItem[
     lineItems.push({
       key: "pollutants",
       label: "Prüfung / Umgang mit weiteren Schadstoffen",
-      amount: 420,
-    })
-  }
-
-  if (submission.elevator === "Ja") {
-    lineItems.push({
-      key: "elevator-benefit",
-      label: "Aufzug vorhanden",
-      amount: 0,
-      details: "Kein Zuschlag nötig",
+      amount: roundCurrency(Math.max(650, normalizedSquareMeters * 4)),
     })
   }
 
@@ -276,9 +335,16 @@ export function buildQuoteLineItems(submission: QuoteSubmission): QuoteLineItem[
 
 export function resolveQuotePricing(submission: QuoteSubmission, pricing?: QuotePricingState): QuotePricingSummary {
   const autoItems = buildQuoteLineItems(submission)
+  const customItems: QuoteLineItem[] = (pricing?.customLineItems ?? []).map((item) => ({
+    key: item.key,
+    label: item.label,
+    amount: roundCurrency(item.amount),
+    details: item.details,
+  }))
+  const allItems = [...autoItems, ...customItems]
   const overrideMap = new Map((pricing?.lineItemOverrides ?? []).map((item) => [item.key, item]))
 
-  const lineItems = autoItems.map((item) => {
+  const lineItems = allItems.map((item) => {
     const override = overrideMap.get(item.key)
     const included = override?.included !== false
     const hasManualAmount = typeof override?.amount === "number" && Number.isFinite(override.amount)
@@ -356,6 +422,24 @@ export function evaluateComplexity(submission: QuoteSubmission): ComplexityResul
   const flags: string[] = []
   const squareMeters = Number(submission.squareMeters) || 0
   const materials = submission.materials ?? []
+  const removalItems = submission.removalItems ?? []
+  const selectionCount = materials.length + removalItems.length
+  const quantityLabel = getQuantityLabel(submission)
+
+  if (submission.type === "Entkernung & Entrümpelung") {
+    score += 1
+    flags.push("Kombinierter Leistungsumfang mit zwei Gewerken.")
+  }
+
+  if (squareMeters >= 80) {
+    score += 1
+    flags.push("Projektgröße ab 80 m² — erhöhter Grundaufwand.")
+  }
+
+  if (squareMeters >= 150) {
+    score += 1
+    flags.push("Großfläche ab 150 m² — Organisation und Logistik steigen deutlich.")
+  }
 
   if (submission.asbestosRequired) {
     score += 1
@@ -367,76 +451,85 @@ export function evaluateComplexity(submission: QuoteSubmission): ComplexityResul
     flags.push("Andere Schadstoffe angegeben — gesonderte Prüfung erforderlich.")
   }
 
-  if (squareMeters > 100) {
+  if ((submission.floor === "2.OG" || submission.floor === "3.OG+" || submission.floor === "Keller") && submission.elevator !== "Ja") {
     score += 1
-    flags.push("Projektgröße über 100 m² — zusätzlicher Aufwand einplanen.")
+    flags.push("Erschwerter Materialtransport ohne Aufzug.")
   }
 
-  if ((submission.floor === "2.OG" || submission.floor === "3.OG+") && submission.elevator === "Nein") {
+  if (materials.includes("Sondermüll") || materials.includes("Baumaterialien")) {
     score += 1
-    flags.push("Höheres Stockwerk ohne Aufzug — Transportaufwand erhöht.")
+    flags.push("Entsorgungsintensive Materialien ausgewählt.")
   }
 
-  if (materials.includes("Sondermüll")) {
+  if (removalItems.some((item) => item === "Sanitär (Bad/WC)" || item === "Elektroinstallationen" || item === "Heizung & Rohre")) {
     score += 1
-    flags.push("Sondermüll ausgewählt — gesonderte Entsorgung berücksichtigen.")
+    flags.push("Technische Rückbaupositionen ausgewählt.")
   }
 
-  const level = score >= 4 ? "High" : score === 3 ? "Medium" : "Low"
-  const effortRange = level === "High" ? "16h+" : level === "Medium" ? "8–16h" : "4–8h"
+  if (selectionCount >= 4) {
+    score += 1
+    flags.push("Viele Leistungspositionen erhöhen Abstimmung und Sortieraufwand.")
+  }
+
+  if (quantityLabel === "Viel") {
+    score += 1
+    flags.push("Hoher Umfang/Aufwand angegeben.")
+  }
+
+  const level = score >= 7 ? "High" : score >= 4 ? "Medium" : "Low"
+  const effortRange = level === "High" ? "5+ Arbeitstage" : level === "Medium" ? "2–5 Arbeitstage" : "1–2 Arbeitstage"
 
   return { score, level, effortRange, flags }
 }
 
 export function estimatePriceRange(submission: QuoteSubmission, complexity: ComplexityResult): PriceEstimate {
-  const squareMeters = Math.max(Number(submission.squareMeters) || 0, 1)
-  const isGutting = submission.type === "Entkernung"
-  const baseRate = isGutting ? 28 : 16
-  let multiplier = 1
+  const autoTotal = roundCurrency(buildQuoteLineItems(submission).reduce((sum, item) => sum + item.amount, 0))
+  const selectionCount = (submission.materials ?? []).length + (submission.removalItems ?? []).length
+  const quantityLabel = getQuantityLabel(submission)
+  const isCombined = submission.type === "Entkernung & Entrümpelung"
+  let minFactor = 0.9
+  let maxFactor = 1.14
   const rationale: string[] = []
-  const selectedItems = isGutting ? submission.removalItems ?? [] : submission.materials ?? []
-
-  if (submission.asbestosRequired) {
-    multiplier += 0.35
-    rationale.push("Asbestzuschlag berücksichtigt")
-  }
-
-  if (submission.otherPollutants) {
-    multiplier += 0.2
-    rationale.push("Schadstoffzuschlag berücksichtigt")
-  }
-
-  if (submission.elevator === "Nein" && (submission.floor === "2.OG" || submission.floor === "3.OG+")) {
-    multiplier += 0.15
-    rationale.push("Transportzuschlag für höheres Stockwerk ohne Aufzug")
-  }
-
-  if ((submission.materials ?? []).includes("Sondermüll")) {
-    multiplier += 0.2
-    rationale.push("Sondermüllzuschlag berücksichtigt")
-  }
-
-  if (selectedItems.length >= 5) {
-    multiplier += 0.15
-    rationale.push("Viele Leistungspositionen berücksichtigt")
-  }
-
-  if (submission.quantityEstimate === "Viel") {
-    multiplier += 0.1
-    rationale.push("Hohe Mengenangabe berücksichtigt")
-  }
 
   if (complexity.level === "Medium") {
-    multiplier += 0.1
+    minFactor = 0.88
+    maxFactor = 1.2
   }
 
   if (complexity.level === "High") {
-    multiplier += 0.2
+    minFactor = 0.84
+    maxFactor = 1.28
   }
 
-  const base = squareMeters * baseRate * multiplier
-  const min = Math.round(base * 0.9)
-  const max = Math.round(base * 1.2)
+  rationale.push(`Automatische Kalkulation aus ${buildQuoteLineItems(submission).length} Positionen abgeleitet`)
+
+  if (submission.asbestosRequired || submission.otherPollutants) {
+    minFactor -= 0.02
+    maxFactor += 0.05
+    rationale.push("Schadstoffthemen erhöhen die Preisbandbreite")
+  }
+
+  if (isCombined) {
+    maxFactor += 0.03
+    rationale.push("Kombinierter Leistungsumfang mit zusätzlicher Abstimmung")
+  }
+
+  if (selectionCount >= 4) {
+    maxFactor += 0.03
+    rationale.push("Viele gewählte Leistungspositionen berücksichtigt")
+  }
+
+  if (quantityLabel === "Viel") {
+    maxFactor += 0.02
+    rationale.push("Hoher Umfang/Aufwand eingepreist")
+  }
+
+  if (submission.elevator !== "Ja" && (submission.floor === "2.OG" || submission.floor === "3.OG+" || submission.floor === "Keller")) {
+    rationale.push("Transport- und Trageaufwand berücksichtigt")
+  }
+
+  const min = roundCurrency(autoTotal * Math.max(0.75, minFactor))
+  const max = roundCurrency(autoTotal * Math.max(minFactor + 0.08, maxFactor))
 
   return {
     min,

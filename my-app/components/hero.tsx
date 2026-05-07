@@ -21,18 +21,18 @@ export function Hero() {
           {/* Main Headline */}
           <div className="space-y-4">
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight">
-              Entrümpelung &<br />
-              <span className="text-[#c9a45c]">Entkernung</span>
+              Entrümpelung, Hausauflösung &<br />
+              <span className="text-[#c9a45c]">Entkernung in Heidelberg</span>
             </h1>
             <p className="text-xl sm:text-2xl text-white/80 font-light">
-              schnell · günstig · präzise · sauber
+              Heidelberg · Mannheim · Rhein-Neckar · schnell · sauber · präzise
             </p>
           </div>
 
           {/* Description */}
           <p className="text-lg text-white/60 max-w-2xl">
-            Ihr zuverlässiger Partner für professionelle Entrümpelung, Entkernung und Kernsanierung 
-            in der Region. In 30 Minuten zum unverbindlichen Angebot.
+            Ihr zuverlässiger Partner für professionelle Entrümpelung, Hausauflösung und Entkernung 
+            in Heidelberg, Mannheim und Umgebung. Schnell vor Ort, transparent kalkuliert und auf Wunsch mit besenreiner Übergabe.
           </p>
 
           {/* CTA Buttons */}
@@ -53,7 +53,7 @@ export function Hero() {
               className="bg-[#c9a45c] text-[#0a0a0a] hover:bg-[#d4af37] font-bold text-lg px-8 h-12 shadow-lg shadow-[#c9a45c]/20"
             >
               <a href="#quote" className="flex items-center gap-2">
-                Angebot Entkernung
+                Angebot Hausauflösung
                 <ArrowRight className="w-5 h-5" />
               </a>
             </Button>

@@ -33,7 +33,13 @@ export default function HistoryPage() {
   };
 
   useEffect(() => {
-    laden();
+    const timeoutId = window.setTimeout(() => {
+      void laden();
+    }, 0);
+
+    return () => {
+      window.clearTimeout(timeoutId);
+    };
   }, []);
 
   const handleLoeschen = async (id: string) => {

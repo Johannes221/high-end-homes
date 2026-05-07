@@ -2,95 +2,168 @@
 
 Professionelle Website für Entrümpelung, Entkernung und Kernsanierung.
 
-## Features
+## Produktionsarchitektur
 
-- Modernes, edles Design mit Gold-Akzenten
-- Interaktives Angebotsformular mit sofortiger Preiskalkulation
-- Responsives Layout für alle Geräte
-- Animationen mit Framer Motion
-- E-Mail-Versand via Resend
+Für dieses Projekt ist die sinnvollste kleine Produktionsarchitektur:
 
-## Tech Stack
+- Öffentliche Domain und DNS über Cloudflare
+- Öffentliches Frontend unter `www.high-end-homes.de`
+- Backend, interne Bereiche und APIs auf Render unter `api.high-end-homes.de`
+- Kleine libSQL-Datenbank über Turso
 
-- Next.js 16 mit App Router
-- TypeScript
-- Tailwind CSS v4
-- shadcn/ui Komponenten
-- Framer Motion
-- React Hook Form + Zod
-- Resend (E-Mail)
+Warum so:
+
+- Die App enthält serverseitige Next.js-Features, Auth und API-Routen.
+- Für wenig Datenvolumen brauchst du keine große Postgres-/Mongo-Infrastruktur.
+- Turso/libSQL ist für diesen Scope günstig, schnell und deutlich einfacher als ein schweres DB-Setup.
+
+## Datenbank-Empfehlung
+
+Empfohlen:
+
+- `Turso / libSQL`
+
+Warum passend:
+
+- kleine Datenmenge
+- sehr wenig Operations-Aufwand
+- Prisma ist bereits mit `@prisma/adapter-libsql` integriert
+- funktioniert gut mit Render
+
+Aktuelle Datenbank im Projekt:
+
+- lokal: SQLite/libSQL über `DATABASE_URL="file:./dev.db"`
+- Produktion: libSQL remote, z. B. `libsql://<db>.turso.io`
+
+Nicht nötig für euren Scope:
+
+- kein MongoDB-Cluster
+- kein separates Redis-Setup
+- keine große Postgres-Installation, solange Datenmenge und Schreiblast moderat bleiben
 
 ## Lokale Entwicklung
 
 ```bash
 npm install
+npm run prisma:generate:local
+npm run prisma:push:local
 npm run dev
 ```
 
 Öffne [http://localhost:3000](http://localhost:3000).
 
-## Deployment
+## Environment-Variablen
 
-### Frontend (Cloudflare Pages)
+### Frontend / Cloudflare
 
-1. Build erstellen:
+| Variable | Beispiel | Zweck |
+|----------|----------|-------|
+| `NEXT_PUBLIC_BACKEND_URL` | `https://api.high-end-homes.de` | Öffentliche API-Basis für das Formular |
+
+### Backend / Render
+
+| Variable | Beispiel | Zweck |
+|----------|----------|-------|
+| `AUTH_URL` | `https://api.high-end-homes.de` | Kanonische Backend-URL für Auth.js |
+| `AUTH_SECRET` | langer zufälliger String | Pflicht für Sessions/Auth |
+| `PUBLIC_APP_URL` | `https://www.high-end-homes.de` | Öffentliche Website-URL |
+| `FRONTEND_URL` | `https://www.high-end-homes.de` | Erlaubte Frontend-Origin |
+| `ALLOWED_ORIGIN` | `https://www.high-end-homes.de` | CORS-Origin für Formular-Requests |
+| `DATABASE_URL` | `libsql://<db>.turso.io` | Produktionsdatenbank |
+| `DATABASE_AUTH_TOKEN` | `...` | Turso Auth-Token |
+| `SMTP_HOST` | `smtp.gmail.com` | SMTP Host |
+| `SMTP_PORT` | `587` | SMTP Port |
+| `SMTP_USER` | `...` | SMTP User |
+| `SMTP_PASS` | `...` | SMTP Passwort/App-Passwort |
+| `SMTP_FROM` | `High-End Homes <noreply@high-end-homes.de>` | Absender |
+| `NOTIFICATION_EMAIL` | `info@high-end-homes.de` | Zieladresse für Angebotsbenachrichtigungen |
+| `CRON_SECRET` | zufälliger String | Schutz für `/api/cron` |
+| `SERPAPI_KEY` | `...` | Preisvergleich/Scraping |
+| `QUOTE_ARCHIVE_DIR` | leer lassen | Nur setzen, wenn explizit Datei-Archivierung gewünscht ist |
+
+## Render Deployment
+
+Die Datei `render.yaml` ist vorbereitet.
+
+### Service anlegen
+
+1. Repo mit Render verbinden
+2. `Blueprint` oder `Web Service` aus `render.yaml` erstellen
+3. Root Directory ist `my-app`
+4. Healthcheck läuft über `/api/health`
+
+### Build und Start
+
+- Build: `npm ci && npm run build:production`
+- Start: `npm run start`
+
+### Nach erstem Deploy
+
+Schema auf die Produktions-DB anwenden:
+
 ```bash
-npm run build
+DATABASE_URL="libsql://..." DATABASE_AUTH_TOKEN="..." npm run prisma:push
 ```
 
-2. Den `dist` Ordner auf Cloudflare Pages deployen:
-   - Build command: `npm run build`
-   - Build output directory: `dist`
+## Cloudflare Setup
 
-### Backend (Render)
+## Variante, die ich für euch empfehle
 
-Da die API-Route für das Angebotsformular serverseitige Verarbeitung benötigt:
+Cloudflare übernimmt:
 
-1. **Option A - Render Node.js Service:**
-   - Deploye das gesamte Projekt als Node.js Service auf Render
-   - Setze die Umgebungsvariable `RESEND_API_KEY`
-   - Die API läuft dann unter `https://your-app.onrender.com/api/quote`
+- DNS
+- SSL
+- WAF/CDN
+- Domain-Routing
 
-2. **Frontend konfigurieren:**
-   - Setze in Cloudflare Pages die Umgebungsvariable:
-   ```
-   NEXT_PUBLIC_API_URL=https://your-app.onrender.com/api/quote
-   ```
+Und du legst an:
 
-### Umgebungsvariablen
+- `www.high-end-homes.de` -> öffentliche Website
+- `api.high-end-homes.de` -> Render Backend
 
-| Variable | Beschreibung | Erforderlich |
-|----------|-------------|--------------|
-| `RESEND_API_KEY` | API Key für E-Mail-Versand | Ja (Backend) |
-| `NEXT_PUBLIC_API_URL` | URL des Backends für das Formular | Ja (Frontend) |
+### DNS Einträge
 
-## Projektstruktur
+- `www` -> Ziel je nach Frontend-Hosting
+- `api` -> Render Custom Domain
 
-```
-my-app/
-├── app/
-│   ├── api/quote/      # API-Route für Angebotsberechnung
-│   ├── globals.css     # Globale Styles
-│   ├── layout.tsx      # Root Layout
-│   └── page.tsx        # Hauptseite
-├── components/
-│   ├── navigation.tsx  # Header Navigation
-│   ├── hero.tsx        # Hero Section
-│   ├── quote-form.tsx  # Angebotsformular
-│   ├── services.tsx    # Leistungen Section
-│   ├── about.tsx       # Über uns / USP
-│   └── footer.tsx      # Footer mit Impressum
-├── public/             # Statische Assets (Logos, Bilder)
-└── dist/              # Build-Output
-```
+### Wenn du die Marketing-Seite getrennt auf Cloudflare hosten willst
 
-## Preiskalkulation
+Dann muss der öffentliche Frontend-Teil separat gebaut oder extrahiert werden.
 
-Die Preise werden basierend auf folgenden Faktoren berechnet:
-- **Quadratmeter**: Basispreis 12€/m²
-- **Gebäudetyp**: Multiplikator 1.0x - 1.5x
-- **Materialien**: Komplexitätsfaktor 0.9x - 1.5x
-- **Asbest**: Zuschlag 15€/m²
+Wichtig:
+
+- Die aktuelle Codebasis ist keine rein statische Frontend-App.
+- Interne Bereiche, Auth und API bleiben serverseitig und gehören auf Render.
+- Das öffentliche Angebotsformular kann bereits getrennt auf das Render-Backend zeigen über `NEXT_PUBLIC_BACKEND_URL`.
+
+## Empfohlenes Domain-Setup
+
+- `https://www.high-end-homes.de` -> öffentliches Frontend
+- `https://api.high-end-homes.de` -> Next.js Backend auf Render
+
+Beispiel:
+
+- Frontend sendet Formular an `https://api.high-end-homes.de/api/quote`
+- Backend erlaubt CORS nur von `https://www.high-end-homes.de`
+
+## Produktionscheckliste
+
+1. Turso DB anlegen
+2. `DATABASE_URL` und `DATABASE_AUTH_TOKEN` in Render setzen
+3. `AUTH_SECRET` generieren und in Render setzen
+4. `AUTH_URL=https://api.high-end-homes.de` setzen
+5. `PUBLIC_APP_URL`, `FRONTEND_URL`, `ALLOWED_ORIGIN` auf `https://www.high-end-homes.de` setzen
+6. SMTP-Zugang setzen
+7. `npm run prisma:push` gegen die Produktions-DB ausführen
+8. Render Healthcheck prüfen: `/api/health`
+9. Frontend-Env `NEXT_PUBLIC_BACKEND_URL=https://api.high-end-homes.de` setzen
+10. Formular live testen
+
+## Hinweise
+
+- Render-Filesystem ist nicht für persistente Archivierung gedacht. Deshalb ist Dateispeicherung in Production standardmäßig deaktiviert.
+- Angebotsanfragen werden in der Datenbank gespeichert.
+- E-Mail-Benachrichtigungen werden nur versendet, wenn SMTP-Variablen gesetzt sind.
 
 ## Kontakt
 

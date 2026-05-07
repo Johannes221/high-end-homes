@@ -3,9 +3,12 @@ import { NextRequest, NextResponse } from "next/server"
 import { auth } from "@/lib/auth"
 import { prisma } from "@/lib/prisma"
 import {
+  estimatePriceRange,
+  evaluateComplexity,
   normalizeString,
   parsePersistedQuotePayload,
   resolveQuotePricing,
+  type QuoteCustomLineItem,
   type QuoteLineItemOverride,
 } from "@/lib/quote"
 
@@ -48,13 +51,20 @@ function serializeQuote(quote: {
   updatedAt: Date
 }) {
   const payload = parsePersistedQuotePayload(quote.payloadJson)
+  const complexity = evaluateComplexity(payload)
+  const estimate = estimatePriceRange(payload, complexity)
 
   return {
     ...quote,
+    complexityScore: complexity.score,
+    complexityLevel: complexity.level,
+    effortRange: complexity.effortRange,
+    estimatedMinPrice: estimate.min,
+    estimatedMaxPrice: estimate.max,
     materials: JSON.parse(quote.materialsJson),
     removalItems: JSON.parse(quote.removalItemsJson),
     imageFileNames: JSON.parse(quote.imageFileNamesJson),
-    complexityFlags: JSON.parse(quote.complexityFlagsJson),
+    complexityFlags: complexity.flags,
     payload,
     pricing: payload.pricing ?? { lineItemOverrides: [], internalNotes: "", exportedAt: null },
     pricingSummary: resolveQuotePricing(payload, payload.pricing),
@@ -95,6 +105,7 @@ export async function PATCH(request: NextRequest, context: { params: Promise<{ i
     const body = (await request.json()) as {
       approvalStatus?: string
       lineItemOverrides?: QuoteLineItemOverride[]
+      customLineItems?: QuoteCustomLineItem[]
       internalNotes?: string
       markExported?: boolean
     }
@@ -109,6 +120,7 @@ export async function PATCH(request: NextRequest, context: { params: Promise<{ i
     payload.pricing = {
       ...payload.pricing,
       lineItemOverrides: Array.isArray(body.lineItemOverrides) ? body.lineItemOverrides : (payload.pricing?.lineItemOverrides ?? []),
+      customLineItems: Array.isArray(body.customLineItems) ? body.customLineItems : (payload.pricing?.customLineItems ?? []),
       internalNotes: typeof body.internalNotes === "string" ? normalizeString(body.internalNotes) : (payload.pricing?.internalNotes ?? ""),
       exportedAt: body.markExported ? new Date().toISOString() : (payload.pricing?.exportedAt ?? undefined),
     }

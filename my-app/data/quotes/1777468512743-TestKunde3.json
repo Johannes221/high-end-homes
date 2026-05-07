@@ -1,0 +1,53 @@
+{
+  "type": "Entkernung & Entrümpelung",
+  "name": "Test Kunde 3",
+  "email": "test3@example.com",
+  "phone": "+491234567891",
+  "company": "Test KG",
+  "address": "",
+  "squareMeters": "200",
+  "buildingType": "Villa",
+  "constructionYear": "",
+  "floor": "1.OG",
+  "elevator": "Ja",
+  "materials": [
+    "Möbel",
+    "Sondermüll"
+  ],
+  "removalItems": [
+    "Fenster & Türen",
+    "Trennwände"
+  ],
+  "quantityEstimate": "",
+  "valuables": "",
+  "asbestosRequired": false,
+  "otherPollutants": false,
+  "disposalWanted": false,
+  "permitStatus": "",
+  "desiredDate": "2025-07-01",
+  "imageFileNames": [
+    "kombi1.jpg",
+    "kombi2.jpg"
+  ],
+  "notes": "Testanmerkung Kombiniert",
+  "effortEstimate": "Viel",
+  "complexity": {
+    "score": 3,
+    "level": "Medium",
+    "effortRange": "8–16h",
+    "flags": [
+      "Projektgröße über 100 m² — zusätzlicher Aufwand einplanen.",
+      "Sondermüll ausgewählt — gesonderte Entsorgung berücksichtigen."
+    ]
+  },
+  "estimate": {
+    "min": 3744,
+    "max": 4992,
+    "currency": "EUR",
+    "rationale": [
+      "Sondermüllzuschlag berücksichtigt"
+    ]
+  },
+  "databaseId": "cmok2uy1w00053fd3x6esv90k",
+  "createdAt": "2026-04-29T13:15:12.743Z"
+}

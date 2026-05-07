@@ -1,6 +1,7 @@
 "use client"
 
 
+import Link from "next/link"
 import { Mail, Phone, MapPin, ArrowUp } from "lucide-react"
 import Image from "next/image"
 import { Separator } from "@/components/ui/separator"
@@ -28,7 +29,7 @@ export function Footer() {
             />
             <p className="text-[#fafafa]/60 text-sm leading-relaxed">
               Ihr zuverlässiger Partner für professionelle Entrümpelung, 
-              Entkernung und Sanierung. Schnell, günstig, präzise.
+              Hausauflösung und Entkernung in Heidelberg, Mannheim und der Rhein-Neckar-Region.
             </p>
           </div>
 
@@ -39,18 +40,19 @@ export function Footer() {
             <h4 className="font-semibold mb-6 text-[#c9a45c]">Navigation</h4>
             <ul className="space-y-3">
               {[
-                { label: "Home", href: "#hero" },
-                { label: "Angebot einholen", href: "#quote" },
-                { label: "Leistungen", href: "#services" },
-                { label: "Über uns", href: "#about" },
+                { label: "Home", href: "/#hero" },
+                { label: "Angebot einholen", href: "/#quote" },
+                { label: "Leistungen", href: "/#services" },
+                { label: "Über uns", href: "/#about" },
+                { label: "Region", href: "/#region" },
               ].map((link) => (
                 <li key={link.href}>
-                  <a
+                  <Link
                     href={link.href}
                     className="text-[#fafafa]/60 hover:text-[#c9a45c] transition-colors text-sm"
                   >
                     {link.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -64,8 +66,9 @@ export function Footer() {
             <ul className="space-y-3">
               {[
                 "Entrümpelung",
+                "Hausauflösung",
                 "Entkernung",
-                "Kernsanierung",
+                "Wohnungsauflösung",
                 "Fensterbau",
                 "Gerüstbau",
                 "Fliesenleger",

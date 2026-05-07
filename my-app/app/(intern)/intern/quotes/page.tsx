@@ -8,6 +8,13 @@ type QuoteLineItemOverride = {
   included?: boolean
 }
 
+type QuoteCustomLineItem = {
+  key: string
+  label: string
+  amount: number
+  details?: string
+}
+
 type QuoteResolvedLineItem = {
   key: string
   label: string
@@ -20,6 +27,7 @@ type QuoteResolvedLineItem = {
 
 type QuotePricing = {
   lineItemOverrides?: QuoteLineItemOverride[]
+  customLineItems?: QuoteCustomLineItem[]
   internalNotes?: string
   exportedAt?: string | null
 }
@@ -90,6 +98,12 @@ type QuoteItem = {
 type QuoteResponse = { success?: boolean; quotes?: QuoteItem[] }
 type QuotePatchResponse = { success?: boolean; quote?: QuoteItem }
 
+type CustomLineItemDraft = {
+  label: string
+  amount: string
+  details: string
+}
+
 function formatCurrency(value: number) {
   return new Intl.NumberFormat("de-DE", { style: "currency", currency: "EUR", maximumFractionDigits: 0 }).format(value)
 }
@@ -138,6 +152,10 @@ function downloadCsv(quote: QuoteItem) {
   URL.revokeObjectURL(url)
 }
 
+function openPdfOffer(quoteId: string) {
+  window.open(`/api/quotes/${quoteId}/pdf?print=1`, "_blank", "noopener,noreferrer")
+}
+
 export default function QuotesPage() {
   const [quotes, setQuotes] = useState<QuoteItem[]>([])
   const [loading, setLoading] = useState(true)
@@ -145,6 +163,8 @@ export default function QuotesPage() {
   const [expandedId, setExpandedId] = useState("")
   const [draftOverrides, setDraftOverrides] = useState<Record<string, QuoteLineItemOverride[]>>({})
   const [draftNotes, setDraftNotes] = useState<Record<string, string>>({})
+  const [draftCustomItems, setDraftCustomItems] = useState<Record<string, QuoteCustomLineItem[]>>({})
+  const [newCustomItem, setNewCustomItem] = useState<Record<string, CustomLineItemDraft>>({})
 
   const loadQuotes = async () => {
     try {
@@ -162,14 +182,34 @@ export default function QuotesPage() {
     void loadQuotes()
   }, [])
 
+  const buildDefaultOverrides = (quote: QuoteItem) => {
+    const savedMap = new Map((quote.pricing.lineItemOverrides ?? []).map((item) => [item.key, item]))
+    return quote.pricingSummary.lineItems.map((item) => {
+      const saved = savedMap.get(item.key)
+      return {
+        key: item.key,
+        amount: typeof saved?.amount === "number" ? saved.amount : item.source === "manual" ? item.finalAmount : null,
+        included: saved?.included ?? item.included,
+      }
+    })
+  }
+
   const syncDraft = (quote: QuoteItem) => {
     setDraftOverrides((current) => ({
       ...current,
-      [quote.id]: quote.pricing.lineItemOverrides ?? quote.pricingSummary.lineItems.map((item) => ({ key: item.key, amount: item.source === "manual" ? item.finalAmount : null, included: item.included })),
+      [quote.id]: buildDefaultOverrides(quote),
     }))
     setDraftNotes((current) => ({
       ...current,
       [quote.id]: quote.pricing.internalNotes ?? "",
+    }))
+    setDraftCustomItems((current) => ({
+      ...current,
+      [quote.id]: quote.pricing.customLineItems ?? [],
+    }))
+    setNewCustomItem((current) => ({
+      ...current,
+      [quote.id]: { label: "", amount: "", details: "" },
     }))
   }
 
@@ -188,6 +228,7 @@ export default function QuotesPage() {
           approvalStatus: payload.approvalStatus ?? quote.approvalStatus,
           markExported: payload.markExported,
           lineItemOverrides: draftOverrides[id] ?? quote.pricing.lineItemOverrides ?? [],
+          customLineItems: draftCustomItems[id] ?? quote.pricing.customLineItems ?? [],
           internalNotes: draftNotes[id] ?? quote.pricing.internalNotes ?? "",
         }),
       })
@@ -197,10 +238,13 @@ export default function QuotesPage() {
       if (response.ok && data.success && data.quote) {
         setQuotes((current) => current.map((quote) => (quote.id === id ? { ...quote, ...data.quote } : quote)))
         syncDraft(data.quote)
+        return data.quote
       }
     } finally {
       setUpdatingId("")
     }
+
+    return null
   }
 
   const getDraftOverrides = (quote: QuoteItem) => {
@@ -209,17 +253,26 @@ export default function QuotesPage() {
       return existing
     }
 
-    return quote.pricingSummary.lineItems.map((item) => ({
-      key: item.key,
-      amount: item.source === "manual" ? item.finalAmount : null,
-      included: item.included,
-    }))
+    return buildDefaultOverrides(quote)
   }
 
   const getPreviewSummary = (quote: QuoteItem) => {
     const overrides = getDraftOverrides(quote)
+    const customItems = draftCustomItems[quote.id] ?? quote.pricing.customLineItems ?? []
     const overrideMap = new Map(overrides.map((item) => [item.key, item]))
-    const lineItems = quote.pricingSummary.lineItems.map((item) => {
+    const baseItems = [
+      ...quote.pricingSummary.lineItems.filter((item) => !item.key.startsWith("custom-")),
+      ...customItems.map((item) => ({
+        key: item.key,
+        label: item.label,
+        amount: item.amount,
+        details: item.details,
+        included: true,
+        finalAmount: item.amount,
+        source: "auto" as const,
+      })),
+    ]
+    const lineItems = baseItems.map((item) => {
       const override = overrideMap.get(item.key)
       const included = override?.included !== false
       const hasManualAmount = typeof override?.amount === "number" && Number.isFinite(override.amount)
@@ -246,6 +299,48 @@ export default function QuotesPage() {
 
   const toggleLineItemIncluded = (quote: QuoteItem, key: string) => {
     const next = getDraftOverrides(quote).map((item) => item.key === key ? { ...item, included: item.included === false ? true : false } : item)
+    setDraftOverrides((current) => ({ ...current, [quote.id]: next }))
+  }
+
+  const addCustomLineItem = (quote: QuoteItem) => {
+    const draft = newCustomItem[quote.id] ?? { label: "", amount: "", details: "" }
+    if (!draft.label.trim() || !draft.amount.trim()) {
+      return
+    }
+
+    const customItem: QuoteCustomLineItem = {
+      key: `custom-${Date.now()}`,
+      label: draft.label.trim(),
+      amount: Number(draft.amount) || 0,
+      details: draft.details.trim() || undefined,
+    }
+
+    setDraftCustomItems((current) => ({
+      ...current,
+      [quote.id]: [...(current[quote.id] ?? quote.pricing.customLineItems ?? []), customItem],
+    }))
+    const nextOverrides = [...getDraftOverrides(quote), { key: customItem.key, amount: customItem.amount, included: true }]
+    setDraftOverrides((current) => ({ ...current, [quote.id]: nextOverrides }))
+    setNewCustomItem((current) => ({
+      ...current,
+      [quote.id]: { label: "", amount: "", details: "" },
+    }))
+  }
+
+  const removeLineItem = (quote: QuoteItem, key: string) => {
+    if (key.startsWith("custom-")) {
+      setDraftCustomItems((current) => ({
+        ...current,
+        [quote.id]: (current[quote.id] ?? quote.pricing.customLineItems ?? []).filter((item) => item.key !== key),
+      }))
+      setDraftOverrides((current) => ({
+        ...current,
+        [quote.id]: getDraftOverrides(quote).filter((item) => item.key !== key),
+      }))
+      return
+    }
+
+    const next = getDraftOverrides(quote).map((item) => item.key === key ? { ...item, included: false } : item)
     setDraftOverrides((current) => ({ ...current, [quote.id]: next }))
   }
 
@@ -347,6 +442,19 @@ export default function QuotesPage() {
                   >
                     Angebot exportieren
                   </button>
+                  <button
+                    type="button"
+                    onClick={async () => {
+                      const savedQuote = await updateQuote(quote.id, { markExported: true })
+                      if (savedQuote) {
+                        openPdfOffer(savedQuote.id)
+                      }
+                    }}
+                    disabled={updatingId === quote.id}
+                    className="px-4 py-2 rounded-lg bg-[#c9a45c] text-black text-sm font-semibold disabled:opacity-60"
+                  >
+                    PDF-Angebot erstellen
+                  </button>
                 </div>
 
                 {isExpanded ? (
@@ -406,11 +514,58 @@ export default function QuotesPage() {
                                 />
                               </td>
                               <td className="py-3 pr-4 text-gray-700">{item.source === "manual" ? "Manuell" : "Auto"}</td>
-                              <td className="py-3 text-gray-500">{item.details || "-"}</td>
+                              <td className="py-3 text-gray-500">
+                                <div className="flex items-start justify-between gap-3">
+                                  <span>{item.details || "-"}</span>
+                                  <button
+                                    type="button"
+                                    onClick={() => removeLineItem(quote, item.key)}
+                                    className="rounded-md border border-red-200 px-2 py-1 text-xs text-red-600"
+                                  >
+                                    Löschen
+                                  </button>
+                                </div>
+                              </td>
                             </tr>
                           ))}
                         </tbody>
                       </table>
+                    </div>
+
+                    <div className="rounded-xl border border-dashed border-gray-300 bg-white p-4 space-y-3">
+                      <h3 className="text-sm font-semibold text-gray-900">Position hinzufügen</h3>
+                      <div className="grid md:grid-cols-[1.4fr_0.6fr_1fr_auto] gap-3">
+                        <input
+                          type="text"
+                          value={newCustomItem[quote.id]?.label ?? ""}
+                          onChange={(event) => setNewCustomItem((current) => ({ ...current, [quote.id]: { ...(current[quote.id] ?? { label: "", amount: "", details: "" }), label: event.target.value } }))}
+                          className="rounded-lg border border-gray-300 px-3 py-2"
+                          placeholder="Bezeichnung der Position"
+                        />
+                        <input
+                          type="number"
+                          min="0"
+                          step="1"
+                          value={newCustomItem[quote.id]?.amount ?? ""}
+                          onChange={(event) => setNewCustomItem((current) => ({ ...current, [quote.id]: { ...(current[quote.id] ?? { label: "", amount: "", details: "" }), amount: event.target.value } }))}
+                          className="rounded-lg border border-gray-300 px-3 py-2"
+                          placeholder="Preis"
+                        />
+                        <input
+                          type="text"
+                          value={newCustomItem[quote.id]?.details ?? ""}
+                          onChange={(event) => setNewCustomItem((current) => ({ ...current, [quote.id]: { ...(current[quote.id] ?? { label: "", amount: "", details: "" }), details: event.target.value } }))}
+                          className="rounded-lg border border-gray-300 px-3 py-2"
+                          placeholder="Details optional"
+                        />
+                        <button
+                          type="button"
+                          onClick={() => addCustomLineItem(quote)}
+                          className="rounded-lg bg-gray-900 px-4 py-2 text-sm font-medium text-white"
+                        >
+                          Hinzufügen
+                        </button>
+                      </div>
                     </div>
 
                     <div className="grid md:grid-cols-2 gap-4">
@@ -439,6 +594,19 @@ export default function QuotesPage() {
                         className="px-4 py-2 rounded-lg bg-blue-600 text-white text-sm font-medium disabled:opacity-60"
                       >
                         Änderungen speichern
+                      </button>
+                      <button
+                        type="button"
+                        onClick={async () => {
+                          const savedQuote = await updateQuote(quote.id, { markExported: true })
+                          if (savedQuote) {
+                            openPdfOffer(savedQuote.id)
+                          }
+                        }}
+                        disabled={updatingId === quote.id}
+                        className="px-4 py-2 rounded-lg bg-[#c9a45c] text-black text-sm font-semibold disabled:opacity-60"
+                      >
+                        PDF-Angebot erstellen
                       </button>
                       <button
                         type="button"

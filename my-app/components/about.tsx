@@ -50,15 +50,15 @@ export function About() {
             Unser Versprechen
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
-            Das ist unser <span className="text-gold-gradient">USP</span>
+            Darum vertrauen Kunden aus Heidelberg, Mannheim und Umgebung auf <span className="text-gold-gradient">High-End Homes</span>
           </h2>
           <p className="text-lg text-[#fafafa]/60 max-w-2xl mx-auto">
-            Kein Hokus-Pokus, keine leeren Versprechen. Wir liefern das, was wir sagen - schnell, günstig und präzise.
+            Kein Hokus-Pokus, keine leeren Versprechen. Wir liefern planbare Ergebnisse für Entrümpelung, Hausauflösung und Entkernung - schnell, sauber und präzise.
           </p>
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-24">
-          {uspItems.map((item, index) => (
+          {uspItems.map((item) => (
             <div
               key={item.title}
               

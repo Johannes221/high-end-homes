@@ -593,8 +593,8 @@ export async function sucheProdukte(suchanfrage: string): Promise<SuchergebnisMi
 
   let alleErgebnisse: Produktergebnis[] = [];
   let stufe1Debug: ScraperDebugInfo = { stufe: 1, quelle: "serpapi", erfolgreich: false, ergebnisseAnzahl: 0 };
-  let stufe2Debugs: ScraperDebugInfo[] = [];
-  let stufe3Debugs: ScraperDebugInfo[] = [];
+  const stufe2Debugs: ScraperDebugInfo[] = [];
+  const stufe3Debugs: ScraperDebugInfo[] = [];
 
   // === STUFE 1: SerpApi ===
   for (const begriff of suchbegriffe) {

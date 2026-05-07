@@ -54,7 +54,13 @@ export default function FavoritesPage() {
   };
 
   useEffect(() => {
-    laden();
+    const timeoutId = window.setTimeout(() => {
+      void laden();
+    }, 0);
+
+    return () => {
+      window.clearTimeout(timeoutId);
+    };
   }, []);
 
   return (

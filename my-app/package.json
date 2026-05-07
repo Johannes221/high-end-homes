@@ -7,9 +7,13 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "prisma:generate": "DATABASE_URL=file:./dev.db npx prisma generate",
-    "prisma:push": "DATABASE_URL=file:./dev.db npx prisma db push",
-    "prisma:studio": "DATABASE_URL=file:./dev.db npx prisma studio"
+    "prisma:generate": "prisma generate",
+    "prisma:push": "prisma db push",
+    "prisma:studio": "prisma studio",
+    "prisma:generate:local": "DATABASE_URL=file:./dev.db prisma generate",
+    "prisma:push:local": "DATABASE_URL=file:./dev.db prisma db push",
+    "prisma:studio:local": "DATABASE_URL=file:./dev.db prisma studio",
+    "build:production": "npm run prisma:generate && npm run build"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
