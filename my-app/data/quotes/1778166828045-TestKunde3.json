@@ -1,0 +1,62 @@
+{
+  "type": "Entkernung & Entrümpelung",
+  "name": "Test Kunde 3",
+  "email": "test3@example.com",
+  "phone": "",
+  "company": "Bau GmbH",
+  "address": "",
+  "squareMeters": "120",
+  "buildingType": "Gewerbe",
+  "constructionYear": "",
+  "floor": "1.OG",
+  "elevator": "Nein",
+  "materials": [
+    "Möbel",
+    "Holz",
+    "Metall"
+  ],
+  "removalItems": [
+    "Sanitär (Bad/WC)",
+    "Elektroinstallationen"
+  ],
+  "quantityEstimate": "",
+  "valuables": "",
+  "asbestosRequired": false,
+  "otherPollutants": false,
+  "disposalWanted": false,
+  "permitStatus": "",
+  "desiredDate": "2026-08-01",
+  "imageFileNames": [
+    "gewerbe1.jpg",
+    "gewerbe2.jpg",
+    "gewerbe3.jpg"
+  ],
+  "imagesBase64": [],
+  "notes": "Großprojekt Gewerbe",
+  "effortEstimate": "Viel",
+  "complexity": {
+    "score": 6,
+    "level": "Medium",
+    "effortRange": "2–5 Arbeitstage",
+    "flags": [
+      "Kombinierter Leistungsumfang mit zwei Gewerken.",
+      "Projektgröße ab 80 m² — erhöhter Grundaufwand.",
+      "Technische Rückbaupositionen ausgewählt.",
+      "Viele Leistungspositionen erhöhen Abstimmung und Sortieraufwand.",
+      "Hoher Umfang/Aufwand angegeben."
+    ]
+  },
+  "estimate": {
+    "min": 5241,
+    "max": 7624,
+    "currency": "EUR",
+    "rationale": [
+      "Automatische Kalkulation aus 10 Positionen abgeleitet",
+      "Kombinierter Leistungsumfang mit zusätzlicher Abstimmung",
+      "Viele gewählte Leistungspositionen berücksichtigt",
+      "Hoher Umfang/Aufwand eingepreist"
+    ]
+  },
+  "databaseId": "cmovmm9b10002xhd3ntrts22z",
+  "createdAt": "2026-05-07T15:13:48.045Z"
+}

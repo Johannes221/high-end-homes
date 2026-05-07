@@ -222,16 +222,27 @@ function FileUpload({
     setIsDragging(false)
   }
 
-  const handleDrop = (e: React.DragEvent) => {
+  const convertFileToBase64 = (file: File): Promise<string> => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader()
+      reader.readAsDataURL(file)
+      reader.onload = () => resolve(reader.result as string)
+      reader.onerror = (error) => reject(error)
+    })
+  }
+
+  const handleDrop = async (e: React.DragEvent) => {
     e.preventDefault()
     setIsDragging(false)
     const droppedFiles = Array.from(e.dataTransfer.files).filter((file) => file.type.startsWith("image/"))
-    onFilesChange([...files, ...droppedFiles.map((f) => f.name)])
+    const base64Files = await Promise.all(droppedFiles.map((f) => convertFileToBase64(f)))
+    onFilesChange([...files, ...base64Files])
   }
 
-  const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const selectedFiles = Array.from(e.target.files || []).map((file) => file.name)
-    onFilesChange([...files, ...selectedFiles])
+  const handleFileSelect = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedFiles = Array.from(e.target.files || [])
+    const base64Files = await Promise.all(selectedFiles.map((file) => convertFileToBase64(file)))
+    onFilesChange([...files, ...base64Files])
   }
 
   const removeFile = (index: number) => {
@@ -265,7 +276,7 @@ function FileUpload({
             {files.length === 0 ? "Bilder hierher ziehen oder klicken" : `${files.length} Bild${files.length > 1 ? "er" : ""} ausgewählt`}
           </div>
           <div style={{ color: colors.muted, fontSize: 12 }}>
-            {files.length === 0 ? "JPG, PNG, WEBP (max 10MB pro Bild)" : "Weitere Bilder hinzufügen"}
+            {files.length === 0 ? "JPG, PNG, WEBP (max 5MB pro Bild)" : "Weitere Bilder hinzufügen"}
           </div>
         </div>
       </div>
@@ -290,46 +301,55 @@ function FileUpload({
             </button>
           </div>
           <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
-            {files.map((fileName, index) => (
-              <div
-                key={`${fileName}-${index}`}
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 8,
-                  padding: "8px 12px",
-                  borderRadius: 8,
-                  backgroundColor: "rgba(255,255,255,0.05)",
-                  border: `1px solid ${colors.border}`,
-                  fontSize: 13,
-                  color: colors.text,
-                }}
-              >
-                <span style={{ maxWidth: 150, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
-                  {fileName}
-                </span>
-                <button
-                  type="button"
-                  onClick={() => removeFile(index)}
+            {files.map((base64, index) => {
+              const mimeType = base64.split(":")[1]?.split(";")[0] || "image/jpeg"
+              const fileExt = mimeType.split("/")[1] || "jpg"
+              return (
+                <div
+                  key={`${base64.slice(0, 20)}-${index}`}
                   style={{
-                    width: 20,
-                    height: 20,
-                    borderRadius: "50%",
-                    border: "none",
-                    backgroundColor: colors.error,
-                    color: "#fff",
-                    fontSize: 12,
-                    cursor: "pointer",
                     display: "flex",
                     alignItems: "center",
-                    justifyContent: "center",
-                    padding: 0,
+                    gap: 8,
+                    padding: "6px 10px",
+                    borderRadius: 8,
+                    backgroundColor: "rgba(255,255,255,0.05)",
+                    border: `1px solid ${colors.border}`,
+                    fontSize: 12,
+                    color: colors.text,
                   }}
                 >
-                  ×
-                </button>
-              </div>
-            ))}
+                  <img
+                    src={base64}
+                    alt={`Bild ${index + 1}`}
+                    style={{ width: 40, height: 40, objectFit: "cover", borderRadius: 4 }}
+                  />
+                  <span style={{ maxWidth: 80, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                    Bild.{fileExt}
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => removeFile(index)}
+                    style={{
+                      width: 18,
+                      height: 18,
+                      borderRadius: "50%",
+                      border: "none",
+                      backgroundColor: colors.error,
+                      color: "#fff",
+                      fontSize: 11,
+                      cursor: "pointer",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      padding: 0,
+                    }}
+                  >
+                    ×
+                  </button>
+                </div>
+              )
+            })}
           </div>
         </div>
       )}
@@ -548,6 +568,7 @@ export function QuoteForm() {
           asbestosRequired: clearanceAsbestos,
           desiredDate: clearanceDesiredDate.trim(),
           imageFileNames: clearanceFiles,
+          imagesBase64: clearanceFiles,
           notes: clearanceNotes.trim(),
         }),
       })
@@ -601,6 +622,7 @@ export function QuoteForm() {
           permitStatus: guttingPermit,
           desiredDate: guttingDesiredDate.trim(),
           imageFileNames: guttingFiles,
+          imagesBase64: guttingFiles,
           notes: guttingNotes.trim(),
         }),
       })
@@ -652,6 +674,7 @@ export function QuoteForm() {
           asbestosRequired: combinedAsbestos,
           desiredDate: combinedDesiredDate.trim(),
           imageFileNames: combinedFiles,
+          imagesBase64: combinedFiles,
           notes: combinedNotes.trim(),
         }),
       })

@@ -20,6 +20,7 @@ export type QuoteSubmission = {
   permitStatus?: string
   desiredDate?: string
   imageFileNames?: string[]
+  imagesBase64?: string[]
   notes?: string
   effortEstimate?: string
 }
@@ -413,6 +414,7 @@ export function normalizeSubmission(payload: unknown): QuoteSubmission {
     permitStatus: normalizeString(body.permitStatus),
     desiredDate: normalizeString(body.desiredDate),
     imageFileNames: normalizeStringArray(body.imageFileNames),
+    imagesBase64: normalizeStringArray(body.imagesBase64),
     notes: normalizeString(body.notes),
     effortEstimate: normalizeString(body.effortEstimate),
   }

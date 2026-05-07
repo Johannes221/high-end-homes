@@ -1,0 +1,51 @@
+{
+  "type": "Entkernung",
+  "name": "Test Kunde 2",
+  "email": "test2@example.com",
+  "phone": "0987654321",
+  "company": "",
+  "address": "",
+  "squareMeters": "80",
+  "buildingType": "Haus",
+  "constructionYear": "1980",
+  "floor": "Erdgeschoss",
+  "elevator": "Ja",
+  "materials": [],
+  "removalItems": [
+    "Böden",
+    "Deckenverkleidungen"
+  ],
+  "quantityEstimate": "",
+  "valuables": "",
+  "asbestosRequired": true,
+  "otherPollutants": false,
+  "disposalWanted": true,
+  "permitStatus": "Ja",
+  "desiredDate": "2026-07-15",
+  "imageFileNames": [
+    "asbest-bild.jpg"
+  ],
+  "imagesBase64": [],
+  "notes": "Testanfrage Entkernung mit Asbest",
+  "effortEstimate": "",
+  "complexity": {
+    "score": 3,
+    "level": "Low",
+    "effortRange": "1–2 Arbeitstage",
+    "flags": [
+      "Projektgröße ab 80 m² — erhöhter Grundaufwand.",
+      "Asbestentsorgung erforderlich — Fachbetrieb einplanen."
+    ]
+  },
+  "estimate": {
+    "min": 3397,
+    "max": 4593,
+    "currency": "EUR",
+    "rationale": [
+      "Automatische Kalkulation aus 6 Positionen abgeleitet",
+      "Schadstoffthemen erhöhen die Preisbandbreite"
+    ]
+  },
+  "databaseId": "cmovmm6zy0001xhd3ymo2v1ur",
+  "createdAt": "2026-05-07T15:13:45.041Z"
+}

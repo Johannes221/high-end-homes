@@ -90,6 +90,7 @@ type QuoteItem = {
   materials: string[]
   removalItems: string[]
   imageFileNames: string[]
+  imagesBase64: string[]
   complexityFlags: string[]
   payload: QuotePayload
   pricing: QuotePricing
@@ -415,6 +416,29 @@ export default function QuotesPage() {
                     <p><strong>Hinweise:</strong> {quote.complexityFlags.join(" · ") || "-"}</p>
                     <p><strong>Dateien:</strong> {quote.imageFileNames.join(", ") || "-"}</p>
                   </div>
+
+                  {quote.imagesBase64 && quote.imagesBase64.length > 0 ? (
+                    <div className="mt-3">
+                      <p className="text-sm font-medium text-gray-700 mb-2">Hochgeladene Bilder:</p>
+                      <div className="flex flex-wrap gap-2">
+                        {quote.imagesBase64.map((base64, index) => (
+                          <img
+                            key={index}
+                            src={base64}
+                            alt={`Bild ${index + 1}`}
+                            className="w-20 h-20 object-cover rounded-lg border border-gray-200 cursor-pointer"
+                            onClick={() => {
+                              const modal = document.createElement('div')
+                              modal.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.8);display:flex;align-items:center;justify-content:center;z-index:9999;cursor:pointer'
+                              modal.innerHTML = `<img src="${base64}" style="max-width:90vw;max-height:90vh;object-fit:contain;border-radius:8px" />`
+                              modal.onclick = () => modal.remove()
+                              document.body.appendChild(modal)
+                            }}
+                          />
+                        ))}
+                      </div>
+                    </div>
+                  ) : null}
                 </div>
 
                 {quote.notes ? <p className="text-sm text-gray-700"><strong>Anmerkungen:</strong> {quote.notes}</p> : null}

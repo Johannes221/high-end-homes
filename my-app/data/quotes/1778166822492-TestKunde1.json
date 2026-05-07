@@ -1,0 +1,51 @@
+{
+  "type": "Entrümpelung",
+  "name": "Test Kunde 1",
+  "email": "test1@example.com",
+  "phone": "0123456789",
+  "company": "Test Firma",
+  "address": "",
+  "squareMeters": "50",
+  "buildingType": "Wohnung",
+  "constructionYear": "",
+  "floor": "2.OG",
+  "elevator": "Nein",
+  "materials": [
+    "Möbel",
+    "Elektrogeräte"
+  ],
+  "removalItems": [],
+  "quantityEstimate": "Mittel",
+  "valuables": "Nein",
+  "asbestosRequired": false,
+  "otherPollutants": false,
+  "disposalWanted": false,
+  "permitStatus": "",
+  "desiredDate": "2026-06-01",
+  "imageFileNames": [
+    "bild1.jpg",
+    "bild2.jpg"
+  ],
+  "imagesBase64": [],
+  "notes": "Testanfrage 1",
+  "effortEstimate": "",
+  "complexity": {
+    "score": 2,
+    "level": "Low",
+    "effortRange": "1–2 Arbeitstage",
+    "flags": [
+      "Erschwerter Materialtransport ohne Aufzug."
+    ]
+  },
+  "estimate": {
+    "min": 1359,
+    "max": 1721,
+    "currency": "EUR",
+    "rationale": [
+      "Automatische Kalkulation aus 5 Positionen abgeleitet",
+      "Transport- und Trageaufwand berücksichtigt"
+    ]
+  },
+  "databaseId": "cmovmm53k0000xhd3lzrg8i5r",
+  "createdAt": "2026-05-07T15:13:42.492Z"
+}

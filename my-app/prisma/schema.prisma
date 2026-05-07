@@ -84,6 +84,7 @@ model QuoteRequest {
   permitStatus      String?
   desiredDate       String?
   imageFileNamesJson String
+  imagesBase64Json  String   @default("[]")
   notes             String?
   complexityScore   Int
   complexityLevel   String
