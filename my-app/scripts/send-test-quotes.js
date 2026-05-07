@@ -1,10 +1,18 @@
-const fetch = require('node-fetch');
+const fs = require('fs');
+const path = require('path');
 
-// Generate a simple test image as base64 (1x1 red pixel PNG)
-const redPixelBase64 = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==';
+// Load real images from Assets directory
+function fileToBase64(filePath) {
+  const fileBuffer = fs.readFileSync(filePath);
+  const ext = path.extname(filePath).toLowerCase();
+  const mimeType = ext === '.png' ? 'image/png' : ext === '.jpg' || ext === '.jpeg' ? 'image/jpeg' : ext === '.webp' ? 'image/webp' : 'image/png';
+  return `data:${mimeType};base64,${fileBuffer.toString('base64')}`;
+}
 
-// Generate a simple test image (1x1 blue pixel PNG)
-const bluePixelBase64 = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg==';
+const assetsDir = path.join(__dirname, '../../Assets');
+const image1 = fileToBase64(path.join(assetsDir, 'high end homes look.jpg'));
+const image2 = fileToBase64(path.join(assetsDir, 'high-end homes logo b 1.png'));
+const image3 = fileToBase64(path.join(assetsDir, 'high-end homes logo b 2.webp'));
 
 async function sendTestQuote() {
   const testData = {
@@ -22,8 +30,8 @@ async function sendTestQuote() {
     valuables: "Nein",
     asbestosRequired: false,
     desiredDate: "2026-06-01",
-    imageFileNames: [redPixelBase64, bluePixelBase64],
-    imagesBase64: [redPixelBase64, bluePixelBase64],
+    imageFileNames: ["high end homes look.jpg", "high-end homes logo b 1.png"],
+    imagesBase64: [image1, image2],
     notes: "Testanfrage mit Bildern"
   };
 
@@ -61,8 +69,8 @@ async function sendTestQuote2() {
     disposalWanted: true,
     permitStatus: "Ja",
     desiredDate: "2026-07-15",
-    imageFileNames: [redPixelBase64],
-    imagesBase64: [redPixelBase64],
+    imageFileNames: ["high-end homes logo b 2.webp"],
+    imagesBase64: [image3],
     notes: "Testanfrage Entkernung mit Asbest"
   };
 
@@ -98,8 +106,8 @@ async function sendTestQuote3() {
     removalItems: ["Sanitär (Bad/WC)", "Elektroinstallationen"],
     asbestosRequired: false,
     desiredDate: "2026-08-01",
-    imageFileNames: [bluePixelBase64],
-    imagesBase64: [bluePixelBase64],
+    imageFileNames: ["high end homes look.jpg"],
+    imagesBase64: [image1],
     notes: "Großprojekt Gewerbe"
   };
 
