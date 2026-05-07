@@ -20,7 +20,10 @@ export default defineConfig({
   datasource: {
     url: (() => {
       const url = resolveDatabaseUrl();
-      // libsql-Adapter erwartet alle URLs mit file:-Präfix
+      // libsql:// URLs bleiben wie sie sind, lokale file-URLs bekommen file:-Präfix
+      if (url.startsWith("libsql://")) {
+        return url;
+      }
       return url.startsWith("file:") ? url : `file:${url}`;
     })(),
   },
