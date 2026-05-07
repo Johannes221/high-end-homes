@@ -25,9 +25,12 @@ function resolveDatabaseUrl() {
 function prismaErstellen(): PrismaClient {
   const dbUrl = resolveDatabaseUrl();
   const authToken = process.env.DATABASE_AUTH_TOKEN?.trim() || undefined;
-  const adapter = dbUrl.startsWith("file:")
-    ? new PrismaLibSql({ url: dbUrl })
-    : new PrismaLibSql({ url: dbUrl, authToken });
+
+  // libsql-Adapter erwartet alle URLs mit file:-Präfix
+  const libsqlUrl = dbUrl.startsWith("file:") ? dbUrl : `file:${dbUrl}`;
+
+  const adapter = new PrismaLibSql({ url: libsqlUrl, authToken });
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return new PrismaClient({ adapter } as any);
 }

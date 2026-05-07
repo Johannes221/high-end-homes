@@ -149,11 +149,11 @@ export function Services() {
 
         {/* CTA */}
         <div
-          
+
           className="text-center mt-12"
         >
-          <a 
-            href="#quote" 
+          <a
+            href="?tab=entkernung-entruempelung#quote"
             className="inline-flex items-center gap-2 text-[#c9a45c] hover:text-[#d4af37] font-medium transition-colors"
           >
             Jetzt unverbindliches Angebot einholen

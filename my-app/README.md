@@ -4,11 +4,10 @@ Professionelle Website für Entrümpelung, Entkernung und Kernsanierung.
 
 ## Produktionsarchitektur
 
-Für dieses Projekt ist die sinnvollste kleine Produktionsarchitektur:
+Für dieses Projekt ist die einfachste und stabilste Produktionsarchitektur:
 
 - Öffentliche Domain und DNS über Cloudflare
-- Öffentliches Frontend unter `www.high-end-homes.de`
-- Backend, interne Bereiche und APIs auf Render unter `api.high-end-homes.de`
+- Die komplette Next.js App auf Render unter `www.high-end-homes.de`
 - Kleine libSQL-Datenbank über Turso
 
 Warum so:
@@ -54,21 +53,15 @@ npm run dev
 
 ## Environment-Variablen
 
-### Frontend / Cloudflare
-
-| Variable | Beispiel | Zweck |
-|----------|----------|-------|
-| `NEXT_PUBLIC_BACKEND_URL` | `https://api.high-end-homes.de` | Öffentliche API-Basis für das Formular |
-
 ### Backend / Render
 
 | Variable | Beispiel | Zweck |
 |----------|----------|-------|
-| `AUTH_URL` | `https://api.high-end-homes.de` | Kanonische Backend-URL für Auth.js |
+| `AUTH_URL` | `https://www.high-end-homes.de` | Kanonische App-URL für Auth.js |
 | `AUTH_SECRET` | langer zufälliger String | Pflicht für Sessions/Auth |
 | `PUBLIC_APP_URL` | `https://www.high-end-homes.de` | Öffentliche Website-URL |
-| `FRONTEND_URL` | `https://www.high-end-homes.de` | Erlaubte Frontend-Origin |
-| `ALLOWED_ORIGIN` | `https://www.high-end-homes.de` | CORS-Origin für Formular-Requests |
+| `FRONTEND_URL` | leer lassen | Nur bei separatem Frontend nötig |
+| `ALLOWED_ORIGIN` | leer lassen | Nur bei separatem Frontend nötig |
 | `DATABASE_URL` | `libsql://<db>.turso.io` | Produktionsdatenbank |
 | `DATABASE_AUTH_TOKEN` | `...` | Turso Auth-Token |
 | `SMTP_HOST` | `smtp.gmail.com` | SMTP Host |
@@ -80,6 +73,7 @@ npm run dev
 | `CRON_SECRET` | zufälliger String | Schutz für `/api/cron` |
 | `SERPAPI_KEY` | `...` | Preisvergleich/Scraping |
 | `QUOTE_ARCHIVE_DIR` | leer lassen | Nur setzen, wenn explizit Datei-Archivierung gewünscht ist |
+| `NEXT_PUBLIC_BACKEND_URL` | leer lassen | Bei einer einzigen Render-App nicht nötig |
 
 ## Render Deployment
 
@@ -118,45 +112,32 @@ Cloudflare übernimmt:
 
 Und du legst an:
 
-- `www.high-end-homes.de` -> öffentliche Website
-- `api.high-end-homes.de` -> Render Backend
+- `www.high-end-homes.de` -> kompletter Render Service
 
 ### DNS Einträge
 
-- `www` -> Ziel je nach Frontend-Hosting
-- `api` -> Render Custom Domain
-
-### Wenn du die Marketing-Seite getrennt auf Cloudflare hosten willst
-
-Dann muss der öffentliche Frontend-Teil separat gebaut oder extrahiert werden.
-
-Wichtig:
-
-- Die aktuelle Codebasis ist keine rein statische Frontend-App.
-- Interne Bereiche, Auth und API bleiben serverseitig und gehören auf Render.
-- Das öffentliche Angebotsformular kann bereits getrennt auf das Render-Backend zeigen über `NEXT_PUBLIC_BACKEND_URL`.
+- `www` -> Render Custom Domain
 
 ## Empfohlenes Domain-Setup
 
-- `https://www.high-end-homes.de` -> öffentliches Frontend
-- `https://api.high-end-homes.de` -> Next.js Backend auf Render
+- `https://www.high-end-homes.de` -> komplette Next.js App auf Render
 
 Beispiel:
 
-- Frontend sendet Formular an `https://api.high-end-homes.de/api/quote`
-- Backend erlaubt CORS nur von `https://www.high-end-homes.de`
+- Formular sendet an `https://www.high-end-homes.de/api/quote`
+- Auth, API und öffentliche Seiten laufen über dieselbe Domain
 
 ## Produktionscheckliste
 
 1. Turso DB anlegen
 2. `DATABASE_URL` und `DATABASE_AUTH_TOKEN` in Render setzen
 3. `AUTH_SECRET` generieren und in Render setzen
-4. `AUTH_URL=https://api.high-end-homes.de` setzen
-5. `PUBLIC_APP_URL`, `FRONTEND_URL`, `ALLOWED_ORIGIN` auf `https://www.high-end-homes.de` setzen
+4. `AUTH_URL=https://www.high-end-homes.de` setzen
+5. `PUBLIC_APP_URL=https://www.high-end-homes.de` setzen
 6. SMTP-Zugang setzen
 7. `npm run prisma:push` gegen die Produktions-DB ausführen
 8. Render Healthcheck prüfen: `/api/health`
-9. Frontend-Env `NEXT_PUBLIC_BACKEND_URL=https://api.high-end-homes.de` setzen
+9. Render Custom Domain `www.high-end-homes.de` in Cloudflare verbinden
 10. Formular live testen
 
 ## Hinweise

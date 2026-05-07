@@ -49,6 +49,7 @@ export type QuoteLineItemOverride = {
   key: string
   amount?: number | null
   included?: boolean
+  processed?: boolean
 }
 
 export type QuoteCustomLineItem = {

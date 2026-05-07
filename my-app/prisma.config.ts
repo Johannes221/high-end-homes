@@ -18,6 +18,10 @@ function resolveDatabaseUrl() {
 
 export default defineConfig({
   datasource: {
-    url: resolveDatabaseUrl(),
+    url: (() => {
+      const url = resolveDatabaseUrl();
+      // libsql-Adapter erwartet alle URLs mit file:-Präfix
+      return url.startsWith("file:") ? url : `file:${url}`;
+    })(),
   },
 });

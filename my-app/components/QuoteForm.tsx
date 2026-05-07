@@ -1,6 +1,7 @@
 "use client"
 
-import { useState, type CSSProperties, type FormEvent } from "react"
+import { useState, useEffect, type CSSProperties, type FormEvent } from "react"
+import { useSearchParams } from "next/navigation"
 
 type TabType = "entruempelung" | "entkernung" | "entkernung-entruempelung"
 
@@ -337,7 +338,29 @@ function FileUpload({
 }
 
 export function QuoteForm() {
+  const searchParams = useSearchParams()
   const [activeTab, setActiveTab] = useState<TabType>("entruempelung")
+
+  useEffect(() => {
+    const tabParam = searchParams.get("tab")
+    if (tabParam === "entkernung") {
+      setActiveTab("entkernung")
+    } else if (tabParam === "entkernung-entruempelung") {
+      setActiveTab("entkernung-entruempelung")
+    } else if (tabParam === "entruempelung") {
+      setActiveTab("entruempelung")
+    }
+
+    // Scroll to quote section if hash is present
+    if (window.location.hash === "#quote") {
+      setTimeout(() => {
+        const element = document.getElementById("quote")
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" })
+        }
+      }, 100)
+    }
+  }, [searchParams])
   const [clearanceName, setClearanceName] = useState("")
   const [clearanceEmail, setClearanceEmail] = useState("")
   const [clearancePhone, setClearancePhone] = useState("")
@@ -689,7 +712,7 @@ export function QuoteForm() {
           <div style={{ flex: 1, height: 1, background: "linear-gradient(to right, transparent, rgba(201,164,92,0.3), transparent)" }} />
         </div>
 
-        <div style={{ display: "flex", gap: 12 }}>
+        <div style={{ display: "flex", gap: 12, position: "relative", zIndex: 30 }}>
           <button type="button" onClick={() => setActiveTab("entruempelung")} style={getTabStyle(activeTab === "entruempelung")}>
             Entrümpelung
           </button>

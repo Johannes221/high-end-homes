@@ -6,6 +6,7 @@ type QuoteLineItemOverride = {
   key: string
   amount?: number | null
   included?: boolean
+  processed?: boolean
 }
 
 type QuoteCustomLineItem = {
@@ -165,6 +166,7 @@ export default function QuotesPage() {
   const [draftNotes, setDraftNotes] = useState<Record<string, string>>({})
   const [draftCustomItems, setDraftCustomItems] = useState<Record<string, QuoteCustomLineItem[]>>({})
   const [newCustomItem, setNewCustomItem] = useState<Record<string, CustomLineItemDraft>>({})
+  const [draftProcessed, setDraftProcessed] = useState<Record<string, Record<string, boolean>>>({})
 
   const loadQuotes = async () => {
     try {
@@ -190,14 +192,16 @@ export default function QuotesPage() {
         key: item.key,
         amount: typeof saved?.amount === "number" ? saved.amount : item.source === "manual" ? item.finalAmount : null,
         included: saved?.included ?? item.included,
+        processed: saved?.processed ?? false,
       }
     })
   }
 
   const syncDraft = (quote: QuoteItem) => {
+    const overrides = buildDefaultOverrides(quote)
     setDraftOverrides((current) => ({
       ...current,
-      [quote.id]: buildDefaultOverrides(quote),
+      [quote.id]: overrides,
     }))
     setDraftNotes((current) => ({
       ...current,
@@ -210,6 +214,14 @@ export default function QuotesPage() {
     setNewCustomItem((current) => ({
       ...current,
       [quote.id]: { label: "", amount: "", details: "" },
+    }))
+    const processedMap: Record<string, boolean> = {}
+    overrides.forEach((item) => {
+      processedMap[item.key] = item.processed ?? false
+    })
+    setDraftProcessed((current) => ({
+      ...current,
+      [quote.id]: processedMap,
     }))
   }
 
@@ -299,6 +311,18 @@ export default function QuotesPage() {
 
   const toggleLineItemIncluded = (quote: QuoteItem, key: string) => {
     const next = getDraftOverrides(quote).map((item) => item.key === key ? { ...item, included: item.included === false ? true : false } : item)
+    setDraftOverrides((current) => ({ ...current, [quote.id]: next }))
+  }
+
+  const toggleLineItemProcessed = (quote: QuoteItem, key: string) => {
+    setDraftProcessed((current) => ({
+      ...current,
+      [quote.id]: {
+        ...(current[quote.id] ?? {}),
+        [key]: !(current[quote.id]?.[key] ?? false),
+      },
+    }))
+    const next = getDraftOverrides(quote).map((item) => item.key === key ? { ...item, processed: !(item.processed ?? false) } : item)
     setDraftOverrides((current) => ({ ...current, [quote.id]: next }))
   }
 
@@ -500,21 +524,30 @@ export default function QuotesPage() {
                                   className="h-4 w-4"
                                 />
                               </td>
-                              <td className="py-3 pr-4 font-medium text-gray-900">{item.label}</td>
-                              <td className="py-3 pr-4 text-gray-700">{formatCurrency(item.amount)}</td>
+                              <td className="py-3 pr-4 font-medium text-black">{item.label}</td>
+                              <td className="py-3 pr-4 text-black">{formatCurrency(item.amount)}</td>
                               <td className="py-3 pr-4">
-                                <input
-                                  type="number"
-                                  min="0"
-                                  step="1"
-                                  value={getDraftOverrides(quote).find((entry) => entry.key === item.key)?.amount ?? ""}
-                                  onChange={(event) => setLineItemAmount(quote, item.key, event.target.value)}
-                                  className="w-32 rounded-lg border border-gray-300 px-3 py-2"
-                                  placeholder={String(item.amount)}
-                                />
+                                <div className="flex items-center gap-2">
+                                  <input
+                                    type="checkbox"
+                                    checked={draftProcessed[quote.id]?.[item.key] ?? false}
+                                    onChange={() => toggleLineItemProcessed(quote, item.key)}
+                                    className="h-4 w-4 text-green-600 rounded border-gray-300 focus:ring-green-500"
+                                    style={{ accentColor: '#22c55e' }}
+                                  />
+                                  <input
+                                    type="number"
+                                    min="0"
+                                    step="1"
+                                    value={getDraftOverrides(quote).find((entry) => entry.key === item.key)?.amount ?? ""}
+                                    onChange={(event) => setLineItemAmount(quote, item.key, event.target.value)}
+                                    className="w-32 rounded-lg border border-gray-300 px-3 py-2 text-black"
+                                    placeholder={String(item.amount)}
+                                  />
+                                </div>
                               </td>
-                              <td className="py-3 pr-4 text-gray-700">{item.source === "manual" ? "Manuell" : "Auto"}</td>
-                              <td className="py-3 text-gray-500">
+                              <td className="py-3 pr-4 text-black">{item.source === "manual" ? "Manuell" : "Auto"}</td>
+                              <td className="py-3 text-black">
                                 <div className="flex items-start justify-between gap-3">
                                   <span>{item.details || "-"}</span>
                                   <button
@@ -535,29 +568,38 @@ export default function QuotesPage() {
                     <div className="rounded-xl border border-dashed border-gray-300 bg-white p-4 space-y-3">
                       <h3 className="text-sm font-semibold text-gray-900">Position hinzufügen</h3>
                       <div className="grid md:grid-cols-[1.4fr_0.6fr_1fr_auto] gap-3">
-                        <input
-                          type="text"
-                          value={newCustomItem[quote.id]?.label ?? ""}
-                          onChange={(event) => setNewCustomItem((current) => ({ ...current, [quote.id]: { ...(current[quote.id] ?? { label: "", amount: "", details: "" }), label: event.target.value } }))}
-                          className="rounded-lg border border-gray-300 px-3 py-2"
-                          placeholder="Bezeichnung der Position"
-                        />
-                        <input
-                          type="number"
-                          min="0"
-                          step="1"
-                          value={newCustomItem[quote.id]?.amount ?? ""}
-                          onChange={(event) => setNewCustomItem((current) => ({ ...current, [quote.id]: { ...(current[quote.id] ?? { label: "", amount: "", details: "" }), amount: event.target.value } }))}
-                          className="rounded-lg border border-gray-300 px-3 py-2"
-                          placeholder="Preis"
-                        />
-                        <input
-                          type="text"
-                          value={newCustomItem[quote.id]?.details ?? ""}
-                          onChange={(event) => setNewCustomItem((current) => ({ ...current, [quote.id]: { ...(current[quote.id] ?? { label: "", amount: "", details: "" }), details: event.target.value } }))}
-                          className="rounded-lg border border-gray-300 px-3 py-2"
-                          placeholder="Details optional"
-                        />
+                        <div className="space-y-1">
+                          <label className="block text-xs font-medium text-gray-700">Titel</label>
+                          <input
+                            type="text"
+                            value={newCustomItem[quote.id]?.label ?? ""}
+                            onChange={(event) => setNewCustomItem((current) => ({ ...current, [quote.id]: { ...(current[quote.id] ?? { label: "", amount: "", details: "" }), label: event.target.value } }))}
+                            className="rounded-lg border border-gray-300 px-3 py-2"
+                            placeholder="Bezeichnung der Position"
+                          />
+                        </div>
+                        <div className="space-y-1">
+                          <label className="block text-xs font-medium text-gray-700">Betrag</label>
+                          <input
+                            type="number"
+                            min="0"
+                            step="1"
+                            value={newCustomItem[quote.id]?.amount ?? ""}
+                            onChange={(event) => setNewCustomItem((current) => ({ ...current, [quote.id]: { ...(current[quote.id] ?? { label: "", amount: "", details: "" }), amount: event.target.value } }))}
+                            className="rounded-lg border border-gray-300 px-3 py-2"
+                            placeholder="Preis"
+                          />
+                        </div>
+                        <div className="space-y-1">
+                          <label className="block text-xs font-medium text-gray-700">Anmerkung</label>
+                          <input
+                            type="text"
+                            value={newCustomItem[quote.id]?.details ?? ""}
+                            onChange={(event) => setNewCustomItem((current) => ({ ...current, [quote.id]: { ...(current[quote.id] ?? { label: "", amount: "", details: "" }), details: event.target.value } }))}
+                            className="rounded-lg border border-gray-300 px-3 py-2"
+                            placeholder="Details optional"
+                          />
+                        </div>
                         <button
                           type="button"
                           onClick={() => addCustomLineItem(quote)}

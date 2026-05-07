@@ -1,14 +1,22 @@
 # Production Deployment Checklist
 
-Diese Anleitung ist für genau diese Zielarchitektur geschrieben:
+Diese Anleitung ist für die einfachste und stabilste Zielarchitektur geschrieben:
 
-- `www.high-end-homes.de` = öffentliches Frontend
-- `api.high-end-homes.de` = Next.js Backend auf Render
-- Turso = Produktionsdatenbank
-- Cloudflare = DNS, SSL, Proxy, Domainverwaltung
+- die komplette Next.js App läuft auf Render
+- Cloudflare liegt nur davor für DNS, SSL und Proxy
+- Turso ist die Produktionsdatenbank
+- es gibt kein separates Frontend-/Backend-Splitting
+- die App läuft direkt unter `www.high-end-homes.de`
 
 ## 1. Turso Datenbank anlegen
 
+✅ **ERLEDIGT** — Turso-Datenbank ist bereits angelegt und Schema ist gepusht.
+
+Aktuelle Werte:
+- DATABASE_URL: `libsql://anfragen-bennet221.aws-eu-west-1.turso.io`
+- DATABASE_AUTH_TOKEN: (in render.yaml als sync: false gesetzt)
+
+Wenn du später eine neue DB anlegen musst:
 1. Öffne https://turso.tech/
 2. Klicke auf `Sign up`
 3. Logge dich am einfachsten mit `Google` ein
@@ -44,6 +52,7 @@ Wichtig:
 - Service-Name: `high-end-homes-backend`
 - Root Directory: `my-app`
 - Healthcheck: `/api/health`
+- die komplette Website läuft über diesen einen Service
 
 ## 3. Render Environment Variablen setzen
 
@@ -52,16 +61,19 @@ Gehe in Render in den Service:
 - `Environment`
 - `Environment Variables`
 
-Setze dort alles aus dieser Liste:
+In render.yaml sind bereits gesetzt:
+- `NODE_ENV=production`
+- `AUTH_URL=https://www.high-end-homes.de`
+- `DATABASE_URL=libsql://anfragen-bennet221.aws-eu-west-1.turso.io`
+- `PUBLIC_APP_URL=https://www.high-end-homes.de`
+- `FRONTEND_URL=""`
+- `ALLOWED_ORIGIN=""`
+- `NEXT_PUBLIC_BACKEND_URL=""`
+
+Du musst noch in Render manuell setzen:
 
 ```env
-NODE_ENV=production
-AUTH_URL=https://api.high-end-homes.de
 AUTH_SECRET=HIER_EINEN_LANGEN_ZUFAELLIGEN_STRING_EINTRAGEN
-PUBLIC_APP_URL=https://www.high-end-homes.de
-FRONTEND_URL=https://www.high-end-homes.de
-ALLOWED_ORIGIN=https://www.high-end-homes.de
-DATABASE_URL=libsql://DEINE-TURSO-DB.turso.io
 DATABASE_AUTH_TOKEN=DEIN_TURSO_TOKEN
 SMTP_HOST=smtp.gmail.com
 SMTP_PORT=587
@@ -71,7 +83,6 @@ SMTP_FROM=High-End Homes <noreply@high-end-homes.de>
 NOTIFICATION_EMAIL=info@high-end-homes.de
 CRON_SECRET=HIER_EINEN_ZUFAELLIGEN_STRING_EINTRAGEN
 SERPAPI_KEY=DEIN_SERPAPI_KEY
-QUOTE_ARCHIVE_DIR=
 ```
 
 ## 4. AUTH_SECRET und CRON_SECRET erzeugen
@@ -89,14 +100,16 @@ Diesen Befehl machst du zweimal:
 
 ## 5. Produktions-DB-Schema anwenden
 
-Nachdem der Render-Service angelegt ist und die Variablen gesetzt sind:
+✅ **ERLEDIGT** — Prisma-Schema wurde bereits auf die Turso-DB gepusht.
+
+Wenn du später ein Schema-Update machen musst:
 
 ### Variante A: lokal auf deinem Rechner
 
 Im Ordner `my-app` ausführen:
 
 ```bash
-DATABASE_URL="libsql://DEINE-DB.turso.io" DATABASE_AUTH_TOKEN="DEIN_TOKEN" npm run prisma:push
+DATABASE_URL="libsql://anfragen-bennet221.aws-eu-west-1.turso.io" DATABASE_AUTH_TOKEN="DEIN_TOKEN" npm run prisma:push
 ```
 
 ### Variante B: Render Shell
@@ -121,6 +134,12 @@ Wenn Render deployed hat:
 https://dein-render-service.onrender.com/api/health
 ```
 
+Oder später direkt unter deiner Live-Domain:
+
+```txt
+https://www.high-end-homes.de/api/health
+```
+
 Erwartet wird:
 
 ```json
@@ -141,37 +160,28 @@ Erwartet wird:
 
 Dann:
 
-### Für das Backend
+### Für die komplette Website
 
 1. In Render beim Service `Settings` öffnen
 2. `Custom Domains` öffnen
-3. `api.high-end-homes.de` hinzufügen
+3. `www.high-end-homes.de` hinzufügen
 4. Render zeigt dir den Zielhost oder CNAME an
 5. Diesen Eintrag in Cloudflare unter `DNS` anlegen
 
-### Für das Frontend
-
-Wenn dein öffentliches Frontend separat gehostet wird:
-
-- `www.high-end-homes.de` auf diesen Host zeigen lassen
-
-Wenn du es erstmal einfach halten willst:
-
-- lass zunächst alles Backend-seitig über Render laufen
-- und verbinde später erst das getrennte Frontend
-
 ## 8. Frontend Variable setzen
 
-Dort, wo dein öffentliches Frontend gebaut/gehostet wird, muss diese Variable gesetzt werden:
+Bei dieser einfachen Architektur brauchst du normalerweise keine externe Backend-URL.
+
+Lass diese Variable leer oder setze sie gar nicht:
 
 ```env
-NEXT_PUBLIC_BACKEND_URL=https://api.high-end-homes.de
+NEXT_PUBLIC_BACKEND_URL=
 ```
 
-Dadurch sendet das Formular an:
+Dann nutzt das Formular automatisch die gleiche Domain wie die Website:
 
 ```txt
-https://api.high-end-homes.de/api/quote
+https://www.high-end-homes.de/api/quote
 ```
 
 ## 9. Gmail SMTP vorbereiten
@@ -244,6 +254,6 @@ Mach genau in dieser Reihenfolge:
 5. Env Variablen setzen
 6. `npm run prisma:push` mit Produktionswerten ausführen
 7. Healthcheck testen
-8. Cloudflare `api.high-end-homes.de` auf Render verbinden
-9. Frontend `NEXT_PUBLIC_BACKEND_URL` setzen
+8. Cloudflare `www.high-end-homes.de` auf Render verbinden
+9. Render Custom Domain aktiv prüfen
 10. Formular live testen

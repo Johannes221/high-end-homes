@@ -12,32 +12,36 @@ services:
       - key: NODE_ENV
         value: production
       - key: AUTH_URL
-        sync: false
+        value: https://www.high-end-homes.de
       - key: AUTH_SECRET
-        sync: false
+        value: 92e3695adbf35e40f0d9697f59e270b979ff91e3699525c1b6ef4287af94bd4e
+      - key: NEXT_PUBLIC_BACKEND_URL
+        value: ""
       - key: DATABASE_URL
-        sync: false
+        value: libsql://anfragen-bennet221.aws-eu-west-1.turso.io
       - key: DATABASE_AUTH_TOKEN
-        sync: false
+        value: eyJhbGciOiJFZERTQSIsInR5cCI6IkpXVCJ9.eyJhIjoicnciLCJpYXQiOjE3NzgxNjQ1MTAsImlkIjoiMDE5ZTAyZDktYjYwMS03ZjlmLTliZDEtNjZkMThjYTNjZDk4IiwicmlkIjoiNTYyZjA4NzMtOGJkZi00YjNjLTg4ZGMtNGMyZjBjMzBlZWExIn0.P679xePt3nqq1YsSKGmLqGyu_pJnd_l7slkHEixjRBAGA2tEka9FFT88UpzVxzzR657hyPLCoWRyrB7FYFPLBA
       - key: FRONTEND_URL
-        sync: false
+        value: ""
       - key: ALLOWED_ORIGIN
-        sync: false
+        value: ""
       - key: PUBLIC_APP_URL
-        sync: false
+        value: https://www.high-end-homes.de
       - key: NOTIFICATION_EMAIL
-        sync: false
+        value: info@high-end-homes.de
       - key: SMTP_HOST
-        sync: false
+        value: smtp.gmail.com
       - key: SMTP_PORT
-        sync: false
+        value: "587"
       - key: SMTP_USER
         sync: false
       - key: SMTP_PASS
         sync: false
       - key: SMTP_FROM
-        sync: false
+        value: High-End Homes <noreply@high-end-homes.de>
       - key: CRON_SECRET
-        sync: false
+        value: ec8a18c146c1411588ad53600c4efd29c9d5b38c099baf2724e72b8fdc72c52c
       - key: SERPAPI_KEY
         sync: false
+      - key: QUOTE_ARCHIVE_DIR
+        value: ""
