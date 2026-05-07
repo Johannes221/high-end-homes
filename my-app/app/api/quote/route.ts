@@ -259,6 +259,7 @@ export async function POST(request: Request) {
         permitStatus: submission.permitStatus || null,
         desiredDate: submission.desiredDate || null,
         imageFileNamesJson: JSON.stringify(submission.imageFileNames ?? []),
+        imagesBase64Json: JSON.stringify(submission.imagesBase64 ?? []),
         notes: submission.notes || null,
         complexityScore: complexity.score,
         complexityLevel: complexity.level,
