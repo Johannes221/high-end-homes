@@ -15,7 +15,7 @@ export async function GET() {
 
     const user = await prisma.user.findUnique({
       where: { id: session.user.id },
-      select: { id: true, name: true, email: true, emailAlerts: true, createdAt: true },
+      select: { id: true, name: true, email: true, createdAt: true },
     });
 
     return NextResponse.json({ user });
@@ -36,7 +36,6 @@ export async function PATCH(req: NextRequest) {
     const body = await req.json() as {
       name?: string;
       email?: string;
-      emailAlerts?: boolean;
       altesPasswort?: string;
       neuesPasswort?: string;
     };
@@ -45,7 +44,6 @@ export async function PATCH(req: NextRequest) {
 
     if (body.name !== undefined) updateDaten.name = body.name;
     if (body.email !== undefined) updateDaten.email = body.email;
-    if (body.emailAlerts !== undefined) updateDaten.emailAlerts = body.emailAlerts;
 
     // Passwort ändern
     if (body.neuesPasswort && body.altesPasswort) {
@@ -63,7 +61,7 @@ export async function PATCH(req: NextRequest) {
     const aktualisiertUser = await prisma.user.update({
       where: { id: session.user.id },
       data: updateDaten,
-      select: { id: true, name: true, email: true, emailAlerts: true },
+      select: { id: true, name: true, email: true },
     });
 
     return NextResponse.json({ user: aktualisiertUser });
