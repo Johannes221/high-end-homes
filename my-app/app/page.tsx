@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import { Suspense } from "react"
 import { Navigation } from "@/components/navigation"
 import { Hero } from "@/components/hero"
 import { ProcessFlow } from "@/components/process-flow"
@@ -123,7 +124,9 @@ export default function Home() {
           <div className="w-2 h-2 rounded-full bg-[#c9a45c]" />
           <div className="flex-1 h-px bg-gradient-to-r from-transparent via-[#c9a45c]/30 to-transparent" />
         </div>
-        <QuoteForm />
+        <Suspense fallback={<div className="text-center text-gray-400">Lade Formular...</div>}>
+          <QuoteForm />
+        </Suspense>
         {/* Goldener Trenner */}
         <div className="flex items-center gap-4 my-4 max-w-4xl mx-auto px-4">
           <div className="flex-1 h-px bg-gradient-to-r from-transparent via-[#c9a45c]/30 to-transparent" />
