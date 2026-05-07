@@ -4,7 +4,7 @@ services:
     runtime: node
     plan: starter
     rootDir: my-app
-    buildCommand: npm ci && npm run build:production
+    buildCommand: npm ci --legacy-peer-deps && npm run build:production
     startCommand: npm run start
     autoDeploy: true
     healthCheckPath: /api/health
