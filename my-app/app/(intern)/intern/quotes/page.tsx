@@ -680,7 +680,7 @@ export default function QuotesPage() {
                   <div>
                     <p><strong>Auswahl:</strong> {buildSelectionSummary(quote)}</p>
                     <p><strong>Hinweise:</strong> {quote.complexityFlags.join(" · ") || "-"}</p>
-                    <p><strong>Dateien:</strong> {quote.imageFileNames.filter(name => !name.startsWith("data:")).join(", ") || "-"}</p>
+                    <p><strong>Dateien:</strong> {quote.imageFileNames.filter(name => name && !name.startsWith("data:") && name.length < 100).join(", ") || "-"}</p>
                   </div>
 
                   {quote.imagesBase64 && quote.imagesBase64.length > 0 ? (
