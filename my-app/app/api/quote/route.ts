@@ -220,12 +220,26 @@ export async function OPTIONS(request: Request) {
 
 export async function POST(request: Request) {
   try {
-    const rawBody = await request.json()
-    const submission = normalizeSubmission(rawBody)
+    console.log("=== QUOTE API DEBUG START ===")
+    console.log("Timestamp:", new Date().toISOString())
+    console.log("NODE_ENV:", process.env.NODE_ENV)
+    console.log("DATABASE_URL exists:", !!process.env.DATABASE_URL)
+    console.log("DATABASE_URL prefix:", process.env.DATABASE_URL?.substring(0, 20))
 
-    console.log("Quote submission:", submission)
+    const rawBody = await request.json()
+    console.log("Raw body received:", JSON.stringify(rawBody).substring(0, 200))
+
+    const submission = normalizeSubmission(rawBody)
+    console.log("Normalized submission:", JSON.stringify(submission))
+
+    console.log("Validation check:")
+    console.log("- name:", submission.name)
+    console.log("- email:", submission.email)
+    console.log("- squareMeters:", submission.squareMeters)
+    console.log("- buildingType:", submission.buildingType)
 
     if (!submission.name || !submission.email || !submission.squareMeters || !submission.buildingType) {
+      console.log("VALIDATION FAILED - Missing required fields")
       return jsonWithCors(
         request,
         { success: false, error: "Bitte füllen Sie alle Pflichtfelder aus." },
@@ -233,9 +247,15 @@ export async function POST(request: Request) {
       )
     }
 
+    console.log("VALIDATION PASSED - Calculating complexity and estimate")
+
     const complexity = evaluateComplexity(submission)
     const estimate = estimatePriceRange(submission, complexity)
 
+    console.log("Complexity:", complexity)
+    console.log("Estimate:", estimate)
+
+    console.log("Creating Prisma record...")
     const savedRequest = await prisma.quoteRequest.create({
       data: {
         type: submission.type || "Anfrage",
@@ -270,8 +290,13 @@ export async function POST(request: Request) {
       },
     })
 
-    await sendQuoteNotificationEmail({ submission, complexity, estimate })
+    console.log("Prisma record created successfully, ID:", savedRequest.id)
 
+    console.log("Sending notification email...")
+    await sendQuoteNotificationEmail({ submission, complexity, estimate })
+    console.log("Notification email sent (or skipped)")
+
+    console.log("Archiving quote submission...")
     await archiveQuoteSubmission(submission.name, {
       ...submission,
       complexity,
@@ -279,10 +304,17 @@ export async function POST(request: Request) {
       databaseId: savedRequest.id,
       createdAt: new Date().toISOString(),
     })
+    console.log("Quote submission archived (or skipped)")
 
+    console.log("=== QUOTE API DEBUG SUCCESS ===")
     return jsonWithCors(request, { success: true, id: savedRequest.id, estimate, complexity })
   } catch (error) {
-    console.error("Quote API error:", error)
+    console.error("=== QUOTE API DEBUG ERROR ===")
+    console.error("Error type:", (error as Error)?.constructor?.name)
+    console.error("Error message:", (error as Error)?.message)
+    console.error("Error stack:", (error as Error)?.stack)
+    console.error("Full error:", error)
+    console.error("=== END DEBUG ERROR ===")
     return jsonWithCors(
       request,
       { success: false, error: "Die Anfrage konnte nicht verarbeitet werden." },

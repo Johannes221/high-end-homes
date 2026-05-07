@@ -1,0 +1,42 @@
+{
+  "type": "Entrümpelung",
+  "name": "Test Local",
+  "email": "test@test.com",
+  "phone": "",
+  "company": "",
+  "address": "",
+  "squareMeters": "50",
+  "buildingType": "Wohnung",
+  "constructionYear": "",
+  "floor": "",
+  "elevator": "",
+  "materials": [],
+  "removalItems": [],
+  "quantityEstimate": "",
+  "valuables": "",
+  "asbestosRequired": false,
+  "otherPollutants": false,
+  "disposalWanted": false,
+  "permitStatus": "",
+  "desiredDate": "",
+  "imageFileNames": [],
+  "imagesBase64": [],
+  "notes": "",
+  "effortEstimate": "",
+  "complexity": {
+    "score": 1,
+    "level": "Low",
+    "effortRange": "1–2 Arbeitstage",
+    "flags": []
+  },
+  "estimate": {
+    "min": 918,
+    "max": 1163,
+    "currency": "EUR",
+    "rationale": [
+      "Automatische Kalkulation aus 2 Positionen abgeleitet"
+    ]
+  },
+  "databaseId": "cmovnbk130003xhd3533jui32",
+  "createdAt": "2026-05-07T15:33:28.321Z"
+}
