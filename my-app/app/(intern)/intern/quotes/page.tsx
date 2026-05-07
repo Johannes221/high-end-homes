@@ -221,6 +221,9 @@ export default function QuotesPage() {
   const [newCustomItem, setNewCustomItem] = useState<Record<string, CustomLineItemDraft>>({})
   const [lightboxImages, setLightboxImages] = useState<string[]>([])
   const [lightboxIndex, setLightboxIndex] = useState(0)
+  const [lightboxScale, setLightboxScale] = useState(1)
+  const [lightboxOffset, setLightboxOffset] = useState({ x: 0, y: 0 })
+  const [touchStart, setTouchStart] = useState<{ x: number; y: number } | null>(null)
   const [draftProcessed, setDraftProcessed] = useState<Record<string, Record<string, boolean>>>({})
 
   const loadQuotes = async () => {
@@ -428,73 +431,212 @@ export default function QuotesPage() {
   const openLightbox = (images: string[], startIndex: number = 0) => {
     setLightboxImages(images)
     setLightboxIndex(startIndex)
+    setLightboxScale(1)
+    setLightboxOffset({ x: 0, y: 0 })
   }
 
   const closeLightbox = () => {
     setLightboxImages([])
     setLightboxIndex(0)
+    setLightboxScale(1)
+    setLightboxOffset({ x: 0, y: 0 })
+  }
+
+  const zoomIn = () => setLightboxScale((prev) => Math.min(prev + 0.5, 4))
+  const zoomOut = () => {
+    setLightboxScale((prev) => {
+      const next = Math.max(prev - 0.5, 1)
+      if (next === 1) setLightboxOffset({ x: 0, y: 0 })
+      return next
+    })
+  }
+  const resetZoom = () => {
+    setLightboxScale(1)
+    setLightboxOffset({ x: 0, y: 0 })
   }
 
   const nextImage = () => {
-    setLightboxIndex((prev) => (prev + 1) % lightboxImages.length)
+    setLightboxIndex((prev) => {
+      const next = (prev + 1) % lightboxImages.length
+      return next
+    })
+    setLightboxScale(1)
+    setLightboxOffset({ x: 0, y: 0 })
   }
 
   const prevImage = () => {
-    setLightboxIndex((prev) => (prev - 1 + lightboxImages.length) % lightboxImages.length)
+    setLightboxIndex((prev) => {
+      const next = (prev - 1 + lightboxImages.length) % lightboxImages.length
+      return next
+    })
+    setLightboxScale(1)
+    setLightboxOffset({ x: 0, y: 0 })
+  }
+
+  const goToImage = (index: number) => {
+    setLightboxIndex(index)
+    setLightboxScale(1)
+    setLightboxOffset({ x: 0, y: 0 })
   }
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (lightboxImages.length === 0) return
-      if (e.key === "ArrowRight") nextImage()
-      if (e.key === "ArrowLeft") prevImage()
+      if (e.key === "ArrowRight") { e.preventDefault(); nextImage(); }
+      if (e.key === "ArrowLeft") { e.preventDefault(); prevImage(); }
       if (e.key === "Escape") closeLightbox()
+      if (e.key === "+" || e.key === "=") { e.preventDefault(); zoomIn(); }
+      if (e.key === "-" || e.key === "_") { e.preventDefault(); zoomOut(); }
+      if (e.key === "0") { e.preventDefault(); resetZoom(); }
     }
 
     window.addEventListener("keydown", handleKeyDown)
     return () => window.removeEventListener("keydown", handleKeyDown)
-  }, [lightboxImages.length])
+  }, [lightboxImages.length, lightboxIndex])
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    if (lightboxScale > 1) return
+    setTouchStart({ x: e.touches[0].clientX, y: e.touches[0].clientY })
+  }
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (!touchStart || lightboxScale > 1) return
+    const dx = e.changedTouches[0].clientX - touchStart.x
+    const dy = e.changedTouches[0].clientY - touchStart.y
+    if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 50) {
+      if (dx > 0) prevImage()
+      else nextImage()
+    }
+    setTouchStart(null)
+  }
 
   return (
     <div className="space-y-6">
       {lightboxImages.length > 0 && (
-        <div className="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50">
-          <button
-            className="absolute top-4 right-4 text-white hover:text-gray-300 transition-colors z-10"
-            onClick={closeLightbox}
-          >
-            <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-            </svg>
-          </button>
-
-          <button
-            className="absolute left-4 top-1/2 -translate-y-1/2 text-white hover:text-gray-300 transition-colors z-10 p-2 bg-black bg-opacity-50 rounded-full"
-            onClick={prevImage}
-          >
-            <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-            </svg>
-          </button>
-
-          <button
-            className="absolute right-4 top-1/2 -translate-y-1/2 text-white hover:text-gray-300 transition-colors z-10 p-2 bg-black bg-opacity-50 rounded-full"
-            onClick={nextImage}
-          >
-            <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-            </svg>
-          </button>
-
-          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 text-white text-sm z-10">
-            {lightboxIndex + 1} / {lightboxImages.length}
+        <div
+          className="fixed inset-0 bg-black/95 flex flex-col z-50"
+          onClick={closeLightbox}
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
+        >
+          {/* Top Bar mit Controls */}
+          <div className="flex items-center justify-between px-4 py-3 bg-black/50 backdrop-blur-sm shrink-0">
+            <div className="flex items-center gap-2 text-white">
+              <span className="text-sm font-medium">{lightboxIndex + 1} / {lightboxImages.length}</span>
+              <span className="text-white/50">|</span>
+              <span className="text-sm text-white/70">{lightboxScale > 1 ? `${Math.round(lightboxScale * 100)}%` : "Original"}</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <button
+                className="p-2 text-white hover:text-gray-300 hover:bg-white/10 rounded-lg transition-colors"
+                onClick={(e) => { e.stopPropagation(); zoomOut(); }}
+                disabled={lightboxScale <= 1}
+                title="Verkleinern (-)"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM13 10H7" />
+                </svg>
+              </button>
+              <button
+                className="p-2 text-white hover:text-gray-300 hover:bg-white/10 rounded-lg transition-colors"
+                onClick={(e) => { e.stopPropagation(); resetZoom(); }}
+                title="Originalgröße (0)"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
+                </svg>
+              </button>
+              <button
+                className="p-2 text-white hover:text-gray-300 hover:bg-white/10 rounded-lg transition-colors"
+                onClick={(e) => { e.stopPropagation(); zoomIn(); }}
+                disabled={lightboxScale >= 4}
+                title="Vergrößern (+)"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+                </svg>
+              </button>
+              <div className="w-px h-6 bg-white/20 mx-1" />
+              <button
+                className="p-2 text-white hover:text-gray-300 hover:bg-white/10 rounded-lg transition-colors"
+                onClick={(e) => { e.stopPropagation(); closeLightbox(); }}
+                title="Schließen (Esc)"
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
           </div>
 
-          <img
-            src={lightboxImages[lightboxIndex]}
-            alt={`Bild ${lightboxIndex + 1}`}
-            className="max-w-[90vw] max-h-[90vh] object-contain rounded-lg"
-          />
+          {/* Hauptbereich mit Bild */}
+          <div className="flex-1 flex items-center justify-center relative overflow-hidden" onClick={(e) => e.stopPropagation()}>
+            {/* Navigationsbuttons */}
+            <button
+              className="absolute left-4 top-1/2 -translate-y-1/2 text-white/80 hover:text-white hover:bg-white/10 transition-all z-10 p-3 rounded-full"
+              onClick={(e) => { e.stopPropagation(); prevImage(); }}
+            >
+              <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+
+            <button
+              className="absolute right-4 top-1/2 -translate-y-1/2 text-white/80 hover:text-white hover:bg-white/10 transition-all z-10 p-3 rounded-full"
+              onClick={(e) => { e.stopPropagation(); nextImage(); }}
+            >
+              <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+
+            {/* Bild mit Zoom und Pan */}
+            <div className="relative max-w-[90vw] max-h-[80vh] overflow-auto">
+              <img
+                src={lightboxImages[lightboxIndex]}
+                alt={`Bild ${lightboxIndex + 1}`}
+                className="object-contain transition-transform duration-200 select-none"
+                style={{
+                  transform: `scale(${lightboxScale})`,
+                  cursor: lightboxScale > 1 ? 'grab' : 'pointer',
+                  maxWidth: lightboxScale === 1 ? '85vw' : undefined,
+                  maxHeight: lightboxScale === 1 ? '75vh' : undefined,
+                }}
+                onClick={(e) => {
+                  e.stopPropagation()
+                  if (lightboxScale === 1) {
+                    zoomIn()
+                  } else {
+                    resetZoom()
+                  }
+                }}
+                draggable={false}
+              />
+            </div>
+            {/* Navigations-Hinweis */}
+            {lightboxScale === 1 && lightboxImages.length > 1 && (
+              <div className="absolute bottom-24 left-1/2 -translate-x-1/2 text-white/60 text-sm bg-black/40 backdrop-blur-sm px-4 py-2 rounded-full pointer-events-none select-none">
+                ← Pfeiltasten oder wischen →
+              </div>
+            )}
+          </div>
+
+          {/* Thumbnail-Leiste */}
+          <div className="shrink-0 bg-black/50 backdrop-blur-sm p-3">
+            <div className="flex gap-2 justify-center overflow-x-auto max-w-full">
+              {lightboxImages.map((img, idx) => (
+                <button
+                  key={idx}
+                  onClick={(e) => { e.stopPropagation(); goToImage(idx); }}
+                  className={`relative shrink-0 w-16 h-16 rounded-lg overflow-hidden border-2 transition-all ${
+                    idx === lightboxIndex ? 'border-[#c9a45c] ring-2 ring-[#c9a45c]/30' : 'border-transparent hover:border-white/50'
+                  }`}
+                >
+                  <img src={img} alt={`Thumbnail ${idx + 1}`} className="w-full h-full object-cover" />
+                </button>
+              ))}
+            </div>
+          </div>
         </div>
       )}
       <div>
@@ -542,34 +684,51 @@ export default function QuotesPage() {
                   </div>
 
                   {quote.imagesBase64 && quote.imagesBase64.length > 0 ? (
-                    <div className="mt-3">
-                      <div className="flex items-center justify-between mb-2">
-                        <p className="text-sm font-medium text-gray-700">Hochgeladene Bilder ({quote.imagesBase64.length}):</p>
+                    <div className="mt-4 col-span-full">
+                      <div className="flex items-center justify-between mb-3">
+                        <div className="flex items-center gap-2">
+                          <svg className="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                          </svg>
+                          <p className="text-sm font-semibold text-gray-800">Hochgeladene Bilder ({quote.imagesBase64.length})</p>
+                        </div>
                         <button
                           type="button"
                           onClick={() => openLightbox(quote.imagesBase64, 0)}
-                          className="text-sm text-blue-600 hover:text-blue-700"
+                          className="text-sm bg-blue-50 text-blue-700 px-3 py-1.5 rounded-lg hover:bg-blue-100 transition-colors font-medium"
                         >
                           Alle anzeigen
                         </button>
                       </div>
-                      <div className="grid grid-cols-4 gap-3">
+                      <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                         {quote.imagesBase64.map((base64, index) => (
-                          <div key={index} className="relative group aspect-square">
+                          <div key={index} className="relative group aspect-[4/3] bg-gray-100 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
                             <img
                               src={base64}
                               alt={`Bild ${index + 1}`}
-                              className="w-full h-full object-cover rounded-lg border border-gray-300 cursor-pointer hover:border-gray-500 transition-colors"
+                              className="w-full h-full object-cover cursor-pointer"
                               onClick={() => openLightbox(quote.imagesBase64, index)}
                             />
-                            <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-opacity rounded-lg flex items-center justify-center">
-                              <svg className="w-6 h-6 text-white opacity-0 group-hover:opacity-100 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
-                              </svg>
+                            {/* Hover Overlay */}
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity">
+                              <div className="absolute inset-0 flex items-center justify-center">
+                                <div className="bg-white/20 backdrop-blur-sm rounded-full p-3">
+                                  <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+                                  </svg>
+                                </div>
+                              </div>
                             </div>
-                            <div className="absolute bottom-1 left-1 bg-black bg-opacity-60 text-white text-xs px-2 py-0.5 rounded">
+                            {/* Bildnummer */}
+                            <div className="absolute top-2 left-2 bg-black/60 backdrop-blur-sm text-white text-sm font-medium px-2.5 py-1 rounded-lg">
                               {index + 1}
                             </div>
+                            {/* Dateiname falls vorhanden */}
+                            {quote.imageFileNames[index] && !quote.imageFileNames[index].startsWith("data:") && (
+                              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent px-3 py-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                                <p className="text-white text-xs truncate">{quote.imageFileNames[index]}</p>
+                              </div>
+                            )}
                           </div>
                         ))}
                       </div>
