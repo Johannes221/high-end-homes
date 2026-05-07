@@ -591,7 +591,7 @@ export default function QuotesPage() {
             </button>
 
             {/* Bild mit Zoom und Pan */}
-            <div className="relative max-w-[90vw] max-h-[80vh] overflow-auto">
+            <div className="relative flex items-center justify-center" style={{ width: '90vw', height: '75vh' }}>
               <img
                 src={lightboxImages[lightboxIndex]}
                 alt={`Bild ${lightboxIndex + 1}`}
@@ -599,8 +599,8 @@ export default function QuotesPage() {
                 style={{
                   transform: `scale(${lightboxScale})`,
                   cursor: lightboxScale > 1 ? 'grab' : 'pointer',
-                  maxWidth: lightboxScale === 1 ? '85vw' : undefined,
-                  maxHeight: lightboxScale === 1 ? '75vh' : undefined,
+                  maxWidth: '100%',
+                  maxHeight: '100%',
                 }}
                 onClick={(e) => {
                   e.stopPropagation()
