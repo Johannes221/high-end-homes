@@ -695,8 +695,11 @@ export default function QuotesPage() {
                         <button
                           type="button"
                           onClick={() => openLightbox(quote.imagesBase64, 0)}
-                          className="text-sm bg-blue-50 text-blue-700 px-3 py-1.5 rounded-lg hover:bg-blue-100 transition-colors font-medium"
+                          className="flex items-center gap-2 text-sm bg-gray-100 text-gray-700 px-3 py-1.5 rounded-lg hover:bg-gray-200 transition-colors font-medium"
                         >
+                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+                          </svg>
                           Alle anzeigen
                         </button>
                       </div>
@@ -740,24 +743,44 @@ export default function QuotesPage() {
                       }
                       setExpandedId(isExpanded ? "" : quote.id)
                     }}
-                    className="px-4 py-2 rounded-lg border border-gray-300 text-gray-700 text-sm font-medium"
+                    className="flex items-center gap-2 px-4 py-2.5 rounded-lg border border-gray-200 text-gray-700 text-sm font-medium hover:bg-gray-50 hover:border-gray-300 transition-all"
                   >
-                    {isExpanded ? "Details schließen" : "Bearbeiten & Details"}
+                    {isExpanded ? (
+                      <>
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
+                        </svg>
+                        Details schließen
+                      </>
+                    ) : (
+                      <>
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                        </svg>
+                        Bearbeiten & Details
+                      </>
+                    )}
                   </button>
                   <button
                     type="button"
                     onClick={() => void updateQuote(quote.id, { approvalStatus: "approved" })}
                     disabled={updatingId === quote.id}
-                    className="px-4 py-2 rounded-lg bg-emerald-600 text-white text-sm font-medium disabled:opacity-60"
+                    className="flex items-center gap-2 px-4 py-2.5 rounded-lg bg-emerald-500 text-white text-sm font-medium hover:bg-emerald-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-sm"
                   >
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
                     Freigeben
                   </button>
                   <button
                     type="button"
                     onClick={() => void updateQuote(quote.id, { approvalStatus: "pending" })}
                     disabled={updatingId === quote.id}
-                    className="px-4 py-2 rounded-lg border border-gray-300 text-gray-700 text-sm font-medium disabled:opacity-60"
+                    className="flex items-center gap-2 px-4 py-2.5 rounded-lg border border-gray-200 text-gray-700 text-sm font-medium hover:bg-gray-50 hover:border-gray-300 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
                   >
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
                     Auf offen setzen
                   </button>
                   <button
@@ -774,24 +797,33 @@ export default function QuotesPage() {
                       openPdfOffer(quote.id)
                     }}
                     disabled={updatingId === quote.id}
-                    className="px-4 py-2 rounded-lg bg-[#c9a45c] text-black text-sm font-semibold disabled:opacity-60"
+                    className="flex items-center gap-2 px-4 py-2.5 rounded-lg bg-[#c9a45c] text-white text-sm font-medium hover:bg-[#b8944d] disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-sm"
                   >
-                    PDF-Angebot erstellen
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                    PDF-Angebot
                   </button>
                   <button
                     type="button"
                     onClick={() => downloadText(quote, preview)}
                     disabled={updatingId === quote.id}
-                    className="px-4 py-2 rounded-lg border border-gray-300 text-gray-700 text-sm font-medium disabled:opacity-60"
+                    className="flex items-center gap-2 px-4 py-2.5 rounded-lg border border-gray-200 text-gray-700 text-sm font-medium hover:bg-gray-50 hover:border-gray-300 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
                   >
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
                     Text
                   </button>
                   <button
                     type="button"
                     onClick={() => window.location.href = `mailto:${quote.email}?subject=Ihr unverbindliches Preisangebot von High-End Homes&body=Hallo ${quote.name},%0D%0A%0D%0Avielen Dank für Ihre Anfrage. Anbei erhalten Sie unser unverbindliches Preisangebot.%0D%0A%0D%0ADieses Angebot dient nur als Orientierung und ist ohne Gewähr. Endgültige Preise nach Ortsbesichtigung.%0D%0A%0D%0AFür Rückfragen stehen wir Ihnen gerne zur Verfügung.%0D%0A%0D%0AMit freundlichen Grüßen%0D%0AHigh-End Homes`}
                     disabled={updatingId === quote.id}
-                    className="px-4 py-2 rounded-lg bg-blue-600 text-white text-sm font-medium disabled:opacity-60"
+                    className="flex items-center gap-2 px-4 py-2.5 rounded-lg border border-gray-200 text-gray-700 text-sm font-medium hover:bg-gray-50 hover:border-gray-300 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
                   >
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    </svg>
                     E-Mail senden
                   </button>
                 </div>
