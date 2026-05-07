@@ -121,6 +121,9 @@ function buildSelectionSummary(quote: QuoteItem) {
 
 function downloadCsv(quote: QuoteItem) {
   const rows = [
+    ["Unverbindliches Preisangebot"],
+    ["Dieses Angebot dient nur als Orientierung und ist ohne Gewähr."],
+    [],
     ["Anfrage", quote.type],
     ["Kunde", quote.name],
     ["E-Mail", quote.email],
@@ -144,14 +147,63 @@ function downloadCsv(quote: QuoteItem) {
     ]),
   ]
 
-  const csv = rows.map((row) => row.map((cell = "") => `"${String(cell).replaceAll('"', '""')}"`).join(";")).join("\n")
-  const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" })
-  const url = URL.createObjectURL(blob)
+  const csvContent = rows.map((row) => row.join(",")).join("\n")
+  const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" })
   const link = document.createElement("a")
-  link.href = url
+  link.href = URL.createObjectURL(blob)
   link.download = `angebot-${quote.name.replace(/\s+/g, "-").toLowerCase()}-${quote.id}.csv`
   link.click()
-  URL.revokeObjectURL(url)
+  URL.revokeObjectURL(link.href)
+}
+
+function downloadText(quote: QuoteItem, preview: any) {
+  const text = `
+UNVERBINDLICHES PREISANGEBOT
+============================
+
+Dieses Angebot dient nur als Orientierung und ist ohne Gewähr.
+Endgültige Preise nach Ortsbesichtigung.
+
+KUNDE
+-----
+Name: ${quote.name}
+E-Mail: ${quote.email}
+Telefon: ${quote.phone ?? "-"}
+Firma: ${quote.company ?? quote.payload.company ?? "-"}
+
+PROJEKT
+-------
+Typ: ${quote.type}
+Gebäudetyp: ${quote.buildingType}
+Größe: ${quote.squareMeters} m²
+Stockwerk: ${quote.floor ?? quote.payload.floor ?? "-"}
+Aufzug: ${quote.elevator ?? quote.payload.elevator ?? "-"}
+Wunschtermin: ${quote.desiredDate ?? quote.payload.desiredDate ?? "-"}
+
+PREISÜBERSICHT
+--------------
+Automatische Kalkulation: ${formatCurrency(quote.pricingSummary.autoTotal)}
+Final kalkuliert: ${formatCurrency(preview.finalTotal)}
+
+POSITIONEN
+---------
+${preview.lineItems.map((item: any) =>
+  `- ${item.label}: ${formatCurrency(item.finalAmount)} (${item.included ? "inkludiert" : "exkludiert"})`
+).join("\n")}
+
+GESAMT: ${formatCurrency(preview.finalTotal)}
+
+---
+High-End Homes
+${new Date().toLocaleDateString("de-DE")}
+`.trim()
+
+  const blob = new Blob([text], { type: "text/plain;charset=utf-8;" })
+  const link = document.createElement("a")
+  link.href = URL.createObjectURL(blob)
+  link.download = `angebot-${quote.name.replace(/\s+/g, "-").toLowerCase()}-${quote.id}.txt`
+  link.click()
+  URL.revokeObjectURL(link.href)
 }
 
 function openPdfOffer(quoteId: string) {
@@ -468,6 +520,10 @@ export default function QuotesPage() {
 
                 {quote.notes ? <p className="text-sm text-gray-700"><strong>Anmerkungen:</strong> {quote.notes}</p> : null}
 
+                <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-3 text-sm text-yellow-800">
+                  <p><strong>Unverbindliches Preisangebot:</strong> Dieses Angebot dient nur als Orientierung und ist ohne Gewähr. Endgültige Preise nach Ortsbesichtigung.</p>
+                </div>
+
                 <div className="flex flex-wrap gap-2">
                   <button
                     type="button"
@@ -508,25 +564,28 @@ export default function QuotesPage() {
                           finalTotal: preview.finalTotal,
                         },
                       })
-                      void updateQuote(quote.id, { markExported: true })
-                    }}
-                    disabled={updatingId === quote.id}
-                    className="px-4 py-2 rounded-lg bg-gray-900 text-white text-sm font-medium disabled:opacity-60"
-                  >
-                    Angebot exportieren
-                  </button>
-                  <button
-                    type="button"
-                    onClick={async () => {
-                      const savedQuote = await updateQuote(quote.id, { markExported: true })
-                      if (savedQuote) {
-                        openPdfOffer(savedQuote.id)
-                      }
+                      openPdfOffer(quote.id)
                     }}
                     disabled={updatingId === quote.id}
                     className="px-4 py-2 rounded-lg bg-[#c9a45c] text-black text-sm font-semibold disabled:opacity-60"
                   >
                     PDF-Angebot erstellen
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => downloadText(quote, preview)}
+                    disabled={updatingId === quote.id}
+                    className="px-4 py-2 rounded-lg border border-gray-300 text-gray-700 text-sm font-medium disabled:opacity-60"
+                  >
+                    Text
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => window.location.href = `mailto:${quote.email}?subject=Ihr unverbindliches Preisangebot von High-End Homes&body=Hallo ${quote.name},%0D%0A%0D%0Avielen Dank für Ihre Anfrage. Anbei erhalten Sie unser unverbindliches Preisangebot.%0D%0A%0D%0ADieses Angebot dient nur als Orientierung und ist ohne Gewähr. Endgültige Preise nach Ortsbesichtigung.%0D%0A%0D%0AFür Rückfragen stehen wir Ihnen gerne zur Verfügung.%0D%0A%0D%0AMit freundlichen Grüßen%0D%0AHigh-End Homes`}
+                    disabled={updatingId === quote.id}
+                    className="px-4 py-2 rounded-lg bg-blue-600 text-white text-sm font-medium disabled:opacity-60"
+                  >
+                    E-Mail senden
                   </button>
                 </div>
 
