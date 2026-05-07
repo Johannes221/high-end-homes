@@ -167,6 +167,7 @@ export default function QuotesPage() {
   const [draftNotes, setDraftNotes] = useState<Record<string, string>>({})
   const [draftCustomItems, setDraftCustomItems] = useState<Record<string, QuoteCustomLineItem[]>>({})
   const [newCustomItem, setNewCustomItem] = useState<Record<string, CustomLineItemDraft>>({})
+  const [lightboxImage, setLightboxImage] = useState<string | null>(null)
   const [draftProcessed, setDraftProcessed] = useState<Record<string, Record<string, boolean>>>({})
 
   const loadQuotes = async () => {
@@ -373,6 +374,30 @@ export default function QuotesPage() {
 
   return (
     <div className="space-y-6">
+      {lightboxImage && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50 cursor-pointer"
+          onClick={() => setLightboxImage(null)}
+        >
+          <button
+            className="absolute top-4 right-4 text-white hover:text-gray-300 transition-colors"
+            onClick={(e) => {
+              e.stopPropagation()
+              setLightboxImage(null)
+            }}
+          >
+            <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+          <img
+            src={lightboxImage}
+            alt="Vollbild"
+            className="max-w-[90vw] max-h-[90vh] object-contain rounded-lg"
+            onClick={(e) => e.stopPropagation()}
+          />
+        </div>
+      )}
       <div>
         <h1 className="text-2xl font-bold text-gray-900 mb-1">Anfragen</h1>
         <p className="text-sm text-gray-500">Gesammelte Angebotsanfragen mit Detailposten, Kostenschätzung, manueller Preisfreigabe und Export.</p>
@@ -420,21 +445,21 @@ export default function QuotesPage() {
                   {quote.imagesBase64 && quote.imagesBase64.length > 0 ? (
                     <div className="mt-3">
                       <p className="text-sm font-medium text-gray-700 mb-2">Hochgeladene Bilder:</p>
-                      <div className="flex flex-wrap gap-2">
+                      <div className="flex flex-wrap gap-3">
                         {quote.imagesBase64.map((base64, index) => (
-                          <img
-                            key={index}
-                            src={base64}
-                            alt={`Bild ${index + 1}`}
-                            className="w-20 h-20 object-cover rounded-lg border border-gray-200 cursor-pointer"
-                            onClick={() => {
-                              const modal = document.createElement('div')
-                              modal.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.8);display:flex;align-items:center;justify-content:center;z-index:9999;cursor:pointer'
-                              modal.innerHTML = `<img src="${base64}" style="max-width:90vw;max-height:90vh;object-fit:contain;border-radius:8px" />`
-                              modal.onclick = () => modal.remove()
-                              document.body.appendChild(modal)
-                            }}
-                          />
+                          <div key={index} className="relative group">
+                            <img
+                              src={base64}
+                              alt={`Bild ${index + 1}`}
+                              className="w-24 h-24 object-cover rounded-lg border border-gray-300 cursor-pointer hover:border-gray-500 transition-colors"
+                              onClick={() => setLightboxImage(base64)}
+                            />
+                            <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-opacity rounded-lg flex items-center justify-center">
+                              <svg className="w-6 h-6 text-white opacity-0 group-hover:opacity-100 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+                              </svg>
+                            </div>
+                          </div>
                         ))}
                       </div>
                     </div>

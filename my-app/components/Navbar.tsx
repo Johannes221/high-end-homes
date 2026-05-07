@@ -14,10 +14,8 @@ interface NavbarProps {
 }
 
 const NAV_LINKS = [
-  { href: "/intern", label: "Preisvergleich" },
+  { href: "/intern", label: "Dashboard" },
   { href: "/intern/quotes", label: "Anfragen" },
-  { href: "/intern/favorites", label: "Favoriten" },
-  { href: "/intern/history", label: "Verlauf" },
   { href: "/intern/settings", label: "Einstellungen" },
 ];
 
@@ -43,7 +41,7 @@ export default function Navbar({ userName, userEmail }: NavbarProps) {
         <div className="flex items-center justify-between h-14">
           {/* Logo */}
           <Link href="/intern" className="flex items-center gap-2 font-semibold text-gray-800 text-sm tracking-wide">
-            Preisvergleich
+            High-End Homes
           </Link>
 
           {/* Desktop Navigation */}
