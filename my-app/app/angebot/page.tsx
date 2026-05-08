@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import { Suspense } from "react"
 import { Navigation } from "@/components/navigation-new"
 import { Footer } from "@/components/footer-new"
-import { QuoteFormTabs } from "@/components/quote-form-tabs"
+import { QuoteFormTabs } from "@/components/quote-form-tabs-new"
 
 export const metadata: Metadata = {
   title: "Angebot einholen | High-End Homes",

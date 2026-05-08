@@ -132,6 +132,13 @@ export function Navigation() {
               >
                 Kontakt
               </Link>
+              
+              <Link
+                href="/angebot"
+                className="text-sm hover:text-white transition-colors duration-300" style={{ fontFamily: 'var(--font-body)', color: 'rgba(255,255,255,0.7)' }}
+              >
+                Angebot einholen
+              </Link>
             </div>
 
             {/* CTA Button */}
@@ -217,6 +224,13 @@ export function Navigation() {
                   className="block text-lg font-medium text-white hover:text-white/60 transition-colors" style={{ fontFamily: 'var(--font-body)' }}
                 >
                   Kontakt
+                </Link>
+                <Link
+                  href="/angebot"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="block text-lg font-medium text-white hover:text-white/60 transition-colors" style={{ fontFamily: 'var(--font-body)' }}
+                >
+                  Angebot einholen
                 </Link>
               </div>
 

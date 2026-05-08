@@ -8,9 +8,10 @@ import Image from "next/image"
 interface ImageUploadProps {
   id: string
   label?: string
+  onChange?: (images: File[], base64Images: string[]) => void
 }
 
-export function ImageUpload({ id, label = "Bilder hochladen" }: ImageUploadProps) {
+export function ImageUpload({ id, label = "Bilder hochladen", onChange }: ImageUploadProps) {
   const [images, setImages] = useState<File[]>([])
   const [previews, setPreviews] = useState<string[]>([])
   const [showTooltip, setShowTooltip] = useState(false)
@@ -25,12 +26,25 @@ export function ImageUpload({ id, label = "Bilder hochladen" }: ImageUploadProps
     }).slice(0, 10 - images.length)
 
     if (validFiles.length > 0) {
-      setImages(prev => [...prev, ...validFiles].slice(0, 10))
+      const newImages = [...images, ...validFiles].slice(0, 10)
+      setImages(newImages)
+      
+      const newPreviews: string[] = []
+      let loadedCount = 0
       
       validFiles.forEach(file => {
         const reader = new FileReader()
         reader.onloadend = () => {
-          setPreviews(prev => [...prev, reader.result as string].slice(0, 10))
+          newPreviews.push(reader.result as string)
+          loadedCount++
+          
+          if (loadedCount === validFiles.length) {
+            const allPreviews = [...previews, ...newPreviews].slice(0, 10)
+            setPreviews(allPreviews)
+            if (onChange) {
+              onChange(newImages, allPreviews)
+            }
+          }
         }
         reader.readAsDataURL(file)
       })
@@ -38,8 +52,13 @@ export function ImageUpload({ id, label = "Bilder hochladen" }: ImageUploadProps
   }
 
   const removeImage = (index: number) => {
-    setImages(prev => prev.filter((_, i) => i !== index))
-    setPreviews(prev => prev.filter((_, i) => i !== index))
+    const newImages = images.filter((_, i) => i !== index)
+    const newPreviews = previews.filter((_, i) => i !== index)
+    setImages(newImages)
+    setPreviews(newPreviews)
+    if (onChange) {
+      onChange(newImages, newPreviews)
+    }
   }
 
   return (

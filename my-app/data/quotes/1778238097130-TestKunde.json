@@ -1,0 +1,54 @@
+{
+  "type": "Entrümpelung",
+  "name": "Test Kunde",
+  "email": "test@example.com",
+  "phone": "+49 123 456789",
+  "company": "Test GmbH",
+  "address": "",
+  "squareMeters": 120,
+  "buildingType": "Wohnung",
+  "constructionYear": "",
+  "floor": "2. OG",
+  "elevator": "ja",
+  "materials": [
+    "Möbel",
+    "Elektrogeräte",
+    "Holz"
+  ],
+  "removalItems": [],
+  "quantityEstimate": "Mittel",
+  "valuables": "Einige Antiquitäten vorhanden",
+  "asbestosRequired": false,
+  "otherPollutants": false,
+  "disposalWanted": false,
+  "permitStatus": "",
+  "desiredDate": "2026-06-01",
+  "imageFileNames": [
+    "test-bild-1.png",
+    "test-bild-2.png"
+  ],
+  "imagesBase64": [
+    "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==",
+    "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg=="
+  ],
+  "notes": "Testanfrage mit Bildern - bitte prüfen ob Bilder korrekt angezeigt werden",
+  "effortEstimate": "",
+  "complexity": {
+    "score": 2,
+    "level": "Low",
+    "effortRange": "1–2 Arbeitstage",
+    "flags": [
+      "Projektgröße ab 80 m² — erhöhter Grundaufwand."
+    ]
+  },
+  "estimate": {
+    "min": 2509,
+    "max": 3178,
+    "currency": "EUR",
+    "rationale": [
+      "Automatische Kalkulation aus 5 Positionen abgeleitet"
+    ]
+  },
+  "databaseId": "cmowt1svf00005nd39e5319f0",
+  "createdAt": "2026-05-08T11:01:37.127Z"
+}
