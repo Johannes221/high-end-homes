@@ -53,3 +53,152 @@ body {
 .section-padding {
   @apply px-4 sm:px-6 lg:px-8 xl:px-16 2xl:px-24;
 }
+
+/* Ablauf Section */
+.ablauf-section {
+  background: #0a0a0a;
+  padding: 100px 48px;
+  text-align: center;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+
+.ablauf-section .eyebrow {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  color: rgba(255,255,255,0.35);
+  margin-bottom: 16px;
+  text-transform: uppercase;
+}
+
+.ablauf-section h2 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(28px, 3vw, 42px);
+  font-weight: 300;
+  letter-spacing: 0.03em;
+  margin-bottom: 64px;
+  color: white;
+}
+
+.ablauf-steps {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  max-width: 1100px;
+  margin: 0 auto 56px;
+}
+
+.step {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 0 12px;
+}
+
+.step-circle {
+  width: 56px;
+  height: 56px;
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  transition: border-color 0.3s, background 0.3s;
+  background: transparent;
+}
+
+.step:hover .step-circle {
+  border-color: rgba(255,255,255,0.7);
+  background: rgba(255,255,255,0.05);
+}
+
+.step-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.step-nr {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  color: rgba(255,255,255,0.25);
+}
+
+.step-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: white;
+  letter-spacing: 0.03em;
+}
+
+.step-text {
+  font-family: 'Source Sans 3', sans-serif;
+  font-size: 13px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.45);
+  line-height: 1.6;
+  text-align: center;
+}
+
+.step-line {
+  width: 60px;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(255,255,255,0.15), rgba(255,255,255,0.05));
+  flex-shrink: 0;
+  margin-bottom: 60px;
+  align-self: flex-start;
+  margin-top: 28px;
+}
+
+.ablauf-cta {
+  margin-top: 48px;
+}
+
+.btn-primary {
+  display: inline-block;
+  padding: 14px 32px;
+  background: white;
+  color: #0a0a0a;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: all 0.3s;
+}
+
+.btn-primary:hover {
+  background: rgba(255,255,255,0.9);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .ablauf-section {
+    padding: 60px 24px;
+  }
+
+  .ablauf-section h2 {
+    margin-bottom: 48px;
+  }
+
+  .ablauf-steps {
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .step-line {
+    width: 1px;
+    height: 32px;
+    margin: 0;
+    background: linear-gradient(180deg, rgba(255,255,255,0.15), rgba(255,255,255,0.05));
+  }
+}

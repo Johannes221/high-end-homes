@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import { Suspense } from "react"
 import { Navigation } from "@/components/navigation-new"
 import { Hero } from "@/components/hero-new"
+import { AblaufSection } from "@/components/ablauf-section"
 import { VillaInteractive } from "@/components/villa-interactive"
 import { ServiceCards } from "@/components/service-cards"
 import { FAQSection } from "@/components/faq-section"
@@ -110,6 +111,7 @@ export default function Home() {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
         <Hero />
+        <AblaufSection />
         <VillaInteractive />
         <ServiceCards />
         <FAQSection />

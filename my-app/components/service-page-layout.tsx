@@ -5,7 +5,7 @@ import Link from "next/link"
 import { Navigation } from "@/components/navigation-new"
 import { Footer } from "@/components/footer-new"
 import { Button } from "@/components/ui/button"
-import { ArrowRight, CheckCircle2, Info, ChevronDown } from "lucide-react"
+import { ArrowRight, CheckCircle2, Info, ChevronDown, Mail, Phone } from "lucide-react"
 import { ReactNode } from "react"
 
 interface ServicePageLayoutProps {
@@ -41,9 +41,45 @@ export function ServicePageLayout({
   quoteTab,
 }: ServicePageLayoutProps) {
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(null)
+  const [contactForm, setContactForm] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    message: ""
+  })
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle")
 
   const toggleFaq = (index: number) => {
     setOpenFaqIndex(openFaqIndex === index ? null : index)
+  }
+
+  const handleContactSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setIsSubmitting(true)
+    setSubmitStatus("idle")
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ...contactForm,
+          service: title
+        })
+      })
+
+      if (response.ok) {
+        setSubmitStatus("success")
+        setContactForm({ name: "", email: "", phone: "", message: "" })
+      } else {
+        setSubmitStatus("error")
+      }
+    } catch (error) {
+      setSubmitStatus("error")
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -199,6 +235,149 @@ export function ServicePageLayout({
                   </div>
                 </div>
               ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Kontakt */}
+      <section className="py-20 bg-[#0a0a0a] border-t border-[rgba(255,255,255,0.08)]">
+        <div className="section-padding">
+          <div className="max-w-6xl mx-auto">
+            <h2 className="text-3xl md:text-4xl text-white mb-12 text-center" style={{ fontFamily: 'var(--font-headline)', fontWeight: 400, letterSpacing: '0.02em' }}>
+              Kontaktieren Sie uns
+            </h2>
+            
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+              {/* Kontaktformular */}
+              <div>
+                <h3 className="text-xl text-white mb-6" style={{ fontFamily: 'var(--font-headline)', fontWeight: 500 }}>
+                  Nachricht senden
+                </h3>
+                <form onSubmit={handleContactSubmit} className="space-y-4">
+                  <div>
+                    <input
+                      type="text"
+                      placeholder="Name *"
+                      required
+                      value={contactForm.name}
+                      onChange={(e) => setContactForm({ ...contactForm, name: e.target.value })}
+                      className="w-full px-4 py-3 bg-[#111111] border border-[rgba(255,255,255,0.1)] text-white placeholder:text-white/40 focus:border-white/30 focus:outline-none transition-colors"
+                      style={{ fontFamily: 'var(--font-body)', borderRadius: '3px' }}
+                    />
+                  </div>
+                  <div>
+                    <input
+                      type="email"
+                      placeholder="E-Mail *"
+                      required
+                      value={contactForm.email}
+                      onChange={(e) => setContactForm({ ...contactForm, email: e.target.value })}
+                      className="w-full px-4 py-3 bg-[#111111] border border-[rgba(255,255,255,0.1)] text-white placeholder:text-white/40 focus:border-white/30 focus:outline-none transition-colors"
+                      style={{ fontFamily: 'var(--font-body)', borderRadius: '3px' }}
+                    />
+                  </div>
+                  <div>
+                    <input
+                      type="tel"
+                      placeholder="Telefon"
+                      value={contactForm.phone}
+                      onChange={(e) => setContactForm({ ...contactForm, phone: e.target.value })}
+                      className="w-full px-4 py-3 bg-[#111111] border border-[rgba(255,255,255,0.1)] text-white placeholder:text-white/40 focus:border-white/30 focus:outline-none transition-colors"
+                      style={{ fontFamily: 'var(--font-body)', borderRadius: '3px' }}
+                    />
+                  </div>
+                  <div>
+                    <textarea
+                      placeholder="Ihre Nachricht *"
+                      required
+                      rows={5}
+                      value={contactForm.message}
+                      onChange={(e) => setContactForm({ ...contactForm, message: e.target.value })}
+                      className="w-full px-4 py-3 bg-[#111111] border border-[rgba(255,255,255,0.1)] text-white placeholder:text-white/40 focus:border-white/30 focus:outline-none transition-colors resize-none"
+                      style={{ fontFamily: 'var(--font-body)', borderRadius: '3px' }}
+                    />
+                  </div>
+                  
+                  {submitStatus === "success" && (
+                    <div className="p-4 bg-green-900/20 border border-green-500/30 text-green-400 text-sm" style={{ fontFamily: 'var(--font-body)', borderRadius: '3px' }}>
+                      Vielen Dank! Ihre Nachricht wurde erfolgreich gesendet.
+                    </div>
+                  )}
+                  
+                  {submitStatus === "error" && (
+                    <div className="p-4 bg-red-900/20 border border-red-500/30 text-red-400 text-sm" style={{ fontFamily: 'var(--font-body)', borderRadius: '3px' }}>
+                      Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut oder kontaktieren Sie uns direkt per E-Mail.
+                    </div>
+                  )}
+                  
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="w-full px-8 py-3.5 bg-white text-black hover:bg-[rgba(255,255,255,0.9)] font-semibold transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                    style={{ 
+                      fontFamily: 'var(--font-headline)', 
+                      fontWeight: 600, 
+                      letterSpacing: '0.05em',
+                      borderRadius: '3px'
+                    }}
+                  >
+                    {isSubmitting ? "Wird gesendet..." : "Nachricht senden"}
+                  </button>
+                </form>
+              </div>
+
+              {/* Kontaktinformationen */}
+              <div>
+                <h3 className="text-xl text-white mb-6" style={{ fontFamily: 'var(--font-headline)', fontWeight: 500 }}>
+                  Direkt kontaktieren
+                </h3>
+                
+                <div className="space-y-6">
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 rounded-full bg-[#111111] border border-[rgba(255,255,255,0.1)] flex items-center justify-center flex-shrink-0">
+                      <Mail className="w-5 h-5 text-white" />
+                    </div>
+                    <div>
+                      <p className="text-sm mb-2" style={{ fontFamily: 'var(--font-body)', color: 'rgba(255,255,255,0.5)' }}>
+                        E-Mail
+                      </p>
+                      <a 
+                        href="mailto:info@high-end-homes.de" 
+                        className="text-white hover:text-white/80 transition-colors"
+                        style={{ fontFamily: 'var(--font-body)', fontWeight: 400 }}
+                      >
+                        info@high-end-homes.de
+                      </a>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-4">
+                    <div className="w-12 h-12 rounded-full bg-[#111111] border border-[rgba(255,255,255,0.1)] flex items-center justify-center flex-shrink-0">
+                      <Phone className="w-5 h-5 text-white" />
+                    </div>
+                    <div>
+                      <p className="text-sm mb-2" style={{ fontFamily: 'var(--font-body)', color: 'rgba(255,255,255,0.5)' }}>
+                        Telefon
+                      </p>
+                      <a 
+                        href="tel:+4962219999999" 
+                        className="text-white hover:text-white/80 transition-colors"
+                        style={{ fontFamily: 'var(--font-body)', fontWeight: 400 }}
+                      >
+                        +49 6221 999 99 99
+                      </a>
+                    </div>
+                  </div>
+
+                  <div className="mt-8 p-6 bg-[#111111] border border-[rgba(255,255,255,0.06)]" style={{ borderRadius: '3px' }}>
+                    <p className="text-sm leading-relaxed" style={{ fontFamily: 'var(--font-body)', fontWeight: 300, color: 'rgba(255,255,255,0.6)' }}>
+                      Wir sind Montag bis Freitag von 8:00 bis 18:00 Uhr für Sie erreichbar. 
+                      Gerne beantworten wir Ihre Fragen zu unseren Dienstleistungen und erstellen Ihnen ein individuelles Angebot.
+                    </p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

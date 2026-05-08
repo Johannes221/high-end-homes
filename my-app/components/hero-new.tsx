@@ -9,14 +9,14 @@ export function Hero() {
       {/* Background Image */}
       <div className="absolute inset-0">
         <Image
-          src="/villa-bild.png"
-          alt="High-End Homes Villa"
+          src="/hero-bg.png"
+          alt="High-End Homes"
           fill
           className="object-cover"
           priority
         />
         {/* Overlay Gradient */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[rgba(10,10,10,0.2)] to-[rgba(10,10,10,0.75)]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[rgba(10,10,10,0.3)] to-[rgba(10,10,10,0.8)]" />
       </div>
 
       {/* Content */}

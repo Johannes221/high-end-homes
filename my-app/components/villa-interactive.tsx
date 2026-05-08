@@ -12,7 +12,7 @@ const floors = [
     desc: "Vorbereitung · Rückbau · Beräumung",
     href: "/entruempelung",
     top: "0%",
-    height: "17%",
+    height: "18%",
   },
   {
     id: "og3",
@@ -20,8 +20,8 @@ const floors = [
     label: "Maler & Lackierer",
     desc: "Innen · Außen · Spachteln",
     href: "/maler",
-    top: "17%",
-    height: "18%",
+    top: "18%",
+    height: "17%",
   },
   {
     id: "og2",
@@ -30,7 +30,7 @@ const floors = [
     desc: "Wände · Decken · Stuck",
     href: "/trockenbau",
     top: "35%",
-    height: "18%",
+    height: "17%",
   },
   {
     id: "og1",
@@ -38,8 +38,8 @@ const floors = [
     label: "Fliesenleger",
     desc: "Bad · Küche · Terrasse",
     href: "/fliesenleger",
-    top: "53%",
-    height: "18%",
+    top: "52%",
+    height: "15%",
   },
   {
     id: "eg",
@@ -47,8 +47,8 @@ const floors = [
     label: "Sanitär & Elektro",
     desc: "Installation · Leitungen",
     href: "/sanitaer",
-    top: "71%",
-    height: "29%",
+    top: "67%",
+    height: "33%",
   },
 ]
 
@@ -65,41 +65,45 @@ export function VillaInteractive() {
 
   return (
     <>
-      <section id="leistungen" className="relative w-screen h-screen m-0 p-0 overflow-hidden">
+      {/* Header - Above the Image Section */}
+      <div className="w-full py-16 text-center" style={{ background: 'var(--bg-1)' }}>
+        <p 
+          className="text-[11px] font-semibold tracking-[0.3em] uppercase mb-3"
+          style={{ 
+            fontFamily: 'var(--font-headline)', 
+            fontWeight: 600,
+            color: 'rgba(255,255,255,0.5)'
+          }}
+        >
+          UNSERE LEISTUNGEN
+        </p>
+        <h2 
+          className="text-3xl sm:text-4xl md:text-5xl"
+          style={{ 
+            fontFamily: 'var(--font-headline)', 
+            fontWeight: 300,
+            letterSpacing: '0.03em',
+            color: 'white'
+          }}
+        >
+          Von oben bis unten
+        </h2>
+      </div>
+
+      <section id="leistungen" className="relative w-screen m-0 p-0 overflow-hidden" style={{ aspectRatio: '3/2', minHeight: '600px' }}>
         {/* Villa Background Image */}
         <Image
           src="/villa-bild.png"
           alt="High-End Homes Villa"
           fill
           className="object-cover object-center transition-all duration-500"
-          style={{ filter: hoveredFloor ? 'brightness(0.45)' : 'brightness(0.7)' }}
+          style={{ 
+            filter: hoveredFloor ? 'brightness(0.45)' : 'brightness(0.7)',
+            objectFit: 'cover',
+            objectPosition: 'center center'
+          }}
           priority
         />
-
-        {/* Header - Absolutely Positioned at Top */}
-        <div className="absolute top-12 left-1/2 -translate-x-1/2 text-center z-10 pointer-events-none">
-          <p 
-            className="text-[11px] font-semibold tracking-[0.3em] uppercase mb-3"
-            style={{ 
-              fontFamily: 'var(--font-headline)', 
-              fontWeight: 600,
-              color: 'rgba(255,255,255,0.5)'
-            }}
-          >
-            UNSERE LEISTUNGEN
-          </p>
-          <h2 
-            className="text-3xl sm:text-4xl md:text-5xl"
-            style={{ 
-              fontFamily: 'var(--font-headline)', 
-              fontWeight: 300,
-              letterSpacing: '0.03em',
-              color: 'white'
-            }}
-          >
-            Von oben bis unten
-          </h2>
-        </div>
 
         {/* Hover Zones */}
         {floors.map((floor) => (
