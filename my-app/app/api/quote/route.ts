@@ -14,6 +14,7 @@ import {
   type QuoteSubmission,
 } from "@/lib/quote"
 
+export const runtime = 'edge';
 export const dynamic = 'force-dynamic';
 
 type MailSharePayload = {

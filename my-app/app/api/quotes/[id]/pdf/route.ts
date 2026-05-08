@@ -4,6 +4,7 @@ import { auth } from "@/lib/auth"
 import { prisma } from "@/lib/prisma"
 import { escapeHtml, parsePersistedQuotePayload, resolveQuotePricing } from "@/lib/quote"
 
+export const runtime = 'edge';
 export const dynamic = 'force-dynamic';
 
 type QuoteRecord = {

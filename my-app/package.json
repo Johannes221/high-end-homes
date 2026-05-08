@@ -8,6 +8,8 @@
     "start": "next start",
     "lint": "eslint",
     "postinstall": "prisma generate",
+    "pages:build": "npx @cloudflare/next-on-pages",
+    "preview": "npx wrangler pages dev .vercel/output/static",
     "prisma:generate": "prisma generate",
     "prisma:push": "prisma db push",
     "prisma:studio": "prisma studio",
@@ -65,8 +67,10 @@
     "zod": "^4.3.6"
   },
   "devDependencies": {
+    "@cloudflare/next-on-pages": "^1.13.16",
     "eslint": "^9",
-    "eslint-config-next": "16.2.4"
+    "eslint-config-next": "16.2.4",
+    "vercel": "^53.2.0"
   },
   "overrides": {
     "picomatch": "^4.0.4"
