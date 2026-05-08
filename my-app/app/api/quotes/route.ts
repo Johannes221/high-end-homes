@@ -4,6 +4,8 @@ import { auth } from "@/lib/auth"
 import { prisma } from "@/lib/prisma"
 import { estimatePriceRange, evaluateComplexity, parsePersistedQuotePayload, resolveQuotePricing } from "@/lib/quote"
 
+export const dynamic = 'force-dynamic';
+
 function serializeQuote(quote: {
   id: string
   type: string

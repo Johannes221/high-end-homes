@@ -12,6 +12,8 @@ import {
   type QuoteLineItemOverride,
 } from "@/lib/quote"
 
+export const dynamic = 'force-dynamic';
+
 function serializeQuote(quote: {
   id: string
   type: string

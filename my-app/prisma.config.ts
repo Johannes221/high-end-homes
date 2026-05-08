@@ -13,6 +13,11 @@ function resolveDatabaseUrl() {
     return "file:./dev.db";
   }
 
+  // During build phase, use a dummy URL
+  if (process.env.NEXT_PHASE === "phase-production-build") {
+    return "file:./build-dummy.db";
+  }
+
   throw new Error("DATABASE_URL ist in Production erforderlich.");
 }
 

@@ -14,6 +14,8 @@ import {
   type QuoteSubmission,
 } from "@/lib/quote"
 
+export const dynamic = 'force-dynamic';
+
 type MailSharePayload = {
   recipientEmail?: string
   formUrl?: string
