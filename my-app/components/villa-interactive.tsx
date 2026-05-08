@@ -110,46 +110,51 @@ export function VillaInteractive() {
           <Link
             key={floor.id}
             href={floor.href}
-            className="absolute left-0 right-0 cursor-pointer transition-all duration-[400ms] ease-out"
+            className={`absolute left-0 right-0 cursor-pointer transition-all duration-[400ms] ease-out
+              bg-transparent
+              md:bg-transparent
+              ${hoveredFloor === floor.id ? 'md:bg-[rgba(255,255,255,0.04)]' : ''}`}
             style={{
               top: floor.top,
               height: floor.height,
-              background: hoveredFloor === floor.id ? "rgba(255,255,255,0.04)" : "transparent",
             }}
             onMouseEnter={() => setHoveredFloor(floor.id)}
             onMouseLeave={() => setHoveredFloor(null)}
           >
-            {/* Horizontal Line at Top */}
+            {/* Horizontal Line at Top - Mobile: immer sichtbar, Desktop: nur bei Hover */}
             <div
-              className="absolute top-0 h-[1px] transition-transform duration-500"
+              className={`absolute top-0 h-[1px] 
+                scale-x-100
+                md:scale-x-0 md:transition-transform md:duration-500
+                ${hoveredFloor === floor.id ? 'md:scale-x-100' : ''}`}
               style={{
                 left: "5%",
                 right: "5%",
                 background: "rgba(255,255,255,0.35)",
-                transform: hoveredFloor === floor.id ? "scaleX(1)" : "scaleX(0)",
                 transformOrigin: "center",
                 transitionTimingFunction: "cubic-bezier(0.25, 0.46, 0.45, 0.94)",
               }}
             />
 
-            {/* Label */}
+            {/* Label - Mobile: immer sichtbar, Desktop: nur bei Hover */}
             <div
-              className="absolute left-1/2 top-1/2 -translate-x-1/2 pointer-events-none transition-all duration-[400ms] whitespace-nowrap z-10"
+              className={`absolute left-1/2 top-1/2 -translate-x-1/2 pointer-events-none whitespace-nowrap z-10 
+                opacity-100 translate-y-0
+                md:opacity-0 md:transition-all md:duration-[400ms]
+                ${hoveredFloor === floor.id ? 'md:opacity-100 md:translate-y-0' : 'md:translate-y-3.5'}`}
               style={{
-                opacity: hoveredFloor === floor.id ? 1 : 0,
-                transform: `translate(-50%, -50%) translateY(${hoveredFloor === floor.id ? "0" : "14px"})`,
                 transitionTimingFunction: "cubic-bezier(0.34, 1.3, 0.64, 1)",
               }}
             >
               <div
-                className="px-9 py-4 text-center"
+                className="px-4 py-2 md:px-9 md:py-4 text-center"
                 style={{
                   background: "rgba(8,8,8,0.88)",
                   border: "1px solid rgba(255,255,255,0.45)",
                 }}
               >
                 <div
-                  className="text-[9px] tracking-[0.3em] mb-2"
+                  className="text-[7px] md:text-[9px] tracking-[0.3em] mb-1 md:mb-2"
                   style={{
                     fontFamily: "var(--font-headline)",
                     fontWeight: 600,
@@ -160,7 +165,7 @@ export function VillaInteractive() {
                   {floor.etage}
                 </div>
                 <div
-                  className="text-xl sm:text-2xl md:text-3xl mb-1.5"
+                  className="text-sm md:text-xl lg:text-2xl xl:text-3xl mb-0.5 md:mb-1.5"
                   style={{
                     fontFamily: "var(--font-headline)",
                     fontWeight: 400,
@@ -171,7 +176,7 @@ export function VillaInteractive() {
                   {floor.label}
                 </div>
                 <div
-                  className="text-xs tracking-[0.1em]"
+                  className="text-[10px] md:text-xs tracking-[0.1em]"
                   style={{
                     fontFamily: "var(--font-body)",
                     fontWeight: 300,
