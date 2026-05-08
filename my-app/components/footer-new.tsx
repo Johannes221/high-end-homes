@@ -20,43 +20,43 @@ const constructionServices = [
 
 export function Footer() {
   return (
-    <footer id="kontakt" className="bg-[#0A1628] border-t border-[#60A5FA]/20">
+    <footer id="kontakt" className="bg-[#0a0a0a] border-t border-[rgba(255,255,255,0.08)]">
       <div className="section-padding py-16">
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
             {/* Company Info */}
             <div>
-              <h3 className="text-2xl font-bold text-white mb-4" style={{ fontFamily: 'Playfair Display, serif' }}>
+              <h3 className="text-xl font-bold text-white mb-4 tracking-[0.1em]" style={{ fontFamily: 'var(--font-headline)' }}>
                 HIGH-END HOMES
               </h3>
-              <p className="text-white/70 mb-6" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+              <p className="text-white/60 mb-6 text-sm" style={{ fontFamily: 'var(--font-body)', fontWeight: 300 }}>
                 Ihr zuverlässiger Partner für Entrümpelung, Hausauflösung, Entkernung und Ausbau in Heidelberg, Mannheim und Umgebung.
               </p>
             </div>
 
             {/* Navigation */}
             <div>
-              <h4 className="text-lg font-semibold text-white mb-4" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+              <h4 className="text-sm font-semibold text-white mb-4 uppercase tracking-wider" style={{ fontFamily: 'var(--font-headline)' }}>
                 Navigation
               </h4>
               <ul className="space-y-2">
                 <li>
-                  <Link href="/#hero" className="text-white/70 hover:text-[#60A5FA] transition-colors" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+                  <Link href="/#hero" className="text-white/60 hover:text-white transition-colors text-sm" style={{ fontFamily: 'var(--font-body)' }}>
                     Home
                   </Link>
                 </li>
                 <li>
-                  <Link href="/#about" className="text-white/70 hover:text-[#60A5FA] transition-colors" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+                  <Link href="/#about" className="text-white/60 hover:text-white transition-colors text-sm" style={{ fontFamily: 'var(--font-body)' }}>
                     Über uns
                   </Link>
                 </li>
                 <li>
-                  <Link href="/#region" className="text-white/70 hover:text-[#60A5FA] transition-colors" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+                  <Link href="/#region" className="text-white/60 hover:text-white transition-colors text-sm" style={{ fontFamily: 'var(--font-body)' }}>
                     Region
                   </Link>
                 </li>
                 <li>
-                  <Link href="/angebot" className="text-white/70 hover:text-[#60A5FA] transition-colors" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+                  <Link href="/angebot" className="text-white/60 hover:text-white transition-colors text-sm" style={{ fontFamily: 'var(--font-body)' }}>
                     Angebot einholen
                   </Link>
                 </li>
@@ -65,13 +65,13 @@ export function Footer() {
 
             {/* Services */}
             <div>
-              <h4 className="text-lg font-semibold text-white mb-4" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+              <h4 className="text-sm font-semibold text-white mb-4 uppercase tracking-wider" style={{ fontFamily: 'var(--font-headline)' }}>
                 Leistungen
               </h4>
               <ul className="space-y-2">
                 {mainServices.map((service) => (
                   <li key={service.href}>
-                    <Link href={service.href} className="text-white/70 hover:text-[#60A5FA] transition-colors" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+                    <Link href={service.href} className="text-white/60 hover:text-white transition-colors text-sm" style={{ fontFamily: 'var(--font-body)' }}>
                       {service.label}
                     </Link>
                   </li>
@@ -81,28 +81,28 @@ export function Footer() {
 
             {/* Contact */}
             <div>
-              <h4 className="text-lg font-semibold text-white mb-4" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+              <h4 className="text-sm font-semibold text-white mb-4 uppercase tracking-wider" style={{ fontFamily: 'var(--font-headline)' }}>
                 Kontakt
               </h4>
               <div className="space-y-4">
                 <div className="flex items-start gap-3">
-                  <MapPin className="w-5 h-5 text-[#60A5FA] flex-shrink-0 mt-1" />
+                  <MapPin className="w-4 h-4 text-white flex-shrink-0 mt-1" />
                   <div>
-                    <p className="text-white/70 text-sm" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+                    <p className="text-white/60 text-sm" style={{ fontFamily: 'var(--font-body)', fontWeight: 300 }}>
                       Gerhard-Hauptmann Straße 38<br />
                       69221 Dossenheim
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <Mail className="w-5 h-5 text-[#60A5FA] flex-shrink-0 mt-1" />
+                  <Mail className="w-4 h-4 text-white flex-shrink-0 mt-1" />
                   <div>
                     <a 
-                      href="mailto:Bennet.pfeifer@highendhomes.de" 
-                      className="text-white/70 hover:text-[#60A5FA] transition-colors text-sm"
-                      style={{ fontFamily: 'Montserrat, sans-serif' }}
+                      href="mailto:bennet.pfeifer@highendhomes.de" 
+                      className="text-white/60 hover:text-white transition-colors text-sm"
+                      style={{ fontFamily: 'var(--font-body)', fontWeight: 300 }}
                     >
-                      Bennet.pfeifer@highendhomes.de
+                      bennet.pfeifer@highendhomes.de
                     </a>
                   </div>
                 </div>
@@ -111,18 +111,18 @@ export function Footer() {
           </div>
 
           {/* Service Area */}
-          <div className="border-t border-[#60A5FA]/20 pt-8 mb-8">
-            <h4 className="text-lg font-semibold text-white mb-4 text-center" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+          <div className="border-t border-[rgba(255,255,255,0.08)] pt-8 mb-8">
+            <h4 className="text-sm font-semibold text-white mb-4 text-center uppercase tracking-wider" style={{ fontFamily: 'var(--font-headline)' }}>
               Unser Einsatzgebiet
             </h4>
-            <p className="text-white/70 text-center text-sm" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+            <p className="text-white/60 text-center text-sm" style={{ fontFamily: 'var(--font-body)', fontWeight: 300 }}>
               Heidelberg · Mannheim · Dossenheim · Schriesheim · Weinheim · Leimen · Eppelheim · Schwetzingen · Hockenheim · Ladenburg · Rhein-Neckar-Kreis
             </p>
           </div>
 
           {/* Copyright */}
-          <div className="border-t border-[#60A5FA]/20 pt-8 text-center">
-            <p className="text-white/50 text-sm" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+          <div className="border-t border-[rgba(255,255,255,0.08)] pt-8 text-center">
+            <p className="text-white/35 text-sm" style={{ fontFamily: 'var(--font-body)', fontWeight: 300 }}>
               © {new Date().getFullYear()} High-End Homes. Alle Rechte vorbehalten.
             </p>
           </div>

@@ -31,7 +31,7 @@ export default function Home() {
         name: "High-End Homes",
         url: siteUrl,
         image: `${siteUrl}/logo-main.png`,
-        email: "info@high-end-homes.de",
+        email: "bennet.pfeifer@highendhomes.de",
         address: {
           "@type": "PostalAddress",
           streetAddress: "Gerhard-Hauptmann Straße 38",
@@ -105,7 +105,7 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen bg-[#0A1628]">
+    <div className="min-h-screen bg-[#0a0a0a]">
       <Navigation />
       <main>
         <script

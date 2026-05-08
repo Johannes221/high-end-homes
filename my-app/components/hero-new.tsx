@@ -6,69 +6,65 @@ import Image from "next/image"
 
 export function Hero() {
   return (
-    <section id="hero" className="relative bg-[#0A1628] pt-20 pb-12 overflow-hidden">
-      {/* Villa Background Image */}
-      <div className="absolute inset-0 z-0">
-        <div className="relative w-full h-full">
-          <Image
-            src="/villa-bild.png"
-            alt="Luxuriöse Villa bei Nacht"
-            fill
-            className="object-cover opacity-30"
-            priority
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#0A1628]/80 via-[#0A1628]/60 to-[#0A1628]" />
-        </div>
-      </div>
-      
-      {/* Accent line at top */}
-      <div className="absolute top-0 left-0 right-0 h-1 pointer-events-none bg-gradient-to-r from-transparent via-[#60A5FA] to-transparent z-10" />
+    <>
+      {/* Hero Text Section */}
+      <section id="hero" className="relative bg-[#0a0a0a] pt-32 pb-16 overflow-hidden">
+        <div className="relative z-10 px-4 sm:px-6 lg:px-8 w-full max-w-6xl mx-auto">
+          <div className="flex flex-col items-center text-center space-y-12">
+            
+            {/* Main Headline */}
+            <div className="space-y-8">
+              <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl text-white leading-[1.1]" style={{ fontFamily: 'var(--font-headline)', fontWeight: 300 }}>
+                Ihr Haus.<br />
+                Eine Adresse.
+              </h1>
+              <p className="text-xl sm:text-2xl md:text-2xl text-white/70 font-light max-w-3xl mx-auto" style={{ fontFamily: 'var(--font-body)', fontWeight: 300 }}>
+                Von der Entrümpelung bis zum fertigen Ausbau – alles aus einer Hand.<br />
+                In Heidelberg, Mannheim & Umgebung.
+              </p>
+            </div>
 
-      {/* Content */}
-      <div className="relative z-10 px-4 sm:px-6 lg:px-8 w-full max-w-6xl mx-auto">
-        <div className="flex flex-col items-center text-center space-y-8 py-16">
-          
-          {/* Main Headline */}
-          <div className="space-y-6">
-            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-white leading-tight" style={{ fontFamily: 'Playfair Display, serif' }}>
-              Ihr Haus.<br />
-              <span className="text-[#60A5FA]">Eine Adresse.</span>
-            </h1>
-            <p className="text-xl sm:text-2xl md:text-3xl text-white/90 font-light" style={{ fontFamily: 'Montserrat, sans-serif' }}>
-              Von der Entrümpelung bis zum fertigen Ausbau – alles aus einer Hand.<br />
-              <span className="text-[#60A5FA]">In Heidelberg, Mannheim & Umgebung.</span>
-            </p>
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4 pt-8">
+              <Button
+                asChild
+                size="lg"
+                className="bg-white text-black hover:bg-white/90 font-bold text-lg px-12 h-16 border-0 rounded-sm"
+                style={{ fontFamily: 'var(--font-headline)' }}
+              >
+                <a href="/angebot" className="flex items-center gap-2">
+                  Angebot einholen
+                  <ArrowRight className="w-5 h-5" />
+                </a>
+              </Button>
+              <Button
+                asChild
+                variant="outline"
+                size="lg"
+                className="border border-white/30 text-white hover:bg-white/5 h-16 px-10 text-lg rounded-sm"
+                style={{ fontFamily: 'var(--font-headline)' }}
+              >
+                <a href="#villa-services">
+                  Leistungen entdecken
+                </a>
+              </Button>
+            </div>
+
           </div>
-
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 pt-4">
-            <Button
-              asChild
-              size="lg"
-              className="bg-[#60A5FA] text-[#0A1628] hover:bg-[#93C5FD] font-bold text-lg px-10 h-14 shadow-lg shadow-[#60A5FA]/30 border-0"
-            >
-              <a href="/angebot" className="flex items-center gap-2">
-                Angebot einholen
-                <ArrowRight className="w-5 h-5" />
-              </a>
-            </Button>
-            <Button
-              asChild
-              variant="outline"
-              size="lg"
-              className="border-[#60A5FA] text-white hover:bg-[#60A5FA]/10 h-14 px-8 text-lg"
-            >
-              <a href="#villa-services">
-                Leistungen entdecken
-              </a>
-            </Button>
-          </div>
-
         </div>
-      </div>
+      </section>
 
-      {/* Accent line at bottom */}
-      <div className="absolute bottom-0 left-0 right-0 h-1 pointer-events-none bg-gradient-to-r from-transparent via-[#60A5FA] to-transparent z-10" />
-    </section>
+      {/* Full Width Building Image */}
+      <section className="relative w-full h-screen">
+        <Image
+          src="/villa-bild.png"
+          alt="Luxuriöse Villa bei Nacht"
+          fill
+          className="object-cover"
+          priority
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-[rgba(10,10,10,0.4)] to-[rgba(10,10,10,1)]" />
+      </section>
+    </>
   )
 }

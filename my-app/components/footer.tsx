@@ -96,10 +96,10 @@ export function Footer() {
               <li className="flex items-center gap-3">
                 <Mail className="w-5 h-5 text-[#c9a45c] shrink-0" />
                 <a
-                  href="mailto:info@high-end-homes.de"
+                  href="mailto:bennet.pfeifer@highendhomes.de"
                   className="text-[#fafafa]/60 hover:text-[#c9a45c] transition-colors text-sm"
                 >
-                  info@high-end-homes.de
+                  bennet.pfeifer@highendhomes.de
                 </a>
               </li>
               <li className="flex items-center gap-3">

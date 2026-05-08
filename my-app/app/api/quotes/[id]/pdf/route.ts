@@ -421,7 +421,7 @@ export async function GET(_request: NextRequest, context: { params: Promise<{ id
     const payload = parsePersistedQuotePayload(quote.payloadJson)
     const pricingSummary = resolveQuotePricing(payload, payload.pricing)
     const advisorName = session.user.name || quote.approvedBy || "High-End Homes"
-    const advisorEmail = session.user.email || "info@high-end-homes.de"
+    const advisorEmail = session.user.email || "bennet.pfeifer@highendhomes.de"
     const internalNotes = payload.pricing?.internalNotes ?? ""
 
     return new NextResponse(

@@ -25,27 +25,24 @@ const stats = [
 
 export function TrustStats() {
   return (
-    <section className="py-16 bg-[#0A1628]">
+    <section className="py-24 bg-[#0a0a0a]">
       <div className="section-padding">
         <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-0 border-y border-[rgba(255,255,255,0.08)]">
             {stats.map((stat, index) => {
               const Icon = stat.icon
               return (
                 <div
                   key={index}
-                  className="flex flex-col items-center text-center p-8 bg-[#1a2a3a] border border-[#60A5FA]/15 rounded-lg hover:border-[#60A5FA]/40 hover:shadow-lg hover:shadow-[#60A5FA]/10 transition-all duration-300"
+                  className="flex flex-col items-center text-center py-16 px-8 border-r border-[rgba(255,255,255,0.08)] last:border-r-0 md:border-b-0 border-b"
                 >
-                  <div className="w-16 h-16 rounded-full bg-[#60A5FA]/10 flex items-center justify-center mb-4">
-                    <Icon className="w-8 h-8 text-[#60A5FA]" />
-                  </div>
-                  <div className="text-5xl font-bold text-[#60A5FA] mb-2" style={{ fontFamily: 'Playfair Display, serif' }}>
+                  <div className="text-7xl text-white mb-4" style={{ fontFamily: 'var(--font-headline)', fontWeight: 300 }}>
                     {stat.number}
                   </div>
-                  <h3 className="text-xl font-semibold text-white mb-2" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+                  <h3 className="text-lg font-normal text-white mb-2" style={{ fontFamily: 'var(--font-headline)', fontWeight: 400 }}>
                     {stat.label}
                   </h3>
-                  <p className="text-white/60 text-sm" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+                  <p className="text-sm text-white/40" style={{ fontFamily: 'var(--font-body)', fontWeight: 300 }}>
                     {stat.description}
                   </p>
                 </div>

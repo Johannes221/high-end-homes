@@ -1,6 +1,7 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import { useSearchParams } from "next/navigation"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -8,7 +9,8 @@ import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Checkbox } from "@/components/ui/checkbox"
-import { CheckCircle2, DollarSign, Shield } from "lucide-react"
+import { CheckCircle2, DollarSign, Shield, Info } from "lucide-react"
+import { ImageUpload } from "@/components/image-upload"
 
 const buildingTypes = ["Wohnung", "Haus", "Keller", "Garage", "Dachgeschoss", "Büro", "Gewerbe", "Sonstiges"]
 const floorOptions = ["Erdgeschoss", "1. OG", "2. OG", "3. OG+", "Keller"]
@@ -18,7 +20,21 @@ const guttingMaterials = ["Böden", "Deckenverkleidungen", "Wandverkleidungen & 
 const constructionServices = ["Maler & Lackierer", "Trockenbau & Stukateur", "Fliesenleger", "Sanitär & Elektro", "Fensterbau & Gerüst"]
 
 export function QuoteFormTabs() {
+  const searchParams = useSearchParams()
   const [activeTab, setActiveTab] = useState("entruempelung")
+
+  useEffect(() => {
+    const serviceParam = searchParams.get("service")
+    if (serviceParam === "entkernung") {
+      setActiveTab("entkernung")
+    } else if (serviceParam === "entruempelung") {
+      setActiveTab("entruempelung")
+    } else if (serviceParam === "kombi") {
+      setActiveTab("kombi")
+    } else if (serviceParam === "ausbau") {
+      setActiveTab("ausbau")
+    }
+  }, [searchParams])
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -42,6 +58,10 @@ export function QuoteFormTabs() {
 
           {/* Entrümpelung Form */}
           <TabsContent value="entruempelung" className="mt-6">
+            <div className="bg-[#60A5FA]/10 border border-[#60A5FA]/30 rounded-sm p-4 mb-6 flex items-start gap-3">
+              <Info className="w-5 h-5 text-[#60A5FA] flex-shrink-0 mt-0.5" />
+              <p className="text-white/80 text-sm">Unverbindliche Preiseinschätzung – der finale Preis wird vor Ort festgelegt.</p>
+            </div>
             <form className="space-y-6 bg-[#1a2a3a] border border-[#60A5FA]/15 rounded-lg p-8">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
@@ -142,6 +162,8 @@ export function QuoteFormTabs() {
                 <Textarea id="notes" placeholder="Weitere Informationen..." className="bg-[#0A1628] border-[#60A5FA]/30 text-white" rows={4} />
               </div>
 
+              <ImageUpload id="images-entruempelung" label="Bilder hochladen (optional)" />
+
               <Button type="submit" className="w-full bg-[#60A5FA] text-[#0A1628] hover:bg-[#93C5FD] font-bold text-lg h-14">
                 Angebot anfragen
               </Button>
@@ -150,6 +172,10 @@ export function QuoteFormTabs() {
 
           {/* Entkernung Form */}
           <TabsContent value="entkernung" className="mt-6">
+            <div className="bg-[#60A5FA]/10 border border-[#60A5FA]/30 rounded-sm p-4 mb-6 flex items-start gap-3">
+              <Info className="w-5 h-5 text-[#60A5FA] flex-shrink-0 mt-0.5" />
+              <p className="text-white/80 text-sm">Unverbindliche Preiseinschätzung – der finale Preis wird vor Ort festgelegt.</p>
+            </div>
             <form className="space-y-6 bg-[#1a2a3a] border border-[#60A5FA]/15 rounded-lg p-8">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
@@ -215,6 +241,8 @@ export function QuoteFormTabs() {
                 <Textarea id="notes-g" placeholder="Weitere Informationen..." className="bg-[#0A1628] border-[#60A5FA]/30 text-white" rows={4} />
               </div>
 
+              <ImageUpload id="images-entkernung" label="Bilder hochladen (optional)" />
+
               <Button type="submit" className="w-full bg-[#60A5FA] text-[#0A1628] hover:bg-[#93C5FD] font-bold text-lg h-14">
                 Angebot anfragen
               </Button>
@@ -223,6 +251,10 @@ export function QuoteFormTabs() {
 
           {/* Kombi Form */}
           <TabsContent value="kombi" className="mt-6">
+            <div className="bg-[#60A5FA]/10 border border-[#60A5FA]/30 rounded-sm p-4 mb-6 flex items-start gap-3">
+              <Info className="w-5 h-5 text-[#60A5FA] flex-shrink-0 mt-0.5" />
+              <p className="text-white/80 text-sm">Unverbindliche Preiseinschätzung – der finale Preis wird vor Ort festgelegt.</p>
+            </div>
             <form className="space-y-6 bg-[#1a2a3a] border border-[#60A5FA]/15 rounded-lg p-8">
               <p className="text-white/70 text-sm mb-4">Kombinieren Sie Entkernung und Entrümpelung für ein Komplettpaket.</p>
               
@@ -247,6 +279,8 @@ export function QuoteFormTabs() {
                 <Textarea id="notes-k" placeholder="Beschreiben Sie Ihr Projekt..." className="bg-[#0A1628] border-[#60A5FA]/30 text-white" rows={6} required />
               </div>
 
+              <ImageUpload id="images-kombi" label="Bilder hochladen (optional)" />
+
               <Button type="submit" className="w-full bg-[#60A5FA] text-[#0A1628] hover:bg-[#93C5FD] font-bold text-lg h-14">
                 Angebot anfragen
               </Button>
@@ -255,6 +289,10 @@ export function QuoteFormTabs() {
 
           {/* Ausbau Form */}
           <TabsContent value="ausbau" className="mt-6">
+            <div className="bg-[#60A5FA]/10 border border-[#60A5FA]/30 rounded-sm p-4 mb-6 flex items-start gap-3">
+              <Info className="w-5 h-5 text-[#60A5FA] flex-shrink-0 mt-0.5" />
+              <p className="text-white/80 text-sm">Unverbindliche Preiseinschätzung – der finale Preis wird vor Ort festgelegt.</p>
+            </div>
             <form className="space-y-6 bg-[#1a2a3a] border border-[#60A5FA]/15 rounded-lg p-8">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
@@ -290,6 +328,8 @@ export function QuoteFormTabs() {
                 <Label htmlFor="notes-a" className="text-white">Projektbeschreibung *</Label>
                 <Textarea id="notes-a" placeholder="Beschreiben Sie Ihr Projekt..." className="bg-[#0A1628] border-[#60A5FA]/30 text-white" rows={6} required />
               </div>
+
+              <ImageUpload id="images-ausbau" label="Bilder hochladen (optional)" />
 
               <Button type="submit" className="w-full bg-[#60A5FA] text-[#0A1628] hover:bg-[#93C5FD] font-bold text-lg h-14">
                 Angebot anfragen

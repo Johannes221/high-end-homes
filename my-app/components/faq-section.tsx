@@ -30,49 +30,45 @@ export function FAQSection() {
   }
 
   return (
-    <section className="py-20 bg-[#0A1628]">
+    <section className="py-20 bg-[#0a0a0a]">
       <div className="section-padding">
         <div className="max-w-4xl mx-auto">
           {/* Section Header */}
           <div className="text-center mb-12">
-            <p className="text-[#60A5FA] text-sm font-semibold uppercase tracking-wider mb-3" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+            <h2 className="text-4xl md:text-5xl font-bold text-white" style={{ fontFamily: 'var(--font-headline)' }}>
               Häufige Fragen
-            </p>
-            <h2 className="text-4xl md:text-5xl font-bold text-white" style={{ fontFamily: 'Playfair Display, serif' }}>
-              FAQ
             </h2>
           </div>
 
           {/* FAQ Items */}
-          <div className="space-y-4">
+          <div className="space-y-0">
             {faqs.map((faq, index) => (
               <div
                 key={index}
-                className="bg-[#1a2a3a] border border-[#60A5FA]/15 rounded-lg overflow-hidden hover:border-[#60A5FA]/40 transition-all duration-300"
+                className="border-b border-[rgba(255,255,255,0.08)] overflow-hidden"
               >
                 <button
                   onClick={() => toggleFAQ(index)}
-                  className="w-full flex items-center justify-between p-6 text-left"
+                  className="w-full flex items-center justify-between py-5 text-left transition-all duration-300"
                 >
-                  <h3 className="text-lg font-semibold text-white pr-4" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+                  <h3 className="text-[15px] font-semibold text-white pr-4" style={{ fontFamily: 'var(--font-headline)' }}>
                     {faq.question}
                   </h3>
                   <ChevronDown
-                    className={`w-6 h-6 text-[#60A5FA] flex-shrink-0 transition-transform duration-300 ${
+                    className={`w-5 h-5 text-white flex-shrink-0 transition-transform duration-400 ${
                       openIndex === index ? "rotate-180" : ""
                     }`}
                   />
                 </button>
                 <div
-                  className={`overflow-hidden transition-all duration-300 ${
-                    openIndex === index ? "max-h-96" : "max-h-0"
+                  className={`overflow-hidden transition-all duration-400 ${
+                    openIndex === index ? "max-h-96 pb-5" : "max-h-0"
                   }`}
+                  style={{ transitionTimingFunction: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)' }}
                 >
-                  <div className="px-6 pb-6">
-                    <p className="text-white/70 leading-relaxed" style={{ fontFamily: 'Montserrat, sans-serif' }}>
-                      {faq.answer}
-                    </p>
-                  </div>
+                  <p className="text-white/60 leading-relaxed" style={{ fontFamily: 'var(--font-body)', fontWeight: 300 }}>
+                    {faq.answer}
+                  </p>
                 </div>
               </div>
             ))}

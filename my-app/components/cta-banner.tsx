@@ -6,17 +6,13 @@ import { ArrowRight } from "lucide-react"
 
 export function CTABanner() {
   return (
-    <section className="py-20 bg-gradient-to-br from-[#60A5FA]/10 to-[#0A1628]">
+    <section className="py-20 bg-[#0a0a0a] border-t border-b border-[rgba(255,255,255,0.08)]">
       <div className="section-padding">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6" style={{ fontFamily: 'Playfair Display, serif' }}>
-            Jetzt unverbindliches<br />
-            <span className="text-[#60A5FA]">Angebot einholen</span>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-8" style={{ fontFamily: 'var(--font-headline)' }}>
+            Jetzt unverbindliches Angebot einholen
           </h2>
-          <p className="text-xl text-white/80 mb-8" style={{ fontFamily: 'Montserrat, sans-serif' }}>
-            Kostenlose Beratung · Transparente Preise · Schnelle Umsetzung
-          </p>
-          <Button asChild size="lg" className="bg-[#60A5FA] text-[#0A1628] hover:bg-[#93C5FD] font-bold text-lg px-12 h-16 shadow-xl shadow-[#60A5FA]/30 border-0">
+          <Button asChild size="lg" className="bg-white text-black hover:bg-white/90 font-bold text-lg px-12 h-16 border-0 rounded-sm" style={{ fontFamily: 'var(--font-headline)' }}>
             <Link href="/angebot" className="flex items-center gap-2">
               Angebot anfragen
               <ArrowRight className="w-5 h-5" />

@@ -2,85 +2,90 @@
 
 import { useState } from "react"
 import Link from "next/link"
+import Image from "next/image"
 
 const floors = [
   {
     id: "dach",
-    label: "Entrümpelung & Entkernung",
+    etage: "DACHGESCHOSS",
+    label: "Entrümpelung & Entkernug",
+    desc: "BESENREIN",
     href: "/entkernung",
-    top: "5%",
-    height: "18%",
-  },
-  {
-    id: "og1",
-    label: "Maler & Lackierer",
-    href: "/maler",
-    top: "23%",
-    height: "18%",
-  },
-  {
-    id: "og2",
-    label: "Trockenbau & Stukateur",
-    href: "/trockenbau",
-    top: "41%",
-    height: "18%",
+    top: "0%",
+    height: "17%",
   },
   {
     id: "og3",
+    etage: "3. OBERGESCHOSS",
+    label: "Maler & Lackierer",
+    desc: "PRÄZISE AUSFÜHRUNG",
+    href: "/maler",
+    top: "17%",
+    height: "19%",
+  },
+  {
+    id: "og2",
+    etage: "2. OBERGESCHOSS",
+    label: "Trockenbau & Stukateur",
+    desc: "MILLIMETERGENAU",
+    href: "/trockenbau",
+    top: "36%",
+    height: "19%",
+  },
+  {
+    id: "og1",
+    etage: "1. OBERGESCHOSS",
     label: "Fliesenleger",
+    desc: "PERFEKTE FUGEN",
     href: "/fliesenleger",
-    top: "59%",
-    height: "18%",
+    top: "55%",
+    height: "19%",
   },
   {
     id: "eg",
+    etage: "ERDGESCHOSS",
     label: "Sanitär & Elektro",
+    desc: "ZERTIFIZIERT",
     href: "/sanitaer",
-    top: "77%",
-    height: "18%",
+    top: "74%",
+    height: "26%",
   },
+]
+
+const tabs = [
+  { nr: "01", name: "Entrümpelung & Entkernug", href: "/entkernung" },
+  { nr: "02", name: "Maler & Lackierer", href: "/maler" },
+  { nr: "03", name: "Trockenbau & Stukateur", href: "/trockenbau" },
+  { nr: "04", name: "Fliesenleger", href: "/fliesenleger" },
+  { nr: "05", name: "Sanitär & Elektro", href: "/sanitaer" },
 ]
 
 export function VillaInteractive() {
   const [hoveredFloor, setHoveredFloor] = useState<string | null>(null)
 
   return (
-    <section id="villa-services" className="py-20 bg-[#0A1628]">
+    <section id="villa-services" className="min-h-screen bg-[#0a0a0a] py-20">
       <div className="section-padding">
-        <div className="max-w-6xl mx-auto">
-          {/* Section Header */}
-          <div className="text-center mb-12">
-            <p className="text-[#60A5FA] text-sm font-semibold uppercase tracking-wider mb-3" style={{ fontFamily: 'Montserrat, sans-serif' }}>
-              Unsere Leistungen
-            </p>
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4" style={{ fontFamily: 'Playfair Display, serif' }}>
-              Alles aus einer Hand –<br />
-              <span className="text-[#60A5FA]">von Keller bis Dach</span>
-            </h2>
-            <p className="text-white/70 text-lg max-w-2xl mx-auto" style={{ fontFamily: 'Montserrat, sans-serif' }}>
-              Klicken Sie auf eine Etage, um mehr über unsere Leistungen zu erfahren
-            </p>
-          </div>
+        <div className="max-w-[1000px] mx-auto">
+          {/* Villa Container */}
+          <div className="relative w-full" style={{ minHeight: "70vh" }}>
+            {/* Villa Image */}
+            <div className="relative w-full h-full">
+              <Image
+                src="/villa-bild.png"
+                alt="High-End Homes Villa"
+                width={1000}
+                height={1330}
+                className="w-full h-auto"
+                priority
+              />
 
-          {/* Villa Interactive */}
-          <div className="relative max-w-3xl mx-auto">
-            {/* Villa SVG Container */}
-            <div className="relative w-full" style={{ paddingBottom: "133%" }}>
-              {/* Background Villa Image */}
-              <div className="absolute inset-0">
-                <iframe
-                  src="/villa-interactive.html"
-                  className="w-full h-full border-0"
-                  title="Interaktive Villa"
-                />
-              </div>
-
-              {/* Clickable Floor Overlays */}
+              {/* Hover Zones */}
               {floors.map((floor) => (
                 <Link
                   key={floor.id}
                   href={floor.href}
-                  className="absolute left-0 right-0 cursor-pointer group transition-all duration-300"
+                  className="absolute left-0 right-0 cursor-pointer group zone"
                   style={{
                     top: floor.top,
                     height: floor.height,
@@ -90,25 +95,72 @@ export function VillaInteractive() {
                 >
                   {/* Hover Overlay */}
                   <div
-                    className={`absolute inset-0 transition-all duration-300 ${
-                      hoveredFloor === floor.id
-                        ? "bg-[#60A5FA]/20 shadow-[0_0_30px_rgba(96,165,250,0.4)]"
-                        : "bg-transparent"
-                    }`}
+                    className="absolute inset-0 transition-all duration-[400ms] ease-out"
+                    style={{
+                      background: hoveredFloor === floor.id ? "rgba(255,255,255,0.04)" : "transparent",
+                    }}
                   />
-                  
+
+                  {/* Horizontal Line */}
+                  <div
+                    className="absolute top-0 h-[1px] transition-transform duration-[400ms]"
+                    style={{
+                      left: "10%",
+                      right: "10%",
+                      background: "rgba(255,255,255,0.4)",
+                      transform: hoveredFloor === floor.id ? "scaleX(1)" : "scaleX(0)",
+                      transformOrigin: "center",
+                    }}
+                  />
+
                   {/* Label */}
                   <div
-                    className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transition-all duration-300 ${
-                      hoveredFloor === floor.id
-                        ? "opacity-100 scale-100"
-                        : "opacity-0 scale-95"
-                    }`}
+                    className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none transition-all duration-[350ms]"
+                    style={{
+                      opacity: hoveredFloor === floor.id ? 1 : 0,
+                      transform: `translate(-50%, -50%) translateY(${hoveredFloor === floor.id ? "0" : "12px"})`,
+                      transitionTimingFunction: "cubic-bezier(0.34, 1.4, 0.64, 1)",
+                    }}
                   >
-                    <div className="bg-[#0A1628]/95 border-2 border-[#60A5FA] rounded-lg px-6 py-3 shadow-xl">
-                      <p className="text-white font-semibold text-lg whitespace-nowrap" style={{ fontFamily: 'Montserrat, sans-serif' }}>
+                    <div
+                      className="px-8 py-3.5 text-center"
+                      style={{
+                        background: "rgba(10,10,10,0.9)",
+                        border: "1px solid rgba(255,255,255,0.5)",
+                        backdropFilter: "blur(8px)",
+                      }}
+                    >
+                      <div
+                        className="text-[10px] tracking-[0.3em] mb-1.5"
+                        style={{
+                          fontFamily: "var(--font-headline)",
+                          fontWeight: 600,
+                          color: "rgba(255,255,255,0.5)",
+                        }}
+                      >
+                        {floor.etage}
+                      </div>
+                      <div
+                        className="text-[20px] whitespace-nowrap mb-1"
+                        style={{
+                          fontFamily: "var(--font-headline)",
+                          fontWeight: 700,
+                          color: "#ffffff",
+                          letterSpacing: "0.02em",
+                        }}
+                      >
                         {floor.label}
-                      </p>
+                      </div>
+                      <div
+                        className="text-[11px] tracking-[0.1em]"
+                        style={{
+                          fontFamily: "var(--font-body)",
+                          fontWeight: 300,
+                          color: "rgba(255,255,255,0.55)",
+                        }}
+                      >
+                        {floor.desc}
+                      </div>
                     </div>
                   </div>
                 </Link>
@@ -116,17 +168,45 @@ export function VillaInteractive() {
             </div>
           </div>
 
-          {/* Legend */}
-          <div className="mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-4xl mx-auto">
-            {floors.map((floor) => (
+          {/* Leistungs-Tabs */}
+          <div
+            className="grid grid-cols-1 md:grid-cols-5 mt-0 overflow-x-auto"
+            style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }}
+          >
+            {tabs.map((tab, idx) => (
               <Link
-                key={floor.id}
-                href={floor.href}
-                className="flex items-center gap-3 p-4 bg-[#1a2a3a] border border-[#60A5FA]/20 rounded-lg hover:border-[#60A5FA] hover:shadow-lg hover:shadow-[#60A5FA]/20 transition-all duration-300"
+                key={tab.nr}
+                href={tab.href}
+                className="flex flex-col gap-1.5 p-5 transition-all duration-300 hover:bg-[rgba(255,255,255,0.04)]"
+                style={{
+                  borderRight: idx < tabs.length - 1 ? "1px solid rgba(255,255,255,0.08)" : "none",
+                  textDecoration: "none",
+                  color: "white",
+                }}
               >
-                <div className="w-3 h-3 rounded-full bg-[#60A5FA]" />
-                <span className="text-white/90 font-medium" style={{ fontFamily: 'Montserrat, sans-serif' }}>
-                  {floor.label}
+                <span
+                  className="text-[10px] tracking-[0.2em]"
+                  style={{
+                    fontFamily: "var(--font-headline)",
+                    color: "rgba(255,255,255,0.3)",
+                  }}
+                >
+                  {tab.nr}
+                </span>
+                <span
+                  className="text-[13px]"
+                  style={{
+                    fontFamily: "var(--font-headline)",
+                    fontWeight: 600,
+                  }}
+                >
+                  {tab.name}
+                </span>
+                <span
+                  className="text-[16px] mt-auto"
+                  style={{ color: "rgba(255,255,255,0.4)" }}
+                >
+                  →
                 </span>
               </Link>
             ))}
