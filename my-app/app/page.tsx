@@ -1,13 +1,15 @@
 import type { Metadata } from "next"
 import { Suspense } from "react"
-import { Navigation } from "@/components/navigation"
-import { Hero } from "@/components/hero"
-import { ProcessFlow } from "@/components/process-flow"
-import { QuoteForm } from "@/components/QuoteForm"
-import { Services } from "@/components/services"
-import { About } from "@/components/about"
-import { SeoContent } from "@/components/seo-content"
-import { Footer } from "@/components/footer"
+import { Navigation } from "@/components/navigation-new"
+import { Hero } from "@/components/hero-new"
+import { TrustStats } from "@/components/trust-stats"
+import { VillaInteractive } from "@/components/villa-interactive"
+import { ProcessSteps } from "@/components/process-steps"
+import { ServiceCards } from "@/components/service-cards"
+import { WhyUs } from "@/components/why-us"
+import { FAQSection } from "@/components/faq-section"
+import { CTABanner } from "@/components/cta-banner"
+import { Footer } from "@/components/footer-new"
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://high-end-homes.de"
 
@@ -103,7 +105,7 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a]">
+    <div className="min-h-screen bg-[#0A1628]">
       <Navigation />
       <main>
         <script
@@ -111,42 +113,13 @@ export default function Home() {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
         <Hero />
-        {/* Goldener Trenner */}
-        <div className="flex items-center gap-4 my-4 max-w-4xl mx-auto px-4">
-          <div className="flex-1 h-px bg-gradient-to-r from-transparent via-[#c9a45c]/30 to-transparent" />
-          <div className="w-2 h-2 rounded-full bg-[#c9a45c]" />
-          <div className="flex-1 h-px bg-gradient-to-r from-transparent via-[#c9a45c]/30 to-transparent" />
-        </div>
-        <ProcessFlow />
-        {/* Goldener Trenner */}
-        <div className="flex items-center gap-4 my-4 max-w-4xl mx-auto px-4">
-          <div className="flex-1 h-px bg-gradient-to-r from-transparent via-[#c9a45c]/30 to-transparent" />
-          <div className="w-2 h-2 rounded-full bg-[#c9a45c]" />
-          <div className="flex-1 h-px bg-gradient-to-r from-transparent via-[#c9a45c]/30 to-transparent" />
-        </div>
-        <Suspense fallback={<div className="text-center text-gray-400">Lade Formular...</div>}>
-          <QuoteForm />
-        </Suspense>
-        {/* Goldener Trenner */}
-        <div className="flex items-center gap-4 my-4 max-w-4xl mx-auto px-4">
-          <div className="flex-1 h-px bg-gradient-to-r from-transparent via-[#c9a45c]/30 to-transparent" />
-          <div className="w-2 h-2 rounded-full bg-[#c9a45c]" />
-          <div className="flex-1 h-px bg-gradient-to-r from-transparent via-[#c9a45c]/30 to-transparent" />
-        </div>
-        <Services />
-        {/* Goldener Trenner */}
-        <div className="flex items-center gap-4 my-4 max-w-4xl mx-auto px-4">
-          <div className="flex-1 h-px bg-gradient-to-r from-transparent via-[#c9a45c]/30 to-transparent" />
-          <div className="w-2 h-2 rounded-full bg-[#c9a45c]" />
-          <div className="flex-1 h-px bg-gradient-to-r from-transparent via-[#c9a45c]/30 to-transparent" />
-        </div>
-        <About />
-        <div className="flex items-center gap-4 my-4 max-w-4xl mx-auto px-4">
-          <div className="flex-1 h-px bg-gradient-to-r from-transparent via-[#c9a45c]/30 to-transparent" />
-          <div className="w-2 h-2 rounded-full bg-[#c9a45c]" />
-          <div className="flex-1 h-px bg-gradient-to-r from-transparent via-[#c9a45c]/30 to-transparent" />
-        </div>
-        <SeoContent />
+        <VillaInteractive />
+        <TrustStats />
+        <ProcessSteps />
+        <ServiceCards />
+        <WhyUs />
+        <FAQSection />
+        <CTABanner />
       </main>
       <Footer />
     </div>
