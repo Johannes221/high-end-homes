@@ -66,5 +66,8 @@
   "devDependencies": {
     "eslint": "^9",
     "eslint-config-next": "16.2.4"
+  },
+  "overrides": {
+    "picomatch": "^4.0.4"
   }
 }
