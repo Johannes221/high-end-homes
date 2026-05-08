@@ -2,11 +2,8 @@ import type { Metadata } from "next"
 import { Suspense } from "react"
 import { Navigation } from "@/components/navigation-new"
 import { Hero } from "@/components/hero-new"
-import { TrustStats } from "@/components/trust-stats"
 import { VillaInteractive } from "@/components/villa-interactive"
-import { ProcessSteps } from "@/components/process-steps"
 import { ServiceCards } from "@/components/service-cards"
-import { WhyUs } from "@/components/why-us"
 import { FAQSection } from "@/components/faq-section"
 import { CTABanner } from "@/components/cta-banner"
 import { Footer } from "@/components/footer-new"
@@ -114,10 +111,7 @@ export default function Home() {
         />
         <Hero />
         <VillaInteractive />
-        <TrustStats />
-        <ProcessSteps />
         <ServiceCards />
-        <WhyUs />
         <FAQSection />
         <CTABanner />
       </main>

@@ -3,19 +3,14 @@
 import Link from "next/link"
 import { Mail, MapPin } from "lucide-react"
 
-const mainServices = [
+const allServices = [
   { href: "/entruempelung", label: "Entrümpelung" },
-  { href: "/hausaufloesung", label: "Hausauflösung" },
   { href: "/entkernung", label: "Entkernung" },
-  { href: "/wohnungsaufloesung", label: "Wohnungsauflösung" },
-]
-
-const constructionServices = [
+  { href: "/hausaufloesung", label: "Hausauflösung" },
   { href: "/maler", label: "Maler & Lackierer" },
-  { href: "/trockenbau", label: "Trockenbau & Stukateur" },
+  { href: "/trockenbau", label: "Trockenbau" },
   { href: "/fliesenleger", label: "Fliesenleger" },
   { href: "/sanitaer", label: "Sanitär & Elektro" },
-  { href: "/fensterbau", label: "Fensterbau & Gerüst" },
 ]
 
 export function Footer() {
@@ -41,23 +36,28 @@ export function Footer() {
               </h4>
               <ul className="space-y-2">
                 <li>
-                  <Link href="/#hero" className="text-white/60 hover:text-white transition-colors text-sm" style={{ fontFamily: 'var(--font-body)' }}>
+                  <Link href="/" className="text-white/60 hover:text-white transition-colors text-sm" style={{ fontFamily: 'var(--font-body)' }}>
                     Home
                   </Link>
                 </li>
                 <li>
-                  <Link href="/#about" className="text-white/60 hover:text-white transition-colors text-sm" style={{ fontFamily: 'var(--font-body)' }}>
+                  <Link href="/#leistungen" className="text-white/60 hover:text-white transition-colors text-sm" style={{ fontFamily: 'var(--font-body)' }}>
+                    Leistungen
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/ueber-uns" className="text-white/60 hover:text-white transition-colors text-sm" style={{ fontFamily: 'var(--font-body)' }}>
                     Über uns
                   </Link>
                 </li>
                 <li>
-                  <Link href="/#region" className="text-white/60 hover:text-white transition-colors text-sm" style={{ fontFamily: 'var(--font-body)' }}>
+                  <Link href="/region" className="text-white/60 hover:text-white transition-colors text-sm" style={{ fontFamily: 'var(--font-body)' }}>
                     Region
                   </Link>
                 </li>
                 <li>
-                  <Link href="/angebot" className="text-white/60 hover:text-white transition-colors text-sm" style={{ fontFamily: 'var(--font-body)' }}>
-                    Angebot einholen
+                  <Link href="/kontakt" className="text-white/60 hover:text-white transition-colors text-sm" style={{ fontFamily: 'var(--font-body)' }}>
+                    Kontakt
                   </Link>
                 </li>
               </ul>
@@ -69,7 +69,7 @@ export function Footer() {
                 Leistungen
               </h4>
               <ul className="space-y-2">
-                {mainServices.map((service) => (
+                {allServices.map((service) => (
                   <li key={service.href}>
                     <Link href={service.href} className="text-white/60 hover:text-white transition-colors text-sm" style={{ fontFamily: 'var(--font-body)' }}>
                       {service.label}

@@ -1,25 +1,24 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Source+Sans+3:wght@300;400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Source+Sans+3:wght@300;400;600&display=swap');
 @import "tailwindcss";
 
 :root {
-  --color-bg:           #0a0a0a;
-  --color-bg-2:         #111111;
-  --color-bg-3:         #1a1a1a;
-  --color-border:       rgba(255,255,255,0.08);
-  --color-border-hover: rgba(255,255,255,0.2);
-  --color-text-primary: #ffffff;
-  --color-text-secondary: rgba(255,255,255,0.6);
-  --color-text-muted:   rgba(255,255,255,0.35);
-  --color-accent:       #ffffff;
-  --color-accent-dim:   rgba(255,255,255,0.12);
+  --bg:           #0a0a0a;
+  --bg-2:         #111111;
+  --bg-3:         #1c1c1c;
+  --border:       rgba(255,255,255,0.08);
+  --border-hover: rgba(255,255,255,0.22);
+  --text-1:       #ffffff;
+  --text-2:       rgba(255,255,255,0.55);
+  --text-3:       rgba(255,255,255,0.3);
+  --accent:       #ffffff;
   
   --font-headline: 'Montserrat', sans-serif;
   --font-body: 'Source Sans 3', sans-serif;
 }
 
 @theme inline {
-  --color-background: var(--color-bg);
-  --color-foreground: var(--color-text-primary);
+  --color-background: var(--bg);
+  --color-foreground: var(--text-1);
 }
 
 html {
@@ -27,8 +26,8 @@ html {
 }
 
 body {
-  background: var(--color-bg);
-  color: var(--color-text-primary);
+  background: var(--bg);
+  color: var(--text-1);
   font-family: var(--font-body);
 }
 
@@ -38,7 +37,7 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--color-bg);
+  background: var(--bg);
 }
 
 ::-webkit-scrollbar-thumb {

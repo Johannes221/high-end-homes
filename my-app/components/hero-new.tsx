@@ -1,70 +1,98 @@
 "use client"
 
-import { ArrowRight } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import Link from "next/link"
 import Image from "next/image"
 
 export function Hero() {
   return (
-    <>
-      {/* Hero Text Section */}
-      <section id="hero" className="relative bg-[#0a0a0a] pt-32 pb-16 overflow-hidden">
-        <div className="relative z-10 px-4 sm:px-6 lg:px-8 w-full max-w-6xl mx-auto">
-          <div className="flex flex-col items-center text-center space-y-12">
-            
-            {/* Main Headline */}
-            <div className="space-y-8">
-              <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl text-white leading-[1.1]" style={{ fontFamily: 'var(--font-headline)', fontWeight: 300 }}>
-                Ihr Haus.<br />
-                Eine Adresse.
-              </h1>
-              <p className="text-xl sm:text-2xl md:text-2xl text-white/70 font-light max-w-3xl mx-auto" style={{ fontFamily: 'var(--font-body)', fontWeight: 300 }}>
-                Von der Entrümpelung bis zum fertigen Ausbau – alles aus einer Hand.<br />
-                In Heidelberg, Mannheim & Umgebung.
-              </p>
-            </div>
-
-            {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 pt-8">
-              <Button
-                asChild
-                size="lg"
-                className="bg-white text-black hover:bg-white/90 font-bold text-lg px-12 h-16 border-0 rounded-sm"
-                style={{ fontFamily: 'var(--font-headline)' }}
-              >
-                <a href="/angebot" className="flex items-center gap-2">
-                  Angebot einholen
-                  <ArrowRight className="w-5 h-5" />
-                </a>
-              </Button>
-              <Button
-                asChild
-                variant="outline"
-                size="lg"
-                className="border border-white/30 text-white hover:bg-white/5 h-16 px-10 text-lg rounded-sm"
-                style={{ fontFamily: 'var(--font-headline)' }}
-              >
-                <a href="#villa-services">
-                  Leistungen entdecken
-                </a>
-              </Button>
-            </div>
-
-          </div>
-        </div>
-      </section>
-
-      {/* Full Width Building Image */}
-      <section className="relative w-full h-screen">
+    <section className="relative w-full h-screen overflow-hidden">
+      {/* Background Image */}
+      <div className="absolute inset-0">
         <Image
           src="/villa-bild.png"
-          alt="Luxuriöse Villa bei Nacht"
+          alt="High-End Homes Villa"
           fill
           className="object-cover"
           priority
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[rgba(10,10,10,0.4)] to-[rgba(10,10,10,1)]" />
-      </section>
-    </>
+        {/* Overlay Gradient */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[rgba(10,10,10,0.2)] to-[rgba(10,10,10,0.75)]" />
+      </div>
+
+      {/* Content */}
+      <div className="relative z-10 h-full flex items-center justify-center">
+        <div className="text-center px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
+          {/* Eyebrow */}
+          <p 
+            className="text-[11px] font-semibold tracking-[0.3em] uppercase mb-6"
+            style={{ 
+              fontFamily: 'var(--font-headline)', 
+              fontWeight: 600,
+              color: 'rgba(255,255,255,0.5)'
+            }}
+          >
+            HIGH-END HOMES
+          </p>
+
+          {/* Headline */}
+          <h1 
+            className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl mb-6"
+            style={{ 
+              fontFamily: 'var(--font-headline)', 
+              fontWeight: 300,
+              letterSpacing: '0.02em',
+              lineHeight: 1.05,
+              color: 'white'
+            }}
+          >
+            Ihr Haus.<br />
+            <span style={{ fontWeight: 400, fontStyle: 'italic' }}>Eine Adresse.</span>
+          </h1>
+
+          {/* Subline */}
+          <p 
+            className="text-base sm:text-lg md:text-xl lg:text-2xl mb-10 max-w-3xl mx-auto"
+            style={{ 
+              fontFamily: 'var(--font-body)', 
+              fontWeight: 300,
+              color: 'rgba(255,255,255,0.65)',
+              lineHeight: 1.7
+            }}
+          >
+            Von der Entrümpelung bis zum fertigen Ausbau – alles aus einer Hand.<br />
+            In Heidelberg, Mannheim & Umgebung.
+          </p>
+
+          {/* Buttons */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <Link 
+              href="/angebot" 
+              className="px-8 py-3.5 bg-white text-black hover:bg-[rgba(255,255,255,0.9)] font-semibold transition-all"
+              style={{ 
+                fontFamily: 'var(--font-headline)', 
+                fontWeight: 600, 
+                letterSpacing: '0.05em',
+                borderRadius: '3px'
+              }}
+            >
+              Angebot einholen →
+            </Link>
+            <Link 
+              href="#leistungen" 
+              className="px-8 py-3.5 bg-transparent text-white border hover:bg-[rgba(255,255,255,0.05)] transition-all"
+              style={{ 
+                fontFamily: 'var(--font-headline)', 
+                fontWeight: 600,
+                letterSpacing: '0.05em',
+                borderColor: 'rgba(255,255,255,0.4)',
+                borderRadius: '3px'
+              }}
+            >
+              Leistungen entdecken
+            </Link>
+          </div>
+        </div>
+      </div>
+    </section>
   )
 }

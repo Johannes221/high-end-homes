@@ -53,41 +53,50 @@ export function ServicePageLayout({
       {/* Hero Section */}
       <section className="relative bg-[#0a0a0a] pt-32 pb-16 overflow-hidden">
         <div className="relative z-10 section-padding">
-          <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6" style={{ fontFamily: 'var(--font-headline)' }}>
+          <div className="max-w-4xl mx-auto">
+            {/* Breadcrumb */}
+            <div className="mb-6">
+              <Link href="/" className="text-sm hover:text-white transition-colors" style={{ fontFamily: 'var(--font-body)', color: 'rgba(255,255,255,0.5)' }}>
+                Home
+              </Link>
+              <span className="mx-2" style={{ color: 'rgba(255,255,255,0.3)' }}>→</span>
+              <span className="text-sm" style={{ fontFamily: 'var(--font-body)', color: 'rgba(255,255,255,0.7)' }}>{title}</span>
+            </div>
+            
+            <h1 className="text-5xl md:text-6xl lg:text-7xl text-white mb-6" style={{ fontFamily: 'var(--font-headline)', fontWeight: 300, letterSpacing: '0.02em' }}>
               {title}
             </h1>
-            <p className="text-xl text-white/60 mb-6" style={{ fontFamily: 'var(--font-body)', fontWeight: 300 }}>
+            <p className="text-xl mb-8" style={{ fontFamily: 'var(--font-body)', fontWeight: 300, color: 'rgba(255,255,255,0.65)', lineHeight: 1.7 }}>
               {description}
             </p>
-            <div className="bg-white/5 border border-white/10 rounded-sm p-4 mb-8 flex items-start gap-3 max-w-2xl mx-auto">
-              <Info className="w-5 h-5 text-white flex-shrink-0 mt-0.5" />
-              <p className="text-white/70 text-sm" style={{ fontFamily: 'var(--font-body)', fontWeight: 300 }}>
-                Unverbindliche Preiseinschätzung – der finale Preis wird vor Ort festgelegt.
-              </p>
-            </div>
-            <Button asChild size="lg" className="bg-white text-black hover:bg-white/90 font-bold text-lg px-10 h-14 rounded-sm" style={{ fontFamily: 'var(--font-headline)' }}>
-              <Link href={`/angebot?service=${quoteTab}`} className="flex items-center gap-2">
-                Jetzt Angebot einholen
-                <ArrowRight className="w-5 h-5" />
-              </Link>
-            </Button>
+            <Link 
+              href={`/angebot?service=${quoteTab}`} 
+              className="inline-block px-8 py-3.5 bg-white text-black hover:bg-[rgba(255,255,255,0.9)] font-semibold transition-all"
+              style={{ 
+                fontFamily: 'var(--font-headline)', 
+                fontWeight: 600, 
+                letterSpacing: '0.05em',
+                borderRadius: '3px'
+              }}
+            >
+              Angebot anfragen →
+            </Link>
           </div>
         </div>
       </section>
 
       {/* Was wir machen */}
-      <section className="py-16 bg-[#0a0a0a]">
+      <section className="py-20 bg-[#0a0a0a]">
         <div className="section-padding">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-8 text-center" style={{ fontFamily: 'var(--font-headline)' }}>
+            <h2 className="text-3xl md:text-4xl text-white mb-12" style={{ fontFamily: 'var(--font-headline)', fontWeight: 400, letterSpacing: '0.02em' }}>
               Was wir machen
             </h2>
             <div className="space-y-4">
               {whatWeDo.map((item, index) => (
-                <div key={index} className="flex items-start gap-4 bg-[#111111] border border-[rgba(255,255,255,0.06)] p-6">
-                  <CheckCircle2 className="w-6 h-6 text-white flex-shrink-0 mt-1" />
-                  <p className="text-white/80 text-lg" style={{ fontFamily: 'var(--font-body)', fontWeight: 300 }}>
+                <div key={index} className="flex items-start gap-4">
+                  <span className="text-white mt-1">•</span>
+                  <p className="text-base leading-relaxed" style={{ fontFamily: 'var(--font-body)', fontWeight: 300, color: 'rgba(255,255,255,0.7)' }}>
                     {item}
                   </p>
                 </div>
@@ -124,23 +133,23 @@ export function ServicePageLayout({
       </section>
 
       {/* Ablauf */}
-      <section className="py-16 bg-[#0a0a0a]">
+      <section className="py-20 bg-[#0a0a0a]">
         <div className="section-padding">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-12 text-center" style={{ fontFamily: 'var(--font-headline)' }}>
-              So läuft's ab
+            <h2 className="text-3xl md:text-4xl text-white mb-12" style={{ fontFamily: 'var(--font-headline)', fontWeight: 400, letterSpacing: '0.02em' }}>
+              Ablauf
             </h2>
-            <div className="space-y-6">
+            <div className="space-y-8">
               {process.map((step, index) => (
                 <div key={index} className="flex items-start gap-6">
-                  <div className="w-10 h-10 rounded-full border border-[rgba(255,255,255,0.3)] flex items-center justify-center flex-shrink-0">
-                    <span className="text-white font-bold text-lg" style={{ fontFamily: 'var(--font-headline)' }}>{index + 1}</span>
+                  <div className="w-12 h-12 rounded-full border flex items-center justify-center flex-shrink-0" style={{ borderColor: 'rgba(255,255,255,0.3)' }}>
+                    <span className="text-white text-lg" style={{ fontFamily: 'var(--font-headline)', fontWeight: 500 }}>{index + 1}</span>
                   </div>
                   <div className="flex-1">
-                    <h3 className="text-xl font-bold text-white mb-2" style={{ fontFamily: 'var(--font-headline)' }}>
+                    <h3 className="text-xl text-white mb-2" style={{ fontFamily: 'var(--font-headline)', fontWeight: 500 }}>
                       {step.title}
                     </h3>
-                    <p className="text-white/60" style={{ fontFamily: 'var(--font-body)', fontWeight: 300 }}>
+                    <p className="leading-relaxed" style={{ fontFamily: 'var(--font-body)', fontWeight: 300, color: 'rgba(255,255,255,0.55)' }}>
                       {step.description}
                     </p>
                   </div>
@@ -152,10 +161,10 @@ export function ServicePageLayout({
       </section>
 
       {/* FAQ */}
-      <section className="py-16 bg-[#0a0a0a]">
+      <section className="py-20 bg-[#0a0a0a]">
         <div className="section-padding">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-12 text-center" style={{ fontFamily: 'var(--font-headline)' }}>
+            <h2 className="text-3xl md:text-4xl text-white mb-12" style={{ fontFamily: 'var(--font-headline)', fontWeight: 400, letterSpacing: '0.02em' }}>
               Häufige Fragen
             </h2>
             <div className="space-y-0">
@@ -165,22 +174,26 @@ export function ServicePageLayout({
                     onClick={() => toggleFaq(index)}
                     className="w-full flex items-center justify-between py-5 text-left transition-all duration-300"
                   >
-                    <h3 className="text-[15px] font-semibold text-white pr-4" style={{ fontFamily: 'var(--font-headline)' }}>
+                    <h3 className="text-[15px] text-white pr-4" style={{ fontFamily: 'var(--font-headline)', fontWeight: 500 }}>
                       {faq.question}
                     </h3>
-                    <ChevronDown
-                      className={`w-5 h-5 text-white flex-shrink-0 transition-transform duration-400 ${
-                        openFaqIndex === index ? "rotate-180" : ""
-                      }`}
-                    />
+                    <span
+                      className="text-xl flex-shrink-0 transition-transform duration-400"
+                      style={{ 
+                        color: 'rgba(255,255,255,0.4)', 
+                        transform: openFaqIndex === index ? 'rotate(45deg)' : 'rotate(0deg)'
+                      }}
+                    >
+                      +
+                    </span>
                   </button>
                   <div
-                    className={`overflow-hidden transition-all duration-400 ${
+                    className={`overflow-hidden transition-all duration-[450ms] ${
                       openFaqIndex === index ? "max-h-96 pb-5" : "max-h-0"
                     }`}
                     style={{ transitionTimingFunction: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)' }}
                   >
-                    <p className="text-white/60 leading-relaxed" style={{ fontFamily: 'var(--font-body)', fontWeight: 300 }}>
+                    <p className="text-[15px] leading-loose" style={{ fontFamily: 'var(--font-body)', fontWeight: 300, color: 'rgba(255,255,255,0.55)' }}>
                       {faq.answer}
                     </p>
                   </div>
@@ -195,15 +208,21 @@ export function ServicePageLayout({
       <section className="py-20 bg-[#0a0a0a] border-t border-[rgba(255,255,255,0.08)]">
         <div className="section-padding">
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-8" style={{ fontFamily: 'var(--font-headline)' }}>
-              Bereit zu starten?
+            <h2 className="text-4xl md:text-5xl text-white mb-8" style={{ fontFamily: 'var(--font-headline)', fontWeight: 400, letterSpacing: '0.02em' }}>
+              Jetzt Angebot anfragen
             </h2>
-            <Button asChild size="lg" className="bg-white text-black hover:bg-white/90 font-bold text-lg px-12 h-16 rounded-sm" style={{ fontFamily: 'var(--font-headline)' }}>
-              <Link href={`/angebot?service=${quoteTab}`} className="flex items-center gap-2">
-                Angebot anfragen
-                <ArrowRight className="w-5 h-5" />
-              </Link>
-            </Button>
+            <Link 
+              href={`/angebot?service=${quoteTab}`} 
+              className="inline-block px-8 py-3.5 bg-white text-black hover:bg-[rgba(255,255,255,0.9)] font-semibold transition-all"
+              style={{ 
+                fontFamily: 'var(--font-headline)', 
+                fontWeight: 600, 
+                letterSpacing: '0.05em',
+                borderRadius: '3px'
+              }}
+            >
+              Angebot einholen →
+            </Link>
           </div>
         </div>
       </section>

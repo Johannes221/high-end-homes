@@ -41,62 +41,62 @@ export function QuoteFormTabs() {
       {/* Form Section */}
       <div className="lg:col-span-2">
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <TabsList className="grid w-full grid-cols-4 bg-[#1a2a3a] border border-[#60A5FA]/20 p-1">
-            <TabsTrigger value="entruempelung" className="data-[state=active]:bg-[#60A5FA] data-[state=active]:text-[#0A1628]">
+          <TabsList className="grid w-full grid-cols-4 bg-[var(--bg-2)] border p-1" style={{ borderColor: 'rgba(255,255,255,0.08)' }}>
+            <TabsTrigger value="entruempelung" className="data-[state=active]:bg-white data-[state=active]:text-black" style={{ fontFamily: 'var(--font-headline)', fontWeight: 500 }}>
               Entrümpelung
             </TabsTrigger>
-            <TabsTrigger value="entkernung" className="data-[state=active]:bg-[#60A5FA] data-[state=active]:text-[#0A1628]">
+            <TabsTrigger value="entkernung" className="data-[state=active]:bg-white data-[state=active]:text-black" style={{ fontFamily: 'var(--font-headline)', fontWeight: 500 }}>
               Entkernung
             </TabsTrigger>
-            <TabsTrigger value="kombi" className="data-[state=active]:bg-[#60A5FA] data-[state=active]:text-[#0A1628]">
-              Entkernung & Entrümpelung
+            <TabsTrigger value="kombi" className="data-[state=active]:bg-white data-[state=active]:text-black" style={{ fontFamily: 'var(--font-headline)', fontWeight: 500 }}>
+              Kombi
             </TabsTrigger>
-            <TabsTrigger value="ausbau" className="data-[state=active]:bg-[#60A5FA] data-[state=active]:text-[#0A1628]">
-              Ausbau-Leistung
+            <TabsTrigger value="ausbau" className="data-[state=active]:bg-white data-[state=active]:text-black" style={{ fontFamily: 'var(--font-headline)', fontWeight: 500 }}>
+              Ausbau
             </TabsTrigger>
           </TabsList>
 
           {/* Entrümpelung Form */}
           <TabsContent value="entruempelung" className="mt-6">
-            <div className="bg-[#60A5FA]/10 border border-[#60A5FA]/30 rounded-sm p-4 mb-6 flex items-start gap-3">
-              <Info className="w-5 h-5 text-[#60A5FA] flex-shrink-0 mt-0.5" />
-              <p className="text-white/80 text-sm">Unverbindliche Preiseinschätzung – der finale Preis wird vor Ort festgelegt.</p>
+            <div className="bg-[var(--bg-2)] border p-4 mb-6 flex items-start gap-3" style={{ borderColor: 'rgba(255,255,255,0.08)', borderRadius: '3px' }}>
+              <Info className="w-5 h-5 text-white flex-shrink-0 mt-0.5" />
+              <p style={{ fontFamily: 'var(--font-body)', fontWeight: 300, color: 'rgba(255,255,255,0.7)', fontSize: '14px' }}>Unverbindliche Preiseinschätzung – der finale Preis wird vor Ort festgelegt.</p>
             </div>
-            <form className="space-y-6 bg-[#1a2a3a] border border-[#60A5FA]/15 rounded-lg p-8">
+            <form className="space-y-6 bg-[var(--bg-2)] border p-8" style={{ borderColor: 'rgba(255,255,255,0.08)', borderRadius: '3px' }}>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <Label htmlFor="name" className="text-white">Name *</Label>
-                  <Input id="name" required className="bg-[#0A1628] border-[#60A5FA]/30 text-white" />
+                  <Input id="name" required className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)] text-white" />
                 </div>
                 <div>
                   <Label htmlFor="email" className="text-white">E-Mail *</Label>
-                  <Input id="email" type="email" required className="bg-[#0A1628] border-[#60A5FA]/30 text-white" />
+                  <Input id="email" type="email" required className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)] text-white" />
                 </div>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <Label htmlFor="phone" className="text-white">Telefon</Label>
-                  <Input id="phone" type="tel" className="bg-[#0A1628] border-[#60A5FA]/30 text-white" />
+                  <Input id="phone" type="tel" className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)] text-white" />
                 </div>
                 <div>
                   <Label htmlFor="company" className="text-white">Firma (optional)</Label>
-                  <Input id="company" className="bg-[#0A1628] border-[#60A5FA]/30 text-white" />
+                  <Input id="company" className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)] text-white" />
                 </div>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <Label htmlFor="sqm" className="text-white">Quadratmeter *</Label>
-                  <Input id="sqm" type="number" required className="bg-[#0A1628] border-[#60A5FA]/30 text-white" />
+                  <Input id="sqm" type="number" required className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)] text-white" />
                 </div>
                 <div>
                   <Label htmlFor="building-type" className="text-white">Gebäudetyp *</Label>
                   <Select required>
-                    <SelectTrigger className="bg-[#0A1628] border-[#60A5FA]/30 text-white">
+                    <SelectTrigger className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)] text-white">
                       <SelectValue placeholder="Wählen Sie..." />
                     </SelectTrigger>
-                    <SelectContent className="bg-[#0A1628] border-[#60A5FA]/30">
+                    <SelectContent className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)]">
                       {buildingTypes.map((type) => (
                         <SelectItem key={type} value={type} className="text-white">{type}</SelectItem>
                       ))}
@@ -109,10 +109,10 @@ export function QuoteFormTabs() {
                 <div>
                   <Label htmlFor="floor" className="text-white">Stockwerk</Label>
                   <Select>
-                    <SelectTrigger className="bg-[#0A1628] border-[#60A5FA]/30 text-white">
+                    <SelectTrigger className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)] text-white">
                       <SelectValue placeholder="Wählen Sie..." />
                     </SelectTrigger>
-                    <SelectContent className="bg-[#0A1628] border-[#60A5FA]/30">
+                    <SelectContent className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)]">
                       {floorOptions.map((floor) => (
                         <SelectItem key={floor} value={floor} className="text-white">{floor}</SelectItem>
                       ))}
@@ -122,10 +122,10 @@ export function QuoteFormTabs() {
                 <div>
                   <Label htmlFor="elevator" className="text-white">Aufzug vorhanden?</Label>
                   <Select>
-                    <SelectTrigger className="bg-[#0A1628] border-[#60A5FA]/30 text-white">
+                    <SelectTrigger className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)] text-white">
                       <SelectValue placeholder="Wählen Sie..." />
                     </SelectTrigger>
-                    <SelectContent className="bg-[#0A1628] border-[#60A5FA]/30">
+                    <SelectContent className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)]">
                       <SelectItem value="ja" className="text-white">Ja</SelectItem>
                       <SelectItem value="nein" className="text-white">Nein</SelectItem>
                     </SelectContent>
@@ -138,7 +138,7 @@ export function QuoteFormTabs() {
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
                   {clearanceMaterials.map((material) => (
                     <div key={material} className="flex items-center space-x-2">
-                      <Checkbox id={material} className="border-[#60A5FA]/30" />
+                      <Checkbox id={material} className="border-[rgba(255,255,255,0.1)]" />
                       <label htmlFor={material} className="text-sm text-white/80 cursor-pointer">
                         {material}
                       </label>
@@ -149,22 +149,22 @@ export function QuoteFormTabs() {
 
               <div>
                 <Label htmlFor="valuables" className="text-white">Wertgegenstände vorhanden?</Label>
-                <Textarea id="valuables" placeholder="Beschreiben Sie eventuelle Wertgegenstände..." className="bg-[#0A1628] border-[#60A5FA]/30 text-white" />
+                <Textarea id="valuables" placeholder="Beschreiben Sie eventuelle Wertgegenstände..." className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)] text-white" />
               </div>
 
               <div>
                 <Label htmlFor="date" className="text-white">Wunschtermin</Label>
-                <Input id="date" type="date" className="bg-[#0A1628] border-[#60A5FA]/30 text-white" />
+                <Input id="date" type="date" className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)] text-white" />
               </div>
 
               <div>
                 <Label htmlFor="notes" className="text-white">Anmerkungen</Label>
-                <Textarea id="notes" placeholder="Weitere Informationen..." className="bg-[#0A1628] border-[#60A5FA]/30 text-white" rows={4} />
+                <Textarea id="notes" placeholder="Weitere Informationen..." className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)] text-white" rows={4} />
               </div>
 
               <ImageUpload id="images-entruempelung" label="Bilder hochladen (optional)" />
 
-              <Button type="submit" className="w-full bg-[#60A5FA] text-[#0A1628] hover:bg-[#93C5FD] font-bold text-lg h-14">
+              <Button type="submit" className="w-full bg-white text-black hover:bg-[rgba(255,255,255,0.9)] font-bold text-lg h-14">
                 Angebot anfragen
               </Button>
             </form>
@@ -172,34 +172,34 @@ export function QuoteFormTabs() {
 
           {/* Entkernung Form */}
           <TabsContent value="entkernung" className="mt-6">
-            <div className="bg-[#60A5FA]/10 border border-[#60A5FA]/30 rounded-sm p-4 mb-6 flex items-start gap-3">
-              <Info className="w-5 h-5 text-[#60A5FA] flex-shrink-0 mt-0.5" />
+            <div className="bg-white/10 border border-[rgba(255,255,255,0.1)] rounded-sm p-4 mb-6 flex items-start gap-3">
+              <Info className="w-5 h-5 text-white flex-shrink-0 mt-0.5" />
               <p className="text-white/80 text-sm">Unverbindliche Preiseinschätzung – der finale Preis wird vor Ort festgelegt.</p>
             </div>
-            <form className="space-y-6 bg-[#1a2a3a] border border-[#60A5FA]/15 rounded-lg p-8">
+            <form className="space-y-6 bg-[var(--bg-2)] border border rounded-lg p-8">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <Label htmlFor="name-g" className="text-white">Name *</Label>
-                  <Input id="name-g" required className="bg-[#0A1628] border-[#60A5FA]/30 text-white" />
+                  <Input id="name-g" required className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)] text-white" />
                 </div>
                 <div>
                   <Label htmlFor="email-g" className="text-white">E-Mail *</Label>
-                  <Input id="email-g" type="email" required className="bg-[#0A1628] border-[#60A5FA]/30 text-white" />
+                  <Input id="email-g" type="email" required className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)] text-white" />
                 </div>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <Label htmlFor="sqm-g" className="text-white">Quadratmeter *</Label>
-                  <Input id="sqm-g" type="number" required className="bg-[#0A1628] border-[#60A5FA]/30 text-white" />
+                  <Input id="sqm-g" type="number" required className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)] text-white" />
                 </div>
                 <div>
                   <Label htmlFor="building-type-g" className="text-white">Gebäudetyp *</Label>
                   <Select required>
-                    <SelectTrigger className="bg-[#0A1628] border-[#60A5FA]/30 text-white">
+                    <SelectTrigger className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)] text-white">
                       <SelectValue placeholder="Wählen Sie..." />
                     </SelectTrigger>
-                    <SelectContent className="bg-[#0A1628] border-[#60A5FA]/30">
+                    <SelectContent className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)]">
                       {buildingTypes.map((type) => (
                         <SelectItem key={type} value={type} className="text-white">{type}</SelectItem>
                       ))}
@@ -213,7 +213,7 @@ export function QuoteFormTabs() {
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
                   {guttingMaterials.map((material) => (
                     <div key={material} className="flex items-center space-x-2">
-                      <Checkbox id={`g-${material}`} className="border-[#60A5FA]/30" />
+                      <Checkbox id={`g-${material}`} className="border-[rgba(255,255,255,0.1)]" />
                       <label htmlFor={`g-${material}`} className="text-sm text-white/80 cursor-pointer">
                         {material}
                       </label>
@@ -225,10 +225,10 @@ export function QuoteFormTabs() {
               <div>
                 <Label htmlFor="asbestos" className="text-white">Asbest vorhanden?</Label>
                 <Select>
-                  <SelectTrigger className="bg-[#0A1628] border-[#60A5FA]/30 text-white">
+                  <SelectTrigger className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)] text-white">
                     <SelectValue placeholder="Wählen Sie..." />
                   </SelectTrigger>
-                  <SelectContent className="bg-[#0A1628] border-[#60A5FA]/30">
+                  <SelectContent className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)]">
                     <SelectItem value="ja" className="text-white">Ja</SelectItem>
                     <SelectItem value="nein" className="text-white">Nein</SelectItem>
                     <SelectItem value="unbekannt" className="text-white">Unbekannt</SelectItem>
@@ -238,12 +238,12 @@ export function QuoteFormTabs() {
 
               <div>
                 <Label htmlFor="notes-g" className="text-white">Anmerkungen</Label>
-                <Textarea id="notes-g" placeholder="Weitere Informationen..." className="bg-[#0A1628] border-[#60A5FA]/30 text-white" rows={4} />
+                <Textarea id="notes-g" placeholder="Weitere Informationen..." className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)] text-white" rows={4} />
               </div>
 
               <ImageUpload id="images-entkernung" label="Bilder hochladen (optional)" />
 
-              <Button type="submit" className="w-full bg-[#60A5FA] text-[#0A1628] hover:bg-[#93C5FD] font-bold text-lg h-14">
+              <Button type="submit" className="w-full bg-white text-black hover:bg-[rgba(255,255,255,0.9)] font-bold text-lg h-14">
                 Angebot anfragen
               </Button>
             </form>
@@ -251,37 +251,37 @@ export function QuoteFormTabs() {
 
           {/* Kombi Form */}
           <TabsContent value="kombi" className="mt-6">
-            <div className="bg-[#60A5FA]/10 border border-[#60A5FA]/30 rounded-sm p-4 mb-6 flex items-start gap-3">
-              <Info className="w-5 h-5 text-[#60A5FA] flex-shrink-0 mt-0.5" />
+            <div className="bg-white/10 border border-[rgba(255,255,255,0.1)] rounded-sm p-4 mb-6 flex items-start gap-3">
+              <Info className="w-5 h-5 text-white flex-shrink-0 mt-0.5" />
               <p className="text-white/80 text-sm">Unverbindliche Preiseinschätzung – der finale Preis wird vor Ort festgelegt.</p>
             </div>
-            <form className="space-y-6 bg-[#1a2a3a] border border-[#60A5FA]/15 rounded-lg p-8">
+            <form className="space-y-6 bg-[var(--bg-2)] border border rounded-lg p-8">
               <p className="text-white/70 text-sm mb-4">Kombinieren Sie Entkernung und Entrümpelung für ein Komplettpaket.</p>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <Label htmlFor="name-k" className="text-white">Name *</Label>
-                  <Input id="name-k" required className="bg-[#0A1628] border-[#60A5FA]/30 text-white" />
+                  <Input id="name-k" required className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)] text-white" />
                 </div>
                 <div>
                   <Label htmlFor="email-k" className="text-white">E-Mail *</Label>
-                  <Input id="email-k" type="email" required className="bg-[#0A1628] border-[#60A5FA]/30 text-white" />
+                  <Input id="email-k" type="email" required className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)] text-white" />
                 </div>
               </div>
 
               <div>
                 <Label htmlFor="sqm-k" className="text-white">Quadratmeter *</Label>
-                <Input id="sqm-k" type="number" required className="bg-[#0A1628] border-[#60A5FA]/30 text-white" />
+                <Input id="sqm-k" type="number" required className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)] text-white" />
               </div>
 
               <div>
                 <Label htmlFor="notes-k" className="text-white">Projektbeschreibung *</Label>
-                <Textarea id="notes-k" placeholder="Beschreiben Sie Ihr Projekt..." className="bg-[#0A1628] border-[#60A5FA]/30 text-white" rows={6} required />
+                <Textarea id="notes-k" placeholder="Beschreiben Sie Ihr Projekt..." className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)] text-white" rows={6} required />
               </div>
 
               <ImageUpload id="images-kombi" label="Bilder hochladen (optional)" />
 
-              <Button type="submit" className="w-full bg-[#60A5FA] text-[#0A1628] hover:bg-[#93C5FD] font-bold text-lg h-14">
+              <Button type="submit" className="w-full bg-white text-black hover:bg-[rgba(255,255,255,0.9)] font-bold text-lg h-14">
                 Angebot anfragen
               </Button>
             </form>
@@ -289,19 +289,19 @@ export function QuoteFormTabs() {
 
           {/* Ausbau Form */}
           <TabsContent value="ausbau" className="mt-6">
-            <div className="bg-[#60A5FA]/10 border border-[#60A5FA]/30 rounded-sm p-4 mb-6 flex items-start gap-3">
-              <Info className="w-5 h-5 text-[#60A5FA] flex-shrink-0 mt-0.5" />
+            <div className="bg-white/10 border border-[rgba(255,255,255,0.1)] rounded-sm p-4 mb-6 flex items-start gap-3">
+              <Info className="w-5 h-5 text-white flex-shrink-0 mt-0.5" />
               <p className="text-white/80 text-sm">Unverbindliche Preiseinschätzung – der finale Preis wird vor Ort festgelegt.</p>
             </div>
-            <form className="space-y-6 bg-[#1a2a3a] border border-[#60A5FA]/15 rounded-lg p-8">
+            <form className="space-y-6 bg-[var(--bg-2)] border border rounded-lg p-8">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <Label htmlFor="name-a" className="text-white">Name *</Label>
-                  <Input id="name-a" required className="bg-[#0A1628] border-[#60A5FA]/30 text-white" />
+                  <Input id="name-a" required className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)] text-white" />
                 </div>
                 <div>
                   <Label htmlFor="email-a" className="text-white">E-Mail *</Label>
-                  <Input id="email-a" type="email" required className="bg-[#0A1628] border-[#60A5FA]/30 text-white" />
+                  <Input id="email-a" type="email" required className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)] text-white" />
                 </div>
               </div>
 
@@ -310,7 +310,7 @@ export function QuoteFormTabs() {
                 <div className="space-y-3">
                   {constructionServices.map((service) => (
                     <div key={service} className="flex items-center space-x-2">
-                      <Checkbox id={`a-${service}`} className="border-[#60A5FA]/30" />
+                      <Checkbox id={`a-${service}`} className="border-[rgba(255,255,255,0.1)]" />
                       <label htmlFor={`a-${service}`} className="text-sm text-white/80 cursor-pointer">
                         {service}
                       </label>
@@ -321,17 +321,17 @@ export function QuoteFormTabs() {
 
               <div>
                 <Label htmlFor="sqm-a" className="text-white">Quadratmeter</Label>
-                <Input id="sqm-a" type="number" className="bg-[#0A1628] border-[#60A5FA]/30 text-white" />
+                <Input id="sqm-a" type="number" className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)] text-white" />
               </div>
 
               <div>
                 <Label htmlFor="notes-a" className="text-white">Projektbeschreibung *</Label>
-                <Textarea id="notes-a" placeholder="Beschreiben Sie Ihr Projekt..." className="bg-[#0A1628] border-[#60A5FA]/30 text-white" rows={6} required />
+                <Textarea id="notes-a" placeholder="Beschreiben Sie Ihr Projekt..." className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)] text-white" rows={6} required />
               </div>
 
               <ImageUpload id="images-ausbau" label="Bilder hochladen (optional)" />
 
-              <Button type="submit" className="w-full bg-[#60A5FA] text-[#0A1628] hover:bg-[#93C5FD] font-bold text-lg h-14">
+              <Button type="submit" className="w-full bg-white text-black hover:bg-[rgba(255,255,255,0.9)] font-bold text-lg h-14">
                 Angebot anfragen
               </Button>
             </form>
@@ -341,36 +341,36 @@ export function QuoteFormTabs() {
 
       {/* Trust Box */}
       <div className="lg:col-span-1">
-        <div className="bg-[#1a2a3a] border border-[#60A5FA]/15 rounded-lg p-8 sticky top-24">
-          <h3 className="text-2xl font-bold text-white mb-6" style={{ fontFamily: 'Playfair Display, serif' }}>
-            Ihre <span className="text-[#60A5FA]">Vorteile</span>
+        <div className="bg-[var(--bg-2)] border p-8 sticky top-24" style={{ borderColor: 'rgba(255,255,255,0.08)', borderRadius: '3px' }}>
+          <h3 className="text-2xl text-white mb-6" style={{ fontFamily: 'var(--font-headline)', fontWeight: 400 }}>
+            Ihre Vorteile
           </h3>
           <div className="space-y-6">
             <div className="flex items-start gap-4">
-              <div className="w-12 h-12 rounded-full bg-[#60A5FA]/10 flex items-center justify-center flex-shrink-0">
-                <CheckCircle2 className="w-6 h-6 text-[#60A5FA]" />
+              <div className="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: 'rgba(255,255,255,0.08)' }}>
+                <CheckCircle2 className="w-6 h-6 text-white" />
               </div>
               <div>
-                <h4 className="text-white font-semibold mb-1">Schnell</h4>
-                <p className="text-white/60 text-sm">Angebot innerhalb 24h, Start in 24-48h möglich</p>
+                <h4 className="text-white mb-1" style={{ fontFamily: 'var(--font-headline)', fontWeight: 500 }}>Schnell</h4>
+                <p style={{ fontFamily: 'var(--font-body)', fontWeight: 300, color: 'rgba(255,255,255,0.55)', fontSize: '14px' }}>Kurzfristige Termine möglich</p>
               </div>
             </div>
             <div className="flex items-start gap-4">
-              <div className="w-12 h-12 rounded-full bg-[#60A5FA]/10 flex items-center justify-center flex-shrink-0">
-                <DollarSign className="w-6 h-6 text-[#60A5FA]" />
+              <div className="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: 'rgba(255,255,255,0.08)' }}>
+                <DollarSign className="w-6 h-6 text-white" />
               </div>
               <div>
-                <h4 className="text-white font-semibold mb-1">Günstig</h4>
-                <p className="text-white/60 text-sm">Transparente Preise ohne versteckte Kosten</p>
+                <h4 className="text-white mb-1" style={{ fontFamily: 'var(--font-headline)', fontWeight: 500 }}>Transparent</h4>
+                <p style={{ fontFamily: 'var(--font-body)', fontWeight: 300, color: 'rgba(255,255,255,0.55)', fontSize: '14px' }}>Klare Preise ohne versteckte Kosten</p>
               </div>
             </div>
             <div className="flex items-start gap-4">
-              <div className="w-12 h-12 rounded-full bg-[#60A5FA]/10 flex items-center justify-center flex-shrink-0">
-                <Shield className="w-6 h-6 text-[#60A5FA]" />
+              <div className="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0" style={{ backgroundColor: 'rgba(255,255,255,0.08)' }}>
+                <Shield className="w-6 h-6 text-white" />
               </div>
               <div>
-                <h4 className="text-white font-semibold mb-1">Diskret</h4>
-                <p className="text-white/60 text-sm">Professionelle und diskrete Abwicklung</p>
+                <h4 className="text-white mb-1" style={{ fontFamily: 'var(--font-headline)', fontWeight: 500 }}>Professionell</h4>
+                <p style={{ fontFamily: 'var(--font-body)', fontWeight: 300, color: 'rgba(255,255,255,0.55)', fontSize: '14px' }}>Erfahrenes Team mit hoher Qualität</p>
               </div>
             </div>
           </div>

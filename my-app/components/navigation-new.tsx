@@ -8,9 +8,8 @@ import { Button } from "@/components/ui/button"
 
 const mainServices = [
   { href: "/entruempelung", label: "Entrümpelung" },
-  { href: "/hausaufloesung", label: "Hausauflösung" },
   { href: "/entkernung", label: "Entkernung" },
-  { href: "/wohnungsaufloesung", label: "Wohnungsauflösung" },
+  { href: "/hausaufloesung", label: "Hausauflösung" },
 ]
 
 const constructionServices = [
@@ -47,13 +46,12 @@ export function Navigation() {
           <div className="flex items-center justify-between h-20">
             {/* Logo */}
             <Link href="/" className="flex items-center">
-              <Image 
-                src="/logo.png" 
-                alt="High-End Homes" 
-                width={200} 
-                height={50} 
+              <Image
+                src="/logo.webp"
+                alt="High-End Homes"
+                width={160}
+                height={50}
                 className="h-12 w-auto"
-                priority
               />
             </Link>
 
@@ -61,32 +59,29 @@ export function Navigation() {
             <div className="hidden lg:flex items-center gap-8">
               {/* Leistungen Dropdown */}
               <div 
-                className="relative group"
+                className="relative nav-dropdown-wrapper"
                 onMouseEnter={() => setIsServicesOpen(true)}
                 onMouseLeave={() => setIsServicesOpen(false)}
               >
-                <button className="flex items-center gap-1 text-sm text-white/60 hover:text-white transition-colors duration-300 py-2" style={{ fontFamily: 'var(--font-body)' }}>
-                  Leistungen
-                  <ChevronDown className="w-4 h-4" />
+                <button className="flex items-center gap-1 text-sm hover:text-white transition-colors duration-300 py-2" style={{ fontFamily: 'var(--font-body)', color: 'rgba(255,255,255,0.7)' }}>
+                  Leistungen ▾
                 </button>
                 
-                {/* Invisible bridge to prevent dropdown from closing */}
-                <div className="absolute top-full left-0 w-full h-2 bg-transparent" />
-                
                 {isServicesOpen && (
-                  <div className="absolute top-full left-0 pt-2 bg-[#111111] border border-[rgba(255,255,255,0.08)] rounded-sm shadow-xl min-w-[500px] p-6">
-                    <div className="grid grid-cols-2 gap-6">
+                  <div className="absolute left-0 min-w-[320px]" style={{ top: '100%', paddingTop: '8px' }}>
+                    <div className="bg-[#111] border border-[rgba(255,255,255,0.1)] py-2">
+                    <div className="space-y-0">
                       {/* Hauptleistungen */}
-                      <div>
-                        <h3 className="text-xs font-semibold text-white/40 mb-3 uppercase tracking-wider" style={{ fontFamily: 'var(--font-headline)' }}>
+                      <div className="px-5 py-2">
+                        <h3 className="text-[10px] font-semibold mb-2 uppercase tracking-wider" style={{ fontFamily: 'var(--font-headline)', color: 'rgba(255,255,255,0.4)' }}>
                           Hauptleistungen
                         </h3>
-                        <div className="space-y-2">
+                        <div className="space-y-0">
                           {mainServices.map((service) => (
                             <Link
                               key={service.href}
                               href={service.href}
-                              className="block text-sm text-white/60 hover:text-white transition-colors py-1" style={{ fontFamily: 'var(--font-body)' }}
+                              className="block text-sm py-3 px-5 -mx-5 hover:bg-[rgba(255,255,255,0.05)] transition-all" style={{ fontFamily: 'var(--font-body)', color: 'rgba(255,255,255,0.7)' }}
                             >
                               {service.label}
                             </Link>
@@ -95,16 +90,16 @@ export function Navigation() {
                       </div>
                       
                       {/* Ausbau-Leistungen */}
-                      <div>
-                        <h3 className="text-xs font-semibold text-white/40 mb-3 uppercase tracking-wider" style={{ fontFamily: 'var(--font-headline)' }}>
+                      <div className="px-5 py-2 border-t" style={{ borderColor: 'rgba(255,255,255,0.08)' }}>
+                        <h3 className="text-[10px] font-semibold mb-2 uppercase tracking-wider" style={{ fontFamily: 'var(--font-headline)', color: 'rgba(255,255,255,0.4)' }}>
                           Ausbau-Leistungen
                         </h3>
-                        <div className="space-y-2">
+                        <div className="space-y-0">
                           {constructionServices.map((service) => (
                             <Link
                               key={service.href}
                               href={service.href}
-                              className="block text-sm text-white/60 hover:text-white transition-colors py-1" style={{ fontFamily: 'var(--font-body)' }}
+                              className="block text-sm py-3 px-5 -mx-5 hover:bg-[rgba(255,255,255,0.05)] transition-all" style={{ fontFamily: 'var(--font-body)', color: 'rgba(255,255,255,0.7)' }}
                             >
                               {service.label}
                             </Link>
@@ -112,27 +107,28 @@ export function Navigation() {
                         </div>
                       </div>
                     </div>
+                    </div>
                   </div>
                 )}
               </div>
 
               <Link
                 href="/ueber-uns"
-                className="text-sm text-white/60 hover:text-white transition-colors duration-300" style={{ fontFamily: 'var(--font-body)' }}
+                className="text-sm hover:text-white transition-colors duration-300" style={{ fontFamily: 'var(--font-body)', color: 'rgba(255,255,255,0.7)' }}
               >
                 Über uns
               </Link>
               
               <Link
                 href="/region"
-                className="text-sm text-white/60 hover:text-white transition-colors duration-300" style={{ fontFamily: 'var(--font-body)' }}
+                className="text-sm hover:text-white transition-colors duration-300" style={{ fontFamily: 'var(--font-body)', color: 'rgba(255,255,255,0.7)' }}
               >
                 Region
               </Link>
               
               <Link
                 href="/kontakt"
-                className="text-sm text-white/60 hover:text-white transition-colors duration-300" style={{ fontFamily: 'var(--font-body)' }}
+                className="text-sm hover:text-white transition-colors duration-300" style={{ fontFamily: 'var(--font-body)', color: 'rgba(255,255,255,0.7)' }}
               >
                 Kontakt
               </Link>
@@ -140,9 +136,9 @@ export function Navigation() {
 
             {/* CTA Button */}
             <div className="hidden lg:flex items-center gap-4">
-              <Button asChild className="bg-white text-black hover:bg-white/90 font-semibold border-0 rounded-sm" style={{ fontFamily: 'var(--font-headline)' }}>
-                <Link href="/angebot">Angebot einholen →</Link>
-              </Button>
+              <Link href="/angebot" className="px-8 py-3.5 bg-white text-black hover:bg-[rgba(255,255,255,0.9)] font-semibold transition-all" style={{ fontFamily: 'var(--font-headline)', fontWeight: 600, letterSpacing: '0.05em', borderRadius: '3px' }}>
+                Angebot einholen →
+              </Link>
             </div>
 
             {/* Mobile Menu Button */}
@@ -225,11 +221,9 @@ export function Navigation() {
               </div>
 
               <div className="pt-6 border-t border-white/10">
-                <Button asChild className="w-full bg-white text-black hover:bg-white/90 font-semibold rounded-sm" style={{ fontFamily: 'var(--font-headline)' }}>
-                  <Link href="/angebot" onClick={() => setIsMobileMenuOpen(false)}>
-                    Angebot einholen →
-                  </Link>
-                </Button>
+                <Link href="/angebot" onClick={() => setIsMobileMenuOpen(false)} className="block w-full text-center px-8 py-3.5 bg-white text-black hover:bg-[rgba(255,255,255,0.9)] font-semibold transition-all" style={{ fontFamily: 'var(--font-headline)', fontWeight: 600, letterSpacing: '0.05em', borderRadius: '3px' }}>
+                  Angebot einholen →
+                </Link>
               </div>
             </div>
           </div>

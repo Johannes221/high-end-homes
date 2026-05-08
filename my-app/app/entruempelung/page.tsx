@@ -21,7 +21,7 @@ export default function EntruempelungPage() {
       benefits={[
         {
           title: "Schnell",
-          description: "Express-Service möglich – Start innerhalb 24-48h nach Besichtigung",
+          description: "Kurzfristige Termine nach Besichtigung möglich",
         },
         {
           title: "Günstig",
@@ -29,31 +29,31 @@ export default function EntruempelungPage() {
         },
         {
           title: "Zuverlässig",
-          description: "Erfahrenes Team mit über 500 abgeschlossenen Projekten",
+          description: "Professionelles und erfahrenes Team",
         },
       ]}
       process={[
         {
-          title: "Anfrage & Besichtigung",
-          description: "Sie kontaktieren uns, wir vereinbaren einen Besichtigungstermin vor Ort",
+          title: "Anfrage",
+          description: "Sie kontaktieren uns über das Formular oder per E-Mail",
+        },
+        {
+          title: "Besichtigung",
+          description: "Wir vereinbaren einen Termin zur Besichtigung vor Ort",
         },
         {
           title: "Angebot",
-          description: "Sie erhalten ein transparentes, unverbindliches Angebot innerhalb 24h",
+          description: "Sie erhalten ein transparentes und unverbindliches Angebot",
         },
         {
-          title: "Durchführung",
+          title: "Ausführung",
           description: "Unser Team entrümpelt professionell und hinterlässt besenreine Räume",
-        },
-        {
-          title: "Abnahme",
-          description: "Gemeinsame Abnahme und Übergabe der Räumlichkeiten",
         },
       ]}
       faqs={[
         {
           question: "Wie schnell können Sie mit der Entrümpelung starten?",
-          answer: "Je nach Verfügbarkeit können wir innerhalb von 24-48 Stunden nach der Besichtigung starten. Bei dringenden Fällen bieten wir auch Express-Service an.",
+          answer: "Je nach Verfügbarkeit können wir kurzfristige Termine vereinbaren. Nach der Besichtigung erstellen wir Ihnen ein Angebot und können dann zeitnah starten.",
         },
         {
           question: "Was passiert mit Wertgegenständen?",

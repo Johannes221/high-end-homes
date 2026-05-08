@@ -29,33 +29,33 @@ export default function RegionPage() {
       <main className="pt-32 pb-16">
         <div className="section-padding">
           <div className="max-w-4xl mx-auto">
-            <h1 className="text-5xl md:text-6xl font-bold text-white mb-8" style={{ fontFamily: 'var(--font-headline)', fontWeight: 300 }}>
+            <h1 className="text-5xl md:text-6xl text-white mb-8" style={{ fontFamily: 'var(--font-headline)', fontWeight: 300, letterSpacing: '0.02em' }}>
               Unser Einsatzgebiet
             </h1>
-            <p className="text-xl text-white/70 mb-12" style={{ fontFamily: 'var(--font-body)', fontWeight: 300 }}>
+            <p className="text-xl mb-12" style={{ fontFamily: 'var(--font-body)', fontWeight: 300, color: 'rgba(255,255,255,0.65)', lineHeight: 1.7 }}>
               Wir sind in der gesamten Rhein-Neckar-Region für Sie da – schnell, zuverlässig und professionell.
             </p>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
               {regions.map((region) => (
                 <div
                   key={region}
-                  className="flex items-center gap-3 bg-[#111111] border border-[rgba(255,255,255,0.06)] p-4"
+                  className="flex items-center gap-3 bg-[var(--bg-2)] border p-4"
+                  style={{ borderColor: 'rgba(255,255,255,0.06)' }}
                 >
-                  <MapPin className="w-5 h-5 text-white flex-shrink-0" />
-                  <span className="text-white/80 text-lg" style={{ fontFamily: 'var(--font-body)', fontWeight: 300 }}>
+                  <span className="text-lg" style={{ fontFamily: 'var(--font-body)', fontWeight: 300, color: 'rgba(255,255,255,0.7)' }}>
                     {region}
                   </span>
                 </div>
               ))}
             </div>
 
-            <div className="mt-12 bg-[#111111] border border-[rgba(255,255,255,0.06)] p-8">
-              <h2 className="text-2xl font-bold text-white mb-4" style={{ fontFamily: 'var(--font-headline)' }}>
-                Nicht in der Liste?
+            <div className="mt-12 bg-[var(--bg-2)] border p-8" style={{ borderColor: 'rgba(255,255,255,0.06)' }}>
+              <h2 className="text-2xl text-white mb-4" style={{ fontFamily: 'var(--font-headline)', fontWeight: 400 }}>
+                Sie sind nicht sicher, ob Ihr Ort dazugehört?
               </h2>
-              <p className="text-white/70" style={{ fontFamily: 'var(--font-body)', fontWeight: 300 }}>
-                Kontaktieren Sie uns gerne – wir prüfen, ob wir auch in Ihrer Region tätig werden können.
+              <p style={{ fontFamily: 'var(--font-body)', fontWeight: 300, color: 'rgba(255,255,255,0.55)' }}>
+                Fragen Sie einfach an. Wir prüfen gerne, ob wir auch in Ihrer Region tätig werden können.
               </p>
             </div>
           </div>

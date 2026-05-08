@@ -15,11 +15,11 @@ export default function KontaktPage() {
       <main className="pt-32 pb-16">
         <div className="section-padding">
           <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-12">
-              <h1 className="text-5xl md:text-6xl font-bold text-white mb-6" style={{ fontFamily: 'var(--font-headline)', fontWeight: 300 }}>
+            <div className="mb-12">
+              <h1 className="text-5xl md:text-6xl text-white mb-6" style={{ fontFamily: 'var(--font-headline)', fontWeight: 300, letterSpacing: '0.02em' }}>
                 Kontakt
               </h1>
-              <p className="text-xl text-white/70" style={{ fontFamily: 'var(--font-body)', fontWeight: 300 }}>
+              <p className="text-xl" style={{ fontFamily: 'var(--font-body)', fontWeight: 300, color: 'rgba(255,255,255,0.65)', lineHeight: 1.7 }}>
                 Haben Sie Fragen? Wir sind für Sie da.
               </p>
             </div>

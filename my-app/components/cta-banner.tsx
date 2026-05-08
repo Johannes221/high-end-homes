@@ -9,15 +9,31 @@ export function CTABanner() {
     <section className="py-20 bg-[#0a0a0a] border-t border-b border-[rgba(255,255,255,0.08)]">
       <div className="section-padding">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-8" style={{ fontFamily: 'var(--font-headline)' }}>
-            Jetzt unverbindliches Angebot einholen
+          <p 
+            className="text-[11px] font-semibold tracking-[0.3em] uppercase mb-6"
+            style={{ 
+              fontFamily: 'var(--font-headline)', 
+              fontWeight: 600,
+              color: 'rgba(255,255,255,0.5)'
+            }}
+          >
+            KOSTENLOS & UNVERBINDLICH
+          </p>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl text-white mb-8" style={{ fontFamily: 'var(--font-headline)', fontWeight: 400, letterSpacing: '0.02em' }}>
+            Jetzt Angebot anfragen
           </h2>
-          <Button asChild size="lg" className="bg-white text-black hover:bg-white/90 font-bold text-lg px-12 h-16 border-0 rounded-sm" style={{ fontFamily: 'var(--font-headline)' }}>
-            <Link href="/angebot" className="flex items-center gap-2">
-              Angebot anfragen
-              <ArrowRight className="w-5 h-5" />
-            </Link>
-          </Button>
+          <Link 
+            href="/angebot" 
+            className="inline-block px-8 py-3.5 bg-white text-black hover:bg-[rgba(255,255,255,0.9)] font-semibold transition-all"
+            style={{ 
+              fontFamily: 'var(--font-headline)', 
+              fontWeight: 600, 
+              letterSpacing: '0.05em',
+              borderRadius: '3px'
+            }}
+          >
+            Angebot einholen →
+          </Link>
         </div>
       </div>
     </section>

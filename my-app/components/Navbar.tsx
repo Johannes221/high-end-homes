@@ -4,6 +4,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { signOut } from "next-auth/react";
 import { Menu, X, ChevronDown, LogOut, Settings } from "lucide-react";
@@ -40,8 +41,14 @@ export default function Navbar({ userName, userEmail }: NavbarProps) {
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="flex items-center justify-between h-14">
           {/* Logo */}
-          <Link href="/intern" className="flex items-center gap-2 font-semibold text-gray-800 text-sm tracking-wide">
-            High-End Homes
+          <Link href="/intern" className="flex items-center">
+            <Image
+              src="/logo.webp"
+              alt="High-End Homes"
+              width={120}
+              height={40}
+              className="h-10 w-auto"
+            />
           </Link>
 
           {/* Desktop Navigation */}
