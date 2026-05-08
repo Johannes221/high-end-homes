@@ -61,8 +61,8 @@ export const metadata: Metadata = {
     },
   },
   icons: {
-    icon: "/logo-favicon.webp",
-    apple: "/logo-favicon.webp",
+    icon: "/favicon.png",
+    apple: "/icon-192.png",
   },
 };
 
