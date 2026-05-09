@@ -1,9 +1,9 @@
-// Proxy – schützt interne /intern/* Routen (nicht öffentlich zugänglich)
+// Middleware – schützt interne /intern/* Routen (nicht öffentlich zugänglich)
 
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-export function proxy(req: NextRequest) {
+export function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
   // Session-Cookie prüfen (NextAuth v5)
