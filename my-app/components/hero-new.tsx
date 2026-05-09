@@ -46,7 +46,7 @@ export function Hero() {
             }}
           >
             Ihr Haus.<br />
-            <span style={{ fontWeight: 400, fontStyle: 'italic' }}>Eine Adresse.</span>
+            <span style={{ fontWeight: 400 }}>Eine Adresse.</span>
           </h1>
 
           {/* Subline */}
