@@ -102,6 +102,7 @@ export function VillaInteractive() {
             objectFit: 'cover',
             objectPosition: 'center center'
           }}
+          sizes="100vw"
           priority
         />
 
@@ -121,27 +122,27 @@ export function VillaInteractive() {
             onMouseEnter={() => setHoveredFloor(floor.id)}
             onMouseLeave={() => setHoveredFloor(null)}
           >
-            {/* Horizontal Line at Top - Mobile: immer sichtbar, Desktop: nur bei Hover */}
+            {/* Horizontal Line at Top - Mobile/Tablet: immer sichtbar & zentriert, Desktop: nur bei Hover */}
             <div
               className={`absolute top-0 h-[1px] 
                 scale-x-100
-                md:scale-x-0 md:transition-transform md:duration-500
-                ${hoveredFloor === floor.id ? 'md:scale-x-100' : ''}`}
+                lg:scale-x-0 lg:transition-transform lg:duration-500
+                ${hoveredFloor === floor.id ? 'lg:scale-x-100' : ''}`}
               style={{
                 left: "5%",
                 right: "5%",
-                background: "rgba(255,255,255,0.35)",
+                background: "rgba(255,255,255,0.5)",
                 transformOrigin: "center",
                 transitionTimingFunction: "cubic-bezier(0.25, 0.46, 0.45, 0.94)",
               }}
             />
 
-            {/* Label - Mobile: immer sichtbar, Desktop: nur bei Hover */}
+            {/* Label - Mobile/Tablet: immer sichtbar, Desktop: nur bei Hover */}
             <div
-              className={`absolute left-1/2 top-1/2 -translate-x-1/2 pointer-events-none whitespace-nowrap z-10 
-                opacity-100 translate-y-0
-                md:opacity-0 md:transition-all md:duration-[400ms]
-                ${hoveredFloor === floor.id ? 'md:opacity-100 md:translate-y-0' : 'md:translate-y-3.5'}`}
+              className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none whitespace-nowrap z-10 
+                opacity-100
+                lg:opacity-0 lg:transition-all lg:duration-[400ms]
+                ${hoveredFloor === floor.id ? 'lg:opacity-100 lg:translate-y-0' : 'lg:translate-y-3.5'}`}
               style={{
                 transitionTimingFunction: "cubic-bezier(0.34, 1.3, 0.64, 1)",
               }}
@@ -149,8 +150,8 @@ export function VillaInteractive() {
               <div
                 className="px-4 py-2 md:px-9 md:py-4 text-center"
                 style={{
-                  background: "rgba(8,8,8,0.88)",
-                  border: "1px solid rgba(255,255,255,0.45)",
+                  background: "rgba(8,8,8,0.75)",
+                  border: "1px solid rgba(255,255,255,0.4)",
                 }}
               >
                 <div
