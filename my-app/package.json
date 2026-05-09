@@ -52,9 +52,6 @@
     "node-cron": "^4.2.1",
     "nodemailer": "^7.0.13",
     "prisma": "^7.8.0",
-    "puppeteer": "^24.42.0",
-    "puppeteer-extra": "^3.3.6",
-    "puppeteer-extra-plugin-stealth": "^2.11.2",
     "react": "19.2.4",
     "react-dom": "19.2.4",
     "react-hook-form": "^7.74.0",
@@ -72,6 +69,11 @@
     "eslint-config-next": "15.3.0",
     "vercel": "47.0.4",
     "wrangler": "^3.78.0"
+  },
+  "optionalDependencies": {
+    "puppeteer": "^24.42.0",
+    "puppeteer-extra": "^3.3.6",
+    "puppeteer-extra-plugin-stealth": "^2.11.2"
   },
   "overrides": {
     "picomatch": "^4.0.4"
