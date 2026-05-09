@@ -36,7 +36,7 @@ export function Hero() {
 
           {/* Headline */}
           <h1 
-            className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl mb-6"
+            className="heading-glow text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl mb-6"
             style={{ 
               fontFamily: 'var(--font-headline)', 
               fontWeight: 300,

@@ -20,7 +20,7 @@ export function Hero() {
 
           {/* Main Headline */}
           <div className="space-y-4">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight">
+            <h1 className="heading-glow text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight">
               Entrümpelung, Hausauflösung &<br />
               <span className="text-[#c9a45c]">Entkernung in Heidelberg</span>
             </h1>

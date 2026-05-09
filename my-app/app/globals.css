@@ -54,6 +54,11 @@ body {
   @apply px-4 sm:px-6 lg:px-8 xl:px-16 2xl:px-24;
 }
 
+/* Heading Glow Effect */
+.heading-glow {
+  text-shadow: 0 0 30px rgba(255, 255, 255, 0.4), 0 0 60px rgba(255, 255, 255, 0.2), 0 0 80px rgba(255, 255, 255, 0.1);
+}
+
 /* Ablauf Section */
 .ablauf-section {
   background: #0a0a0a;
@@ -80,11 +85,12 @@ body {
   letter-spacing: 0.03em;
   margin-bottom: 64px;
   color: white;
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.15), 0 0 40px rgba(255, 255, 255, 0.1);
 }
 
 .ablauf-steps {
   display: flex;
-  align-items: center;
+  align-items: stretch;
   justify-content: center;
   gap: 0;
   max-width: 1100px;
@@ -96,6 +102,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: flex-start;
   gap: 12px;
   padding: 0 12px;
 }

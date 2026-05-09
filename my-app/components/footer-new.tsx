@@ -18,7 +18,7 @@ export function Footer() {
     <footer id="kontakt" className="bg-[#0a0a0a] border-t border-[rgba(255,255,255,0.08)]">
       <div className="section-padding py-16">
         <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-12 mb-12">
             {/* Company Info */}
             <div>
               <h3 className="text-xl font-bold text-white mb-4 tracking-[0.1em]" style={{ fontFamily: 'var(--font-headline)' }}>
@@ -58,6 +58,25 @@ export function Footer() {
                 <li>
                   <Link href="/kontakt" className="text-white/60 hover:text-white transition-colors text-sm" style={{ fontFamily: 'var(--font-body)' }}>
                     Kontakt
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
+            {/* Rechtliches */}
+            <div>
+              <h4 className="text-sm font-semibold text-white mb-4 uppercase tracking-wider" style={{ fontFamily: 'var(--font-headline)' }}>
+                Rechtliches
+              </h4>
+              <ul className="space-y-2">
+                <li>
+                  <Link href="/datenschutz" className="text-white/60 hover:text-white transition-colors text-sm" style={{ fontFamily: 'var(--font-body)' }}>
+                    Datenschutzerklärung
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/impressum" className="text-white/60 hover:text-white transition-colors text-sm" style={{ fontFamily: 'var(--font-body)' }}>
+                    Impressum
                   </Link>
                 </li>
               </ul>

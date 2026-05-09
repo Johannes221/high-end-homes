@@ -19,7 +19,7 @@ export function CTABanner() {
           >
             KOSTENLOS & UNVERBINDLICH
           </p>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl text-white mb-8" style={{ fontFamily: 'var(--font-headline)', fontWeight: 400, letterSpacing: '0.02em' }}>
+          <h2 className="heading-glow text-4xl md:text-5xl lg:text-6xl text-white mb-8" style={{ fontFamily: 'var(--font-headline)', fontWeight: 400, letterSpacing: '0.02em' }}>
             Jetzt Angebot anfragen
           </h2>
           <Link 

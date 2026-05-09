@@ -42,7 +42,7 @@ export function WhyUs() {
         <div className="max-w-6xl mx-auto">
           {/* Section Header */}
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-white" style={{ fontFamily: 'var(--font-headline)' }}>
+            <h2 className="heading-glow text-4xl md:text-5xl font-bold text-white" style={{ fontFamily: 'var(--font-headline)' }}>
               Warum High-End Homes?
             </h2>
           </div>

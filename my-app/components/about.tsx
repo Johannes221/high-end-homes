@@ -49,7 +49,7 @@ export function About() {
           <span className="inline-block px-4 py-2 bg-[#c9a45c]/10 border border-[#c9a45c]/30 rounded-full text-[#c9a45c] text-sm font-medium mb-4">
             Unser Versprechen
           </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
+          <h2 className="heading-glow text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
             Darum vertrauen Kunden aus Heidelberg, Mannheim und Umgebung auf <span className="text-gold-gradient">High-End Homes</span>
           </h2>
           <p className="text-lg text-[#fafafa]/60 max-w-2xl mx-auto">

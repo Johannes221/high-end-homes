@@ -87,7 +87,7 @@ export function SeoContent() {
           <Badge className="bg-[#c9a45c]/10 text-[#c9a45c] border border-[#c9a45c]/30 hover:bg-[#c9a45c]/10">
             Regional stark in der Rhein-Neckar-Region
           </Badge>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white">
+          <h2 className="heading-glow text-3xl sm:text-4xl lg:text-5xl font-bold text-white">
             Entrümpelung, Hausauflösung und Entkernung in <span className="text-[#c9a45c]">Heidelberg, Mannheim und Umgebung</span>
           </h2>
           <p className="text-lg text-white/70 leading-relaxed">

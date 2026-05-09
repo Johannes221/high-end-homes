@@ -41,7 +41,7 @@ export function ProcessFlow() {
 
       <div className="relative z-10 px-4 sm:px-6 lg:px-8 w-full max-w-6xl mx-auto">
         <div className="text-center mb-12">
-          <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4">
+          <h2 className="heading-glow text-3xl sm:text-4xl font-bold text-white mb-4">
             So läuft Ihre Entrümpelung, Hausauflösung oder Entkernung ab
           </h2>
           <p className="text-white/60 text-lg">
@@ -59,22 +59,24 @@ export function ProcessFlow() {
               return (
                 <div key={index} className="relative flex flex-col items-center text-center">
                   {/* Icon circle */}
-                  <div className="relative z-10 w-24 h-24 rounded-full bg-[#1a1a1a] border-2 border-[#c9a45c] flex items-center justify-center mb-4 shadow-lg shadow-[#c9a45c]/20">
+                  <div className="relative z-10 w-24 h-24 rounded-full bg-[#1a1a1a] border-2 border-[#c9a45c] flex items-center justify-center mb-4 shadow-lg shadow-[#c9a45c]/20 shrink-0">
                     <Icon className="w-10 h-10 text-[#c9a45c]" />
                   </div>
 
                   {/* Step number */}
-                  <div className="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-[#c9a45c] text-[#0a0a0a] font-bold text-sm flex items-center justify-center">
+                  <div className="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-[#c9a45c] text-[#0a0a0a] font-bold text-sm flex items-center justify-center shrink-0">
                     {index + 1}
                   </div>
 
                   {/* Content */}
-                  <h3 className="text-white font-semibold text-lg mb-2">
-                    {step.title}
-                  </h3>
-                  <p className="text-white/60 text-sm leading-relaxed">
-                    {step.description}
-                  </p>
+                  <div className="mt-6">
+                    <h3 className="text-white font-semibold text-lg mb-2">
+                      {step.title}
+                    </h3>
+                    <p className="text-white/60 text-sm leading-relaxed">
+                      {step.description}
+                    </p>
+                  </div>
                 </div>
               )
             })}

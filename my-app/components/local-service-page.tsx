@@ -57,7 +57,7 @@ export function LocalServicePage({ page }: { page: LocalSeoPage }) {
               <Badge className="bg-[#c9a45c]/10 text-[#c9a45c] border border-[#c9a45c]/30 hover:bg-[#c9a45c]/10">
                 {page.service} in {page.location}
               </Badge>
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight">
+              <h1 className="heading-glow text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight">
                 {page.heroTitle}
               </h1>
               <p className="text-lg sm:text-xl text-white/70 leading-8 max-w-3xl">
@@ -166,7 +166,7 @@ export function LocalServicePage({ page }: { page: LocalSeoPage }) {
         <section className="bg-[#0a0a0a] py-16">
           <div className="section-padding max-w-6xl mx-auto space-y-6">
             <div className="max-w-3xl space-y-3">
-              <h2 className="text-3xl sm:text-4xl font-bold text-white">{page.faqTitle}</h2>
+              <h2 className="heading-glow text-3xl sm:text-4xl font-bold text-white">{page.faqTitle}</h2>
               <p className="text-white/65 leading-7">
                 Kurze Antworten auf typische Fragen rund um {page.service.toLowerCase()} in {page.location}.
               </p>

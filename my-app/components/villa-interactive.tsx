@@ -78,7 +78,7 @@ export function VillaInteractive() {
           UNSERE LEISTUNGEN
         </p>
         <h2 
-          className="text-3xl sm:text-4xl md:text-5xl"
+          className="heading-glow text-3xl sm:text-4xl md:text-5xl"
           style={{ 
             fontFamily: 'var(--font-headline)', 
             fontWeight: 300,

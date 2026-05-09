@@ -65,7 +65,7 @@ export function ServiceCards() {
         <div className="max-w-6xl mx-auto">
           {/* Main Services */}
           <div className="mb-20">
-            <h2 className="text-3xl md:text-4xl text-white text-center mb-12" style={{ fontFamily: 'var(--font-headline)', fontWeight: 400, letterSpacing: '0.02em' }}>
+            <h2 className="heading-glow text-3xl md:text-4xl text-white text-center mb-12" style={{ fontFamily: 'var(--font-headline)', fontWeight: 400, letterSpacing: '0.02em' }}>
               Hauptleistungen
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -96,7 +96,7 @@ export function ServiceCards() {
 
           {/* Construction Services */}
           <div>
-            <h2 className="text-3xl md:text-4xl text-white text-center mb-12" style={{ fontFamily: 'var(--font-headline)', fontWeight: 400, letterSpacing: '0.02em' }}>
+            <h2 className="heading-glow text-3xl md:text-4xl text-white text-center mb-12" style={{ fontFamily: 'var(--font-headline)', fontWeight: 400, letterSpacing: '0.02em' }}>
               Ausbau-Leistungen
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">

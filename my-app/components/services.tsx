@@ -62,7 +62,7 @@ const additionalServices = [
 
 export function Services() {
   return (
-    <section id="services" className="py-16 bg-[#0a0a0a]">
+    <section id="services" className="hidden md:block py-16 bg-[#0a0a0a]">
       <div className="section-padding max-w-7xl mx-auto">
         {/* Header */}
         <div
@@ -72,7 +72,7 @@ export function Services() {
           <span className="inline-block px-4 py-2 bg-[#c9a45c]/10 border border-[#c9a45c]/30 rounded-full text-[#c9a45c] text-sm font-medium mb-4">
             Unsere Leistungen
           </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
+          <h2 className="heading-glow text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
             Entrümpelung, Hausauflösung und <span className="text-gold-gradient">Entkernung aus einer Hand</span>
           </h2>
           <p className="text-lg text-[#fafafa]/60 max-w-2xl mx-auto">

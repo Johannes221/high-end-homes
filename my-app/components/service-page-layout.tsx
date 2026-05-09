@@ -99,7 +99,7 @@ export function ServicePageLayout({
               <span className="text-sm" style={{ fontFamily: 'var(--font-body)', color: 'rgba(255,255,255,0.7)' }}>{title}</span>
             </div>
             
-            <h1 className="text-5xl md:text-6xl lg:text-7xl text-white mb-6" style={{ fontFamily: 'var(--font-headline)', fontWeight: 300, letterSpacing: '0.02em' }}>
+            <h1 className="heading-glow text-5xl md:text-6xl lg:text-7xl text-white mb-6" style={{ fontFamily: 'var(--font-headline)', fontWeight: 300, letterSpacing: '0.02em' }}>
               {title}
             </h1>
             <p className="text-xl mb-8" style={{ fontFamily: 'var(--font-body)', fontWeight: 300, color: 'rgba(255,255,255,0.65)', lineHeight: 1.7 }}>
@@ -125,7 +125,7 @@ export function ServicePageLayout({
       <section className="py-20 bg-[#0a0a0a]">
         <div className="section-padding">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl md:text-4xl text-white mb-12" style={{ fontFamily: 'var(--font-headline)', fontWeight: 400, letterSpacing: '0.02em' }}>
+            <h2 className="heading-glow text-3xl md:text-4xl text-white mb-12" style={{ fontFamily: 'var(--font-headline)', fontWeight: 400, letterSpacing: '0.02em' }}>
               Was wir machen
             </h2>
             <div className="space-y-4">
@@ -146,7 +146,7 @@ export function ServicePageLayout({
       <section className="py-16 bg-[#0a0a0a]">
         <div className="section-padding">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-12 text-center" style={{ fontFamily: 'var(--font-headline)' }}>
+            <h2 className="heading-glow text-3xl md:text-4xl font-bold text-white mb-12 text-center" style={{ fontFamily: 'var(--font-headline)' }}>
               Ihre Vorteile
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -172,7 +172,7 @@ export function ServicePageLayout({
       <section className="py-20 bg-[#0a0a0a]">
         <div className="section-padding">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl md:text-4xl text-white mb-12" style={{ fontFamily: 'var(--font-headline)', fontWeight: 400, letterSpacing: '0.02em' }}>
+            <h2 className="heading-glow text-3xl md:text-4xl text-white mb-12" style={{ fontFamily: 'var(--font-headline)', fontWeight: 400, letterSpacing: '0.02em' }}>
               Ablauf
             </h2>
             <div className="space-y-8">
@@ -200,7 +200,7 @@ export function ServicePageLayout({
       <section className="py-20 bg-[#0a0a0a]">
         <div className="section-padding">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl md:text-4xl text-white mb-12" style={{ fontFamily: 'var(--font-headline)', fontWeight: 400, letterSpacing: '0.02em' }}>
+            <h2 className="heading-glow text-3xl md:text-4xl text-white mb-12" style={{ fontFamily: 'var(--font-headline)', fontWeight: 400, letterSpacing: '0.02em' }}>
               Häufige Fragen
             </h2>
             <div className="space-y-0">
@@ -244,7 +244,7 @@ export function ServicePageLayout({
       <section className="py-20 bg-[#0a0a0a] border-t border-[rgba(255,255,255,0.08)]">
         <div className="section-padding">
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl md:text-4xl text-white mb-12 text-center" style={{ fontFamily: 'var(--font-headline)', fontWeight: 400, letterSpacing: '0.02em' }}>
+            <h2 className="heading-glow text-3xl md:text-4xl text-white mb-12 text-center" style={{ fontFamily: 'var(--font-headline)', fontWeight: 400, letterSpacing: '0.02em' }}>
               Kontaktieren Sie uns
             </h2>
             
@@ -387,7 +387,7 @@ export function ServicePageLayout({
       <section className="py-20 bg-[#0a0a0a] border-t border-[rgba(255,255,255,0.08)]">
         <div className="section-padding">
           <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-4xl md:text-5xl text-white mb-8" style={{ fontFamily: 'var(--font-headline)', fontWeight: 400, letterSpacing: '0.02em' }}>
+            <h2 className="heading-glow text-4xl md:text-5xl text-white mb-8" style={{ fontFamily: 'var(--font-headline)', fontWeight: 400, letterSpacing: '0.02em' }}>
               Jetzt Angebot anfragen
             </h2>
             <Link 
