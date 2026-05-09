@@ -1,8 +1,8 @@
 #!/bin/bash
 set -e
 
-echo "==> Navigating to my-app directory..."
-cd my-app
+echo "==> Current directory:"
+pwd
 
 echo "==> Node version:"
 node --version

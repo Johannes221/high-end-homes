@@ -3,8 +3,8 @@ services:
     name: high-end-homes-backend
     runtime: node
     plan: starter
-    buildCommand: bash build.sh
-    startCommand: bash start.sh
+    buildCommand: cd my-app && bash build.sh
+    startCommand: cd my-app && bash start.sh
     autoDeploy: true
     healthCheckPath: /api/health
     envVars:
