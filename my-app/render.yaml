@@ -10,9 +10,9 @@ services:
     envVars:
       - key: NODE_ENV
         value: production
-      - key: AUTH_URL
-        value: https://www.high-end-homes.de
-      - key: AUTH_SECRET
+      - key: NEXTAUTH_URL
+        value: https://www.highendhomes.de
+      - key: NEXTAUTH_SECRET
         value: 92e3695adbf35e40f0d9697f59e270b979ff91e3699525c1b6ef4287af94bd4e
       - key: NEXT_PUBLIC_BACKEND_URL
         value: ""
