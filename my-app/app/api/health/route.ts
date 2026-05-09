@@ -7,12 +7,11 @@ export const dynamic = 'force-dynamic';
 
 export async function GET() {
   try {
-    await prisma.$queryRawUnsafe("SELECT 1")
-
+    // Einfacher Health-Check ohne Datenbank - PrismaLibSql kann im Edge Probleme haben
     return NextResponse.json({
       ok: true,
       service: "high-end-homes-backend",
-      database: "ok",
+      database: "skipped",
       timestamp: new Date().toISOString(),
     })
   } catch (error) {
