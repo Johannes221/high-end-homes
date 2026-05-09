@@ -17,7 +17,7 @@ services:
       - key: NEXT_PUBLIC_BACKEND_URL
         value: ""
       - key: DATABASE_URL
-        value: libsql://anfragen-bennet221.aws-eu-west-1.turso.io
+        value: file:libsql://anfragen-bennet221.aws-eu-west-1.turso.io
       - key: DATABASE_AUTH_TOKEN
         value: eyJhbGciOiJFZERTQSIsInR5cCI6IkpXVCJ9.eyJhIjoicnciLCJpYXQiOjE3NzgzMzMwNzgsImlkIjoiMDE5ZTAyZDktYjYwMS03ZjlmLTliZDEtNjZkMThjYTNjZDk4IiwicmlkIjoiNTYyZjA4NzMtOGJkZi00YjNjLTg4ZGMtNGMyZjBjMzBlZWExIn0.EtEpHVXL31ztr9Dt0Jhlm87qLnKxcPsrA_jTKrhu4VqgUAVlH7xkUMfuEZ0EduIow-7_amD1otki_UJUsRYWDw
       - key: FRONTEND_URL
