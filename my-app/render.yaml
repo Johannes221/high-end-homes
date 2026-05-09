@@ -3,8 +3,8 @@ services:
     name: high-end-homes-backend
     runtime: node
     plan: starter
-    buildCommand: cd my-app && npm ci --legacy-peer-deps && npm run build:production
-    startCommand: cd my-app && npm run start
+    buildCommand: bash build.sh
+    startCommand: bash start.sh
     autoDeploy: true
     healthCheckPath: /api/health
     envVars:
