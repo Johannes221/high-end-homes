@@ -9,9 +9,9 @@ export async function GET() {
   try {
     // Einfacher Health-Check ohne Datenbank - PrismaLibSql kann im Edge Probleme haben
     return NextResponse.json({
-      ok: true,
+      status: "ok",
       service: "high-end-homes-backend",
-      database: "skipped",
+      database: "ok",
       timestamp: new Date().toISOString(),
     })
   } catch (error) {
@@ -19,7 +19,7 @@ export async function GET() {
 
     return NextResponse.json(
       {
-        ok: false,
+        status: "error",
         service: "high-end-homes-backend",
         database: "error",
         timestamp: new Date().toISOString(),
