@@ -16,7 +16,7 @@ const buildingTypes = ["Wohnung", "Haus", "Keller", "Garage", "Dachgeschoss", "B
 const floorOptions = ["Erdgeschoss", "1. OG", "2. OG", "3. OG+", "Keller"]
 const clearanceMaterials = ["Möbel", "Elektrogeräte", "Kleidung & Textilien", "Holz", "Metall", "Kunststoff", "Baumaterialien", "Sondermüll"]
 const guttingMaterials = ["Böden", "Deckenverkleidungen", "Wandverkleidungen & Putz", "Sanitär (Bad/WC)", "Elektroinstallationen", "Fenster & Türen", "Heizung & Rohre", "Trennwände"]
-const constructionServices = ["Maler & Lackierer", "Trockenbau & Stukateur", "Fliesenleger", "Sanitär & Elektro", "Fensterbau & Gerüst"]
+const constructionServices = ["Maler & Lackierer", "Trockenbau & Stuckateur", "Fliesenleger", "Sanitär & Elektro", "Fensterbau & Gerüst"]
 
 type FormData = {
   name: string

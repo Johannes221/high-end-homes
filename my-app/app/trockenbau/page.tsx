@@ -2,14 +2,14 @@ import type { Metadata } from "next"
 import { ServicePageLayout } from "@/components/service-page-layout"
 
 export const metadata: Metadata = {
-  title: "Trockenbau & Stukateur in Heidelberg & Mannheim | High-End Homes",
+  title: "Trockenbau & Stuckateur in Heidelberg & Mannheim | High-End Homes",
   description: "Professioneller Trockenbau und Stuckarbeiten in Heidelberg, Mannheim und Umgebung. Jetzt Angebot einholen.",
 }
 
 export default function TrockenbauPage() {
   return (
     <ServicePageLayout
-      title="Trockenbau & Stukateur"
+      title="Trockenbau & Stuckateur"
       subtitle="Trockenbau & Stuckarbeiten"
       description="Professioneller Trockenbau und Stuckarbeiten in Heidelberg, Mannheim und der Rhein-Neckar-Region"
       whatWeDo={[

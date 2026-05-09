@@ -34,7 +34,7 @@ const constructionServices = [
   },
   {
     icon: Box,
-    title: "Trockenbau & Stukateur",
+    title: "Trockenbau & Stuckateur",
     description: "Trockenbau, Stuckarbeiten und Innenausbau.",
     href: "/trockenbau",
   },

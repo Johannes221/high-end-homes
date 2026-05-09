@@ -14,7 +14,7 @@ const mainServices = [
 
 const constructionServices = [
   { href: "/maler", label: "Maler & Lackierer" },
-  { href: "/trockenbau", label: "Trockenbau & Stukateur" },
+  { href: "/trockenbau", label: "Trockenbau & Stuckateur" },
   { href: "/fliesenleger", label: "Fliesenleger" },
   { href: "/sanitaer", label: "Sanitär & Elektro" },
   { href: "/fensterbau", label: "Fensterbau & Gerüst" },

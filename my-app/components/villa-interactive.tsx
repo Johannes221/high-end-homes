@@ -26,7 +26,7 @@ const floors = [
   {
     id: "og2",
     etage: "2. OBERGESCHOSS",
-    label: "Trockenbau & Stukateur",
+    label: "Trockenbau & Stuckateur",
     desc: "Wände · Decken · Stuck",
     href: "/trockenbau",
     top: "35%",
@@ -55,7 +55,7 @@ const floors = [
 const tabs = [
   { nr: "01", name: "Entrümpelung & Entkernug", href: "/entkernung" },
   { nr: "02", name: "Maler & Lackierer", href: "/maler" },
-  { nr: "03", name: "Trockenbau & Stukateur", href: "/trockenbau" },
+  { nr: "03", name: "Trockenbau & Stuckateur", href: "/trockenbau" },
   { nr: "04", name: "Fliesenleger", href: "/fliesenleger" },
   { nr: "05", name: "Sanitär & Elektro", href: "/sanitaer" },
 ]
