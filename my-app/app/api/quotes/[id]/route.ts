@@ -12,7 +12,7 @@ import {
   type QuoteLineItemOverride,
 } from "@/lib/quote"
 
-export const runtime = 'edge';
+export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
 
 function serializeQuote(quote: {
