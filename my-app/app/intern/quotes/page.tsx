@@ -1076,7 +1076,7 @@ export default function QuotesPage() {
                   <p><strong>Unverbindliches Preisangebot:</strong> Dieses Angebot dient nur als Orientierung und ist ohne Gewähr. Endgültige Preise nach Ortsbesichtigung.</p>
                 </div>
 
-                <div className="flex flex-wrap gap-2 overflow-x-auto pb-2 -mx-2 px-2">
+                <div className="flex flex-wrap gap-2 items-start">
                   <button
                     type="button"
                     onClick={() => {
