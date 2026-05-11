@@ -2,6 +2,10 @@ import { NextResponse } from "next/server"
 
 import { auth } from "@/lib/auth"
 import { prisma } from "@/lib/prisma"
+import {
+  parsePersistedQuotePayload,
+  resolveQuotePricing,
+} from "@/lib/quote"
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -14,7 +18,7 @@ export async function GET() {
       return NextResponse.json({ success: false, error: "Nicht eingeloggt." }, { status: 401 })
     }
 
-    // Einfache Abfrage ohne komplexe Serialisierung
+    // Abfrage mit payloadJson für lineItems
     const quotes = await prisma.quoteRequest.findMany({
       orderBy: { createdAt: "desc" },
       select: {
@@ -54,33 +58,28 @@ export async function GET() {
         materialsJson: false,
         removalItemsJson: false,
         imagesBase64Json: false,
-        payloadJson: false,
+        payloadJson: true,
         complexityFlagsJson: false,
       }
     })
 
     return NextResponse.json({
       success: true,
-      quotes: quotes.map(quote => ({
-        ...quote,
-        materials: [],
-        removalItems: [],
-        imageFileNames: JSON.parse(quote.imageFileNamesJson),
-        imagesBase64: [],
-        complexityFlags: [],
-        payload: null,
-        pricing: {
-          lineItemOverrides: [],
-          customLineItems: [],
-          internalNotes: "",
-          exportedAt: null
-        },
-        pricingSummary: {
-          autoTotal: quote.estimatedMinPrice || 0,
-          finalTotal: quote.estimatedMaxPrice || 0,
-          lineItems: []
+      quotes: quotes.map(quote => {
+        const payload = parsePersistedQuotePayload(quote.payloadJson)
+        const pricingSummary = resolveQuotePricing(payload, payload.pricing)
+        return {
+          ...quote,
+          materials: [],
+          removalItems: [],
+          imageFileNames: JSON.parse(quote.imageFileNamesJson),
+          imagesBase64: [],
+          complexityFlags: [],
+          payload,
+          pricing: payload.pricing ?? { lineItemOverrides: [], customLineItems: [], internalNotes: "", exportedAt: null },
+          pricingSummary
         }
-      }))
+      })
     })
   } catch (error) {
     return NextResponse.json({ 

@@ -524,7 +524,8 @@ export default function QuotesPage() {
     })
 
     const autoTotal = lineItems.filter((item) => item.included && item.source === "auto").reduce((sum, item) => sum + item.finalAmount, 0)
-    const finalTotal = lineItems.filter((item) => item.included).reduce((sum, item) => sum + item.finalAmount, 0)
+    const manualTotal = lineItems.filter((item) => item.included && item.source === "manual").reduce((sum, item) => sum + item.finalAmount, 0)
+    const finalTotal = autoTotal + manualTotal
     
     return {
       lineItems,
@@ -1258,7 +1259,7 @@ export default function QuotesPage() {
                           <tr className="border-t-2 border-gray-300 font-bold">
                             <td className="py-3 pr-4"></td>
                             <td className="py-3 pr-4 text-black">Gesamtsumme</td>
-                            <td className="py-3 pr-4 text-black">{formatCurrency(quote.pricingSummary.autoTotal)}</td>
+                            <td className="py-3 pr-4 text-black">{formatCurrency(preview.autoTotal)}</td>
                             <td className="py-3 pr-4 text-black">{formatCurrency(preview.finalTotal)}</td>
                             <td className="py-3 pr-4"></td>
                             <td className="py-3"></td>
@@ -1268,10 +1269,10 @@ export default function QuotesPage() {
                     </div>
 
                     <div className="rounded-xl border border-dashed border-gray-300 bg-white p-4 space-y-3">
-                      <h3 className="text-sm font-semibold text-gray-900">Position hinzufügen</h3>
+                      <h3 className="text-sm font-semibold text-gray-900 !text-gray-900">Position hinzufügen</h3>
                       <div className="grid md:grid-cols-[1.4fr_0.6fr_1fr_auto] gap-3">
                         <div className="space-y-1">
-                          <label className="block text-xs font-medium text-gray-700">Titel</label>
+                          <label className="block text-xs font-medium text-gray-700 !text-gray-700">Titel</label>
                           <input
                             type="text"
                             value={newCustomItem[quote.id]?.label ?? ""}
@@ -1281,7 +1282,7 @@ export default function QuotesPage() {
                           />
                         </div>
                         <div className="space-y-1">
-                          <label className="block text-xs font-medium text-gray-700">Betrag</label>
+                          <label className="block text-xs font-medium text-gray-700 !text-gray-700">Betrag</label>
                           <input
                             type="number"
                             min="0"
@@ -1293,7 +1294,7 @@ export default function QuotesPage() {
                           />
                         </div>
                         <div className="space-y-1">
-                          <label className="block text-xs font-medium text-gray-700">Anmerkung</label>
+                          <label className="block text-xs font-medium text-gray-700 !text-gray-700">Anmerkung</label>
                           <input
                             type="text"
                             value={newCustomItem[quote.id]?.details ?? ""}
@@ -1314,7 +1315,7 @@ export default function QuotesPage() {
 
                     <div className="grid md:grid-cols-2 gap-4">
                       <div className="rounded-xl border border-gray-200 bg-white p-4 space-y-2 text-sm text-gray-700">
-                        <p><strong>Automatische Summe:</strong> {formatCurrency(quote.pricingSummary.autoTotal)}</p>
+                        <p><strong>Automatische Summe:</strong> {formatCurrency(preview.autoTotal)}</p>
                         <p><strong>Finale Summe:</strong> {formatCurrency(preview.finalTotal)}</p>
                         <p><strong>Preisspanne Anfrage:</strong> {formatCurrency(quote.estimatedMinPrice)} bis {formatCurrency(quote.estimatedMaxPrice)}</p>
                       </div>
