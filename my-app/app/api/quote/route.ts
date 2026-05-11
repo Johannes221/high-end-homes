@@ -1,9 +1,9 @@
 import { mkdir, writeFile } from "node:fs/promises"
 import path from "node:path"
 
-import nodemailer from "nodemailer"
 import { NextResponse } from "next/server"
 
+import { sendEmail } from "@/lib/email"
 import { prisma } from "@/lib/prisma"
 import {
   escapeHtml,
@@ -131,27 +131,6 @@ function createFileName(name: string) {
   return `${Date.now()}-${safeName}.json`
 }
 
-function createTransporter() {
-  return nodemailer.createTransport({
-    host: process.env.SMTP_HOST,
-    port: Number(process.env.SMTP_PORT || 587),
-    secure: String(process.env.SMTP_PORT || "587") === "465",
-    auth: {
-      user: process.env.SMTP_USER,
-      pass: process.env.SMTP_PASS,
-    },
-  })
-}
-
-function canSendQuoteNotificationEmail() {
-  return Boolean(
-    process.env.SMTP_HOST &&
-      process.env.SMTP_PORT &&
-      process.env.SMTP_USER &&
-      process.env.SMTP_PASS &&
-      process.env.NOTIFICATION_EMAIL
-  )
-}
 
 async function sendQuoteNotificationEmail({
   submission,
@@ -162,11 +141,10 @@ async function sendQuoteNotificationEmail({
   complexity: ReturnType<typeof evaluateComplexity>
   estimate: ReturnType<typeof estimatePriceRange>
 }) {
-  if (!canSendQuoteNotificationEmail()) {
+  if (!process.env.NOTIFICATION_EMAIL) {
     return
   }
 
-  const transporter = createTransporter()
   const html = buildEmailHtml(
     submission,
     complexity.score,
@@ -177,16 +155,11 @@ async function sendQuoteNotificationEmail({
     complexity.flags
   )
 
-  try {
-    await transporter.sendMail({
-      from: process.env.SMTP_FROM || process.env.SMTP_USER,
-      to: process.env.NOTIFICATION_EMAIL,
-      subject: `Neues Angebot — ${submission.type || "Anfrage"} von ${submission.name}`,
-      html,
-    })
-  } catch (mailError) {
-    console.error("Quote notification email failed:", mailError)
-  }
+  await sendEmail({
+    to: process.env.NOTIFICATION_EMAIL,
+    subject: `Neues Angebot — ${submission.type || "Anfrage"} von ${submission.name}`,
+    html,
+  })
 }
 
 function resolveQuoteArchiveDirectory() {

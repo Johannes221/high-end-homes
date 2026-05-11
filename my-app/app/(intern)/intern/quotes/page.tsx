@@ -876,13 +876,6 @@ export default function QuotesPage() {
                               <td className="py-3 pr-4">
                                 <div className="flex items-center gap-2">
                                   <input
-                                    type="checkbox"
-                                    checked={draftProcessed[quote.id]?.[item.key] ?? false}
-                                    onChange={() => toggleLineItemProcessed(quote, item.key)}
-                                    className="h-4 w-4 text-green-600 rounded border-gray-300 focus:ring-green-500"
-                                    style={{ accentColor: '#22c55e' }}
-                                  />
-                                  <input
                                     type="number"
                                     min="0"
                                     step="1"
@@ -890,6 +883,14 @@ export default function QuotesPage() {
                                     onChange={(event) => setLineItemAmount(quote, item.key, event.target.value)}
                                     className="w-32 rounded-lg border border-gray-300 px-3 py-2 text-black"
                                     placeholder={String(item.amount)}
+                                  />
+                                  <input
+                                    type="checkbox"
+                                    checked={draftProcessed[quote.id]?.[item.key] ?? false}
+                                    onChange={() => toggleLineItemProcessed(quote, item.key)}
+                                    className="h-5 w-5 text-green-600 rounded border-gray-300 focus:ring-green-500"
+                                    style={{ accentColor: '#22c55e' }}
+                                    title="Speichern"
                                   />
                                 </div>
                               </td>
@@ -908,6 +909,14 @@ export default function QuotesPage() {
                               </td>
                             </tr>
                           ))}
+                          <tr className="border-t-2 border-gray-300 font-bold">
+                            <td className="py-3 pr-4"></td>
+                            <td className="py-3 pr-4 text-black">Gesamtsumme</td>
+                            <td className="py-3 pr-4 text-black">{formatCurrency(quote.pricingSummary.autoTotal)}</td>
+                            <td className="py-3 pr-4 text-black">{formatCurrency(preview.finalTotal)}</td>
+                            <td className="py-3 pr-4"></td>
+                            <td className="py-3"></td>
+                          </tr>
                         </tbody>
                       </table>
                     </div>

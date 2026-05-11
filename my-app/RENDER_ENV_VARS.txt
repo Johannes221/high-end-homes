@@ -1,0 +1,17 @@
+ALLOWED_ORIGIN=
+AUTH_SECRET=92e3695adbf35e40f0d9697f59e270b979ff91e3699525c1b6ef4287af94bd4e
+AUTH_URL=https://www.high-end-homes.de
+CONTACT_EMAIL=bennet.pfeifer@highendhomes.de
+CRON_SECRET=ec8a18c146c1411588ad53600c4efd29c9d5b38c099baf2724e72b8fdc72c52c
+DATABASE_AUTH_TOKEN=eyJhbGciOiJFZERTQSIsInR5cCI6IkpXVCJ9.eyJhIjoicnciLCJpYXQiOjE3NzgxNjQ1MTAsImlkIjoiMDE5ZTAyZDktYjYwMS03ZjlmLTliZDEtNjZkMThjYTNjZDk4IiwicmlkIjoiNTYyZjA4NzMtOGJkZi00YjNjLTg4ZGMtNGMyZjBjMzBlZWExIn0.P679xePt3nqq1YsSKGmLqGyu_pJnd_l7slkHEixjRBAGA2tEka9FFT88UpzVxzzR657hyPLCoWRyrB7FYFPLBA
+DATABASE_URL=libsql://anfragen-bennet221.aws-eu-west-1.turso.io
+FRONTEND_URL=
+NEXT_PUBLIC_BACKEND_URL=
+NODE_ENV=production
+NOTIFICATION_EMAIL=bennet.pfeifer@highendhomes.de
+PUBLIC_APP_URL=https://www.high-end-homes.de
+QUOTE_ARCHIVE_DIR=
+RESEND_API_KEY=re_bWFM8bAK_9BjJb7W3i12wWFr5GPG9YbZZ
+SMTP_FROM=High-End Homes <bennet.pfeifer@highendhomes.de>
+SMTP_HOST=smtp.gmail.com
+SMTP_PORT=587
