@@ -1,0 +1,62 @@
+{
+  "type": "Entrümpelung",
+  "name": "Maria Hoffmann",
+  "email": "maria.h@example.com",
+  "phone": "+49 176 22334455",
+  "company": "",
+  "address": "",
+  "squareMeters": 45,
+  "buildingType": "Keller",
+  "constructionYear": "",
+  "floor": "Keller",
+  "elevator": "Nein",
+  "materials": [
+    "Möbel",
+    "Holz",
+    "Metall",
+    "Kunststoff",
+    "Sondermüll"
+  ],
+  "removalItems": [],
+  "quantityEstimate": "1-2 LKW-Ladungen",
+  "valuables": "Alte Werkzeuge, evtl. wertvoll",
+  "asbestosRequired": false,
+  "otherPollutants": true,
+  "disposalWanted": true,
+  "permitStatus": "Nicht erforderlich",
+  "desiredDate": "2026-06-20",
+  "imageFileNames": [
+    "keller-uebersicht.jpg",
+    "werkbank.jpg"
+  ],
+  "imagesBase64": [
+    "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjRkZBNTAyIi8+CiAgICA8dGV4dCB4PSIyMDAiIHk9IjE1MCIgZm9udC1zaXplPSIyNCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0id2hpdGUiPktlbGxlcnJhdW0gw5xiZXJzaWNodDwvdGV4dD4KICA8L3N2Zz4=",
+    "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjMkVENTczIi8+CiAgICA8dGV4dCB4PSIyMDAiIHk9IjE1MCIgZm9udC1zaXplPSIyNCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0id2hpdGUiPldlcmtiYW5rPC90ZXh0PgogIDwvc3ZnPg=="
+  ],
+  "notes": "Zugang über Außentreppe, sehr eng",
+  "effortEstimate": "",
+  "complexity": {
+    "score": 5,
+    "level": "Medium",
+    "effortRange": "2–5 Arbeitstage",
+    "flags": [
+      "Andere Schadstoffe angegeben — gesonderte Prüfung erforderlich.",
+      "Erschwerter Materialtransport ohne Aufzug.",
+      "Entsorgungsintensive Materialien ausgewählt.",
+      "Viele Leistungspositionen erhöhen Abstimmung und Sortieraufwand."
+    ]
+  },
+  "estimate": {
+    "min": 2073,
+    "max": 3085,
+    "currency": "EUR",
+    "rationale": [
+      "Automatische Kalkulation aus 9 Positionen abgeleitet",
+      "Schadstoffthemen erhöhen die Preisbandbreite",
+      "Viele gewählte Leistungspositionen berücksichtigt",
+      "Transport- und Trageaufwand berücksichtigt"
+    ]
+  },
+  "databaseId": "cmp13l8d10003iwd3d5t7wuf9",
+  "createdAt": "2026-05-11T11:07:44.399Z"
+}

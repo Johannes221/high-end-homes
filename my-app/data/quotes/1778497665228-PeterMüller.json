@@ -1,0 +1,70 @@
+{
+  "type": "Entkernung",
+  "name": "Peter Müller",
+  "email": "p.mueller@example.com",
+  "phone": "+49 160 77889900",
+  "company": "",
+  "address": "",
+  "squareMeters": 150,
+  "buildingType": "Dachgeschoss",
+  "constructionYear": "1960",
+  "floor": "3. OG+",
+  "elevator": "Nein",
+  "materials": [],
+  "removalItems": [
+    "Böden",
+    "Deckenverkleidungen",
+    "Wandverkleidungen & Putz",
+    "Elektroinstallationen",
+    "Heizung & Rohre"
+  ],
+  "quantityEstimate": "Vollständige Entkernung",
+  "valuables": "",
+  "asbestosRequired": true,
+  "otherPollutants": false,
+  "disposalWanted": true,
+  "permitStatus": "Erteilt",
+  "desiredDate": "2026-09-01",
+  "imageFileNames": [
+    "dach-links.jpg",
+    "dach-rechts.jpg",
+    "fenster.jpg",
+    "treppe.jpg",
+    "isolierung.jpg",
+    "elektrik.jpg"
+  ],
+  "imagesBase64": [
+    "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjRkY2MzQ4Ii8+CiAgICA8dGV4dCB4PSIyMDAiIHk9IjE1MCIgZm9udC1zaXplPSIyNCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0id2hpdGUiPkRhY2hzY2hyw6RnZSBMaW5rczwvdGV4dD4KICA8L3N2Zz4=",
+    "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjMUU5MEZGIi8+CiAgICA8dGV4dCB4PSIyMDAiIHk9IjE1MCIgZm9udC1zaXplPSIyNCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0id2hpdGUiPkRhY2hzY2hyw6RnZSBSZWNodHM8L3RleHQ+CiAgPC9zdmc+",
+    "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjMkVDQzcxIi8+CiAgICA8dGV4dCB4PSIyMDAiIHk9IjE1MCIgZm9udC1zaXplPSIyNCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0id2hpdGUiPkRhY2hmZW5zdGVyPC90ZXh0PgogIDwvc3ZnPg==",
+    "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjRTc0QzNDIi8+CiAgICA8dGV4dCB4PSIyMDAiIHk9IjE1MCIgZm9udC1zaXplPSIyNCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0id2hpdGUiPlRyZXBwZTwvdGV4dD4KICA8L3N2Zz4=",
+    "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjOUI1OUI2Ii8+CiAgICA8dGV4dCB4PSIyMDAiIHk9IjE1MCIgZm9udC1zaXplPSIyNCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0id2hpdGUiPklzb2xpZXJ1bmc8L3RleHQ+CiAgPC9zdmc+",
+    "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjRjM5QzEyIi8+CiAgICA8dGV4dCB4PSIyMDAiIHk9IjE1MCIgZm9udC1zaXplPSIyNCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0id2hpdGUiPkVsZWt0cmlrPC90ZXh0PgogIDwvc3ZnPg=="
+  ],
+  "notes": "Dachschrägen beachten, sehr verwinkelt",
+  "effortEstimate": "",
+  "complexity": {
+    "score": 6,
+    "level": "Medium",
+    "effortRange": "2–5 Arbeitstage",
+    "flags": [
+      "Projektgröße ab 80 m² — erhöhter Grundaufwand.",
+      "Großfläche ab 150 m² — Organisation und Logistik steigen deutlich.",
+      "Asbestentsorgung erforderlich — Fachbetrieb einplanen.",
+      "Technische Rückbaupositionen ausgewählt.",
+      "Viele Leistungspositionen erhöhen Abstimmung und Sortieraufwand."
+    ]
+  },
+  "estimate": {
+    "min": 6682,
+    "max": 9946,
+    "currency": "EUR",
+    "rationale": [
+      "Automatische Kalkulation aus 9 Positionen abgeleitet",
+      "Schadstoffthemen erhöhen die Preisbandbreite",
+      "Viele gewählte Leistungspositionen berücksichtigt"
+    ]
+  },
+  "databaseId": "cmp13l8yb0004iwd34fq8frp1",
+  "createdAt": "2026-05-11T11:07:45.228Z"
+}

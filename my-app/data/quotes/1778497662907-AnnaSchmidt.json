@@ -1,0 +1,65 @@
+{
+  "type": "Entkernung",
+  "name": "Anna Schmidt",
+  "email": "anna.schmidt@example.com",
+  "phone": "+49 162 98765432",
+  "company": "",
+  "address": "",
+  "squareMeters": 85,
+  "buildingType": "Haus",
+  "constructionYear": "1972",
+  "floor": "Erdgeschoss",
+  "elevator": "Nein",
+  "materials": [],
+  "removalItems": [
+    "Böden",
+    "Wandverkleidungen & Putz",
+    "Sanitär (Bad/WC)",
+    "Fenster & Türen"
+  ],
+  "quantityEstimate": "Komplettsanierung",
+  "valuables": "",
+  "asbestosRequired": true,
+  "otherPollutants": true,
+  "disposalWanted": true,
+  "permitStatus": "In Bearbeitung",
+  "desiredDate": "2026-07-01",
+  "imageFileNames": [
+    "bad-alt.jpg",
+    "flur.jpg",
+    "keller.jpg",
+    "dachboden.jpg"
+  ],
+  "imagesBase64": [
+    "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjRjdCNzMxIi8+CiAgICA8dGV4dCB4PSIyMDAiIHk9IjE1MCIgZm9udC1zaXplPSIyNCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0id2hpdGUiPkJhZGV6aW1tZXIgQWx0PC90ZXh0PgogIDwvc3ZnPg==",
+    "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjNUYyN0NEIi8+CiAgICA8dGV4dCB4PSIyMDAiIHk9IjE1MCIgZm9udC1zaXplPSIyNCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0id2hpdGUiPkZsdXI8L3RleHQ+CiAgPC9zdmc+",
+    "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjMDBEMkQzIi8+CiAgICA8dGV4dCB4PSIyMDAiIHk9IjE1MCIgZm9udC1zaXplPSIyNCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0id2hpdGUiPktlbGxlcjwvdGV4dD4KICA8L3N2Zz4=",
+    "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjRkY5RkYzIi8+CiAgICA8dGV4dCB4PSIyMDAiIHk9IjE1MCIgZm9udC1zaXplPSIyNCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0id2hpdGUiPkRhY2hib2RlbjwvdGV4dD4KICA8L3N2Zz4="
+  ],
+  "notes": "Asbest-Gutachten liegt vor, kann zugeschickt werden",
+  "effortEstimate": "",
+  "complexity": {
+    "score": 6,
+    "level": "Medium",
+    "effortRange": "2–5 Arbeitstage",
+    "flags": [
+      "Projektgröße ab 80 m² — erhöhter Grundaufwand.",
+      "Asbestentsorgung erforderlich — Fachbetrieb einplanen.",
+      "Andere Schadstoffe angegeben — gesonderte Prüfung erforderlich.",
+      "Technische Rückbaupositionen ausgewählt.",
+      "Viele Leistungspositionen erhöhen Abstimmung und Sortieraufwand."
+    ]
+  },
+  "estimate": {
+    "min": 4731,
+    "max": 7041,
+    "currency": "EUR",
+    "rationale": [
+      "Automatische Kalkulation aus 9 Positionen abgeleitet",
+      "Schadstoffthemen erhöhen die Preisbandbreite",
+      "Viele gewählte Leistungspositionen berücksichtigt"
+    ]
+  },
+  "databaseId": "cmp13l7880001iwd3msu2wfzt",
+  "createdAt": "2026-05-11T11:07:42.907Z"
+}

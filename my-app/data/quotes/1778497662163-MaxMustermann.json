@@ -1,0 +1,56 @@
+{
+  "type": "Entrümpelung",
+  "name": "Max Mustermann",
+  "email": "max@example.com",
+  "phone": "+49 151 12345678",
+  "company": "Mustermann GmbH",
+  "address": "",
+  "squareMeters": 120,
+  "buildingType": "Wohnung",
+  "constructionYear": "1985",
+  "floor": "2. OG",
+  "elevator": "Ja",
+  "materials": [
+    "Möbel",
+    "Elektrogeräte",
+    "Kleidung & Textilien"
+  ],
+  "removalItems": [],
+  "quantityEstimate": "3-4 LKW-Ladungen",
+  "valuables": "Einige antike Möbelstücke",
+  "asbestosRequired": false,
+  "otherPollutants": false,
+  "disposalWanted": true,
+  "permitStatus": "Nicht erforderlich",
+  "desiredDate": "2026-06-15",
+  "imageFileNames": [
+    "wohnzimmer.jpg",
+    "schlafzimmer.jpg",
+    "kueche.jpg"
+  ],
+  "imagesBase64": [
+    "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjRkY2QjZCIi8+CiAgICA8dGV4dCB4PSIyMDAiIHk9IjE1MCIgZm9udC1zaXplPSIyNCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0id2hpdGUiPldvaG56aW1tZXI8L3RleHQ+CiAgPC9zdmc+",
+    "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjNEVDREM0Ii8+CiAgICA8dGV4dCB4PSIyMDAiIHk9IjE1MCIgZm9udC1zaXplPSIyNCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0id2hpdGUiPlNjaGxhZnppbW1lcjwvdGV4dD4KICA8L3N2Zz4=",
+    "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjNDVCN0QxIi8+CiAgICA8dGV4dCB4PSIyMDAiIHk9IjE1MCIgZm9udC1zaXplPSIyNCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0id2hpdGUiPkvDvGNoZTwvdGV4dD4KICA8L3N2Zz4="
+  ],
+  "notes": "Bitte Vorsicht mit den Antiquitäten im Wohnzimmer",
+  "effortEstimate": "",
+  "complexity": {
+    "score": 2,
+    "level": "Low",
+    "effortRange": "1–2 Arbeitstage",
+    "flags": [
+      "Projektgröße ab 80 m² — erhöhter Grundaufwand."
+    ]
+  },
+  "estimate": {
+    "min": 2444,
+    "max": 3096,
+    "currency": "EUR",
+    "rationale": [
+      "Automatische Kalkulation aus 5 Positionen abgeleitet"
+    ]
+  },
+  "databaseId": "cmp13l6fw0000iwd30afw2uxr",
+  "createdAt": "2026-05-11T11:07:42.162Z"
+}

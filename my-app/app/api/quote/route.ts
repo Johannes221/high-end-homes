@@ -287,9 +287,18 @@ export async function POST(request: Request) {
     return jsonWithCors(request, { success: true, id: savedRequest.id, estimate, complexity })
   } catch (error) {
     console.error("Quote API error:", error)
+    console.error("Error details:", {
+      message: error instanceof Error ? error.message : String(error),
+      stack: error instanceof Error ? error.stack : undefined,
+      name: error instanceof Error ? error.name : undefined,
+    })
     return jsonWithCors(
       request,
-      { success: false, error: "Die Anfrage konnte nicht verarbeitet werden." },
+      { 
+        success: false, 
+        error: "Die Anfrage konnte nicht verarbeitet werden.",
+        details: process.env.NODE_ENV !== "production" ? (error instanceof Error ? error.message : String(error)) : undefined
+      },
       { status: 500 }
     )
   }

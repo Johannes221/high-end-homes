@@ -1,0 +1,68 @@
+{
+  "type": "Kombi",
+  "name": "Thomas Weber",
+  "email": "t.weber@example.com",
+  "phone": "+49 170 55555555",
+  "company": "Weber Immobilien",
+  "address": "",
+  "squareMeters": 200,
+  "buildingType": "Gewerbe",
+  "constructionYear": "1995",
+  "floor": "1. OG",
+  "elevator": "Ja",
+  "materials": [
+    "Möbel",
+    "Elektrogeräte",
+    "Baumaterialien"
+  ],
+  "removalItems": [
+    "Böden",
+    "Deckenverkleidungen",
+    "Trennwände"
+  ],
+  "quantityEstimate": "Großprojekt, ca. 5-7 LKW",
+  "valuables": "Keine",
+  "asbestosRequired": false,
+  "otherPollutants": false,
+  "disposalWanted": true,
+  "permitStatus": "Erteilt",
+  "desiredDate": "2026-08-10",
+  "imageFileNames": [
+    "buero1.jpg",
+    "buero2.jpg",
+    "lager.jpg",
+    "eingang.jpg",
+    "sanitaer.jpg"
+  ],
+  "imagesBase64": [
+    "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjRUU1QTZGIi8+CiAgICA8dGV4dCB4PSIyMDAiIHk9IjE1MCIgZm9udC1zaXplPSIyNCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0id2hpdGUiPkLDvHJvcmF1bSAxPC90ZXh0PgogIDwvc3ZnPg==",
+    "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjQzU2Q0YwIi8+CiAgICA8dGV4dCB4PSIyMDAiIHk9IjE1MCIgZm9udC1zaXplPSIyNCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0id2hpdGUiPkLDvHJvcmF1bSAyPC90ZXh0PgogIDwvc3ZnPg==",
+    "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjRkZCOEI4Ii8+CiAgICA8dGV4dCB4PSIyMDAiIHk9IjE1MCIgZm9udC1zaXplPSIyNCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0id2hpdGUiPkxhZ2VyPC90ZXh0PgogIDwvc3ZnPg==",
+    "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjM0FFMzc0Ii8+CiAgICA8dGV4dCB4PSIyMDAiIHk9IjE1MCIgZm9udC1zaXplPSIyNCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0id2hpdGUiPkVpbmdhbmdzYmVyZWljaDwvdGV4dD4KICA8L3N2Zz4=",
+    "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjRkRBN0RGIi8+CiAgICA8dGV4dCB4PSIyMDAiIHk9IjE1MCIgZm9udC1zaXplPSIyNCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0id2hpdGUiPlNhbml0w6RyYmVyZWljaDwvdGV4dD4KICA8L3N2Zz4="
+  ],
+  "notes": "Zeitfenster ist flexibel, Projekt muss bis Ende August abgeschlossen sein",
+  "effortEstimate": "",
+  "complexity": {
+    "score": 5,
+    "level": "Medium",
+    "effortRange": "2–5 Arbeitstage",
+    "flags": [
+      "Projektgröße ab 80 m² — erhöhter Grundaufwand.",
+      "Großfläche ab 150 m² — Organisation und Logistik steigen deutlich.",
+      "Entsorgungsintensive Materialien ausgewählt.",
+      "Viele Leistungspositionen erhöhen Abstimmung und Sortieraufwand."
+    ]
+  },
+  "estimate": {
+    "min": 4277,
+    "max": 5978,
+    "currency": "EUR",
+    "rationale": [
+      "Automatische Kalkulation aus 5 Positionen abgeleitet",
+      "Viele gewählte Leistungspositionen berücksichtigt"
+    ]
+  },
+  "databaseId": "cmp13l7su0002iwd3pn0usjf2",
+  "createdAt": "2026-05-11T11:07:43.632Z"
+}
