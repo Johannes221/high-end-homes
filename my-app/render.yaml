@@ -10,14 +10,18 @@ services:
     envVars:
       - key: NODE_ENV
         value: production
+      - key: AUTH_URL
+        value: https://www.highendhomes.de
       - key: NEXTAUTH_URL
         value: https://www.highendhomes.de
+      - key: AUTH_SECRET
+        value: 92e3695adbf35e40f0d9697f59e270b979ff91e3699525c1b6ef4287af94bd4e
       - key: NEXTAUTH_SECRET
         value: 92e3695adbf35e40f0d9697f59e270b979ff91e3699525c1b6ef4287af94bd4e
       - key: NEXT_PUBLIC_BACKEND_URL
         value: ""
       - key: DATABASE_URL
-        value: file:libsql://anfragen-bennet221.aws-eu-west-1.turso.io
+        value: libsql://anfragen-bennet221.aws-eu-west-1.turso.io
       - key: DATABASE_AUTH_TOKEN
         value: eyJhbGciOiJFZERTQSIsInR5cCI6IkpXVCJ9.eyJhIjoicnciLCJpYXQiOjE3NzgzMzMwNzgsImlkIjoiMDE5ZTAyZDktYjYwMS03ZjlmLTliZDEtNjZkMThjYTNjZDk4IiwicmlkIjoiNTYyZjA4NzMtOGJkZi00YjNjLTg4ZGMtNGMyZjBjMzBlZWExIn0.EtEpHVXL31ztr9Dt0Jhlm87qLnKxcPsrA_jTKrhu4VqgUAVlH7xkUMfuEZ0EduIow-7_amD1otki_UJUsRYWDw
       - key: FRONTEND_URL
