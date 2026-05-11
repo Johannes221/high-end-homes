@@ -349,6 +349,33 @@ export default function QuotesPage() {
     }
   }
 
+  const deleteQuote = async (quote: QuoteItem) => {
+    if (!confirm(`Anfrage von ${quote.name} (${quote.email}) wirklich löschen?\n\nDieser Vorgang kann nicht rückgängig gemacht werden!`)) {
+      return
+    }
+
+    setUpdatingId(quote.id)
+    try {
+      const response = await fetch(`/api/quotes/${quote.id}`, {
+        method: "DELETE",
+      })
+
+      const data = await response.json()
+
+      if (response.ok && data.success) {
+        alert(`✅ Anfrage erfolgreich gelöscht!`)
+        setQuotes((current) => current.filter((q) => q.id !== quote.id))
+      } else {
+        alert(`❌ Fehler beim Löschen: ${data.error || "Unbekannter Fehler"}`)
+      }
+    } catch (error) {
+      console.error("Delete quote error:", error)
+      alert(`❌ Fehler beim Löschen: ${error instanceof Error ? error.message : String(error)}`)
+    } finally {
+      setUpdatingId("")
+    }
+  }
+
   const getDraftOverrides = (quote: QuoteItem) => {
     const existing = draftOverrides[quote.id]
     if (existing) {
@@ -761,7 +788,7 @@ export default function QuotesPage() {
           <select
             value={filterType}
             onChange={(e) => setFilterType(e.target.value)}
-            className="px-4 py-2.5 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-[#c9a45c] focus:border-transparent bg-white"
+            className="px-4 py-2.5 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-[#c9a45c] focus:border-transparent bg-white text-gray-900"
           >
             <option value="all">Alle Typen</option>
             <option value="Entrümpelung">Entrümpelung</option>
@@ -774,7 +801,7 @@ export default function QuotesPage() {
           <select
             value={filterStatus}
             onChange={(e) => setFilterStatus(e.target.value)}
-            className="px-4 py-2.5 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-[#c9a45c] focus:border-transparent bg-white"
+            className="px-4 py-2.5 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-[#c9a45c] focus:border-transparent bg-white text-gray-900"
           >
             <option value="all">Alle Status</option>
             <option value="pending">Pending</option>
@@ -786,7 +813,7 @@ export default function QuotesPage() {
           <select
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value)}
-            className="px-4 py-2.5 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-[#c9a45c] focus:border-transparent bg-white"
+            className="px-4 py-2.5 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-[#c9a45c] focus:border-transparent bg-white text-gray-900"
           >
             <option value="date-desc">Neueste zuerst</option>
             <option value="date-asc">Älteste zuerst</option>
@@ -997,6 +1024,17 @@ export default function QuotesPage() {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                     </svg>
                     PDF per E-Mail senden
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => deleteQuote(quote)}
+                    disabled={updatingId === quote.id}
+                    className="flex items-center gap-2 px-4 py-2.5 rounded-lg bg-red-600 text-white text-sm font-medium hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-sm"
+                  >
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                    </svg>
+                    Löschen
                   </button>
                 </div>
 

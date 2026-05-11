@@ -1,0 +1,42 @@
+{
+  "type": "Test DELETE",
+  "name": "Test User DELETE",
+  "email": "delete@test.de",
+  "phone": "",
+  "company": "",
+  "address": "",
+  "squareMeters": 50,
+  "buildingType": "Wohnung",
+  "constructionYear": "",
+  "floor": "",
+  "elevator": "",
+  "materials": [],
+  "removalItems": [],
+  "quantityEstimate": "",
+  "valuables": "",
+  "asbestosRequired": false,
+  "otherPollutants": false,
+  "disposalWanted": false,
+  "permitStatus": "",
+  "desiredDate": "",
+  "imageFileNames": [],
+  "imagesBase64": [],
+  "notes": "",
+  "effortEstimate": "",
+  "complexity": {
+    "score": 1,
+    "level": "Low",
+    "effortRange": "1–2 Arbeitstage",
+    "flags": []
+  },
+  "estimate": {
+    "min": 918,
+    "max": 1163,
+    "currency": "EUR",
+    "rationale": [
+      "Automatische Kalkulation aus 2 Positionen abgeleitet"
+    ]
+  },
+  "databaseId": "cmp15w1880009iwd369co27ud",
+  "createdAt": "2026-05-11T12:12:07.670Z"
+}

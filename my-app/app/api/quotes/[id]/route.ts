@@ -133,7 +133,7 @@ export async function PATCH(request: NextRequest, context: { params: Promise<{ i
       data: {
         approvalStatus,
         approvedAt: approvalStatus === "approved" ? new Date() : null,
-        approvedBy: approvalStatus === "approved" ? session.user.email ?? session.user.name ?? "intern" : null,
+        approvedBy: approvalStatus === "approved" ? session.user.email ?? session.user.name ?? "Bennet Pfeifer" : null,
         payloadJson: JSON.stringify(payload),
       },
     })
@@ -142,5 +142,29 @@ export async function PATCH(request: NextRequest, context: { params: Promise<{ i
   } catch (error) {
     console.error("Quote approval error:", error)
     return NextResponse.json({ success: false, error: "Freigabe konnte nicht gespeichert werden." }, { status: 500 })
+  }
+}
+
+export async function DELETE(_request: NextRequest, context: { params: Promise<{ id: string }> }) {
+  try {
+    const session = await auth()
+
+    if (!session?.user?.id) {
+      return NextResponse.json({ success: false, error: "Nicht eingeloggt." }, { status: 401 })
+    }
+
+    const { id } = await context.params
+    const existing = await prisma.quoteRequest.findUnique({ where: { id } })
+
+    if (!existing) {
+      return NextResponse.json({ success: false, error: "Anfrage nicht gefunden." }, { status: 404 })
+    }
+
+    await prisma.quoteRequest.delete({ where: { id } })
+
+    return NextResponse.json({ success: true, message: "Anfrage erfolgreich gelöscht." })
+  } catch (error) {
+    console.error("Quote delete error:", error)
+    return NextResponse.json({ success: false, error: "Anfrage konnte nicht gelöscht werden." }, { status: 500 })
   }
 }

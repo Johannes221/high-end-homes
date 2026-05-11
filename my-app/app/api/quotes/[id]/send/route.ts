@@ -36,7 +36,7 @@ export async function POST(_request: NextRequest, context: { params: Promise<{ i
 
     const payload = parsePersistedQuotePayload(quote.payloadJson)
     const pricingSummary = resolveQuotePricing(payload, payload.pricing)
-    const advisorName = session.user.name || quote.approvedBy || "High-End Homes"
+    const advisorName = session.user.name || quote.approvedBy || "Bennet Pfeifer"
     const advisorEmail = session.user.email || "bennet.pfeifer@highendhomes.de"
 
     const baseUrl = process.env.AUTH_URL || process.env.NEXTAUTH_URL || 'http://localhost:3001'
