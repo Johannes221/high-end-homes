@@ -5,19 +5,6 @@ import { prisma } from "@/lib/prisma"
 import { parsePersistedQuotePayload, resolveQuotePricing } from "@/lib/quote"
 import { sendEmail } from "@/lib/email"
 
-let puppeteer: typeof import("puppeteer-core") | null = null
-let chromium: typeof import("@sparticuz/chromium").default | null = null
-
-try {
-  // eslint-disable-next-line @typescript-eslint/no-require-imports
-  puppeteer = require("puppeteer-core")
-  // eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-unused-vars
-  chromium = require("@sparticuz/chromium").default
-  console.log("Puppeteer-core + Chromium loaded successfully")
-} catch (error) {
-  console.error("Puppeteer not available:", error)
-}
-
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
 
@@ -30,10 +17,21 @@ function formatCurrency(value: number) {
 }
 
 export async function POST(_request: NextRequest, context: { params: Promise<{ id: string }> }) {
+  let puppeteer: typeof import("puppeteer-core") | null = null
+  let chromium: any = null
   let browser: Awaited<ReturnType<typeof import("puppeteer-core").launch>> | null = null
   let quoteId = "unknown"
 
   try {
+    // Dynamischer Import für Puppeteer und Chromium
+    try {
+      puppeteer = await import("puppeteer-core")
+      chromium = (await import("@sparticuz/chromium")).default
+      console.log("Puppeteer-core + Chromium loaded successfully")
+    } catch (error) {
+      console.error("Puppeteer not available:", error)
+    }
+
     if (!puppeteer) {
       console.error("Puppeteer is not available - cannot generate PDF")
       return NextResponse.json(
