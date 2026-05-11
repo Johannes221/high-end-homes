@@ -57,6 +57,16 @@ export async function POST(_request: NextRequest, context: { params: Promise<{ i
       return NextResponse.json({ success: false, error: "Anfrage nicht gefunden." }, { status: 404 })
     }
 
+    // Fix für leere buildingType-Werte (NOT NULL Constraint workaround)
+    if (!quote.buildingType) {
+      await prisma.quoteRequest.update({
+        where: { id },
+        data: { buildingType: "Nicht angegeben" }
+      })
+      quote.buildingType = "Nicht angegeben"
+      console.log("Fixed null buildingType for quote:", id)
+    }
+
     const payload = parsePersistedQuotePayload(quote.payloadJson)
     const pricingSummary = resolveQuotePricing(payload, payload.pricing)
     const advisorName = session.user.name || quote.approvedBy || "Bennet Pfeifer"
