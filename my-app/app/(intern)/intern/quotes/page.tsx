@@ -70,7 +70,7 @@ type QuoteItem = {
   company: string | null
   address: string | null
   squareMeters: number
-  buildingType: string
+  buildingType: string | null
   constructionYear: string | null
   floor: string | null
   elevator: string | null
