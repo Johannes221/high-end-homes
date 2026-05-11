@@ -77,16 +77,26 @@ export async function GET() {
       return NextResponse.json({ success: false, error: "Nicht eingeloggt." }, { status: 401 })
     }
 
-    const quotes = await prisma.quoteRequest.findMany({
-      orderBy: { createdAt: "desc" },
-    })
+    // Timeout für Datenbankabfrage
+    const quotes = await Promise.race([
+      prisma.quoteRequest.findMany({
+        orderBy: { createdAt: "desc" },
+      }),
+      new Promise((_, reject) => 
+        setTimeout(() => reject(new Error("Datenbank Timeout - DATABASE_URL fehlt auf Render.com")), 5000)
+      )
+    ]) as any[]
 
     return NextResponse.json({
       success: true,
-      quotes: quotes.map((quote: (typeof quotes)[number]) => serializeQuote(quote, false)),
+      quotes: quotes.map((quote) => serializeQuote(quote, false)),
     })
   } catch (error) {
     console.error("Quotes API error:", error)
-    return NextResponse.json({ success: false, error: "Anfragen konnten nicht geladen werden." }, { status: 500 })
+    return NextResponse.json({ 
+      success: false, 
+      error: error instanceof Error ? error.message : "Anfragen konnten nicht geladen werden.",
+      needsDatabaseConfig: true
+    }, { status: 500 })
   }
 }
