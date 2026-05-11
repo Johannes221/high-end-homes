@@ -108,6 +108,29 @@ export function QuoteFormTabs() {
     setSubmitting(true)
     setError("")
 
+    // Manuelle Validierung der Pflichtfelder
+    if (!formData.name.trim() || !formData.email.trim()) {
+      setError("Bitte füllen Sie alle Pflichtfelder aus.")
+      setSubmitting(false)
+      return
+    }
+
+    // Validierung für Entrümpelung und Entkernung: Quadratmeter und Gebäudetyp erforderlich
+    if ((type === "Entrümpelung" || type === "Entkernung") && 
+        (!formData.squareMeters.trim() || !formData.buildingType.trim())) {
+      setError("Bitte füllen Sie alle Pflichtfelder aus.")
+      setSubmitting(false)
+      return
+    }
+
+    // Validierung für Kombi und Ausbau: Quadratmeter und Projektbeschreibung erforderlich
+    if ((type === "Kombi" || type === "Ausbau") && 
+        (!formData.squareMeters.trim() || !formData.notes.trim())) {
+      setError("Bitte füllen Sie alle Pflichtfelder aus.")
+      setSubmitting(false)
+      return
+    }
+
     try {
       const payload = {
         type,

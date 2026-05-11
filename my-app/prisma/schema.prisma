@@ -25,7 +25,7 @@ model QuoteRequest {
   company           String?
   address           String?
   squareMeters      Int
-  buildingType      String
+  buildingType      String?
   constructionYear  String?
   floor             String?
   elevator          String?

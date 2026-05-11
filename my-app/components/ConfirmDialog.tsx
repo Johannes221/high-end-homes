@@ -44,7 +44,7 @@ export function ConfirmDialog({
           <DialogDescription className="text-gray-900 text-base whitespace-pre-wrap">{description}</DialogDescription>
         </DialogHeader>
         <DialogFooter className="flex-col sm:flex-row gap-2">
-          <Button variant="outline" onClick={() => onOpenChange(false)} className="w-full sm:w-auto">
+          <Button variant="secondary" onClick={() => onOpenChange(false)} className="w-full sm:w-auto">
             {cancelLabel}
           </Button>
           <Button variant={variant} onClick={handleConfirm} className="w-full sm:w-auto">

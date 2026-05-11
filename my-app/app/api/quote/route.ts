@@ -207,12 +207,10 @@ export async function POST(request: Request) {
     const submission = normalizeSubmission(rawBody)
     console.log("Normalized submission:", JSON.stringify(submission, null, 2))
 
-    if (!submission.name || !submission.email || !submission.squareMeters || !submission.buildingType) {
+    if (!submission.name || !submission.email) {
       console.log("Validation failed - missing fields:", {
         name: !!submission.name,
         email: !!submission.email,
-        squareMeters: !!submission.squareMeters,
-        buildingType: !!submission.buildingType,
       })
       return jsonWithCors(
         request,
@@ -234,7 +232,7 @@ export async function POST(request: Request) {
         company: submission.company || null,
         address: submission.address || null,
         squareMeters: Math.max(Number(submission.squareMeters) || 0, 0),
-        buildingType: submission.buildingType,
+        buildingType: submission.buildingType || null,
         constructionYear: submission.constructionYear || null,
         floor: submission.floor || null,
         elevator: submission.elevator || null,

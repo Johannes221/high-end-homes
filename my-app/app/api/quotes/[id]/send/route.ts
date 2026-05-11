@@ -1,10 +1,17 @@
 import { NextRequest, NextResponse } from "next/server"
-import puppeteer from "puppeteer"
 
 import { auth } from "@/lib/auth"
-import { sendEmail } from "@/lib/email"
 import { prisma } from "@/lib/prisma"
 import { parsePersistedQuotePayload, resolveQuotePricing } from "@/lib/quote"
+import { sendEmail } from "@/lib/email"
+
+let puppeteer: typeof import("puppeteer") | null = null
+try {
+  puppeteer = require("puppeteer")
+  console.log("Puppeteer loaded successfully")
+} catch (error) {
+  console.error("Puppeteer not available:", error)
+}
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -18,10 +25,21 @@ function formatCurrency(value: number) {
 }
 
 export async function POST(_request: NextRequest, context: { params: Promise<{ id: string }> }) {
-  let browser: Awaited<ReturnType<typeof puppeteer.launch>> | null = null
+  let browser: any = null
   let quoteId = "unknown"
 
   try {
+    if (!puppeteer) {
+      console.error("Puppeteer is not available - cannot generate PDF")
+      return NextResponse.json(
+        { 
+          success: false, 
+          error: "PDF-Generierung nicht verfügbar. Bitte kontaktieren Sie den Support." 
+        },
+        { status: 503 }
+      )
+    }
+
     const session = await auth()
 
     if (!session?.user?.id) {
@@ -45,10 +63,13 @@ export async function POST(_request: NextRequest, context: { params: Promise<{ i
     const pdfUrl = `${baseUrl}/api/quotes/${id}/pdf`
 
     console.log("Generating PDF from:", pdfUrl)
-    console.log("Puppeteer executable:", process.env.PUPPETEER_EXECUTABLE_PATH || process.env.CHROME_BIN || '/usr/bin/chromium')
+    console.log("Puppeteer config:", {
+      executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || process.env.CHROME_BIN || "default",
+      headless: true,
+    })
 
     try {
-      browser = await puppeteer.launch({
+      const launchOptions: Parameters<typeof puppeteer.launch>[0] = {
         headless: true,
         args: [
           '--no-sandbox',
@@ -58,8 +79,16 @@ export async function POST(_request: NextRequest, context: { params: Promise<{ i
           '--disable-software-rasterizer',
           '--disable-extensions',
         ],
-        executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || process.env.CHROME_BIN,
-      })
+      }
+      
+      // Nur executablePath setzen wenn explizit konfiguriert
+      if (process.env.PUPPETEER_EXECUTABLE_PATH || process.env.CHROME_BIN) {
+        launchOptions.executablePath = process.env.PUPPETEER_EXECUTABLE_PATH || process.env.CHROME_BIN
+      }
+      
+      console.log("Launching browser with options:", launchOptions)
+      browser = await puppeteer.launch(launchOptions)
+      console.log("Browser launched successfully")
     } catch (launchError) {
       console.error("Puppeteer launch failed:", launchError)
       throw new Error(`Browser konnte nicht gestartet werden: ${launchError instanceof Error ? launchError.message : String(launchError)}`)
