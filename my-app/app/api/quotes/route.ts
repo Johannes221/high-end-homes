@@ -77,26 +77,70 @@ export async function GET() {
       return NextResponse.json({ success: false, error: "Nicht eingeloggt." }, { status: 401 })
     }
 
-    // Timeout für Datenbankabfrage
-    const quotes = await Promise.race([
-      prisma.quoteRequest.findMany({
-        orderBy: { createdAt: "desc" },
-      }),
-      new Promise((_, reject) => 
-        setTimeout(() => reject(new Error("Datenbank Timeout - DATABASE_URL fehlt auf Render.com")), 5000)
-      )
-    ]) as any[]
+    // Einfache Abfrage ohne komplexe Serialisierung
+    const quotes = await prisma.quoteRequest.findMany({
+      orderBy: { createdAt: "desc" },
+      select: {
+        id: true,
+        type: true,
+        name: true,
+        email: true,
+        phone: true,
+        company: true,
+        address: true,
+        squareMeters: true,
+        buildingType: true,
+        constructionYear: true,
+        floor: true,
+        elevator: true,
+        quantityEstimate: true,
+        valuables: true,
+        asbestosRequired: true,
+        otherPollutants: true,
+        disposalWanted: true,
+        permitStatus: true,
+        desiredDate: true,
+        imageFileNamesJson: true,
+        notes: true,
+        complexityScore: true,
+        complexityLevel: true,
+        effortRange: true,
+        estimatedMinPrice: true,
+        estimatedMaxPrice: true,
+        approvalStatus: true,
+        approvedAt: true,
+        approvedBy: true,
+        sharedAt: true,
+        createdAt: true,
+        updatedAt: true,
+        // Komplexe Felder weglassen für Performance
+        materialsJson: false,
+        removalItemsJson: false,
+        imagesBase64Json: false,
+        payloadJson: false,
+        complexityFlagsJson: false,
+      }
+    })
 
     return NextResponse.json({
       success: true,
-      quotes: quotes.map((quote) => serializeQuote(quote, false)),
+      quotes: quotes.map(quote => ({
+        ...quote,
+        materials: [],
+        removalItems: [],
+        imageFileNames: JSON.parse(quote.imageFileNamesJson),
+        imagesBase64: [],
+        complexityFlags: [],
+        payload: null,
+        pricing: null,
+        pricingSummary: null,
+      }))
     })
   } catch (error) {
     console.error("Quotes API error:", error)
     return NextResponse.json({ 
       success: false, 
-      error: error instanceof Error ? error.message : "Anfragen konnten nicht geladen werden.",
-      needsDatabaseConfig: true
+      error: error instanceof Error ? error.message : "Anfragen konnten nicht geladen werden."
     }, { status: 500 })
   }
 }
