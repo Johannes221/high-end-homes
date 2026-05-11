@@ -758,7 +758,7 @@ export default function QuotesPage() {
         </div>
 
         {/* Results count */}
-        <div className="mt-3 text-sm text-gray-600">
+        <div className="mt-3 text-sm text-gray-900 font-medium">
           {sortedQuotes.length} von {quotes.length} Anfrage{quotes.length !== 1 ? "n" : ""}
           {(searchQuery || filterType !== "all" || filterStatus !== "all") && (
             <button
