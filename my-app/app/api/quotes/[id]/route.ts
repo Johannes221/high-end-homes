@@ -38,6 +38,7 @@ function serializeQuote(quote: {
   permitStatus: string | null
   desiredDate: string | null
   imageFileNamesJson: string
+  imagesBase64Json?: string
   notes: string | null
   complexityScore: number
   complexityLevel: string
@@ -67,6 +68,7 @@ function serializeQuote(quote: {
     materials: JSON.parse(quote.materialsJson),
     removalItems: JSON.parse(quote.removalItemsJson),
     imageFileNames: JSON.parse(quote.imageFileNamesJson),
+    imagesBase64: quote.imagesBase64Json ? JSON.parse(quote.imagesBase64Json) : [],
     complexityFlags: complexity.flags,
     payload,
     pricing: payload.pricing ?? { lineItemOverrides: [], internalNotes: "", exportedAt: null },

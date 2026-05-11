@@ -43,22 +43,37 @@ export async function POST(_request: NextRequest, context: { params: Promise<{ i
     const pdfUrl = `${baseUrl}/api/quotes/${id}/pdf`
 
     console.log("Generating PDF from:", pdfUrl)
+    console.log("Puppeteer executable:", process.env.PUPPETEER_EXECUTABLE_PATH || process.env.CHROME_BIN || '/usr/bin/chromium')
 
-    browser = await puppeteer.launch({
-      headless: true,
-      args: [
-        '--no-sandbox',
-        '--disable-setuid-sandbox',
-        '--disable-dev-shm-usage',
-        '--disable-gpu',
-        '--disable-software-rasterizer',
-        '--disable-extensions',
-      ],
-      executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || process.env.CHROME_BIN || '/usr/bin/chromium',
-    })
+    try {
+      browser = await puppeteer.launch({
+        headless: true,
+        args: [
+          '--no-sandbox',
+          '--disable-setuid-sandbox',
+          '--disable-dev-shm-usage',
+          '--disable-gpu',
+          '--disable-software-rasterizer',
+          '--disable-extensions',
+        ],
+        executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || process.env.CHROME_BIN,
+      })
+    } catch (launchError) {
+      console.error("Puppeteer launch failed:", launchError)
+      throw new Error(`Browser konnte nicht gestartet werden: ${launchError instanceof Error ? launchError.message : String(launchError)}`)
+    }
 
     const page = await browser.newPage()
-    await page.goto(pdfUrl, { waitUntil: 'networkidle0' })
+    
+    page.on('console', (msg) => console.log('Browser console:', msg.text()))
+    page.on('pageerror', (error) => console.error('Browser page error:', error))
+    
+    try {
+      await page.goto(pdfUrl, { waitUntil: 'networkidle0', timeout: 30000 })
+    } catch (gotoError) {
+      console.error("Page navigation failed:", gotoError)
+      throw new Error(`PDF-Seite konnte nicht geladen werden: ${gotoError instanceof Error ? gotoError.message : String(gotoError)}`)
+    }
 
     const pdfBuffer = await page.pdf({
       format: 'A4',
@@ -85,12 +100,15 @@ export async function POST(_request: NextRequest, context: { params: Promise<{ i
         </head>
         <body style="margin:0;padding:24px;background:#f9fafb;font-family:Arial,sans-serif;">
           <div style="max-width:600px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:16px;padding:32px;">
-            <h1 style="margin:0 0 16px 0;color:#111827;font-size:24px;">Ihr Angebot von High-End Homes</h1>
+            <h1 style="margin:0 0 16px 0;color:#111827;font-size:24px;">Ihre unverbindliche Preisindikation von High-End Homes</h1>
             <p style="margin:0 0 16px 0;color:#4b5563;font-size:15px;line-height:1.6;">
               Sehr geehrte/r ${quote.name},
             </p>
             <p style="margin:0 0 16px 0;color:#4b5563;font-size:15px;line-height:1.6;">
-              vielen Dank für Ihre Anfrage. Im Anhang finden Sie unser detailliertes Angebot für Ihr Projekt <strong>${quote.type}</strong>.
+              vielen Dank für Ihre Anfrage. Im Anhang finden Sie eine <strong>unverbindliche Preisindikation</strong> für Ihr Projekt <strong>${quote.type}</strong>.
+            </p>
+            <p style="margin:0 0 16px 0;color:#4b5563;font-size:15px;line-height:1.6;">
+              Die angegebenen Preise basieren auf den von Ihnen übermittelten Informationen und stellen eine erste Orientierung dar. Nach einer persönlichen Vor-Ort-Besichtigung erstellen wir Ihnen gerne ein verbindliches Angebot.
             </p>
             <div style="background:#f9fafb;border:1px solid #e5e7eb;border-radius:12px;padding:20px;margin:24px 0;">
               <h2 style="margin:0 0 12px 0;color:#111827;font-size:16px;">Angebotszusammenfassung</h2>
@@ -110,7 +128,7 @@ export async function POST(_request: NextRequest, context: { params: Promise<{ i
               </table>
             </div>
             <p style="margin:0 0 16px 0;color:#4b5563;font-size:15px;line-height:1.6;">
-              Bei Fragen oder Änderungswünschen stehen wir Ihnen gerne zur Verfügung.
+              Bei Fragen, für eine Terminvereinbarung zur Besichtigung oder bei Änderungswünschen stehen wir Ihnen gerne zur Verfügung.
             </p>
             <p style="margin:0 0 8px 0;color:#4b5563;font-size:15px;line-height:1.6;">
               Mit freundlichen Grüßen<br />
@@ -130,7 +148,7 @@ export async function POST(_request: NextRequest, context: { params: Promise<{ i
 
     const result = await sendEmail({
       to: quote.email,
-      subject: `Ihr Angebot von High-End Homes – ${quote.type}`,
+      subject: `Ihre unverbindliche Preisindikation von High-End Homes – ${quote.type}`,
       html: emailHtml,
       attachments: [
         {

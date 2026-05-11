@@ -45,7 +45,7 @@ function serializeQuote(quote: {
   payloadJson: string
   createdAt: Date
   updatedAt: Date
-}) {
+}, includeImages = false) {
   const payload = parsePersistedQuotePayload(quote.payloadJson)
   const complexity = evaluateComplexity(payload)
   const estimate = estimatePriceRange(payload, complexity)
@@ -61,7 +61,7 @@ function serializeQuote(quote: {
     materials: JSON.parse(quote.materialsJson),
     removalItems: JSON.parse(quote.removalItemsJson),
     imageFileNames: JSON.parse(quote.imageFileNamesJson),
-    imagesBase64: JSON.parse(quote.imagesBase64Json),
+    imagesBase64: includeImages ? JSON.parse(quote.imagesBase64Json) : [],
     complexityFlags: complexity.flags,
     payload,
     pricing: payload.pricing ?? { lineItemOverrides: [], internalNotes: "", exportedAt: null },
@@ -83,7 +83,7 @@ export async function GET() {
 
     return NextResponse.json({
       success: true,
-      quotes: quotes.map((quote: (typeof quotes)[number]) => serializeQuote(quote)),
+      quotes: quotes.map((quote: (typeof quotes)[number]) => serializeQuote(quote, false)),
     })
   } catch (error) {
     console.error("Quotes API error:", error)

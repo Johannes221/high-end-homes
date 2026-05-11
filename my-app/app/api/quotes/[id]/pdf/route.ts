@@ -160,11 +160,6 @@ function buildPdfHtml(input: {
         border-bottom: 2px solid #c9a45c;
         padding-bottom: 20px;
       }
-      .brand img {
-        width: 220px;
-        height: auto;
-        margin-bottom: 18px;
-      }
       .brand p,
       .meta,
       .small,
@@ -314,7 +309,9 @@ function buildPdfHtml(input: {
     <main class="page">
       <div class="header">
         <div class="brand">
-          <img src="/logo-black.png" alt="High-End Homes" />
+          <div style="width: 220px; height: 60px; margin-bottom: 18px; background: #111827; display: flex; align-items: center; justify-content: center; border-radius: 8px;">
+            <span style="color: #c9a45c; font-size: 20px; font-weight: 700; letter-spacing: 0.05em;">HIGH-END HOMES</span>
+          </div>
           <p>
             High-End Homes<br />
             Angebotserstellung & Objektservice<br />
@@ -323,7 +320,7 @@ function buildPdfHtml(input: {
           </p>
         </div>
         <div>
-          <span class="badge">Angebot</span>
+          <span class="badge">Unverbindliche Preisindikation</span>
           <h1>High-End Homes</h1>
           <div class="meta">
             Angebotsnr.: ${escapeHtml(quote.id)}<br />
@@ -363,7 +360,7 @@ function buildPdfHtml(input: {
             <span>Gesamtpreis</span>
             <span>${escapeHtml(formatCurrency(pricingSummary.finalTotal))}</span>
           </div>
-          <div class="small" style="margin-top: 10px;">Alle Preise als Richtwert gemäß interner Freigabe.</div>
+          <div class="small" style="margin-top: 10px;">Alle Preise sind unverbindliche Richtwerte gemäß interner Freigabe. Endgültige Preise nach Besichtigung.</div>
         </div>
       </section>
 
@@ -391,7 +388,8 @@ function buildPdfHtml(input: {
       </section>
 
       <div class="footer">
-        Dieses Angebot wurde digital erstellt auf Basis der freigegebenen Anfrage vom ${escapeHtml(formatDate(quote.createdAt))}.
+        <strong>Hinweis:</strong> Dieses Dokument stellt eine unverbindliche Preisindikation dar. Die angegebenen Preise basieren auf den übermittelten Informationen und können nach einer Vor-Ort-Besichtigung abweichen. Verbindliche Angebote erfolgen nach persönlicher Begutachtung.<br /><br />
+        Erstellt am ${escapeHtml(formatDate(quote.createdAt))} auf Basis der freigegebenen Anfrage.
       </div>
     </main>
     <script>

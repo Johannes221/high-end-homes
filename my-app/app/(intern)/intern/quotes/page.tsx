@@ -1,12 +1,13 @@
 "use client"
 
 import { useEffect, useMemo, useState } from "react"
+import { ConfirmDialog } from "@/components/ConfirmDialog"
+import { AlertDialog } from "@/components/AlertDialog"
 
 type QuoteLineItemOverride = {
   key: string
   amount?: number | null
   included?: boolean
-  processed?: boolean
 }
 
 type QuoteCustomLineItem = {
@@ -156,7 +157,7 @@ function downloadCsv(quote: QuoteItem) {
   URL.revokeObjectURL(link.href)
 }
 
-function downloadText(quote: QuoteItem, preview: any) {
+function downloadText(quote: QuoteItem, preview: QuotePricingSummary) {
   const text = `
 UNVERBINDLICHES PREISANGEBOT
 ============================
@@ -187,7 +188,7 @@ Final kalkuliert: ${formatCurrency(preview.finalTotal)}
 
 POSITIONEN
 ---------
-${preview.lineItems.map((item: any) =>
+${preview.lineItems.map((item) =>
   `- ${item.label}: ${formatCurrency(item.finalAmount)} (${item.included ? "inkludiert" : "exkludiert"})`
 ).join("\n")}
 
@@ -215,6 +216,7 @@ export default function QuotesPage() {
   const [loading, setLoading] = useState(true)
   const [updatingId, setUpdatingId] = useState("")
   const [expandedId, setExpandedId] = useState("")
+  const [loadedImages, setLoadedImages] = useState<Record<string, string[]>>({})
   const [draftOverrides, setDraftOverrides] = useState<Record<string, QuoteLineItemOverride[]>>({})
   const [draftNotes, setDraftNotes] = useState<Record<string, string>>({})
   const [draftCustomItems, setDraftCustomItems] = useState<Record<string, QuoteCustomLineItem[]>>({})
@@ -224,11 +226,22 @@ export default function QuotesPage() {
   const [lightboxScale, setLightboxScale] = useState(1)
   const [lightboxOffset, setLightboxOffset] = useState({ x: 0, y: 0 })
   const [touchStart, setTouchStart] = useState<{ x: number; y: number } | null>(null)
-  const [draftProcessed, setDraftProcessed] = useState<Record<string, Record<string, boolean>>>({})
   const [searchQuery, setSearchQuery] = useState("")
   const [filterType, setFilterType] = useState<string>("all")
   const [filterStatus, setFilterStatus] = useState<string>("all")
   const [sortBy, setSortBy] = useState<string>("date-desc")
+  const [confirmDialog, setConfirmDialog] = useState<{
+    open: boolean
+    title: string
+    description: string
+    onConfirm: () => void
+  }>({ open: false, title: "", description: "", onConfirm: () => {} })
+  const [alertDialog, setAlertDialog] = useState<{
+    open: boolean
+    title: string
+    description: string
+    variant?: "default" | "destructive"
+  }>({ open: false, title: "", description: "", variant: "default" })
 
   const loadQuotes = async () => {
     try {
@@ -254,7 +267,6 @@ export default function QuotesPage() {
         key: item.key,
         amount: typeof saved?.amount === "number" ? saved.amount : item.source === "manual" ? item.finalAmount : null,
         included: saved?.included ?? item.included,
-        processed: saved?.processed ?? false,
       }
     })
   }
@@ -277,14 +289,23 @@ export default function QuotesPage() {
       ...current,
       [quote.id]: { label: "", amount: "", details: "" },
     }))
-    const processedMap: Record<string, boolean> = {}
-    overrides.forEach((item) => {
-      processedMap[item.key] = item.processed ?? false
-    })
-    setDraftProcessed((current) => ({
-      ...current,
-      [quote.id]: processedMap,
-    }))
+  }
+
+  const loadQuoteImages = async (quoteId: string) => {
+    if (loadedImages[quoteId]) return
+    
+    try {
+      const response = await fetch(`/api/quotes/${quoteId}`)
+      const data = await response.json()
+      if (response.ok && data.success && data.quote) {
+        setLoadedImages((current) => ({
+          ...current,
+          [quoteId]: data.quote.imagesBase64 || [],
+        }))
+      }
+    } catch (error) {
+      console.error("Failed to load images:", error)
+    }
   }
 
   const updateQuote = async (id: string, payload: { approvalStatus?: string; markExported?: boolean }) => {
@@ -294,6 +315,19 @@ export default function QuotesPage() {
       if (!quote) {
         return
       }
+
+      const optimisticUpdate = {
+        ...quote,
+        approvalStatus: payload.approvalStatus ?? quote.approvalStatus,
+        pricing: {
+          ...quote.pricing,
+          lineItemOverrides: draftOverrides[id] ?? quote.pricing.lineItemOverrides ?? [],
+          customLineItems: draftCustomItems[id] ?? quote.pricing.customLineItems ?? [],
+          internalNotes: draftNotes[id] ?? quote.pricing.internalNotes ?? "",
+        },
+      }
+      
+      setQuotes((current) => current.map((q) => (q.id === id ? optimisticUpdate : q)))
 
       const response = await fetch(`/api/quotes/${id}`, {
         method: "PATCH",
@@ -312,6 +346,32 @@ export default function QuotesPage() {
       if (response.ok && data.success && data.quote) {
         setQuotes((current) => current.map((quote) => (quote.id === id ? { ...quote, ...data.quote } : quote)))
         syncDraft(data.quote)
+        
+        if (payload.approvalStatus === "approved") {
+          const sendResponse = await fetch(`/api/quotes/${id}/send`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+          })
+          
+          const sendData = await sendResponse.json()
+          
+          if (sendResponse.ok && sendData.success) {
+            setAlertDialog({
+              open: true,
+              title: "Auf www.highendhomes.de wird Folgendes angezeigt:",
+              description: `✅ Anfrage freigegeben und E-Mail mit PDF erfolgreich an ${quote.email} versendet!`,
+              variant: "default",
+            })
+          } else {
+            setAlertDialog({
+              open: true,
+              title: "Auf www.highendhomes.de wird Folgendes angezeigt:",
+              description: `⚠️ Anfrage freigegeben, aber E-Mail-Versand fehlgeschlagen: ${sendData.error || "Unbekannter Fehler"}`,
+              variant: "destructive",
+            })
+          }
+        }
+        
         return data.quote
       }
     } finally {
@@ -322,58 +382,94 @@ export default function QuotesPage() {
   }
 
   const sendQuoteEmail = async (quote: QuoteItem) => {
-    if (!confirm(`Angebot als PDF an ${quote.email} senden?`)) {
-      return
-    }
+    setConfirmDialog({
+      open: true,
+      title: "Auf www.highendhomes.de wird Folgendes angezeigt:",
+      description: `Angebot als PDF an ${quote.email} senden?`,
+      onConfirm: async () => {
+        setUpdatingId(quote.id)
+        try {
+          const response = await fetch(`/api/quotes/${quote.id}/send`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+          })
 
-    setUpdatingId(quote.id)
-    try {
-      const response = await fetch(`/api/quotes/${quote.id}/send`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-      })
+          const data = await response.json()
 
-      const data = await response.json()
-
-      if (response.ok && data.success) {
-        alert(`✅ Angebot erfolgreich an ${quote.email} versendet!`)
-        await loadQuotes()
-      } else {
-        alert(`❌ Fehler beim Versenden: ${data.error || "Unbekannter Fehler"}`)
-      }
-    } catch (error) {
-      console.error("Send quote error:", error)
-      alert(`❌ Fehler beim Versenden: ${error instanceof Error ? error.message : String(error)}`)
-    } finally {
-      setUpdatingId("")
-    }
+          if (response.ok && data.success) {
+            setAlertDialog({
+              open: true,
+              title: "Auf www.highendhomes.de wird Folgendes angezeigt:",
+              description: `✅ Angebot erfolgreich an ${quote.email} versendet!`,
+              variant: "default",
+            })
+            await loadQuotes()
+          } else {
+            setAlertDialog({
+              open: true,
+              title: "Auf www.highendhomes.de wird Folgendes angezeigt:",
+              description: `❌ Fehler beim Versenden: ${data.error || "Unbekannter Fehler"}`,
+              variant: "destructive",
+            })
+          }
+        } catch (error) {
+          console.error("Send quote error:", error)
+          setAlertDialog({
+            open: true,
+            title: "Auf www.highendhomes.de wird Folgendes angezeigt:",
+            description: `❌ Fehler beim Versenden: ${error instanceof Error ? error.message : String(error)}`,
+            variant: "destructive",
+          })
+        } finally {
+          setUpdatingId("")
+        }
+      },
+    })
   }
 
   const deleteQuote = async (quote: QuoteItem) => {
-    if (!confirm(`Anfrage von ${quote.name} (${quote.email}) wirklich löschen?\n\nDieser Vorgang kann nicht rückgängig gemacht werden!`)) {
-      return
-    }
+    setConfirmDialog({
+      open: true,
+      title: "Auf www.highendhomes.de wird Folgendes angezeigt:",
+      description: `Anfrage von ${quote.name} (${quote.email}) wirklich löschen?\n\nDieser Vorgang kann nicht rückgängig gemacht werden!`,
+      onConfirm: async () => {
+        setUpdatingId(quote.id)
+        try {
+          const response = await fetch(`/api/quotes/${quote.id}`, {
+            method: "DELETE",
+          })
 
-    setUpdatingId(quote.id)
-    try {
-      const response = await fetch(`/api/quotes/${quote.id}`, {
-        method: "DELETE",
-      })
+          const data = await response.json()
 
-      const data = await response.json()
-
-      if (response.ok && data.success) {
-        alert(`✅ Anfrage erfolgreich gelöscht!`)
-        setQuotes((current) => current.filter((q) => q.id !== quote.id))
-      } else {
-        alert(`❌ Fehler beim Löschen: ${data.error || "Unbekannter Fehler"}`)
-      }
-    } catch (error) {
-      console.error("Delete quote error:", error)
-      alert(`❌ Fehler beim Löschen: ${error instanceof Error ? error.message : String(error)}`)
-    } finally {
-      setUpdatingId("")
-    }
+          if (response.ok && data.success) {
+            setAlertDialog({
+              open: true,
+              title: "Auf www.highendhomes.de wird Folgendes angezeigt:",
+              description: `✅ Anfrage erfolgreich gelöscht!`,
+              variant: "default",
+            })
+            setQuotes((current) => current.filter((q) => q.id !== quote.id))
+          } else {
+            setAlertDialog({
+              open: true,
+              title: "Auf www.highendhomes.de wird Folgendes angezeigt:",
+              description: `❌ Fehler beim Löschen: ${data.error || "Unbekannter Fehler"}`,
+              variant: "destructive",
+            })
+          }
+        } catch (error) {
+          console.error("Delete quote error:", error)
+          setAlertDialog({
+            open: true,
+            title: "Auf www.highendhomes.de wird Folgendes angezeigt:",
+            description: `❌ Fehler beim Löschen: ${error instanceof Error ? error.message : String(error)}`,
+            variant: "destructive",
+          })
+        } finally {
+          setUpdatingId("")
+        }
+      },
+    })
   }
 
   const getDraftOverrides = (quote: QuoteItem) => {
@@ -415,9 +511,13 @@ export default function QuotesPage() {
       }
     })
 
+    const autoTotal = lineItems.filter((item) => item.included && item.source === "auto").reduce((sum, item) => sum + item.finalAmount, 0)
+    const finalTotal = lineItems.filter((item) => item.included).reduce((sum, item) => sum + item.finalAmount, 0)
+    
     return {
       lineItems,
-      finalTotal: lineItems.filter((item) => item.included).reduce((sum, item) => sum + item.finalAmount, 0),
+      autoTotal,
+      finalTotal,
     }
   }
 
@@ -428,18 +528,6 @@ export default function QuotesPage() {
 
   const toggleLineItemIncluded = (quote: QuoteItem, key: string) => {
     const next = getDraftOverrides(quote).map((item) => item.key === key ? { ...item, included: item.included === false ? true : false } : item)
-    setDraftOverrides((current) => ({ ...current, [quote.id]: next }))
-  }
-
-  const toggleLineItemProcessed = (quote: QuoteItem, key: string) => {
-    setDraftProcessed((current) => ({
-      ...current,
-      [quote.id]: {
-        ...(current[quote.id] ?? {}),
-        [key]: !(current[quote.id]?.[key] ?? false),
-      },
-    }))
-    const next = getDraftOverrides(quote).map((item) => item.key === key ? { ...item, processed: !(item.processed ?? false) } : item)
     setDraftOverrides((current) => ({ ...current, [quote.id]: next }))
   }
 
@@ -721,6 +809,14 @@ export default function QuotesPage() {
                     resetZoom()
                   }
                 }}
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement
+                  target.style.display = 'none'
+                  const parent = target.parentElement
+                  if (parent) {
+                    parent.innerHTML = '<div class="text-white text-center">Bild konnte nicht geladen werden</div>'
+                  }
+                }}
                 draggable={false}
               />
             </div>
@@ -743,7 +839,15 @@ export default function QuotesPage() {
                     idx === lightboxIndex ? 'border-[#c9a45c] ring-2 ring-[#c9a45c]/30' : 'border-transparent hover:border-white/50'
                   }`}
                 >
-                  <img src={img} alt={`Thumbnail ${idx + 1}`} className="w-full h-full object-cover" />
+                  <img 
+                    src={img} 
+                    alt={`Thumbnail ${idx + 1}`} 
+                    className="w-full h-full object-cover"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement
+                      target.style.display = 'none'
+                    }}
+                  />
                 </button>
               ))}
             </div>
@@ -882,49 +986,69 @@ export default function QuotesPage() {
                     <p><strong>Dateien:</strong> {quote.imageFileNames.filter(name => name && !name.startsWith("data:") && name.length < 100).join(", ") || "-"}</p>
                   </div>
 
-                  {quote.imagesBase64 && quote.imagesBase64.length > 0 ? (
-                    <div className="mt-4 col-span-full">
-                      <div className="flex items-center justify-between mb-3">
-                        <div className="flex items-center gap-2">
-                          <svg className="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                          </svg>
-                          <p className="text-sm font-semibold text-gray-800">Hochgeladene Bilder ({quote.imagesBase64.length})</p>
-                        </div>
-                        <button
-                          type="button"
-                          onClick={() => openLightbox(quote.imagesBase64, 0)}
-                          className="flex items-center gap-2 text-sm bg-gray-100 text-gray-700 px-3 py-1.5 rounded-lg hover:bg-gray-200 transition-colors font-medium"
-                        >
-                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
-                          </svg>
-                          Alle anzeigen
-                        </button>
-                      </div>
-                      <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
-                        {quote.imagesBase64.map((base64, index) => (
-                          <div key={index} className="relative group aspect-square bg-gray-100 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow cursor-pointer" onClick={() => openLightbox(quote.imagesBase64, index)}>
-                            <img
-                              src={base64}
-                              alt={`Bild ${index + 1}`}
-                              className="w-full h-full object-cover"
-                            />
-                            {/* Hover Overlay */}
-                            <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
-                              <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
-                              </svg>
-                            </div>
-                            {/* Bildnummer */}
-                            <div className="absolute top-1 left-1 bg-black/60 backdrop-blur-sm text-white text-xs font-medium px-2 py-0.5 rounded">
-                              {index + 1}
-                            </div>
+                  {(() => {
+                    const images = loadedImages[quote.id] || []
+                    const validImages = images.filter((base64) => {
+                      if (!base64 || typeof base64 !== 'string') return false
+                      if (!base64.startsWith('data:image/')) return false
+                      if (base64.length < 100) return false
+                      return true
+                    })
+                    
+                    if (validImages.length === 0) return null
+                    
+                    return (
+                      <div className="mt-4 col-span-full">
+                        <div className="flex items-center justify-between mb-3">
+                          <div className="flex items-center gap-2">
+                            <svg className="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                            </svg>
+                            <p className="text-sm font-semibold text-gray-800">Hochgeladene Bilder ({validImages.length})</p>
                           </div>
-                        ))}
+                          <button
+                            type="button"
+                            onClick={() => openLightbox(validImages, 0)}
+                            className="flex items-center gap-2 text-sm bg-gray-100 text-gray-700 px-3 py-1.5 rounded-lg hover:bg-gray-200 transition-colors font-medium"
+                          >
+                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
+                            </svg>
+                            Vollbild
+                          </button>
+                        </div>
+                        <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
+                          {validImages.map((base64, index) => (
+                            <div key={index} className="relative group aspect-square bg-gray-100 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow cursor-pointer" onClick={() => openLightbox(validImages, index)}>
+                              <img
+                                src={base64}
+                                alt={`Bild ${index + 1}`}
+                                className="w-full h-full object-cover"
+                                onError={(e) => {
+                                  const target = e.target as HTMLImageElement
+                                  target.style.display = 'none'
+                                  const parent = target.parentElement
+                                  if (parent) {
+                                    parent.innerHTML = '<div class="w-full h-full flex items-center justify-center bg-gray-200 text-gray-500 text-xs">Fehler</div>'
+                                  }
+                                }}
+                              />
+                              {/* Hover Overlay */}
+                              <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5l-5-5m5 5v-4m0 4h-4" />
+                                </svg>
+                              </div>
+                              {/* Bildnummer */}
+                              <div className="absolute top-1 left-1 bg-black/60 backdrop-blur-sm text-white text-xs font-medium px-2 py-0.5 rounded">
+                                {index + 1}
+                              </div>
+                            </div>
+                          ))}
+                        </div>
                       </div>
-                    </div>
-                  ) : null}
+                    )
+                  })()}
                 </div>
 
                 {quote.notes ? <p className="text-sm text-gray-700"><strong>Anmerkungen:</strong> {quote.notes}</p> : null}
@@ -939,6 +1063,7 @@ export default function QuotesPage() {
                     onClick={() => {
                       if (!isExpanded) {
                         syncDraft(quote)
+                        void loadQuoteImages(quote.id)
                       }
                       setExpandedId(isExpanded ? "" : quote.id)
                     }}
@@ -1084,25 +1209,15 @@ export default function QuotesPage() {
                               <td className="py-3 pr-4 font-medium text-black">{item.label}</td>
                               <td className="py-3 pr-4 text-black">{formatCurrency(item.amount)}</td>
                               <td className="py-3 pr-4">
-                                <div className="flex items-center gap-2">
-                                  <input
-                                    type="number"
-                                    min="0"
-                                    step="1"
-                                    value={getDraftOverrides(quote).find((entry) => entry.key === item.key)?.amount ?? ""}
-                                    onChange={(event) => setLineItemAmount(quote, item.key, event.target.value)}
-                                    className="w-32 rounded-lg border border-gray-300 px-3 py-2 text-black"
-                                    placeholder={String(item.amount)}
-                                  />
-                                  <input
-                                    type="checkbox"
-                                    checked={draftProcessed[quote.id]?.[item.key] ?? false}
-                                    onChange={() => toggleLineItemProcessed(quote, item.key)}
-                                    className="h-5 w-5 text-green-600 rounded border-gray-300 focus:ring-green-500"
-                                    style={{ accentColor: '#22c55e' }}
-                                    title="Speichern"
-                                  />
-                                </div>
+                                <input
+                                  type="number"
+                                  min="0"
+                                  step="1"
+                                  value={getDraftOverrides(quote).find((entry) => entry.key === item.key)?.amount ?? ""}
+                                  onChange={(event) => setLineItemAmount(quote, item.key, event.target.value)}
+                                  className="w-32 rounded-lg border border-gray-300 px-3 py-2 text-black"
+                                  placeholder={String(item.amount)}
+                                />
                               </td>
                               <td className="py-3 pr-4 text-black">{item.source === "manual" ? "Manuell" : "Auto"}</td>
                               <td className="py-3 text-black">
@@ -1231,6 +1346,22 @@ export default function QuotesPage() {
           })}
         </div>
       )}
+
+      <ConfirmDialog
+        open={confirmDialog.open}
+        onOpenChange={(open) => setConfirmDialog({ ...confirmDialog, open })}
+        title={confirmDialog.title}
+        description={confirmDialog.description}
+        onConfirm={confirmDialog.onConfirm}
+      />
+
+      <AlertDialog
+        open={alertDialog.open}
+        onOpenChange={(open) => setAlertDialog({ ...alertDialog, open })}
+        title={alertDialog.title}
+        description={alertDialog.description}
+        variant={alertDialog.variant}
+      />
     </div>
   )
 }

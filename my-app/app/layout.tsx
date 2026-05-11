@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import SessionProviderWrapper from "@/components/SessionProviderWrapper";
+import { Geist } from "next/font/google";
+import { cn } from "@/lib/utils";
+
+const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://high-end-homes.de";
 
@@ -72,7 +76,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="de" className="h-full antialiased">
+    <html lang="de" className={cn("h-full antialiased", "font-sans", geist.variable)}>
       <body className="min-h-full flex flex-col bg-[#0a0a0a] text-white">
         <SessionProviderWrapper>{children}</SessionProviderWrapper>
       </body>
