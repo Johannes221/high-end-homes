@@ -19,39 +19,60 @@ export async function POST(request: Request) {
   try {
     console.log("Starting production cleanup - keep last 5 quotes...")
     
-    // Alle Anfragen laden
-    const allQuotes = await prisma.quoteRequest.findMany({
-      orderBy: { createdAt: "desc" }
-    })
+    // Timeout für den gesamten Vorgang
+    const result = await Promise.race([
+      (async () => {
+        // Alle Anfragen laden mit Timeout
+        const allQuotes = await Promise.race([
+          prisma.quoteRequest.findMany({
+            orderBy: { createdAt: "desc" }
+          }),
+          new Promise((_, reject) => 
+            setTimeout(() => reject(new Error("Database query timeout")), 10000)
+          )
+        ]) as any[]
 
-    console.log(`Total quotes in production: ${allQuotes.length}`)
+        console.log(`Total quotes in production: ${allQuotes.length}`)
 
-    if (allQuotes.length <= 5) {
-      return NextResponse.json({
-        success: true,
-        message: "Only 5 or fewer quotes, nothing to delete",
-        deletedCount: 0,
-        remainingCount: allQuotes.length
-      })
-    }
+        if (allQuotes.length <= 5) {
+          return {
+            success: true,
+            message: "Only 5 or fewer quotes, nothing to delete",
+            deletedCount: 0,
+            remainingCount: allQuotes.length
+          }
+        }
 
-    // Behalte die letzten 5
-    const quotesToDelete = allQuotes.slice(5)
-    console.log(`Deleting ${quotesToDelete.length} old quotes from production...`)
+        // Behalte die letzten 5
+        const quotesToDelete = allQuotes.slice(5)
+        console.log(`Deleting ${quotesToDelete.length} old quotes from production...`)
 
-    for (const quote of quotesToDelete) {
-      await prisma.quoteRequest.delete({
-        where: { id: quote.id }
-      })
-      console.log(`Deleted: ${quote.name} (${quote.type})`)
-    }
+        // Lösche mit Timeout pro Anfrage
+        let deletedCount = 0
+        for (const quote of quotesToDelete) {
+          await Promise.race([
+            prisma.quoteRequest.delete({ where: { id: quote.id } }),
+            new Promise((_, reject) => 
+              setTimeout(() => reject(new Error("Delete timeout")), 5000)
+            )
+          ])
+          console.log(`Deleted: ${quote.name} (${quote.type})`)
+          deletedCount++
+        }
 
-    return NextResponse.json({
-      success: true,
-      message: `Deleted ${quotesToDelete.length} old quotes, keeping last 5`,
-      deletedCount: quotesToDelete.length,
-      remainingCount: 5
-    })
+        return {
+          success: true,
+          message: `Deleted ${deletedCount} old quotes, keeping last 5`,
+          deletedCount,
+          remainingCount: 5
+        }
+      })(),
+      new Promise((_, reject) => 
+        setTimeout(() => reject(new Error("Overall cleanup timeout (30s)")), 30000)
+      )
+    ])
+
+    return NextResponse.json(result)
   } catch (error) {
     console.error("Production cleanup failed:", error)
     return NextResponse.json(
