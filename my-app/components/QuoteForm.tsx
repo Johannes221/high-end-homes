@@ -754,6 +754,22 @@ export function QuoteForm() {
           margin: "4px 0",
         }} />
 
+        {/* Hinweis Banner */}
+        <div style={{
+          background: "#fef3c7",
+          border: "1px solid #fbbf24",
+          borderRadius: 8,
+          padding: "14px 16px",
+          display: "flex",
+          alignItems: "start",
+          gap: 12,
+        }}>
+          <div style={{ fontSize: 20, flexShrink: 0 }}>⚠️</div>
+          <p style={{ margin: 0, color: "#92400e", fontSize: 14, lineHeight: 1.5 }}>
+            <strong>Unverbindliches Preisangebot:</strong> Dieses Angebot dient nur als Orientierung und ist ohne Gewähr. Endgültige Preise nach Ortsbesichtigung.
+          </p>
+        </div>
+
         {activeTab === "entruempelung" ? (
           clearanceSubmitted ? (
             <div style={cardStyle}>

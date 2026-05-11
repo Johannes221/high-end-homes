@@ -19,6 +19,7 @@ function formatCurrency(value: number) {
 
 export async function POST(_request: NextRequest, context: { params: Promise<{ id: string }> }) {
   let browser: Awaited<ReturnType<typeof puppeteer.launch>> | null = null
+  let quoteId = "unknown"
 
   try {
     const session = await auth()
@@ -28,6 +29,7 @@ export async function POST(_request: NextRequest, context: { params: Promise<{ i
     }
 
     const { id } = await context.params
+    quoteId = id
     const quote = await prisma.quoteRequest.findUnique({ where: { id } })
 
     if (!quote) {
@@ -107,6 +109,11 @@ export async function POST(_request: NextRequest, context: { params: Promise<{ i
             <p style="margin:0 0 16px 0;color:#4b5563;font-size:15px;line-height:1.6;">
               vielen Dank für Ihre Anfrage. Im Anhang finden Sie eine <strong>unverbindliche Preisindikation</strong> für Ihr Projekt <strong>${quote.type}</strong>.
             </p>
+            <div style="background:#fef3c7;border:1px solid #fbbf24;border-radius:8px;padding:16px;margin:16px 0;">
+              <p style="margin:0;color:#92400e;font-size:14px;line-height:1.5;">
+                <strong>Unverbindliches Preisangebot:</strong> Dieses Angebot dient nur als Orientierung und ist ohne Gewähr. Endgültige Preise nach Ortsbesichtigung.
+              </p>
+            </div>
             <p style="margin:0 0 16px 0;color:#4b5563;font-size:15px;line-height:1.6;">
               Die angegebenen Preise basieren auf den von Ihnen übermittelten Informationen und stellen eine erste Orientierung dar. Nach einer persönlichen Vor-Ort-Besichtigung erstellen wir Ihnen gerne ein verbindliches Angebot.
             </p>
@@ -185,21 +192,25 @@ export async function POST(_request: NextRequest, context: { params: Promise<{ i
       emailId: result.id,
     })
   } catch (error) {
-    console.error("Quote send error:", error)
-
+    console.error("=== QUOTE SEND ERROR ===")
+    console.error("Error type:", error instanceof Error ? error.constructor.name : typeof error)
+    console.error("Error message:", error instanceof Error ? error.message : String(error))
+    console.error("Error stack:", error instanceof Error ? error.stack : "No stack trace")
+    console.error("Quote ID:", quoteId)
+    
     if (browser) {
-      try {
-        await browser.close()
-      } catch (closeError) {
+      await browser.close().catch((closeError) => {
         console.error("Browser close error:", closeError)
-      }
+      })
     }
-
+    
+    const errorMessage = error instanceof Error ? error.message : "Unbekannter Fehler"
+    
     return NextResponse.json(
-      {
-        success: false,
-        error: "Angebot konnte nicht versendet werden.",
-        details: error instanceof Error ? error.message : String(error),
+      { 
+        success: false, 
+        error: `Fehler beim Versenden: ${errorMessage}`,
+        details: process.env.NODE_ENV === 'development' ? String(error) : undefined
       },
       { status: 500 }
     )

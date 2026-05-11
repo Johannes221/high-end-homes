@@ -38,16 +38,16 @@ export function ConfirmDialog({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="sm:max-w-[425px] max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle>{title}</DialogTitle>
-          <DialogDescription>{description}</DialogDescription>
+          <DialogDescription className="text-gray-900 text-base whitespace-pre-wrap">{description}</DialogDescription>
         </DialogHeader>
-        <DialogFooter>
-          <Button variant="outline" onClick={() => onOpenChange(false)}>
+        <DialogFooter className="flex-col sm:flex-row gap-2">
+          <Button variant="outline" onClick={() => onOpenChange(false)} className="w-full sm:w-auto">
             {cancelLabel}
           </Button>
-          <Button variant={variant} onClick={handleConfirm}>
+          <Button variant={variant} onClick={handleConfirm} className="w-full sm:w-auto">
             {confirmLabel}
           </Button>
         </DialogFooter>

@@ -32,7 +32,7 @@ export function AlertDialog({
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle>{title}</DialogTitle>
-          <DialogDescription>{description}</DialogDescription>
+          <DialogDescription className="text-gray-900 text-base">{description}</DialogDescription>
         </DialogHeader>
         <DialogFooter>
           <Button variant={variant} onClick={() => onOpenChange(false)}>

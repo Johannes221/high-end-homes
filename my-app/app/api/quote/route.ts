@@ -196,12 +196,24 @@ export async function OPTIONS(request: Request) {
 
 export async function POST(request: Request) {
   try {
+    console.log("=== QUOTE SUBMISSION START ===")
+    console.log("Request method:", request.method)
+    console.log("Request URL:", request.url)
+    console.log("Request headers:", Object.fromEntries(request.headers.entries()))
+    
     const rawBody = await request.json()
+    console.log("Raw body received:", JSON.stringify(rawBody, null, 2))
+    
     const submission = normalizeSubmission(rawBody)
-
-    console.log("Quote submission:", submission)
+    console.log("Normalized submission:", JSON.stringify(submission, null, 2))
 
     if (!submission.name || !submission.email || !submission.squareMeters || !submission.buildingType) {
+      console.log("Validation failed - missing fields:", {
+        name: !!submission.name,
+        email: !!submission.email,
+        squareMeters: !!submission.squareMeters,
+        buildingType: !!submission.buildingType,
+      })
       return jsonWithCors(
         request,
         { success: false, error: "Bitte füllen Sie alle Pflichtfelder aus." },
@@ -212,6 +224,7 @@ export async function POST(request: Request) {
     const complexity = evaluateComplexity(submission)
     const estimate = estimatePriceRange(submission, complexity)
 
+    console.log("Creating quote request in database...")
     const savedRequest = await prisma.quoteRequest.create({
       data: {
         type: submission.type || "Anfrage",
@@ -246,9 +259,13 @@ export async function POST(request: Request) {
         payloadJson: JSON.stringify(submission),
       },
     })
+    console.log("Quote saved with ID:", savedRequest.id)
 
+    console.log("Sending notification email...")
     await sendQuoteNotificationEmail({ submission, complexity, estimate })
+    console.log("Email sent successfully")
 
+    console.log("Archiving submission...")
     await archiveQuoteSubmission(submission.name, {
       ...submission,
       complexity,
@@ -256,7 +273,9 @@ export async function POST(request: Request) {
       databaseId: savedRequest.id,
       createdAt: new Date().toISOString(),
     })
+    console.log("Submission archived")
 
+    console.log("=== QUOTE SUBMISSION SUCCESS ===")
     return jsonWithCors(request, { success: true, id: savedRequest.id, estimate, complexity })
   } catch (error) {
     console.error("Quote API error:", error)
