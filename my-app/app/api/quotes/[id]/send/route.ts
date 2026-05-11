@@ -68,12 +68,11 @@ export async function POST(_request: NextRequest, context: { params: Promise<{ i
     const pdfUrl = `${baseUrl}/api/quotes/${id}/pdf`
 
     console.log("Generating PDF from:", pdfUrl)
-    console.log("Puppeteer will use bundled Chromium")
 
     try {
       const launchOptions: Parameters<typeof puppeteer.launch>[0] = {
         headless: true,
-        args: [
+        args: chromium ? chromium.args : [
           '--no-sandbox',
           '--disable-setuid-sandbox',
           '--disable-dev-shm-usage',
@@ -83,7 +82,16 @@ export async function POST(_request: NextRequest, context: { params: Promise<{ i
         ],
       }
       
-      console.log("Launching browser with options:", launchOptions)
+      // Serverless Chromium für Render.com
+      if (chromium) {
+        launchOptions.executablePath = await chromium.executablePath()
+        console.log("Using serverless Chromium:", launchOptions.executablePath)
+      } else if (process.env.PUPPETEER_EXECUTABLE_PATH || process.env.CHROME_BIN) {
+        launchOptions.executablePath = process.env.PUPPETEER_EXECUTABLE_PATH || process.env.CHROME_BIN
+        console.log("Using local Chrome:", launchOptions.executablePath)
+      }
+      
+      console.log("Launching browser with", chromium ? 'serverless Chromium' : 'local Chrome')
       browser = await puppeteer.launch(launchOptions)
       console.log("Browser launched successfully")
     } catch (launchError) {
