@@ -39,13 +39,22 @@ export async function POST(_request: NextRequest, context: { params: Promise<{ i
     const advisorName = session.user.name || quote.approvedBy || "High-End Homes"
     const advisorEmail = session.user.email || "bennet.pfeifer@highendhomes.de"
 
-    const pdfUrl = `http://localhost:3001/api/quotes/${id}/pdf`
+    const baseUrl = process.env.AUTH_URL || process.env.NEXTAUTH_URL || 'http://localhost:3001'
+    const pdfUrl = `${baseUrl}/api/quotes/${id}/pdf`
 
     console.log("Generating PDF from:", pdfUrl)
 
     browser = await puppeteer.launch({
       headless: true,
-      args: ['--no-sandbox', '--disable-setuid-sandbox', '--disable-dev-shm-usage'],
+      args: [
+        '--no-sandbox',
+        '--disable-setuid-sandbox',
+        '--disable-dev-shm-usage',
+        '--disable-gpu',
+        '--disable-software-rasterizer',
+        '--disable-extensions',
+      ],
+      executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || process.env.CHROME_BIN || '/usr/bin/chromium',
     })
 
     const page = await browser.newPage()
@@ -64,6 +73,8 @@ export async function POST(_request: NextRequest, context: { params: Promise<{ i
 
     await browser.close()
     browser = null
+
+    const pdfBufferNode = Buffer.from(pdfBuffer)
 
     const emailHtml = `
       <!DOCTYPE html>
@@ -124,7 +135,7 @@ export async function POST(_request: NextRequest, context: { params: Promise<{ i
       attachments: [
         {
           filename: `Angebot-${quote.name.replace(/[^a-zA-Z0-9]/g, '_')}-${quote.id.slice(0, 8)}.pdf`,
-          content: pdfBuffer,
+          content: pdfBufferNode,
         },
       ],
     })
