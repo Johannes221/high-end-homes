@@ -16,7 +16,7 @@
     "prisma:generate:local": "DATABASE_URL=file:./dev.db prisma generate",
     "prisma:push:local": "DATABASE_URL=file:./dev.db prisma db push",
     "prisma:studio:local": "DATABASE_URL=file:./dev.db prisma studio",
-    "build:production": "npm run prisma:generate && npm run build"
+    "build:production": "npm run prisma:generate && npm run prisma:push && npm run build"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
