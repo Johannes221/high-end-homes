@@ -232,7 +232,7 @@ export async function POST(request: Request) {
         company: submission.company || null,
         address: submission.address || null,
         squareMeters: Math.max(Number(submission.squareMeters) || 0, 0),
-        buildingType: submission.buildingType || null,
+        buildingType: submission.buildingType || "Nicht angegeben",
         constructionYear: submission.constructionYear || null,
         floor: submission.floor || null,
         elevator: submission.elevator || null,

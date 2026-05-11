@@ -5,10 +5,15 @@ import { prisma } from "@/lib/prisma"
 import { parsePersistedQuotePayload, resolveQuotePricing } from "@/lib/quote"
 import { sendEmail } from "@/lib/email"
 
-let puppeteer: typeof import("puppeteer") | null = null
+let puppeteer: typeof import("puppeteer-core") | null = null
+let chromium: typeof import("@sparticuz/chromium").default | null = null
+
 try {
-  puppeteer = require("puppeteer")
-  console.log("Puppeteer loaded successfully")
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  puppeteer = require("puppeteer-core")
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  chromium = require("@sparticuz/chromium").default
+  console.log("Puppeteer-core + Chromium loaded successfully")
 } catch (error) {
   console.error("Puppeteer not available:", error)
 }
@@ -25,7 +30,7 @@ function formatCurrency(value: number) {
 }
 
 export async function POST(_request: NextRequest, context: { params: Promise<{ id: string }> }) {
-  let browser: any = null
+  let browser: Awaited<ReturnType<typeof import("puppeteer-core").launch>> | null = null
   let quoteId = "unknown"
 
   try {
@@ -63,10 +68,7 @@ export async function POST(_request: NextRequest, context: { params: Promise<{ i
     const pdfUrl = `${baseUrl}/api/quotes/${id}/pdf`
 
     console.log("Generating PDF from:", pdfUrl)
-    console.log("Puppeteer config:", {
-      executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || process.env.CHROME_BIN || "default",
-      headless: true,
-    })
+    console.log("Puppeteer will use bundled Chromium")
 
     try {
       const launchOptions: Parameters<typeof puppeteer.launch>[0] = {
@@ -81,11 +83,6 @@ export async function POST(_request: NextRequest, context: { params: Promise<{ i
         ],
       }
       
-      // Nur executablePath setzen wenn explizit konfiguriert
-      if (process.env.PUPPETEER_EXECUTABLE_PATH || process.env.CHROME_BIN) {
-        launchOptions.executablePath = process.env.PUPPETEER_EXECUTABLE_PATH || process.env.CHROME_BIN
-      }
-      
       console.log("Launching browser with options:", launchOptions)
       browser = await puppeteer.launch(launchOptions)
       console.log("Browser launched successfully")
@@ -96,8 +93,8 @@ export async function POST(_request: NextRequest, context: { params: Promise<{ i
 
     const page = await browser.newPage()
     
-    page.on('console', (msg: any) => console.log('Browser console:', msg.text()))
-    page.on('pageerror', (error: any) => console.error('Browser page error:', error))
+    page.on('console', (msg: { text: () => string }) => console.log('Browser console:', msg.text()))
+    page.on('pageerror', (error: unknown) => console.error('Browser page error:', error))
     
     try {
       await page.goto(pdfUrl, { waitUntil: 'networkidle0', timeout: 30000 })
@@ -227,8 +224,8 @@ export async function POST(_request: NextRequest, context: { params: Promise<{ i
     console.error("Error stack:", error instanceof Error ? error.stack : "No stack trace")
     console.error("Quote ID:", quoteId)
     
-    if (browser) {
-      await browser.close().catch((closeError: any) => {
+    if (browser && typeof browser === 'object' && 'close' in browser && typeof browser.close === 'function') {
+      await browser.close().catch((closeError: unknown) => {
         console.error("Browser close error:", closeError)
       })
     }
