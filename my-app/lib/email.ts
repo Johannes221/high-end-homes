@@ -7,11 +7,16 @@ export async function sendEmail({
   subject,
   html,
   from,
+  attachments,
 }: {
   to: string
   subject: string
   html: string
   from?: string
+  attachments?: Array<{
+    filename: string
+    content: Buffer | string
+  }>
 }) {
   if (!process.env.RESEND_API_KEY) {
     console.warn("RESEND_API_KEY not set, skipping email")
@@ -24,6 +29,7 @@ export async function sendEmail({
       to,
       subject,
       html,
+      attachments,
     })
 
     if (error) {

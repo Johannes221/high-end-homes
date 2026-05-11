@@ -1,0 +1,48 @@
+{
+  "type": "Entrümpelung",
+  "name": "Johannes Schartl",
+  "email": "johannes.schartl@gmail.com",
+  "phone": "+49 176 12345678",
+  "company": "",
+  "address": "Teststraße 123, 69115 Heidelberg",
+  "squareMeters": "85",
+  "buildingType": "Wohnung",
+  "constructionYear": "1985",
+  "floor": "2. OG",
+  "elevator": "Ja",
+  "materials": [
+    "Möbel",
+    "Elektrogeräte",
+    "Sperrmüll"
+  ],
+  "removalItems": [],
+  "quantityEstimate": "Mittel (5-10m³)",
+  "valuables": "Alte Bücher, evtl. verkaufbar",
+  "asbestosRequired": false,
+  "otherPollutants": false,
+  "disposalWanted": true,
+  "permitStatus": "Nicht erforderlich",
+  "desiredDate": "2026-06-15",
+  "imageFileNames": [],
+  "imagesBase64": [],
+  "notes": "Bitte Parkplatz vor dem Haus reservieren. Zugang über Hintereingang möglich.",
+  "effortEstimate": "",
+  "complexity": {
+    "score": 2,
+    "level": "Low",
+    "effortRange": "1–2 Arbeitstage",
+    "flags": [
+      "Projektgröße ab 80 m² — erhöhter Grundaufwand."
+    ]
+  },
+  "estimate": {
+    "min": 1843,
+    "max": 2335,
+    "currency": "EUR",
+    "rationale": [
+      "Automatische Kalkulation aus 5 Positionen abgeleitet"
+    ]
+  },
+  "databaseId": "cmp14llyg000061d37r85ukr9",
+  "createdAt": "2026-05-11T11:36:02.159Z"
+}

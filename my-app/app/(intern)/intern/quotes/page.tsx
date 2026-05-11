@@ -225,6 +225,9 @@ export default function QuotesPage() {
   const [lightboxOffset, setLightboxOffset] = useState({ x: 0, y: 0 })
   const [touchStart, setTouchStart] = useState<{ x: number; y: number } | null>(null)
   const [draftProcessed, setDraftProcessed] = useState<Record<string, Record<string, boolean>>>({})
+  const [searchQuery, setSearchQuery] = useState("")
+  const [filterType, setFilterType] = useState<string>("all")
+  const [filterStatus, setFilterStatus] = useState<string>("all")
 
   const loadQuotes = async () => {
     try {
@@ -315,6 +318,34 @@ export default function QuotesPage() {
     }
 
     return null
+  }
+
+  const sendQuoteEmail = async (quote: QuoteItem) => {
+    if (!confirm(`Angebot als PDF an ${quote.email} senden?`)) {
+      return
+    }
+
+    setUpdatingId(quote.id)
+    try {
+      const response = await fetch(`/api/quotes/${quote.id}/send`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+      })
+
+      const data = await response.json()
+
+      if (response.ok && data.success) {
+        alert(`✅ Angebot erfolgreich an ${quote.email} versendet!`)
+        await loadQuotes()
+      } else {
+        alert(`❌ Fehler beim Versenden: ${data.error || "Unbekannter Fehler"}`)
+      }
+    } catch (error) {
+      console.error("Send quote error:", error)
+      alert(`❌ Fehler beim Versenden: ${error instanceof Error ? error.message : String(error)}`)
+    } finally {
+      setUpdatingId("")
+    }
   }
 
   const getDraftOverrides = (quote: QuoteItem) => {
@@ -426,7 +457,34 @@ export default function QuotesPage() {
     setDraftOverrides((current) => ({ ...current, [quote.id]: next }))
   }
 
-  const sortedQuotes = useMemo(() => quotes, [quotes])
+  const sortedQuotes = useMemo(() => {
+    let filtered = quotes
+
+    // Filter by type
+    if (filterType !== "all") {
+      filtered = filtered.filter((q) => q.type === filterType)
+    }
+
+    // Filter by status
+    if (filterStatus !== "all") {
+      filtered = filtered.filter((q) => q.approvalStatus === filterStatus)
+    }
+
+    // Search
+    if (searchQuery.trim()) {
+      const query = searchQuery.toLowerCase()
+      filtered = filtered.filter((q) =>
+        q.name.toLowerCase().includes(query) ||
+        q.email.toLowerCase().includes(query) ||
+        q.phone?.toLowerCase().includes(query) ||
+        q.company?.toLowerCase().includes(query) ||
+        q.address?.toLowerCase().includes(query) ||
+        q.id.toLowerCase().includes(query)
+      )
+    }
+
+    return filtered
+  }, [quotes, searchQuery, filterType, filterStatus])
 
   const openLightbox = (images: string[], startIndex: number = 0) => {
     setLightboxImages(images)
@@ -644,6 +702,79 @@ export default function QuotesPage() {
         <p className="text-sm text-gray-500">Gesammelte Angebotsanfragen mit Detailposten, Kostenschätzung, manueller Preisfreigabe und Export.</p>
       </div>
 
+      {/* Search & Filter */}
+      <div className="bg-white rounded-xl border border-gray-200 p-4">
+        <div className="flex flex-col md:flex-row gap-3">
+          {/* Search */}
+          <div className="flex-1">
+            <div className="relative">
+              <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg>
+              <input
+                type="text"
+                placeholder="Suche nach Name, E-Mail, Telefon, Firma, Adresse oder ID..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-[#c9a45c] focus:border-transparent"
+              />
+              {searchQuery && (
+                <button
+                  onClick={() => setSearchQuery("")}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                >
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              )}
+            </div>
+          </div>
+
+          {/* Filter Type */}
+          <select
+            value={filterType}
+            onChange={(e) => setFilterType(e.target.value)}
+            className="px-4 py-2.5 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-[#c9a45c] focus:border-transparent bg-white"
+          >
+            <option value="all">Alle Typen</option>
+            <option value="Entrümpelung">Entrümpelung</option>
+            <option value="Entkernung">Entkernung</option>
+            <option value="Kombi">Kombi</option>
+            <option value="Hausauflösung">Hausauflösung</option>
+          </select>
+
+          {/* Filter Status */}
+          <select
+            value={filterStatus}
+            onChange={(e) => setFilterStatus(e.target.value)}
+            className="px-4 py-2.5 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-[#c9a45c] focus:border-transparent bg-white"
+          >
+            <option value="all">Alle Status</option>
+            <option value="pending">Pending</option>
+            <option value="approved">Approved</option>
+            <option value="rejected">Rejected</option>
+          </select>
+        </div>
+
+        {/* Results count */}
+        <div className="mt-3 text-sm text-gray-600">
+          {sortedQuotes.length} von {quotes.length} Anfrage{quotes.length !== 1 ? "n" : ""}
+          {(searchQuery || filterType !== "all" || filterStatus !== "all") && (
+            <button
+              onClick={() => {
+                setSearchQuery("")
+                setFilterType("all")
+                setFilterStatus("all")
+              }}
+              className="ml-3 text-[#c9a45c] hover:underline font-medium"
+            >
+              Filter zurücksetzen
+            </button>
+          )}
+        </div>
+      </div>
+
       {loading ? (
         <div className="bg-white rounded-xl border border-gray-200 p-6 text-sm text-gray-500">Anfragen werden geladen...</div>
       ) : sortedQuotes.length === 0 ? (
@@ -817,14 +948,14 @@ export default function QuotesPage() {
                   </button>
                   <button
                     type="button"
-                    onClick={() => window.location.href = `mailto:${quote.email}?subject=Ihr unverbindliches Preisangebot von High-End Homes&body=Hallo ${quote.name},%0D%0A%0D%0Avielen Dank für Ihre Anfrage. Anbei erhalten Sie unser unverbindliches Preisangebot.%0D%0A%0D%0ADieses Angebot dient nur als Orientierung und ist ohne Gewähr. Endgültige Preise nach Ortsbesichtigung.%0D%0A%0D%0AFür Rückfragen stehen wir Ihnen gerne zur Verfügung.%0D%0A%0D%0AMit freundlichen Grüßen%0D%0AHigh-End Homes`}
+                    onClick={() => sendQuoteEmail(quote)}
                     disabled={updatingId === quote.id}
-                    className="flex items-center gap-2 px-4 py-2.5 rounded-lg border border-gray-200 text-gray-700 text-sm font-medium hover:bg-gray-50 hover:border-gray-300 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+                    className="flex items-center gap-2 px-4 py-2.5 rounded-lg bg-green-600 text-white text-sm font-medium hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-sm"
                   >
                     <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                     </svg>
-                    E-Mail senden
+                    PDF per E-Mail senden
                   </button>
                 </div>
 
