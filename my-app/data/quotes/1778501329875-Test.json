@@ -1,0 +1,46 @@
+{
+  "type": "Entrümpelung",
+  "name": "Test",
+  "email": "test@test.de",
+  "phone": "",
+  "company": "",
+  "address": "",
+  "squareMeters": 100,
+  "buildingType": "Haus",
+  "constructionYear": "",
+  "floor": "",
+  "elevator": "",
+  "materials": [
+    "Möbel"
+  ],
+  "removalItems": [],
+  "quantityEstimate": "",
+  "valuables": "",
+  "asbestosRequired": false,
+  "otherPollutants": false,
+  "disposalWanted": false,
+  "permitStatus": "",
+  "desiredDate": "",
+  "imageFileNames": [],
+  "imagesBase64": [],
+  "notes": "",
+  "effortEstimate": "",
+  "complexity": {
+    "score": 2,
+    "level": "Low",
+    "effortRange": "1–2 Arbeitstage",
+    "flags": [
+      "Projektgröße ab 80 m² — erhöhter Grundaufwand."
+    ]
+  },
+  "estimate": {
+    "min": 1836,
+    "max": 2326,
+    "currency": "EUR",
+    "rationale": [
+      "Automatische Kalkulation aus 3 Positionen abgeleitet"
+    ]
+  },
+  "databaseId": "cmp15rslr0008iwd3cldvfr5o",
+  "createdAt": "2026-05-11T12:08:49.874Z"
+}

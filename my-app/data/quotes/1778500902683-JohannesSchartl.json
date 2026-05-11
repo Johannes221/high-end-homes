@@ -1,0 +1,51 @@
+{
+  "type": "Entrümpelung",
+  "name": "Johannes Schartl",
+  "email": "johannes.schartl@gmail.com",
+  "phone": "01738127316",
+  "company": "",
+  "address": "",
+  "squareMeters": 123,
+  "buildingType": "Haus",
+  "constructionYear": "",
+  "floor": "Erdgeschoss",
+  "elevator": "Nein",
+  "materials": [
+    "Möbel",
+    "Holz",
+    "Elektrogeräte",
+    "Metall"
+  ],
+  "removalItems": [],
+  "quantityEstimate": "",
+  "valuables": "",
+  "asbestosRequired": false,
+  "otherPollutants": false,
+  "disposalWanted": false,
+  "permitStatus": "",
+  "desiredDate": "",
+  "imageFileNames": [],
+  "imagesBase64": [],
+  "notes": "test",
+  "effortEstimate": "",
+  "complexity": {
+    "score": 3,
+    "level": "Low",
+    "effortRange": "1–2 Arbeitstage",
+    "flags": [
+      "Projektgröße ab 80 m² — erhöhter Grundaufwand.",
+      "Viele Leistungspositionen erhöhen Abstimmung und Sortieraufwand."
+    ]
+  },
+  "estimate": {
+    "min": 2733,
+    "max": 3553,
+    "currency": "EUR",
+    "rationale": [
+      "Automatische Kalkulation aus 6 Positionen abgeleitet",
+      "Viele gewählte Leistungspositionen berücksichtigt"
+    ]
+  },
+  "databaseId": "cmp15imxq0006iwd38buu2nce",
+  "createdAt": "2026-05-11T12:01:42.682Z"
+}
