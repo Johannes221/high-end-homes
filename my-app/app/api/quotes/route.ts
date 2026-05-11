@@ -132,8 +132,17 @@ export async function GET() {
         imagesBase64: [],
         complexityFlags: [],
         payload: null,
-        pricing: null,
-        pricingSummary: null,
+        pricing: {
+          lineItemOverrides: [],
+          customLineItems: [],
+          internalNotes: "",
+          exportedAt: null
+        },
+        pricingSummary: {
+          autoTotal: quote.estimatedMinPrice || 0,
+          finalTotal: quote.estimatedMaxPrice || 0,
+          lineItems: []
+        }
       }))
     })
   } catch (error) {
