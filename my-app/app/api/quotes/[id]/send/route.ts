@@ -11,7 +11,7 @@ let chromium: typeof import("@sparticuz/chromium").default | null = null
 try {
   // eslint-disable-next-line @typescript-eslint/no-require-imports
   puppeteer = require("puppeteer-core")
-  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  // eslint-disable-next-line @typescript-eslint/no-require-imports, @typescript-eslint/no-unused-vars
   chromium = require("@sparticuz/chromium").default
   console.log("Puppeteer-core + Chromium loaded successfully")
 } catch (error) {

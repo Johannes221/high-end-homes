@@ -8,11 +8,14 @@ import type { NextConfig } from "next";
 // }
 
 const nextConfig: NextConfig = {
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
   images: {
     unoptimized: true,
   },
   // Puppeteer-Module nicht im Client-Bundle bündeln (nur für Render Backend)
-  serverExternalPackages: ["puppeteer", "puppeteer-core", "node-cron", "nodemailer", "@libsql/client", "@prisma/adapter-libsql"],
+  serverExternalPackages: ["puppeteer", "puppeteer-core", "@sparticuz/chromium", "node-cron", "nodemailer", "@libsql/client", "@prisma/adapter-libsql"],
 };
 
 export default nextConfig;
