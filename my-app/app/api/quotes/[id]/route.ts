@@ -76,7 +76,7 @@ function serializeQuote(quote: {
   }
 }
 
-export async function GET(_request: NextRequest, context: { params: Promise<{ id: string }> }) {
+export async function GET(request: NextRequest, context: { params: Promise<{ id: string }> }) {
   try {
     const session = await auth()
 
@@ -85,13 +85,22 @@ export async function GET(_request: NextRequest, context: { params: Promise<{ id
     }
 
     const { id } = await context.params
+    const { searchParams } = new URL(request.url)
+    const includeImages = searchParams.get("includeImages") === "true"
+    
     const quote = await prisma.quoteRequest.findUnique({ where: { id } })
 
     if (!quote) {
       return NextResponse.json({ success: false, error: "Anfrage nicht gefunden." }, { status: 404 })
     }
 
-    return NextResponse.json({ success: true, quote: serializeQuote(quote) })
+    const serialized = serializeQuote(quote)
+    
+    if (!includeImages) {
+      serialized.imagesBase64 = []
+    }
+
+    return NextResponse.json({ success: true, quote: serialized })
   } catch (error) {
     return NextResponse.json({ success: false, error: "Anfrage konnte nicht geladen werden." }, { status: 500 })
   }

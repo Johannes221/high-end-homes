@@ -26,7 +26,7 @@ export default function DashboardPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    async function loadStats() {
+    const loadStats = async () => {
       try {
         const response = await fetch("/api/quotes");
         const data = await response.json();
@@ -58,9 +58,9 @@ export default function DashboardPage() {
       } finally {
         setLoading(false);
       }
-    }
+    };
 
-    loadStats();
+    setTimeout(() => void loadStats(), 0);
   }, []);
 
   const formatCurrency = (value: number) => {

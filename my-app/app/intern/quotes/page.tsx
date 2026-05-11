@@ -220,6 +220,7 @@ export default function QuotesPage() {
   const [updatingId, setUpdatingId] = useState("")
   const [expandedId, setExpandedId] = useState("")
   const [loadedImages, setLoadedImages] = useState<Record<string, string[]>>({})
+  const [loadingImages, setLoadingImages] = useState<Record<string, boolean>>({})
   const [draftOverrides, setDraftOverrides] = useState<Record<string, QuoteLineItemOverride[]>>({})
   const [draftNotes, setDraftNotes] = useState<Record<string, string>>({})
   const [draftCustomItems, setDraftCustomItems] = useState<Record<string, QuoteCustomLineItem[]>>({})
@@ -294,11 +295,17 @@ export default function QuotesPage() {
     }))
   }
 
+  const syncDraftAsync = (quote: QuoteItem) => {
+    setTimeout(() => syncDraft(quote), 0)
+  }
+
   const loadQuoteImages = async (quoteId: string) => {
-    if (loadedImages[quoteId]) return
+    if (loadedImages[quoteId] || loadingImages[quoteId]) return
+    
+    setLoadingImages((current) => ({ ...current, [quoteId]: true }))
     
     try {
-      const response = await fetch(`/api/quotes/${quoteId}`)
+      const response = await fetch(`/api/quotes/${quoteId}?includeImages=true`)
       const data = await response.json()
       if (response.ok && data.success && data.quote) {
         setLoadedImages((current) => ({
@@ -308,6 +315,8 @@ export default function QuotesPage() {
       }
     } catch (error) {
       console.error("Failed to load images:", error)
+    } finally {
+      setLoadingImages((current) => ({ ...current, [quoteId]: false }))
     }
   }
 
@@ -1064,11 +1073,13 @@ export default function QuotesPage() {
                   <button
                     type="button"
                     onClick={() => {
+                      const newExpandedId = isExpanded ? "" : quote.id
+                      setExpandedId(newExpandedId)
+                      
                       if (!isExpanded) {
-                        syncDraft(quote)
+                        syncDraftAsync(quote)
                         void loadQuoteImages(quote.id)
                       }
-                      setExpandedId(isExpanded ? "" : quote.id)
                     }}
                     className="flex items-center gap-2 px-4 py-2.5 rounded-lg border border-gray-200 text-gray-700 text-sm font-medium hover:bg-gray-50 hover:border-gray-300 transition-all"
                   >
