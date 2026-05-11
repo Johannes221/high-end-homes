@@ -72,7 +72,8 @@ export async function POST(_request: NextRequest, context: { params: Promise<{ i
     const advisorName = session.user.name || quote.approvedBy || "Bennet Pfeifer"
     const advisorEmail = session.user.email || "bennet.pfeifer@highendhomes.de"
 
-    const baseUrl = process.env.AUTH_URL || process.env.NEXTAUTH_URL || 'http://localhost:3001'
+    const request = await _request.clone()
+    const baseUrl = request.headers.get('host') ? `${request.headers.get('x-forwarded-proto') || 'http'}://${request.headers.get('host')}` : 'http://localhost:3001'
     const pdfUrl = `${baseUrl}/api/quotes/${id}/pdf`
 
     console.log("Generating PDF from:", pdfUrl)
