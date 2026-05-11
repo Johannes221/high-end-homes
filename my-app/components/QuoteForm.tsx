@@ -581,8 +581,10 @@ export function QuoteForm() {
       }
 
       setClearanceSubmitted(true)
-    } catch {
-      setClearanceSubmitError("Die Anfrage konnte nicht gesendet werden.")
+    } catch (error) {
+      console.error("Clearance submission error:", error)
+      const errorMessage = error instanceof Error ? error.message : "Die Anfrage konnte nicht gesendet werden."
+      setClearanceSubmitError(errorMessage)
     } finally {
       setClearanceSubmitting(false)
     }
@@ -635,8 +637,10 @@ export function QuoteForm() {
       }
 
       setGuttingSubmitted(true)
-    } catch {
-      setGuttingSubmitError("Die Anfrage konnte nicht gesendet werden.")
+    } catch (error) {
+      console.error("Gutting submission error:", error)
+      const errorMessage = error instanceof Error ? error.message : "Die Anfrage konnte nicht gesendet werden."
+      setGuttingSubmitError(errorMessage)
     } finally {
       setGuttingSubmitting(false)
     }
@@ -687,8 +691,10 @@ export function QuoteForm() {
       }
 
       setCombinedSubmitted(true)
-    } catch {
-      setCombinedSubmitError("Die Anfrage konnte nicht gesendet werden.")
+    } catch (error) {
+      console.error("Combined submission error:", error)
+      const errorMessage = error instanceof Error ? error.message : "Die Anfrage konnte nicht gesendet werden."
+      setCombinedSubmitError(errorMessage)
     } finally {
       setCombinedSubmitting(false)
     }
