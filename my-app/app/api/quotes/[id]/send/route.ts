@@ -96,8 +96,8 @@ export async function POST(_request: NextRequest, context: { params: Promise<{ i
 
     const page = await browser.newPage()
     
-    page.on('console', (msg) => console.log('Browser console:', msg.text()))
-    page.on('pageerror', (error) => console.error('Browser page error:', error))
+    page.on('console', (msg: any) => console.log('Browser console:', msg.text()))
+    page.on('pageerror', (error: any) => console.error('Browser page error:', error))
     
     try {
       await page.goto(pdfUrl, { waitUntil: 'networkidle0', timeout: 30000 })
@@ -228,7 +228,7 @@ export async function POST(_request: NextRequest, context: { params: Promise<{ i
     console.error("Quote ID:", quoteId)
     
     if (browser) {
-      await browser.close().catch((closeError) => {
+      await browser.close().catch((closeError: any) => {
         console.error("Browser close error:", closeError)
       })
     }
