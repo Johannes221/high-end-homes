@@ -19,7 +19,6 @@ export async function sendEmail({
   }>
 }) {
   if (!process.env.RESEND_API_KEY) {
-    console.warn("RESEND_API_KEY not set, skipping email")
     return { success: false, error: "Email not configured" }
   }
 
@@ -33,14 +32,11 @@ export async function sendEmail({
     })
 
     if (error) {
-      console.error("Resend error:", error)
       return { success: false, error: error.message }
     }
 
-    console.log("Email sent successfully:", data?.id)
     return { success: true, id: data?.id }
   } catch (error) {
-    console.error("Email send failed:", error)
     return { success: false, error: String(error) }
   }
 }

@@ -1,0 +1,47 @@
+{
+  "type": "Entkernung",
+  "name": "Test Kunde",
+  "email": "test@example.com",
+  "phone": "0123456789",
+  "company": "",
+  "address": "Teststraße 1, Heidelberg",
+  "squareMeters": 100,
+  "buildingType": "Einfamilienhaus",
+  "constructionYear": "",
+  "floor": "",
+  "elevator": "",
+  "materials": [],
+  "removalItems": [
+    "Boden",
+    "Tapeten"
+  ],
+  "quantityEstimate": "",
+  "valuables": "",
+  "asbestosRequired": false,
+  "otherPollutants": false,
+  "disposalWanted": false,
+  "permitStatus": "",
+  "desiredDate": "",
+  "imageFileNames": [],
+  "imagesBase64": [],
+  "notes": "",
+  "effortEstimate": "",
+  "complexity": {
+    "score": 2,
+    "level": "Low",
+    "effortRange": "1–2 Arbeitstage",
+    "flags": [
+      "Projektgröße ab 80 m² — erhöhter Grundaufwand."
+    ]
+  },
+  "estimate": {
+    "min": 2538,
+    "max": 3215,
+    "currency": "EUR",
+    "rationale": [
+      "Automatische Kalkulation aus 4 Positionen abgeleitet"
+    ]
+  },
+  "databaseId": "cmp1bfb270000dnd3dqg3k27s",
+  "createdAt": "2026-05-11T14:47:05.274Z"
+}

@@ -13,14 +13,11 @@ export function middleware(req: NextRequest) {
 
   const isLoggedIn = !!sessionToken;
 
-  console.log("Proxy - Path:", pathname, "isLoggedIn:", isLoggedIn);
-
   // Interne Dashboard-Routen schützen (alles außer /intern/login und /intern/register)
   const isInternRoute = pathname.startsWith("/intern");
   const isAuthRoute = pathname === "/intern/login" || pathname === "/intern/register";
 
   if (isInternRoute && !isAuthRoute && !isLoggedIn) {
-    console.log("Proxy - Redirecting to login");
     const loginUrl = new URL("/intern/login", req.url);
     loginUrl.searchParams.set("callbackUrl", pathname);
     return NextResponse.redirect(loginUrl);
@@ -28,7 +25,6 @@ export function middleware(req: NextRequest) {
 
   // Eingeloggte User von Login/Register wegschicken
   if (isAuthRoute && isLoggedIn) {
-    console.log("Proxy - Redirecting to /intern");
     return NextResponse.redirect(new URL("/intern", req.url));
   }
 

@@ -15,9 +15,11 @@ export function ImageUpload({ id, label = "Bilder hochladen", onChange }: ImageU
   const [images, setImages] = useState<File[]>([])
   const [previews, setPreviews] = useState<string[]>([])
   const [showTooltip, setShowTooltip] = useState(false)
+  const [error, setError] = useState<string>("")
   const fileInputRef = useRef<HTMLInputElement>(null)
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setError("")
     const files = Array.from(e.target.files || [])
     const validFiles = files.filter(file => {
       const isValidType = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'].includes(file.type)
@@ -31,10 +33,16 @@ export function ImageUpload({ id, label = "Bilder hochladen", onChange }: ImageU
       
       const newPreviews: string[] = []
       let loadedCount = 0
+      let hasError = false
       
       validFiles.forEach(file => {
         const reader = new FileReader()
         reader.onloadend = () => {
+          if (reader.error) {
+            hasError = true
+            setError("Ein oder mehrere Bilder konnten nicht geladen werden.")
+            return
+          }
           newPreviews.push(reader.result as string)
           loadedCount++
           
@@ -45,6 +53,10 @@ export function ImageUpload({ id, label = "Bilder hochladen", onChange }: ImageU
               onChange(newImages, allPreviews)
             }
           }
+        }
+        reader.onerror = () => {
+          hasError = true
+          setError("Ein oder mehrere Bilder konnten nicht geladen werden.")
         }
         reader.readAsDataURL(file)
       })
@@ -100,6 +112,10 @@ export function ImageUpload({ id, label = "Bilder hochladen", onChange }: ImageU
           className="hidden"
         />
       </div>
+
+      {error && (
+        <div className="mt-3 text-red-400 text-sm">{error}</div>
+      )}
 
       {previews.length > 0 && (
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">

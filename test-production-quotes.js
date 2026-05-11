@@ -97,6 +97,33 @@ const testQuotes = [
       createTestImageBase64("#FDA7DF", "Sanitärbereich"),
     ],
     imageFileNames: ["buero1.jpg", "buero2.jpg", "lager.jpg", "eingang.jpg", "sanitaer.jpg"]
+  },
+  {
+    type: "Ausbau",
+    name: "Lisa Müller (PROD TEST)",
+    email: "lisa.m.prod@example.com",
+    phone: "+49 176 88888888",
+    company: "Müller Bau",
+    squareMeters: 150,
+    buildingType: "Haus",
+    constructionYear: "1960",
+    floor: "Erdgeschoss",
+    elevator: "Nein",
+    materials: ["Maler & Lackierer", "Trockenbau & Stuckateur", "Fliesenleger"],
+    quantityEstimate: "Teilsanierung",
+    valuables: "Keine",
+    asbestosRequired: false,
+    otherPollutants: false,
+    disposalWanted: false,
+    permitStatus: "Nicht erforderlich",
+    desiredDate: "2026-09-01",
+    notes: "PRODUKTIONSTEST - Komplette Renovierung Erdgeschoss",
+    imagesBase64: [
+      createTestImageBase64("#FF6B6B", "Wohnzimmer Alt"),
+      createTestImageBase64("#4ECDC4", "Küche Alt"),
+      createTestImageBase64("#45B7D1", "Flur Alt"),
+    ],
+    imageFileNames: ["wohnzimmer-alt.jpg", "kueche-alt.jpg", "flur-alt.jpg"]
   }
 ];
 

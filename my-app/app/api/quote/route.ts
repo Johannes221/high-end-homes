@@ -141,25 +141,87 @@ async function sendQuoteNotificationEmail({
   complexity: ReturnType<typeof evaluateComplexity>
   estimate: ReturnType<typeof estimatePriceRange>
 }) {
-  if (!process.env.NOTIFICATION_EMAIL) {
-    return
+  // Interne Benachrichtigung
+  if (process.env.NOTIFICATION_EMAIL) {
+    const html = buildEmailHtml(
+      submission,
+      complexity.score,
+      complexity.level,
+      complexity.effortRange,
+      estimate.min,
+      estimate.max,
+      complexity.flags
+    )
+
+    await sendEmail({
+      to: process.env.NOTIFICATION_EMAIL,
+      subject: `Neues Angebot — ${submission.type || "Anfrage"} von ${submission.name}`,
+      html,
+    })
   }
 
-  const html = buildEmailHtml(
-    submission,
-    complexity.score,
-    complexity.level,
-    complexity.effortRange,
-    estimate.min,
-    estimate.max,
-    complexity.flags
-  )
+  // Kunden-Bestätigung
+  if (submission.email) {
+    const customerHtml = `
+      <!DOCTYPE html>
+      <html lang="de">
+        <head>
+          <meta charSet="UTF-8" />
+          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+          <title>Ihre Anfrage bei High-End Homes</title>
+        </head>
+        <body style="margin:0;padding:24px;background:#f9fafb;font-family:Arial,sans-serif;">
+          <div style="max-width:600px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:16px;padding:32px;">
+            <h1 style="margin:0 0 16px 0;color:#111827;font-size:24px;">Ihre Anfrage bei High-End Homes</h1>
+            <p style="margin:0 0 16px 0;color:#4b5563;font-size:15px;line-height:1.6;">
+              Sehr geehrte/r ${escapeHtml(submission.name)},
+            </p>
+            <p style="margin:0 0 16px 0;color:#4b5563;font-size:15px;line-height:1.6;">
+              vielen Dank für Ihre Anfrage bezüglich <strong>${escapeHtml(submission.type || "Ihrem Projekt")}</strong>. Wir haben Ihre Angaben erhalten und werden uns zeitnah bei Ihnen melden.
+            </p>
+            <div style="background:#f9fafb;border:1px solid #e5e7eb;border-radius:12px;padding:20px;margin:24px 0;">
+              <h2 style="margin:0 0 12px 0;color:#111827;font-size:16px;">Ihre Angaben</h2>
+              <table style="width:100%;border-collapse:collapse;">
+                <tr>
+                  <td style="padding:8px 0;color:#6b7280;font-size:14px;">Service:</td>
+                  <td style="padding:8px 0;color:#111827;font-size:14px;font-weight:700;text-align:right;">${escapeHtml(submission.type || "-")}</td>
+                </tr>
+                <tr>
+                  <td style="padding:8px 0;color:#6b7280;font-size:14px;">Adresse:</td>
+                  <td style="padding:8px 0;color:#111827;font-size:14px;font-weight:700;text-align:right;">${escapeHtml(submission.address || "-")}</td>
+                </tr>
+                <tr>
+                  <td style="padding:8px 0;color:#6b7280;font-size:14px;">Fläche:</td>
+                  <td style="padding:8px 0;color:#111827;font-size:14px;font-weight:700;text-align:right;">${submission.squareMeters ? `${submission.squareMeters} m²` : "-"}</td>
+                </tr>
+              </table>
+            </div>
+            <p style="margin:0 0 16px 0;color:#4b5563;font-size:15px;line-height:1.6;">
+              Wir prüfen Ihre Anfrage und setzen uns in Kürze mit Ihnen in Verbindung, um weitere Details zu besprechen und Ihnen ein unverbindliches Angebot zu unterbreiten.
+            </p>
+            <p style="margin:0 0 8px 0;color:#4b5563;font-size:15px;line-height:1.6;">
+              Mit freundlichen Grüßen<br />
+              <strong>High-End Homes</strong><br />
+              Bennet Pfeifer<br />
+              bennet.pfeifer@highendhomes.de
+            </p>
+            <hr style="border:0;border-top:1px solid #e5e7eb;margin:24px 0;" />
+            <p style="margin:0;color:#9ca3af;font-size:13px;line-height:1.5;">
+              High-End Homes<br />
+              Fachbetrieb für Entkernung, Entrümpelung und Hausauflösung<br />
+              Heidelberg & Rhein-Neckar
+            </p>
+          </div>
+        </body>
+      </html>
+    `
 
-  await sendEmail({
-    to: process.env.NOTIFICATION_EMAIL,
-    subject: `Neues Angebot — ${submission.type || "Anfrage"} von ${submission.name}`,
-    html,
-  })
+    await sendEmail({
+      to: submission.email,
+      subject: `Ihre Anfrage bei High-End Homes - ${submission.type || "Bestätigung"}`,
+      html: customerHtml,
+    })
+  }
 }
 
 function resolveQuoteArchiveDirectory() {
@@ -196,22 +258,10 @@ export async function OPTIONS(request: Request) {
 
 export async function POST(request: Request) {
   try {
-    console.log("=== QUOTE SUBMISSION START ===")
-    console.log("Request method:", request.method)
-    console.log("Request URL:", request.url)
-    console.log("Request headers:", Object.fromEntries(request.headers.entries()))
-    
     const rawBody = await request.json()
-    console.log("Raw body received:", JSON.stringify(rawBody, null, 2))
-    
     const submission = normalizeSubmission(rawBody)
-    console.log("Normalized submission:", JSON.stringify(submission, null, 2))
 
     if (!submission.name || !submission.email) {
-      console.log("Validation failed - missing fields:", {
-        name: !!submission.name,
-        email: !!submission.email,
-      })
       return jsonWithCors(
         request,
         { success: false, error: "Bitte füllen Sie alle Pflichtfelder aus." },
@@ -222,7 +272,6 @@ export async function POST(request: Request) {
     const complexity = evaluateComplexity(submission)
     const estimate = estimatePriceRange(submission, complexity)
 
-    console.log("Creating quote request in database...")
     const savedRequest = await prisma.quoteRequest.create({
       data: {
         type: submission.type || "Anfrage",
@@ -257,13 +306,9 @@ export async function POST(request: Request) {
         payloadJson: JSON.stringify(submission),
       },
     })
-    console.log("Quote saved with ID:", savedRequest.id)
 
-    console.log("Sending notification email...")
     await sendQuoteNotificationEmail({ submission, complexity, estimate })
-    console.log("Email sent successfully")
 
-    console.log("Archiving submission...")
     await archiveQuoteSubmission(submission.name, {
       ...submission,
       complexity,
@@ -271,17 +316,9 @@ export async function POST(request: Request) {
       databaseId: savedRequest.id,
       createdAt: new Date().toISOString(),
     })
-    console.log("Submission archived")
 
-    console.log("=== QUOTE SUBMISSION SUCCESS ===")
     return jsonWithCors(request, { success: true, id: savedRequest.id, estimate, complexity })
   } catch (error) {
-    console.error("Quote API error:", error)
-    console.error("Error details:", {
-      message: error instanceof Error ? error.message : String(error),
-      stack: error instanceof Error ? error.stack : undefined,
-      name: error instanceof Error ? error.name : undefined,
-    })
     return jsonWithCors(
       request,
       { 
@@ -308,7 +345,6 @@ export async function PUT(request: Request) {
 
     return jsonWithCors(request, { success: true, formUrl })
   } catch (error) {
-    console.error("Quote share error:", error)
     return jsonWithCors(request, { success: false, error: "Der Link konnte nicht generiert werden." }, { status: 500 })
   }
 }

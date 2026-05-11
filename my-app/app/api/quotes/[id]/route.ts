@@ -93,7 +93,6 @@ export async function GET(_request: NextRequest, context: { params: Promise<{ id
 
     return NextResponse.json({ success: true, quote: serializeQuote(quote) })
   } catch (error) {
-    console.error("Quote detail load error:", error)
     return NextResponse.json({ success: false, error: "Anfrage konnte nicht geladen werden." }, { status: 500 })
   }
 }
@@ -142,7 +141,6 @@ export async function PATCH(request: NextRequest, context: { params: Promise<{ i
 
     return NextResponse.json({ success: true, quote: serializeQuote(updated) })
   } catch (error) {
-    console.error("Quote approval error:", error)
     return NextResponse.json({ success: false, error: "Freigabe konnte nicht gespeichert werden." }, { status: 500 })
   }
 }
@@ -166,7 +164,6 @@ export async function DELETE(_request: NextRequest, context: { params: Promise<{
 
     return NextResponse.json({ success: true, message: "Anfrage erfolgreich gelöscht." })
   } catch (error) {
-    console.error("Quote delete error:", error)
     return NextResponse.json({ success: false, error: "Anfrage konnte nicht gelöscht werden." }, { status: 500 })
   }
 }
