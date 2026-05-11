@@ -228,6 +228,7 @@ export default function QuotesPage() {
   const [searchQuery, setSearchQuery] = useState("")
   const [filterType, setFilterType] = useState<string>("all")
   const [filterStatus, setFilterStatus] = useState<string>("all")
+  const [sortBy, setSortBy] = useState<string>("date-desc")
 
   const loadQuotes = async () => {
     try {
@@ -483,8 +484,33 @@ export default function QuotesPage() {
       )
     }
 
-    return filtered
-  }, [quotes, searchQuery, filterType, filterStatus])
+    // Sort
+    const sorted = [...filtered]
+    switch (sortBy) {
+      case "date-desc":
+        sorted.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+        break
+      case "date-asc":
+        sorted.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime())
+        break
+      case "price-desc":
+        sorted.sort((a, b) => b.estimatedMaxPrice - a.estimatedMaxPrice)
+        break
+      case "price-asc":
+        sorted.sort((a, b) => a.estimatedMaxPrice - b.estimatedMaxPrice)
+        break
+      case "name-asc":
+        sorted.sort((a, b) => a.name.localeCompare(b.name))
+        break
+      case "name-desc":
+        sorted.sort((a, b) => b.name.localeCompare(a.name))
+        break
+      default:
+        break
+    }
+
+    return sorted
+  }, [quotes, searchQuery, filterType, filterStatus, sortBy])
 
   const openLightbox = (images: string[], startIndex: number = 0) => {
     setLightboxImages(images)
@@ -755,17 +781,32 @@ export default function QuotesPage() {
             <option value="approved">Approved</option>
             <option value="rejected">Rejected</option>
           </select>
+
+          {/* Sort */}
+          <select
+            value={sortBy}
+            onChange={(e) => setSortBy(e.target.value)}
+            className="px-4 py-2.5 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-[#c9a45c] focus:border-transparent bg-white"
+          >
+            <option value="date-desc">Neueste zuerst</option>
+            <option value="date-asc">Älteste zuerst</option>
+            <option value="price-desc">Preis: Hoch → Niedrig</option>
+            <option value="price-asc">Preis: Niedrig → Hoch</option>
+            <option value="name-asc">Name: A → Z</option>
+            <option value="name-desc">Name: Z → A</option>
+          </select>
         </div>
 
         {/* Results count */}
         <div className="mt-3 text-sm text-gray-900 font-medium">
           {sortedQuotes.length} von {quotes.length} Anfrage{quotes.length !== 1 ? "n" : ""}
-          {(searchQuery || filterType !== "all" || filterStatus !== "all") && (
+          {(searchQuery || filterType !== "all" || filterStatus !== "all" || sortBy !== "date-desc") && (
             <button
               onClick={() => {
                 setSearchQuery("")
                 setFilterType("all")
                 setFilterStatus("all")
+                setSortBy("date-desc")
               }}
               className="ml-3 text-[#c9a45c] hover:underline font-medium"
             >
