@@ -16,7 +16,7 @@ type QuoteRecord = {
   company: string | null
   address: string | null
   squareMeters: number
-  buildingType: string
+  buildingType: string | null
   constructionYear: string | null
   floor: string | null
   elevator: string | null
@@ -88,7 +88,7 @@ function buildPdfHtml(input: {
     ["Telefon", quote.phone || "-"],
     ["Adresse", customerAddress],
     ["Leistung", quote.type],
-    ["Gebäudetyp", quote.buildingType],
+    ["Gebäudetyp", quote.buildingType || "-"],
     ["Fläche", `${quote.squareMeters} m²`],
     ["Stockwerk", quote.floor || payload.floor || "-"],
     ["Aufzug", quote.elevator || payload.elevator || "-"],
