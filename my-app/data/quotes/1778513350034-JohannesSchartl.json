@@ -1,0 +1,60 @@
+{
+  "type": "Entkernung",
+  "name": "Johannes Schartl",
+  "email": "johannes.schartl@gmail.com",
+  "phone": "+49 151 12345678",
+  "company": "Test GmbH",
+  "address": "Hauptstraße 1, 69115 Heidelberg",
+  "squareMeters": 120,
+  "buildingType": "Wohnung",
+  "constructionYear": "1985",
+  "floor": "2. OG",
+  "elevator": "Ja",
+  "materials": [],
+  "removalItems": [
+    "Böden",
+    "Wandverkleidungen & Putz",
+    "Sanitär (Bad/WC)",
+    "Fenster & Türen"
+  ],
+  "quantityEstimate": "Komplettsanierung",
+  "valuables": "Keine",
+  "asbestosRequired": false,
+  "otherPollutants": false,
+  "disposalWanted": true,
+  "permitStatus": "Erteilt",
+  "desiredDate": "2026-07-01",
+  "imageFileNames": [
+    "wohnzimmer.jpg",
+    "schlafzimmer.jpg",
+    "kueche.jpg"
+  ],
+  "imagesBase64": [
+    "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjRkY2QjZCIi8+CiAgICA8dGV4dCB4PSIyMDAiIHk9IjE1MCIgZm9udC1zaXplPSIyNCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0id2hpdGUiPldvaG56aW1tZXI8L3RleHQ+CiAgPC9zdmc+",
+    "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjNEVDREM0Ii8+CiAgICA8dGV4dCB4PSIyMDAiIHk9IjE1MCIgZm9udC1zaXplPSIyNCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0id2hpdGUiPlNjaGxhZnppbW1lcjwvdGV4dD4KICA8L3N2Zz4=",
+    "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICAgIDxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjNDVCN0QxIi8+CiAgICA8dGV4dCB4PSIyMDAiIHk9IjE1MCIgZm9udC1zaXplPSIyNCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0id2hpdGUiPkvDvGNoZTwvdGV4dD4KICA8L3N2Zz4="
+  ],
+  "notes": "Test-Anfrage für kompletten Workflow",
+  "effortEstimate": "",
+  "complexity": {
+    "score": 4,
+    "level": "Medium",
+    "effortRange": "2–5 Arbeitstage",
+    "flags": [
+      "Projektgröße ab 80 m² — erhöhter Grundaufwand.",
+      "Technische Rückbaupositionen ausgewählt.",
+      "Viele Leistungspositionen erhöhen Abstimmung und Sortieraufwand."
+    ]
+  },
+  "estimate": {
+    "min": 4171,
+    "max": 5830,
+    "currency": "EUR",
+    "rationale": [
+      "Automatische Kalkulation aus 7 Positionen abgeleitet",
+      "Viele gewählte Leistungspositionen berücksichtigt"
+    ]
+  },
+  "databaseId": "cmp1cxf320004chd30t8f6hfq",
+  "createdAt": "2026-05-11T15:29:10.033Z"
+}

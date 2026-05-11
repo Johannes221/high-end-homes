@@ -211,7 +211,7 @@ ${new Date().toLocaleDateString("de-DE")}
 }
 
 function openPdfOffer(quoteId: string) {
-  window.open(`/api/quotes/${quoteId}/pdf?print=1`, "_blank", "noopener,noreferrer")
+  window.open(`/api/quotes/${quoteId}/pdf?print=1`, "_blank")
 }
 
 export default function QuotesPage() {
@@ -920,9 +920,9 @@ export default function QuotesPage() {
             className="px-4 py-2.5 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-[#c9a45c] focus:border-transparent bg-white text-gray-900"
           >
             <option value="all">Alle Status</option>
-            <option value="pending">Pending</option>
-            <option value="approved">Approved</option>
-            <option value="rejected">Rejected</option>
+            <option value="pending">Offen</option>
+            <option value="approved">Freigegeben</option>
+            <option value="rejected">Abgelehnt</option>
           </select>
 
           {/* Sort */}
@@ -972,7 +972,14 @@ export default function QuotesPage() {
               <div key={quote.id} className="bg-white rounded-xl border border-gray-200 p-6 space-y-4">
                 <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
                   <div>
-                    <h2 className="text-lg font-semibold text-gray-900">{quote.type} · {quote.name}</h2>
+                    <div className="flex items-center gap-2 mb-1">
+                      <h2 className="text-lg font-semibold text-gray-900">{quote.type} · {quote.name}</h2>
+                      {quote.approvalStatus === "approved" && (
+                        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-100 text-emerald-800">
+                          Abgeschickt
+                        </span>
+                      )}
+                    </div>
                     <p className="text-sm text-gray-500">{quote.email}{quote.phone ? ` · ${quote.phone}` : ""}</p>
                     <p className="text-sm text-gray-500">{quote.buildingType} · {quote.squareMeters} m²{quote.floor ? ` · ${quote.floor}` : ""}</p>
                   </div>
@@ -1069,7 +1076,7 @@ export default function QuotesPage() {
                   <p><strong>Unverbindliches Preisangebot:</strong> Dieses Angebot dient nur als Orientierung und ist ohne Gewähr. Endgültige Preise nach Ortsbesichtigung.</p>
                 </div>
 
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-2 overflow-x-auto pb-2 -mx-2 px-2">
                   <button
                     type="button"
                     onClick={() => {
