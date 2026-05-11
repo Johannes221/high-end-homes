@@ -43,7 +43,7 @@ export default function Navbar({ userName, userEmail }: NavbarProps) {
           {/* Logo */}
           <Link href="/intern" className="flex items-center">
             <Image
-              src="/logo.webp"
+              src="/logo-intern.png"
               alt="High-End Homes"
               width={120}
               height={40}
