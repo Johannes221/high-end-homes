@@ -42,6 +42,16 @@ type FormData = {
   imageFileNames: string[]
 }
 
+async function readJsonResponse<T>(response: Response) {
+  const contentType = response.headers.get("content-type") ?? ""
+
+  if (!contentType.toLowerCase().includes("application/json")) {
+    throw new Error(response.status === 524 ? "Der Server hat zu lange gebraucht. Bitte versuchen Sie es erneut." : "Der Server hat unerwartet geantwortet. Bitte versuchen Sie es erneut.")
+  }
+
+  return (await response.json()) as T
+}
+
 export function QuoteFormTabs() {
   const searchParams = useSearchParams()
   const [activeTab, setActiveTab] = useState("entruempelung")
@@ -154,7 +164,6 @@ export function QuoteFormTabs() {
         permitStatus: formData.permitStatus || undefined,
         desiredDate: formData.desiredDate || undefined,
         notes: formData.notes || undefined,
-        imagesBase64: formData.imagesBase64.length > 0 ? formData.imagesBase64 : undefined,
         imageFileNames: formData.imageFileNames.length > 0 ? formData.imageFileNames : undefined,
       }
 
@@ -166,8 +175,9 @@ export function QuoteFormTabs() {
         body: JSON.stringify(payload),
       })
 
+      const data = await readJsonResponse<{ error?: string }>(response)
+
       if (!response.ok) {
-        const data = await response.json()
         throw new Error(data.error || "Fehler beim Senden der Anfrage")
       }
 

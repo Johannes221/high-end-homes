@@ -100,6 +100,7 @@ type QuoteItem = {
 
 type QuoteResponse = { success?: boolean; quotes?: QuoteItem[] }
 type QuotePatchResponse = { success?: boolean; quote?: QuoteItem }
+type QuoteDetailResponse = { success?: boolean; quote?: QuoteItem; error?: string }
 
 type CustomLineItemDraft = {
   label: string
@@ -114,6 +115,16 @@ function formatCurrency(value: number) {
 function formatValue(value: string | null | undefined) {
   if (!value || typeof value !== "string") return "-"
   return value.trim().length > 0 ? value : "-"
+}
+
+async function readJsonResponse<T>(response: Response) {
+  const contentType = response.headers.get("content-type") ?? ""
+
+  if (!contentType.toLowerCase().includes("application/json")) {
+    throw new Error(response.status === 524 ? "Der Server hat zu lange gebraucht. Bitte erneut versuchen." : `Unerwartete Server-Antwort (${response.status || "ohne Status"}).`)
+  }
+
+  return (await response.json()) as T
 }
 
 function buildSelectionSummary(quote: QuoteItem) {
@@ -217,6 +228,7 @@ function openPdfOffer(quoteId: string) {
 export default function QuotesPage() {
   const [quotes, setQuotes] = useState<QuoteItem[]>([])
   const [loading, setLoading] = useState(true)
+  const [loadError, setLoadError] = useState("")
   const [updatingId, setUpdatingId] = useState("")
   const [expandedId, setExpandedId] = useState("")
   const [loadedImages, setLoadedImages] = useState<Record<string, string[]>>({})
@@ -228,7 +240,7 @@ export default function QuotesPage() {
   const [lightboxImages, setLightboxImages] = useState<string[]>([])
   const [lightboxIndex, setLightboxIndex] = useState(0)
   const [lightboxScale, setLightboxScale] = useState(1)
-  const [lightboxOffset, setLightboxOffset] = useState({ x: 0, y: 0 })
+  const [, setLightboxOffset] = useState({ x: 0, y: 0 })
   const [touchStart, setTouchStart] = useState<{ x: number; y: number } | null>(null)
   const [searchQuery, setSearchQuery] = useState("")
   const [filterType, setFilterType] = useState<string>("all")
@@ -249,11 +261,16 @@ export default function QuotesPage() {
 
   const loadQuotes = async () => {
     try {
+      setLoadError("")
       const response = await fetch("/api/quotes")
-      const data = (await response.json()) as QuoteResponse
+      const data = await readJsonResponse<QuoteResponse>(response)
       if (response.ok && data.success) {
         setQuotes(data.quotes || [])
+      } else {
+        setLoadError("Anfragen konnten nicht geladen werden.")
       }
+    } catch (error) {
+      setLoadError(error instanceof Error ? error.message : "Anfragen konnten nicht geladen werden.")
     } finally {
       setLoading(false)
     }
@@ -295,10 +312,6 @@ export default function QuotesPage() {
     }))
   }
 
-  const syncDraftAsync = (quote: QuoteItem) => {
-    setTimeout(() => syncDraft(quote), 0)
-  }
-
   const loadQuoteImages = async (quoteId: string) => {
     if (loadedImages[quoteId] || loadingImages[quoteId]) return
     
@@ -306,11 +319,12 @@ export default function QuotesPage() {
     
     try {
       const response = await fetch(`/api/quotes/${quoteId}?includeImages=true`)
-      const data = await response.json()
+      const data = await readJsonResponse<QuoteDetailResponse>(response)
       if (response.ok && data.success && data.quote) {
+        const imagesBase64 = data.quote.imagesBase64 || []
         setLoadedImages((current) => ({
           ...current,
-          [quoteId]: data.quote.imagesBase64 || [],
+          [quoteId]: imagesBase64,
         }))
       }
     } catch (error) {
@@ -320,15 +334,30 @@ export default function QuotesPage() {
     }
   }
 
+  const loadQuoteDetails = async (quoteId: string) => {
+    const response = await fetch(`/api/quotes/${quoteId}`)
+    const data = await readJsonResponse<QuoteDetailResponse>(response)
+
+    if (!response.ok || !data.success || !data.quote) {
+      throw new Error(data.error || "Anfrage konnte nicht geladen werden.")
+    }
+
+    const detailedQuote = data.quote
+    setQuotes((current) => current.map((quote) => (quote.id === quoteId ? detailedQuote : quote)))
+    syncDraft(detailedQuote)
+    return detailedQuote
+  }
+
   const updateQuote = async (id: string, payload: { approvalStatus?: string; markExported?: boolean }) => {
     setUpdatingId(id)
     try {
-      const quote = quotes.find((entry) => entry.id === id)
+      let quote = quotes.find((entry) => entry.id === id)
       if (!quote) {
         return
       }
+      quote = await loadQuoteDetails(id)
 
-      const optimisticUpdate = {
+      const optimisticUpdate: QuoteItem = {
         ...quote,
         approvalStatus: payload.approvalStatus ?? quote.approvalStatus,
         pricing: {
@@ -353,11 +382,12 @@ export default function QuotesPage() {
         }),
       })
 
-      const data = (await response.json()) as QuotePatchResponse
+      const data = await readJsonResponse<QuotePatchResponse>(response)
 
       if (response.ok && data.success && data.quote) {
-        setQuotes((current) => current.map((quote) => (quote.id === id ? { ...quote, ...data.quote } : quote)))
-        syncDraft(data.quote)
+        const updatedQuote = data.quote
+        setQuotes((current) => current.map((quote) => (quote.id === id ? { ...quote, ...updatedQuote } : quote)))
+        syncDraft(updatedQuote)
         
         if (payload.approvalStatus === "approved") {
           const sendResponse = await fetch(`/api/quotes/${id}/send`, {
@@ -365,7 +395,7 @@ export default function QuotesPage() {
             headers: { "Content-Type": "application/json" },
           })
           
-          const sendData = await sendResponse.json()
+          const sendData = await readJsonResponse<{ success?: boolean; error?: string }>(sendResponse)
           
           if (sendResponse.ok && sendData.success) {
             setAlertDialog({
@@ -384,7 +414,7 @@ export default function QuotesPage() {
           }
         }
         
-        return data.quote
+        return updatedQuote
       }
     } finally {
       setUpdatingId("")
@@ -406,7 +436,7 @@ export default function QuotesPage() {
             headers: { "Content-Type": "application/json" },
           })
 
-          const data = await response.json()
+          const data = await readJsonResponse<{ success?: boolean; error?: string }>(response)
 
           if (response.ok && data.success) {
             setAlertDialog({
@@ -451,7 +481,7 @@ export default function QuotesPage() {
             method: "DELETE",
           })
 
-          const data = await response.json()
+          const data = await readJsonResponse<{ success?: boolean; error?: string }>(response)
 
           if (response.ok && data.success) {
             setAlertDialog({
@@ -960,7 +990,9 @@ export default function QuotesPage() {
         </div>
       </div>
 
-      {loading ? (
+      {loadError ? (
+        <div className="bg-red-50 rounded-xl border border-red-200 p-6 text-sm text-red-700">{loadError}</div>
+      ) : loading ? (
         <div className="bg-white rounded-xl border border-gray-200 p-6 text-sm text-gray-500">Anfragen werden geladen...</div>
       ) : sortedQuotes.length === 0 ? (
         <div className="bg-white rounded-xl border border-gray-200 p-6 text-sm text-gray-500">Noch keine Anfragen vorhanden.</div>
@@ -1085,7 +1117,7 @@ export default function QuotesPage() {
                       setExpandedId(newExpandedId)
                       
                       if (!isExpanded) {
-                        syncDraftAsync(quote)
+                        void loadQuoteDetails(quote.id)
                         void loadQuoteImages(quote.id)
                       }
                     }}

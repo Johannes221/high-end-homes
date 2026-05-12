@@ -11,10 +11,10 @@ import {
   evaluateComplexity,
   normalizeSubmission,
   normalizeString,
+  sanitizeQuotePayloadForPersistence,
   type QuoteSubmission,
 } from "@/lib/quote"
 
-export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
 
 type MailSharePayload = {
@@ -260,6 +260,7 @@ export async function POST(request: Request) {
   try {
     const rawBody = await request.json()
     const submission = normalizeSubmission(rawBody)
+    const persistedSubmission = sanitizeQuotePayloadForPersistence(submission)
 
     if (!submission.name || !submission.email) {
       return jsonWithCors(
@@ -295,7 +296,8 @@ export async function POST(request: Request) {
         permitStatus: submission.permitStatus || null,
         desiredDate: submission.desiredDate || null,
         imageFileNamesJson: JSON.stringify(submission.imageFileNames ?? []),
-        imagesBase64Json: JSON.stringify(submission.imagesBase64 ?? []),
+        // Base64-Bilder nicht in DB speichern (Performance) - nur Filenames
+        imagesBase64Json: "[]",
         notes: submission.notes || null,
         complexityScore: complexity.score,
         complexityLevel: complexity.level,
@@ -303,19 +305,19 @@ export async function POST(request: Request) {
         complexityFlagsJson: JSON.stringify(complexity.flags),
         estimatedMinPrice: estimate.min,
         estimatedMaxPrice: estimate.max,
-        payloadJson: JSON.stringify(submission),
+        payloadJson: JSON.stringify(persistedSubmission),
       },
     })
 
-    await sendQuoteNotificationEmail({ submission, complexity, estimate })
-
-    await archiveQuoteSubmission(submission.name, {
+    // E-Mail und Archivierung asynchron ausführen (nicht blockieren)
+    sendQuoteNotificationEmail({ submission, complexity, estimate }).catch(console.error)
+    archiveQuoteSubmission(submission.name, {
       ...submission,
       complexity,
       estimate,
       databaseId: savedRequest.id,
       createdAt: new Date().toISOString(),
-    })
+    }).catch(console.error)
 
     return jsonWithCors(request, { success: true, id: savedRequest.id, estimate, complexity })
   } catch (error) {
@@ -344,7 +346,7 @@ export async function PUT(request: Request) {
     const formUrl = normalizeString(body.formUrl) || resolveAppUrl()
 
     return jsonWithCors(request, { success: true, formUrl })
-  } catch (error) {
+  } catch {
     return jsonWithCors(request, { success: false, error: "Der Link konnte nicht generiert werden." }, { status: 500 })
   }
 }

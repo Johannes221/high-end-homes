@@ -3,12 +3,67 @@ import { NextResponse } from "next/server"
 import { auth } from "@/lib/auth"
 import { prisma } from "@/lib/prisma"
 import {
-  parsePersistedQuotePayload,
   resolveQuotePricing,
+  type QuoteSubmission,
 } from "@/lib/quote"
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
+
+type QuoteListRow = {
+  id: string
+  type: string
+  name: string
+  email: string
+  phone: string | null
+  company: string | null
+  address: string | null
+  squareMeters: number
+  buildingType: string | null
+  constructionYear: string | null
+  floor: string | null
+  elevator: string | null
+  materialsJson: string
+  removalItemsJson: string
+  quantityEstimate: string | null
+  valuables: string | null
+  asbestosRequired: boolean | number
+  otherPollutants: boolean | number
+  disposalWanted: boolean | number
+  permitStatus: string | null
+  desiredDate: string | null
+  imageFileNamesJson: string
+  notes: string | null
+  complexityScore: number
+  complexityLevel: string
+  effortRange: string
+  complexityFlagsJson: string
+  estimatedMinPrice: number
+  estimatedMaxPrice: number
+  approvalStatus: string
+  approvedAt: Date | string | null
+  approvedBy: string | null
+  sharedAt: Date | string | null
+  createdAt: Date | string
+  updatedAt: Date | string
+}
+
+function parseStringArray(value: string | null) {
+  if (!value) {
+    return []
+  }
+
+  try {
+    const parsed = JSON.parse(value)
+    return Array.isArray(parsed) ? parsed.filter((entry): entry is string => typeof entry === "string") : []
+  } catch {
+    return []
+  }
+}
+
+function toBoolean(value: boolean | number) {
+  return value === true || value === 1
+}
 
 export async function GET() {
   try {
@@ -18,65 +73,93 @@ export async function GET() {
       return NextResponse.json({ success: false, error: "Nicht eingeloggt." }, { status: 401 })
     }
 
-    // Abfrage mit payloadJson für lineItems
-    const quotes = await prisma.quoteRequest.findMany({
-      orderBy: { createdAt: "desc" },
-      select: {
-        id: true,
-        type: true,
-        name: true,
-        email: true,
-        phone: true,
-        company: true,
-        address: true,
-        squareMeters: true,
-        buildingType: true,
-        constructionYear: true,
-        floor: true,
-        elevator: true,
-        quantityEstimate: true,
-        valuables: true,
-        asbestosRequired: true,
-        otherPollutants: true,
-        disposalWanted: true,
-        permitStatus: true,
-        desiredDate: true,
-        imageFileNamesJson: true,
-        notes: true,
-        complexityScore: true,
-        complexityLevel: true,
-        effortRange: true,
-        estimatedMinPrice: true,
-        estimatedMaxPrice: true,
-        approvalStatus: true,
-        approvedAt: true,
-        approvedBy: true,
-        sharedAt: true,
-        createdAt: true,
-        updatedAt: true,
-        // Komplexe Felder weglassen für Performance
-        materialsJson: false,
-        removalItemsJson: false,
-        imagesBase64Json: false,
-        payloadJson: true,
-        complexityFlagsJson: false,
-      }
-    })
+    const quotes = await prisma.$queryRaw<QuoteListRow[]>`
+      SELECT
+        id,
+        type,
+        name,
+        email,
+        phone,
+        company,
+        address,
+        squareMeters,
+        buildingType,
+        constructionYear,
+        floor,
+        elevator,
+        materialsJson,
+        removalItemsJson,
+        quantityEstimate,
+        valuables,
+        asbestosRequired,
+        otherPollutants,
+        disposalWanted,
+        permitStatus,
+        desiredDate,
+        imageFileNamesJson,
+        notes,
+        complexityScore,
+        complexityLevel,
+        effortRange,
+        complexityFlagsJson,
+        estimatedMinPrice,
+        estimatedMaxPrice,
+        approvalStatus,
+        approvedAt,
+        approvedBy,
+        sharedAt,
+        createdAt,
+        updatedAt
+      FROM QuoteRequest
+      ORDER BY createdAt DESC
+    `
 
     return NextResponse.json({
       success: true,
       quotes: quotes.map(quote => {
-        const payload = parsePersistedQuotePayload(quote.payloadJson)
-        const pricingSummary = resolveQuotePricing(payload, payload.pricing)
+        const materials = parseStringArray(quote.materialsJson)
+        const removalItems = parseStringArray(quote.removalItemsJson)
+        const imageFileNames = parseStringArray(quote.imageFileNamesJson)
+        const complexityFlags = parseStringArray(quote.complexityFlagsJson)
+        const payload: QuoteSubmission = {
+          type: quote.type,
+          name: quote.name,
+          email: quote.email,
+          phone: quote.phone ?? undefined,
+          company: quote.company ?? undefined,
+          address: quote.address ?? undefined,
+          squareMeters: quote.squareMeters,
+          buildingType: quote.buildingType ?? undefined,
+          constructionYear: quote.constructionYear ?? undefined,
+          floor: quote.floor ?? undefined,
+          elevator: quote.elevator ?? undefined,
+          materials,
+          removalItems,
+          quantityEstimate: quote.quantityEstimate ?? undefined,
+          valuables: quote.valuables ?? undefined,
+          asbestosRequired: toBoolean(quote.asbestosRequired),
+          otherPollutants: toBoolean(quote.otherPollutants),
+          disposalWanted: toBoolean(quote.disposalWanted),
+          permitStatus: quote.permitStatus ?? undefined,
+          desiredDate: quote.desiredDate ?? undefined,
+          imageFileNames,
+          notes: quote.notes ?? undefined,
+        }
+        const pricingSummary = resolveQuotePricing(payload)
         return {
           ...quote,
-          materials: [],
-          removalItems: [],
-          imageFileNames: JSON.parse(quote.imageFileNamesJson),
+          materials,
+          removalItems,
+          imageFileNames,
           imagesBase64: [],
-          complexityFlags: [],
+          complexityFlags,
           payload,
-          pricing: payload.pricing ?? { lineItemOverrides: [], customLineItems: [], internalNotes: "", exportedAt: null },
+          pricing: {
+            lineItemOverrides: [],
+            customLineItems: [],
+            internalNotes: "",
+            exportedAt: null,
+          },
           pricingSummary
         }
       })

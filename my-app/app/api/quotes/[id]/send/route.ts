@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server"
 
 import { auth } from "@/lib/auth"
 import { prisma } from "@/lib/prisma"
-import { parsePersistedQuotePayload, resolveQuotePricing } from "@/lib/quote"
+import { parsePersistedQuotePayload, resolveQuotePricing, sanitizeQuotePayloadForPersistence } from "@/lib/quote"
 import { sendEmail } from "@/lib/email"
 import { buildPdfHtml } from "@/lib/pdf-builder"
 
@@ -19,7 +19,7 @@ function formatCurrency(value: number) {
 
 export async function POST(_request: NextRequest, context: { params: Promise<{ id: string }> }) {
   let puppeteer: typeof import("puppeteer-core") | null = null
-  let chromium: any = null
+  let chromium: typeof import("@sparticuz/chromium").default | null = null
   let browser: Awaited<ReturnType<typeof import("puppeteer-core").launch>> | null = null
   let quoteId = "unknown"
 
@@ -262,13 +262,13 @@ export async function POST(_request: NextRequest, context: { params: Promise<{ i
       where: { id },
       data: {
         sharedAt: new Date(),
-        payloadJson: JSON.stringify({
+        payloadJson: JSON.stringify(sanitizeQuotePayloadForPersistence({
           ...payload,
           pricing: {
             ...payload.pricing,
             exportedAt: new Date().toISOString(),
           },
-        }),
+        })),
       },
     })
 

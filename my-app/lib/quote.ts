@@ -209,6 +209,12 @@ export function parsePersistedQuotePayload(payloadJson: string): PersistedQuoteP
   }
 }
 
+export function sanitizeQuotePayloadForPersistence(payload: PersistedQuotePayload): PersistedQuotePayload {
+  const sanitized = { ...payload }
+  delete sanitized.imagesBase64
+  return sanitized
+}
+
 export function buildQuoteLineItems(submission: QuoteSubmission): QuoteLineItem[] {
   const squareMeters = getSquareMeters(submission)
   const normalizedSquareMeters = Math.max(squareMeters, 1)

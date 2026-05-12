@@ -8,6 +8,7 @@ import {
   normalizeString,
   parsePersistedQuotePayload,
   resolveQuotePricing,
+  sanitizeQuotePayloadForPersistence,
   type QuoteCustomLineItem,
   type QuoteLineItemOverride,
 } from "@/lib/quote"
@@ -104,7 +105,7 @@ export async function GET(request: NextRequest, context: { params: Promise<{ id:
     }
 
     return NextResponse.json({ success: true, quote: serialized })
-  } catch (error) {
+  } catch {
     return NextResponse.json({ success: false, error: "Anfrage konnte nicht geladen werden." }, { status: 500 })
   }
 }
@@ -150,12 +151,12 @@ export async function PATCH(request: NextRequest, context: { params: Promise<{ i
         approvalStatus,
         approvedAt: approvalStatus === "approved" ? new Date() : null,
         approvedBy: approvalStatus === "approved" ? (session?.user?.email ?? session?.user?.name ?? "Bennet Pfeifer") : null,
-        payloadJson: JSON.stringify(payload),
+        payloadJson: JSON.stringify(sanitizeQuotePayloadForPersistence(payload)),
       },
     })
 
     return NextResponse.json({ success: true, quote: serializeQuote(updated) })
-  } catch (error) {
+  } catch {
     return NextResponse.json({ success: false, error: "Freigabe konnte nicht gespeichert werden." }, { status: 500 })
   }
 }
@@ -178,7 +179,7 @@ export async function DELETE(_request: NextRequest, context: { params: Promise<{
     await prisma.quoteRequest.delete({ where: { id } })
 
     return NextResponse.json({ success: true, message: "Anfrage erfolgreich gelöscht." })
-  } catch (error) {
+  } catch {
     return NextResponse.json({ success: false, error: "Anfrage konnte nicht gelöscht werden." }, { status: 500 })
   }
 }
