@@ -98,6 +98,7 @@ type QuoteItem = {
   pricingSummary: QuotePricingSummary
 }
 
+type LoadedQuoteItem = QuoteItem & { detailsLoaded?: boolean }
 type QuoteResponse = { success?: boolean; quotes?: QuoteItem[] }
 type QuotePatchResponse = { success?: boolean; quote?: QuoteItem }
 type QuoteDetailResponse = { success?: boolean; quote?: QuoteItem; error?: string }
@@ -226,7 +227,7 @@ function openPdfOffer(quoteId: string) {
 }
 
 export default function QuotesPage() {
-  const [quotes, setQuotes] = useState<QuoteItem[]>([])
+  const [quotes, setQuotes] = useState<LoadedQuoteItem[]>([])
   const [loading, setLoading] = useState(true)
   const [loadError, setLoadError] = useState("")
   const [updatingId, setUpdatingId] = useState("")
@@ -342,10 +343,14 @@ export default function QuotesPage() {
       throw new Error(data.error || "Anfrage konnte nicht geladen werden.")
     }
 
-    const detailedQuote = data.quote
+    const detailedQuote: LoadedQuoteItem = { ...data.quote, detailsLoaded: true }
     setQuotes((current) => current.map((quote) => (quote.id === quoteId ? detailedQuote : quote)))
     syncDraft(detailedQuote)
     return detailedQuote
+  }
+
+  const ensureQuoteDetails = async (quote: LoadedQuoteItem) => {
+    return quote.detailsLoaded ? quote : loadQuoteDetails(quote.id)
   }
 
   const updateQuote = async (id: string, payload: { approvalStatus?: string; markExported?: boolean }) => {
@@ -355,7 +360,7 @@ export default function QuotesPage() {
       if (!quote) {
         return
       }
-      quote = await loadQuoteDetails(id)
+      quote = await ensureQuoteDetails(quote)
 
       const optimisticUpdate: QuoteItem = {
         ...quote,
@@ -1309,7 +1314,7 @@ export default function QuotesPage() {
                             type="text"
                             value={newCustomItem[quote.id]?.label ?? ""}
                             onChange={(event) => setNewCustomItem((current) => ({ ...current, [quote.id]: { ...(current[quote.id] ?? { label: "", amount: "", details: "" }), label: event.target.value } }))}
-                            className="rounded-lg border border-gray-300 px-3 py-2"
+                            className="rounded-lg border border-gray-300 px-3 py-2 text-black"
                             placeholder="Bezeichnung der Position"
                           />
                         </div>
@@ -1321,7 +1326,7 @@ export default function QuotesPage() {
                             step="1"
                             value={newCustomItem[quote.id]?.amount ?? ""}
                             onChange={(event) => setNewCustomItem((current) => ({ ...current, [quote.id]: { ...(current[quote.id] ?? { label: "", amount: "", details: "" }), amount: event.target.value } }))}
-                            className="rounded-lg border border-gray-300 px-3 py-2"
+                            className="rounded-lg border border-gray-300 px-3 py-2 text-black"
                             placeholder="Preis"
                           />
                         </div>
@@ -1331,7 +1336,7 @@ export default function QuotesPage() {
                             type="text"
                             value={newCustomItem[quote.id]?.details ?? ""}
                             onChange={(event) => setNewCustomItem((current) => ({ ...current, [quote.id]: { ...(current[quote.id] ?? { label: "", amount: "", details: "" }), details: event.target.value } }))}
-                            className="rounded-lg border border-gray-300 px-3 py-2"
+                            className="rounded-lg border border-gray-300 px-3 py-2 text-black"
                             placeholder="Details optional"
                           />
                         </div>
