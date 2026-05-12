@@ -86,8 +86,8 @@ export async function POST(_request: NextRequest, context: { params: Promise<{ i
 
     const payload = parsePersistedQuotePayload(quote.payloadJson)
     const pricingSummary = resolveQuotePricing(payload, payload.pricing)
-    const advisorName = session?.user?.name || quote.approvedBy || "Bennet Pfeifer"
-    const advisorEmail = session?.user?.email || "bennet.pfeifer@highendhomes.de"
+    const advisorName = "Bennet Pfeifer"
+    const advisorEmail = "bennet.pfeifer@highendhomes.de"
     const internalNotes = payload.pricing?.internalNotes ?? ""
 
     console.log("Generating PDF directly (no HTTP request)")

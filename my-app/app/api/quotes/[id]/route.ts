@@ -264,7 +264,7 @@ export async function PATCH(request: NextRequest, context: { params: Promise<{ i
       exportedAt: body.markExported ? new Date().toISOString() : (existing.exportedAt ?? undefined),
     }
     const approvedAt = approvalStatus === "approved" ? new Date() : null
-    const approvedBy = approvalStatus === "approved" ? (session?.user?.email ?? session?.user?.name ?? "Bennet Pfeifer") : null
+    const approvedBy = approvalStatus === "approved" ? "Bennet Pfeifer" : null
     const pricingJson = JSON.stringify(pricing)
 
     await prisma.$executeRaw`

@@ -61,7 +61,7 @@ export function buildPdfHtml(input: {
   const customerAddress = quote.address || payload.address || "-"
   const offerDate = formatDate(new Date())
   const desiredDate = quote.desiredDate || payload.desiredDate || "-"
-  const approvalName = quote.approvedBy || advisorName
+  const approvalName = advisorName
 
   const lineRows = selectedItems.map((item, index) => `
     <tr>

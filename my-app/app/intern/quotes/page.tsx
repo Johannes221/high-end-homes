@@ -109,6 +109,10 @@ type CustomLineItemDraft = {
   details: string
 }
 
+type QuoteSaveOptions = {
+  closeDetailsOnSuccess?: boolean
+}
+
 function formatCurrency(value: number) {
   return new Intl.NumberFormat("de-DE", { style: "currency", currency: "EUR", maximumFractionDigits: 0 }).format(value)
 }
@@ -116,6 +120,13 @@ function formatCurrency(value: number) {
 function formatValue(value: string | null | undefined) {
   if (!value || typeof value !== "string") return "-"
   return value.trim().length > 0 ? value : "-"
+}
+
+function formatStatus(value: string) {
+  if (value === "pending") return "Offen"
+  if (value === "approved") return "Freigegeben"
+  if (value === "rejected") return "Abgelehnt"
+  return value
 }
 
 async function readJsonResponse<T>(response: Response) {
@@ -293,19 +304,19 @@ export default function QuotesPage() {
     })
   }
 
-  const syncDraft = (quote: QuoteItem) => {
+  const syncDraft = (quote: QuoteItem, force = false) => {
     const overrides = buildDefaultOverrides(quote)
     setDraftOverrides((current) => ({
       ...current,
-      [quote.id]: overrides,
+      [quote.id]: force || !current[quote.id] ? overrides : current[quote.id],
     }))
     setDraftNotes((current) => ({
       ...current,
-      [quote.id]: quote.pricing.internalNotes ?? "",
+      [quote.id]: force || current[quote.id] === undefined ? quote.pricing.internalNotes ?? "" : current[quote.id],
     }))
     setDraftCustomItems((current) => ({
       ...current,
-      [quote.id]: quote.pricing.customLineItems ?? [],
+      [quote.id]: force || !current[quote.id] ? quote.pricing.customLineItems ?? [] : current[quote.id],
     }))
     setNewCustomItem((current) => ({
       ...current,
@@ -353,7 +364,7 @@ export default function QuotesPage() {
     return quote.detailsLoaded ? quote : loadQuoteDetails(quote.id)
   }
 
-  const updateQuote = async (id: string, payload: { approvalStatus?: string; markExported?: boolean }) => {
+  const updateQuote = async (id: string, payload: { approvalStatus?: string; markExported?: boolean }, options: QuoteSaveOptions = {}) => {
     setUpdatingId(id)
     try {
       let quote = quotes.find((entry) => entry.id === id)
@@ -361,16 +372,17 @@ export default function QuotesPage() {
         return
       }
       quote = await ensureQuoteDetails(quote)
+      const nextPricing: QuotePricing = {
+        ...quote.pricing,
+        lineItemOverrides: draftOverrides[id] ?? quote.pricing.lineItemOverrides ?? [],
+        customLineItems: draftCustomItems[id] ?? quote.pricing.customLineItems ?? [],
+        internalNotes: draftNotes[id] ?? quote.pricing.internalNotes ?? "",
+      }
 
-      const optimisticUpdate: QuoteItem = {
+      const optimisticUpdate: LoadedQuoteItem = {
         ...quote,
         approvalStatus: payload.approvalStatus ?? quote.approvalStatus,
-        pricing: {
-          ...quote.pricing,
-          lineItemOverrides: draftOverrides[id] ?? quote.pricing.lineItemOverrides ?? [],
-          customLineItems: draftCustomItems[id] ?? quote.pricing.customLineItems ?? [],
-          internalNotes: draftNotes[id] ?? quote.pricing.internalNotes ?? "",
-        },
+        pricing: nextPricing,
       }
       
       setQuotes((current) => current.map((q) => (q.id === id ? optimisticUpdate : q)))
@@ -381,18 +393,25 @@ export default function QuotesPage() {
         body: JSON.stringify({
           approvalStatus: payload.approvalStatus ?? quote.approvalStatus,
           markExported: payload.markExported,
-          lineItemOverrides: draftOverrides[id] ?? quote.pricing.lineItemOverrides ?? [],
-          customLineItems: draftCustomItems[id] ?? quote.pricing.customLineItems ?? [],
-          internalNotes: draftNotes[id] ?? quote.pricing.internalNotes ?? "",
+          lineItemOverrides: nextPricing.lineItemOverrides ?? [],
+          customLineItems: nextPricing.customLineItems ?? [],
+          internalNotes: nextPricing.internalNotes ?? "",
         }),
       })
 
       const data = await readJsonResponse<QuotePatchResponse>(response)
 
       if (response.ok && data.success && data.quote) {
-        const updatedQuote = data.quote
+        const updatedQuote: LoadedQuoteItem = {
+          ...data.quote,
+          detailsLoaded: quote.detailsLoaded,
+          pricing: nextPricing,
+        }
         setQuotes((current) => current.map((quote) => (quote.id === id ? { ...quote, ...updatedQuote } : quote)))
-        syncDraft(updatedQuote)
+
+        if (options.closeDetailsOnSuccess) {
+          setExpandedId("")
+        }
         
         if (payload.approvalStatus === "approved") {
           const sendResponse = await fetch(`/api/quotes/${id}/send`, {
@@ -426,52 +445,6 @@ export default function QuotesPage() {
     }
 
     return null
-  }
-
-  const sendQuoteEmail = async (quote: QuoteItem) => {
-    setConfirmDialog({
-      open: true,
-      title: "Auf www.highendhomes.de wird Folgendes angezeigt:",
-      description: `Angebot als PDF an ${quote.email} senden?`,
-      onConfirm: async () => {
-        setUpdatingId(quote.id)
-        try {
-          const response = await fetch(`/api/quotes/${quote.id}/send`, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-          })
-
-          const data = await readJsonResponse<{ success?: boolean; error?: string }>(response)
-
-          if (response.ok && data.success) {
-            setAlertDialog({
-              open: true,
-              title: "Auf www.highendhomes.de wird Folgendes angezeigt:",
-              description: `✅ Angebot erfolgreich an ${quote.email} versendet!`,
-              variant: "default",
-            })
-            await loadQuotes()
-          } else {
-            setAlertDialog({
-              open: true,
-              title: "Auf www.highendhomes.de wird Folgendes angezeigt:",
-              description: `❌ Fehler beim Versenden: ${data.error || "Unbekannter Fehler"}`,
-              variant: "destructive",
-            })
-          }
-        } catch (error) {
-          console.error("Send quote error:", error)
-          setAlertDialog({
-            open: true,
-            title: "Auf www.highendhomes.de wird Folgendes angezeigt:",
-            description: `❌ Fehler beim Versenden: ${error instanceof Error ? error.message : String(error)}`,
-            variant: "destructive",
-          })
-        } finally {
-          setUpdatingId("")
-        }
-      },
-    })
   }
 
   const deleteQuote = async (quote: QuoteItem) => {
@@ -1022,7 +995,7 @@ export default function QuotesPage() {
                     <p className="text-sm text-gray-500">{quote.buildingType} · {quote.squareMeters} m²{quote.floor ? ` · ${quote.floor}` : ""}</p>
                   </div>
                   <div className="text-sm text-gray-600">
-                    <p>Status: <strong>{quote.approvalStatus}</strong></p>
+                    <p>Status: <strong>{formatStatus(quote.approvalStatus)}</strong></p>
                     <p>Komplexität: <strong>{quote.complexityLevel}</strong> ({quote.complexityScore})</p>
                     <p>Preisspanne: <strong>{quote.estimatedMinPrice} € – {quote.estimatedMaxPrice} €</strong></p>
                     <p>Final kalkuliert: <strong>{formatCurrency(preview.finalTotal)}</strong></p>
@@ -1200,17 +1173,6 @@ export default function QuotesPage() {
                   </button>
                   <button
                     type="button"
-                    onClick={() => sendQuoteEmail(quote)}
-                    disabled={updatingId === quote.id}
-                    className="flex items-center gap-2 px-4 py-2.5 rounded-lg bg-green-600 text-white text-sm font-medium hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-sm"
-                  >
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                    </svg>
-                    PDF per E-Mail senden
-                  </button>
-                  <button
-                    type="button"
                     onClick={() => deleteQuote(quote)}
                     disabled={updatingId === quote.id}
                     className="flex items-center gap-2 px-4 py-2.5 rounded-lg bg-red-600 text-white text-sm font-medium hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-sm"
@@ -1274,6 +1236,7 @@ export default function QuotesPage() {
                                   step="1"
                                   value={getDraftOverrides(quote).find((entry) => entry.key === item.key)?.amount ?? ""}
                                   onChange={(event) => setLineItemAmount(quote, item.key, event.target.value)}
+                                  onBlur={() => void updateQuote(quote.id, {})}
                                   className="w-32 rounded-lg border border-gray-300 px-3 py-2 text-black"
                                   placeholder={String(item.amount)}
                                 />
@@ -1371,7 +1334,7 @@ export default function QuotesPage() {
                     <div className="flex flex-wrap gap-2">
                       <button
                         type="button"
-                        onClick={() => void updateQuote(quote.id, {})}
+                        onClick={() => void updateQuote(quote.id, {}, { closeDetailsOnSuccess: true })}
                         disabled={updatingId === quote.id}
                         className="px-4 py-2 rounded-lg bg-blue-600 text-white text-sm font-medium disabled:opacity-60"
                       >
@@ -1392,7 +1355,7 @@ export default function QuotesPage() {
                       </button>
                       <button
                         type="button"
-                        onClick={() => syncDraft(quote)}
+                        onClick={() => syncDraft(quote, true)}
                         className="px-4 py-2 rounded-lg border border-gray-300 text-gray-700 text-sm font-medium"
                       >
                         Entwurf zurücksetzen
