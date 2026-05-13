@@ -5,24 +5,24 @@ import { ChevronDown } from "lucide-react"
 
 const faqs = [
   {
-    question: "Welche Leistungen bieten Sie in Heidelberg und Mannheim an?",
-    answer: "Wir bieten Entrümpelung, Hausauflösung und Entkernung für private und gewerbliche Objekte in Heidelberg, Mannheim und der gesamten Rhein-Neckar-Region an. Zusätzlich übernehmen wir alle Ausbau-Leistungen wie Maler, Trockenbau, Fliesenleger, Sanitär & Elektro sowie Fensterbau.",
+    question: "Welche Leistungen bieten Sie in Heidelberg und Mannheim?",
+    answer: "Entrümpelung, Hausauflösung und Entkernung sowie alle Ausbau-Gewerke: Maler, Trockenbau, Fliesenleger, Sanitär, Elektro und Fensterbau. Für privat und gewerblich.",
   },
   {
-    question: "Wie schnell kann eine Entrümpelung oder Hausauflösung starten?",
-    answer: "Je nach Umfang sind kurzfristige Besichtigungen und schnelle Termine möglich. Nach Ihrer Anfrage melden wir uns zeitnah mit einer Einschätzung zum Aufwand und möglichen Startterminen.",
+    question: "Wie schnell kann eine Entrümpelung starten?",
+    answer: "Kurzfristige Termine sind möglich. Nach Ihrer Anfrage melden wir uns zeitnah mit Einschätzung und möglichen Startterminen.",
   },
   {
     question: "Übernehmen Sie auch Entkernungen vor Sanierungen?",
-    answer: "Ja. Wir übernehmen Entkernungen für Wohnungen, Häuser, Büros und Gewerbeeinheiten und bereiten das Objekt strukturiert auf die nächsten Bau- oder Sanierungsschritte vor. Inklusive fachgerechter Entsorgung aller Materialien.",
+    answer: "Ja – für Wohnungen, Häuser und Gewerbe, inklusive fachgerechter Entsorgung. Wir bereiten das Objekt für die nächsten Bauphasen vor.",
   },
   {
-    question: "In welchen Orten rund um Heidelberg sind Sie tätig?",
-    answer: "Wir sind in Heidelberg, Mannheim, Dossenheim, Schriesheim, Weinheim, Leimen, Eppelheim, Schwetzingen, Hockenheim, Ladenburg und im gesamten Rhein-Neckar-Kreis tätig.",
+    question: "In welchen Orten sind Sie tätig?",
+    answer: "Heidelberg, Mannheim, Dossenheim, Schriesheim, Weinheim, Leimen, Eppelheim, Schwetzingen, Hockenheim, Ladenburg und Umgebung.",
   },
   {
     question: "Was kostet eine Entrümpelung?",
-    answer: "Die Kosten hängen von verschiedenen Faktoren ab: Größe des Objekts, Umfang der Arbeiten, Stockwerk, Aufzug vorhanden, Art der Materialien etc. Nach Ihrer Anfrage erstellen wir Ihnen ein transparentes und unverbindliches Angebot.",
+    answer: "Abhängig von Größe, Umfang, Stockwerk und Materialien. Sie erhalten ein transparentes, unverbindliches Angebot nach Ihrer Anfrage.",
   },
 ]
 

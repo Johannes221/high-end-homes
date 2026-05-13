@@ -8,56 +8,56 @@ const floors = [
   {
     id: "dach",
     etage: "DACHGESCHOSS",
-    label: "Entrümpelung & Entkernug",
+    label: "Entrümpelung & Entkernung",
     desc: "Vorbereitung · Rückbau · Beräumung",
     href: "/entruempelung",
     top: "0%",
-    height: "18%",
+    height: "20%",
   },
   {
     id: "og3",
     etage: "3. OBERGESCHOSS",
-    label: "Maler & Lackierer",
-    desc: "Innen · Außen · Spachteln",
-    href: "/maler",
-    top: "18%",
-    height: "17%",
+    label: "Trockenbau & Stuckateur",
+    desc: "Wände · Decken · Stuck",
+    href: "/trockenbau",
+    top: "20%",
+    height: "20%",
   },
   {
     id: "og2",
     etage: "2. OBERGESCHOSS",
-    label: "Trockenbau & Stuckateur",
-    desc: "Wände · Decken · Stuck",
-    href: "/trockenbau",
-    top: "35%",
-    height: "17%",
+    label: "Sanitär & Elektro",
+    desc: "Installation · Leitungen",
+    href: "/sanitaer",
+    top: "40%",
+    height: "20%",
   },
   {
     id: "og1",
     etage: "1. OBERGESCHOSS",
-    label: "Fliesenleger",
-    desc: "Bad · Küche · Terrasse",
-    href: "/fliesenleger",
-    top: "52%",
-    height: "15%",
+    label: "Maler & Lackierer",
+    desc: "Innen · Außen · Spachteln",
+    href: "/maler",
+    top: "60%",
+    height: "20%",
   },
   {
     id: "eg",
     etage: "ERDGESCHOSS",
-    label: "Sanitär & Elektro",
-    desc: "Installation · Leitungen",
-    href: "/sanitaer",
-    top: "67%",
-    height: "33%",
+    label: "Fliesenleger",
+    desc: "Bad · Küche · Terrasse",
+    href: "/fliesenleger",
+    top: "80%",
+    height: "20%",
   },
 ]
 
 const tabs = [
-  { nr: "01", name: "Entrümpelung & Entkernug", href: "/entkernung" },
-  { nr: "02", name: "Maler & Lackierer", href: "/maler" },
-  { nr: "03", name: "Trockenbau & Stuckateur", href: "/trockenbau" },
-  { nr: "04", name: "Fliesenleger", href: "/fliesenleger" },
-  { nr: "05", name: "Sanitär & Elektro", href: "/sanitaer" },
+  { nr: "01", name: "Entrümpelung & Entkernung", href: "/entkernung" },
+  { nr: "02", name: "Trockenbau & Stuckateur", href: "/trockenbau" },
+  { nr: "03", name: "Sanitär & Elektro", href: "/sanitaer" },
+  { nr: "04", name: "Maler & Lackierer", href: "/maler" },
+  { nr: "05", name: "Fliesenleger", href: "/fliesenleger" },
 ]
 
 export function VillaInteractive() {
@@ -93,7 +93,7 @@ export function VillaInteractive() {
       <section id="leistungen" className="relative w-screen m-0 p-0 overflow-hidden" style={{ aspectRatio: '3/2', minHeight: '600px' }}>
         {/* Villa Background Image */}
         <Image
-          src="/villa-bild.png"
+          src="/villa-bild.webp"
           alt="High-End Homes Villa"
           fill
           className="object-cover object-center transition-all duration-500"
@@ -103,7 +103,7 @@ export function VillaInteractive() {
             objectPosition: 'center center'
           }}
           sizes="100vw"
-          priority
+          loading="lazy"
         />
 
         {/* Hover Zones */}
@@ -148,14 +148,14 @@ export function VillaInteractive() {
               }}
             >
               <div
-                className="px-4 py-2 md:px-9 md:py-4 text-center"
+                className="w-[240px] md:w-[340px] px-4 py-3 md:px-8 md:py-5 text-center"
                 style={{
                   background: "rgba(8,8,8,0.75)",
                   border: "1px solid rgba(255,255,255,0.4)",
                 }}
               >
                 <div
-                  className="text-[7px] md:text-[9px] tracking-[0.3em] mb-1 md:mb-2"
+                  className="text-[9px] md:text-[10px] tracking-[0.3em] mb-1.5 md:mb-2"
                   style={{
                     fontFamily: "var(--font-headline)",
                     fontWeight: 600,
@@ -166,7 +166,7 @@ export function VillaInteractive() {
                   {floor.etage}
                 </div>
                 <div
-                  className="text-sm md:text-xl lg:text-2xl xl:text-3xl mb-0.5 md:mb-1.5"
+                  className="text-base md:text-xl mb-1 md:mb-1.5"
                   style={{
                     fontFamily: "var(--font-headline)",
                     fontWeight: 400,
@@ -177,7 +177,7 @@ export function VillaInteractive() {
                   {floor.label}
                 </div>
                 <div
-                  className="text-[10px] md:text-xs tracking-[0.1em]"
+                  className="text-[11px] md:text-xs tracking-[0.1em]"
                   style={{
                     fontFamily: "var(--font-body)",
                     fontWeight: 300,

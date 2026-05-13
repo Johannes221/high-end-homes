@@ -9,7 +9,7 @@ export function Hero() {
       {/* Background Image */}
       <div className="absolute inset-0">
         <Image
-          src="/hero-bg.png"
+          src="/hero-bg.webp"
           alt="High-End Homes"
           fill
           className="object-cover"
@@ -59,8 +59,8 @@ export function Hero() {
               lineHeight: 1.7
             }}
           >
-            Von der Entrümpelung bis zum fertigen Ausbau – alles aus einer Hand.<br />
-            In Heidelberg, Mannheim & Umgebung.
+            Entrümpelung bis Ausbau – alles aus einer Hand.<br />
+            Heidelberg · Mannheim · Rhein-Neckar.
           </p>
 
           {/* Buttons */}

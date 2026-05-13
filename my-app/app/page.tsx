@@ -5,11 +5,12 @@ import { Hero } from "@/components/hero-new"
 import { AblaufSection } from "@/components/ablauf-section"
 import { VillaInteractive } from "@/components/villa-interactive"
 import { ServiceCards } from "@/components/service-cards"
+import { BeforeAfterSection } from "@/components/before-after-section"
 import { FAQSection } from "@/components/faq-section"
 import { CTABanner } from "@/components/cta-banner"
 import { Footer } from "@/components/footer-new"
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://high-end-homes.de"
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://highendhomes.de"
 
 export const metadata: Metadata = {
   title: "Entrümpelung, Hausauflösung & Entkernung in Heidelberg und Mannheim",
@@ -114,6 +115,7 @@ export default function Home() {
         <AblaufSection />
         <VillaInteractive />
         <ServiceCards />
+        <BeforeAfterSection />
         <FAQSection />
         <CTABanner />
       </main>

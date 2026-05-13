@@ -8,19 +8,19 @@ const mainServices = [
   {
     icon: Trash2,
     title: "Entrümpelung",
-    description: "Professionelle Entrümpelung von Häusern, Wohnungen und Gewerbeobjekten. Schnell, sauber und zuverlässig.",
+    description: "Häuser, Wohnungen, Gewerbe. Schnell und besenrein.",
     href: "/entruempelung",
   },
   {
     icon: Home,
     title: "Hausauflösung",
-    description: "Komplette Hausauflösung mit Wertgegenständen-Sortierung und fachgerechter Entsorgung.",
+    description: "Komplett – inkl. Sortierung und fachgerechter Entsorgung.",
     href: "/hausaufloesung",
   },
   {
     icon: Hammer,
     title: "Entkernung",
-    description: "Professionelle Entkernung für Sanierungen und Umbauten. Inklusive Entsorgung aller Materialien.",
+    description: "Strukturierter Rückbau für Sanierung und Umbau.",
     href: "/entkernung",
   },
 ]
@@ -29,31 +29,31 @@ const constructionServices = [
   {
     icon: Paintbrush,
     title: "Maler & Lackierer",
-    description: "Hochwertige Malerarbeiten für Innen und Außen.",
+    description: "Innen, außen, Spachtelarbeiten.",
     href: "/maler",
   },
   {
     icon: Box,
     title: "Trockenbau & Stuckateur",
-    description: "Trockenbau, Stuckarbeiten und Innenausbau.",
+    description: "Wände, Decken, Stuck.",
     href: "/trockenbau",
   },
   {
     icon: Frame,
     title: "Fliesenleger",
-    description: "Präzise Fliesenverlegung für Bad und Küche.",
+    description: "Bad, Küche, Terrasse.",
     href: "/fliesenleger",
   },
   {
     icon: Droplet,
     title: "Sanitär & Elektro",
-    description: "Sanitär- und Elektroinstallationen vom Profi.",
+    description: "Installation und Leitungen.",
     href: "/sanitaer",
   },
   {
     icon: Wrench,
     title: "Fensterbau & Gerüst",
-    description: "Fensterbau und Gerüstbau für Ihr Projekt.",
+    description: "Fenster, Türen, Gerüstbau.",
     href: "/fensterbau",
   },
 ]

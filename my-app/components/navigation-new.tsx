@@ -127,17 +127,24 @@ export function Navigation() {
               </Link>
               
               <Link
+                href="/karriere"
+                className="text-sm hover:text-white transition-colors duration-300" style={{ fontFamily: 'var(--font-body)', color: 'rgba(255,255,255,0.7)' }}
+              >
+                Karriere
+              </Link>
+
+              <Link
+                href="/partner"
+                className="text-sm hover:text-white transition-colors duration-300" style={{ fontFamily: 'var(--font-body)', color: 'rgba(255,255,255,0.7)' }}
+              >
+                Partner
+              </Link>
+
+              <Link
                 href="/kontakt"
                 className="text-sm hover:text-white transition-colors duration-300" style={{ fontFamily: 'var(--font-body)', color: 'rgba(255,255,255,0.7)' }}
               >
                 Kontakt
-              </Link>
-              
-              <Link
-                href="/angebot"
-                className="text-sm hover:text-white transition-colors duration-300" style={{ fontFamily: 'var(--font-body)', color: 'rgba(255,255,255,0.7)' }}
-              >
-                Angebot einholen
               </Link>
             </div>
 
@@ -219,18 +226,25 @@ export function Navigation() {
                   Region
                 </Link>
                 <Link
+                  href="/karriere"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="block text-lg font-medium text-white hover:text-white/60 transition-colors" style={{ fontFamily: 'var(--font-body)' }}
+                >
+                  Karriere
+                </Link>
+                <Link
+                  href="/partner"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="block text-lg font-medium text-white hover:text-white/60 transition-colors" style={{ fontFamily: 'var(--font-body)' }}
+                >
+                  Partner
+                </Link>
+                <Link
                   href="/kontakt"
                   onClick={() => setIsMobileMenuOpen(false)}
                   className="block text-lg font-medium text-white hover:text-white/60 transition-colors" style={{ fontFamily: 'var(--font-body)' }}
                 >
                   Kontakt
-                </Link>
-                <Link
-                  href="/angebot"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="block text-lg font-medium text-white hover:text-white/60 transition-colors" style={{ fontFamily: 'var(--font-body)' }}
-                >
-                  Angebot einholen
                 </Link>
               </div>
 

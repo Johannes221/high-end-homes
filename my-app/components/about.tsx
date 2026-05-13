@@ -8,32 +8,32 @@ const uspItems = [
   {
     icon: Clock,
     title: "Schnell",
-    description: "Express-Service möglich. In der Regel innerhalb von 24-48 Stunden vor Ort.",
+    description: "In der Regel innerhalb von 24–48 Stunden vor Ort.",
   },
   {
     icon: Wallet,
-    title: "Günstig",
-    description: "Transparente Festpreise ohne versteckte Kosten. Preisgarantie nach Besichtigung.",
+    title: "Transparent",
+    description: "Festpreise nach Besichtigung. Keine versteckten Kosten.",
   },
   {
     icon: Sparkles,
     title: "Einfach",
-    description: "Ein Anruf genügt. Wir kümmern uns um alles - von der Planung bis zur Entsorgung.",
+    description: "Ein Ansprechpartner für alle Gewerke.",
   },
   {
     icon: Target,
     title: "Präzise",
-    description: "Detaillierte Planung und pünktliche Ausführung. Ihr Termin ist heilig.",
+    description: "Pünktliche Termine, saubere Ausführung.",
   },
   {
     icon: Shield,
-    title: "Sauber",
-    description: "Gründliche Reinigung nach jeder Entrümpelung. Übergabe in besenreinem Zustand.",
+    title: "Besenrein",
+    description: "Übergabe in sauberem Zustand – immer.",
   },
   {
     icon: Award,
     title: "Zertifiziert",
-    description: "Fachgerechte Entsorgung mit allen erforderlichen Zertifizierungen und Genehmigungen.",
+    description: "Fachgerechte Entsorgung mit allen Genehmigungen.",
   },
 ]
 
@@ -50,10 +50,10 @@ export function About() {
             Unser Versprechen
           </span>
           <h2 className="heading-glow text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
-            Darum vertrauen Kunden aus Heidelberg, Mannheim und Umgebung auf <span className="text-gold-gradient">High-End Homes</span>
+            Warum Kunden uns vertrauen
           </h2>
           <p className="text-lg text-[#fafafa]/60 max-w-2xl mx-auto">
-            Kein Hokus-Pokus, keine leeren Versprechen. Wir liefern planbare Ergebnisse für Entrümpelung, Hausauflösung und Entkernung - schnell, sauber und präzise.
+            Planbare Ergebnisse – schnell, sauber, präzise.
           </p>
         </div>
 

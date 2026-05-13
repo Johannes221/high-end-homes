@@ -16,6 +16,12 @@
   --text-3:       rgba(255,255,255,0.3);
   --accent:           oklch(0.97 0 0);
 
+  /* Brand gold */
+  --gold:         #c9a45c;
+  --gold-hover:   #d9b46c;
+  --gold-soft:    rgba(201,164,92,0.12);
+  --gold-line:    rgba(201,164,92,0.35);
+
   --font-headline: 'Montserrat', sans-serif;
   --font-body: 'Source Sans 3', sans-serif;
   --background:           oklch(1 0 0);
@@ -126,9 +132,32 @@ body {
   @apply px-4 sm:px-6 lg:px-8 xl:px-16 2xl:px-24;
 }
 
-/* Heading Glow Effect */
+/* Heading Glow Effect — subtle, slightly warm */
 .heading-glow {
-  text-shadow: 0 0 30px rgba(255, 255, 255, 0.4), 0 0 60px rgba(255, 255, 255, 0.2), 0 0 80px rgba(255, 255, 255, 0.1);
+  text-shadow: 0 0 24px rgba(255, 255, 255, 0.25), 0 0 48px rgba(201, 164, 92, 0.08);
+}
+
+/* Section vertical rhythm */
+.section-y {
+  padding-block: 5rem;
+}
+@media (min-width: 768px) {
+  .section-y {
+    padding-block: 7rem;
+  }
+}
+
+/* Gold accent text */
+.text-gold {
+  color: var(--gold);
+}
+
+/* Hairline divider for sections */
+.divider-hairline {
+  width: 64px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold-line), transparent);
+  margin: 0 auto;
 }
 
 /* Ablauf Section */
