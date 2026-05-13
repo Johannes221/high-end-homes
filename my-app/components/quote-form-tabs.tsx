@@ -94,7 +94,7 @@ export function QuoteFormTabs() {
                   <Label htmlFor="building-type" className="text-white">Gebäudetyp *</Label>
                   <Select required>
                     <SelectTrigger className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)] text-white">
-                      <SelectValue placeholder="Wähl..." />
+                      <SelectValue placeholder="Wählen Sie..." />
                     </SelectTrigger>
                     <SelectContent className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)]">
                       {buildingTypes.map((type) => (
@@ -110,7 +110,7 @@ export function QuoteFormTabs() {
                   <Label htmlFor="floor" className="text-white">Stockwerk</Label>
                   <Select>
                     <SelectTrigger className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)] text-white">
-                      <SelectValue placeholder="Wähl..." />
+                      <SelectValue placeholder="Wählen Sie..." />
                     </SelectTrigger>
                     <SelectContent className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)]">
                       {floorOptions.map((floor) => (
@@ -123,7 +123,7 @@ export function QuoteFormTabs() {
                   <Label htmlFor="elevator" className="text-white">Aufzug vorhanden?</Label>
                   <Select>
                     <SelectTrigger className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)] text-white">
-                      <SelectValue placeholder="Wähl..." />
+                      <SelectValue placeholder="Wählen Sie..." />
                     </SelectTrigger>
                     <SelectContent className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)]">
                       <SelectItem value="ja" className="text-white">Ja</SelectItem>
@@ -149,7 +149,7 @@ export function QuoteFormTabs() {
 
               <div>
                 <Label htmlFor="valuables" className="text-white">Wertgegenstände vorhanden?</Label>
-                <Textarea id="valuables" placeholder="Beschreib eventuelle Wertgegenstände..." className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)] text-white" />
+                <Textarea id="valuables" placeholder="Beschreiben Sie eventuelle Wertgegenstände..." className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)] text-white" />
               </div>
 
               <div>
@@ -197,7 +197,7 @@ export function QuoteFormTabs() {
                   <Label htmlFor="building-type-g" className="text-white">Gebäudetyp *</Label>
                   <Select required>
                     <SelectTrigger className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)] text-white">
-                      <SelectValue placeholder="Wähl..." />
+                      <SelectValue placeholder="Wählen Sie..." />
                     </SelectTrigger>
                     <SelectContent className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)]">
                       {buildingTypes.map((type) => (
@@ -226,7 +226,7 @@ export function QuoteFormTabs() {
                 <Label htmlFor="asbestos" className="text-white">Asbest vorhanden?</Label>
                 <Select>
                   <SelectTrigger className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)] text-white">
-                    <SelectValue placeholder="Wähl..." />
+                    <SelectValue placeholder="Wählen Sie..." />
                   </SelectTrigger>
                   <SelectContent className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)]">
                     <SelectItem value="ja" className="text-white">Ja</SelectItem>
@@ -256,7 +256,7 @@ export function QuoteFormTabs() {
               <p className="text-white/80 text-sm">Unverbindliche Preiseinschätzung – der finale Preis wird vor Ort festgelegt.</p>
             </div>
             <form className="space-y-6 bg-[var(--bg-2)] border border rounded-lg p-8">
-              <p className="text-white/70 text-sm mb-4">Kombinier Entkernung und Entrümpelung für ein Komplettpaket.</p>
+              <p className="text-white/70 text-sm mb-4">Kombinieren Sie Entkernung und Entrümpelung für ein Komplettpaket.</p>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
@@ -276,7 +276,7 @@ export function QuoteFormTabs() {
 
               <div>
                 <Label htmlFor="notes-k" className="text-white">Projektbeschreibung *</Label>
-                <Textarea id="notes-k" placeholder="Beschreib dein Projekt..." className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)] text-white" rows={6} required />
+                <Textarea id="notes-k" placeholder="Beschreiben Sie Ihr Projekt..." className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)] text-white" rows={6} required />
               </div>
 
               <ImageUpload id="images-kombi" label="Bilder hochladen (optional)" />
@@ -326,7 +326,7 @@ export function QuoteFormTabs() {
 
               <div>
                 <Label htmlFor="notes-a" className="text-white">Projektbeschreibung *</Label>
-                <Textarea id="notes-a" placeholder="Beschreib dein Projekt..." className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)] text-white" rows={6} required />
+                <Textarea id="notes-a" placeholder="Beschreiben Sie Ihr Projekt..." className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)] text-white" rows={6} required />
               </div>
 
               <ImageUpload id="images-ausbau" label="Bilder hochladen (optional)" />
@@ -343,7 +343,7 @@ export function QuoteFormTabs() {
       <div className="lg:col-span-1">
         <div className="bg-[var(--bg-2)] border p-8 sticky top-24" style={{ borderColor: 'rgba(255,255,255,0.08)', borderRadius: '3px' }}>
           <h3 className="text-2xl text-white mb-6" style={{ fontFamily: 'var(--font-headline)', fontWeight: 400 }}>
-            Deine Vorteile
+            Ihre Vorteile
           </h3>
           <div className="space-y-6">
             <div className="flex items-start gap-4">

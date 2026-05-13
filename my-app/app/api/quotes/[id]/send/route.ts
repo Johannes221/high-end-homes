@@ -45,7 +45,7 @@ export async function POST(_request: NextRequest, context: { params: Promise<{ i
         return NextResponse.json(
           { 
             success: false, 
-            error: "PDF-Generierung nicht verfügbar. Bitte kontaktier den Support." 
+            error: "PDF-Generierung nicht verfügbar. Bitte kontaktieren Sie den Support." 
           },
           { status: 503 }
         )
@@ -186,12 +186,12 @@ export async function POST(_request: NextRequest, context: { params: Promise<{ i
         </head>
         <body style="margin:0;padding:24px;background:#f9fafb;font-family:Arial,sans-serif;">
           <div style="max-width:600px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:16px;padding:32px;">
-            <h1 style="margin:0 0 16px 0;color:#111827;font-size:24px;">Deine unverbindliche Preisindikation von High-End Homes</h1>
+            <h1 style="margin:0 0 16px 0;color:#111827;font-size:24px;">Ihre unverbindliche Preisindikation von High-End Homes</h1>
             <p style="margin:0 0 16px 0;color:#4b5563;font-size:15px;line-height:1.6;">
               Sehr geehrte/r ${quote.name},
             </p>
             <p style="margin:0 0 16px 0;color:#4b5563;font-size:15px;line-height:1.6;">
-              danke für deine Anfrage. Im Anhang findest du eine <strong>unverbindliche Preisindikation</strong> für dein Projekt <strong>${quote.type}</strong>.
+              vielen Dank für Ihre Anfrage. Im Anhang finden Sie eine <strong>unverbindliche Preisindikation</strong> für Ihr Projekt <strong>${quote.type}</strong>.
             </p>
             <div style="background:#fef3c7;border:1px solid #fbbf24;border-radius:8px;padding:16px;margin:16px 0;">
               <p style="margin:0;color:#92400e;font-size:14px;line-height:1.5;">
@@ -199,7 +199,7 @@ export async function POST(_request: NextRequest, context: { params: Promise<{ i
               </p>
             </div>
             <p style="margin:0 0 16px 0;color:#4b5563;font-size:15px;line-height:1.6;">
-              Die angegebenen Preise basieren auf den von dir übermittelten Informationen und sind eine erste Orientierung. Nach einer persönlichen Vor-Ort-Besichtigung erstellen wir dir gern ein verbindliches Angebot.
+              Die angegebenen Preise basieren auf den von Ihnen übermittelten Informationen und stellen eine erste Orientierung dar. Nach einer persönlichen Vor-Ort-Besichtigung erstellen wir Ihnen gerne ein verbindliches Angebot.
             </p>
             <div style="background:#f9fafb;border:1px solid #e5e7eb;border-radius:12px;padding:20px;margin:24px 0;">
               <h2 style="margin:0 0 12px 0;color:#111827;font-size:16px;">Angebotszusammenfassung</h2>
@@ -219,7 +219,7 @@ export async function POST(_request: NextRequest, context: { params: Promise<{ i
               </table>
             </div>
             <p style="margin:0 0 16px 0;color:#4b5563;font-size:15px;line-height:1.6;">
-              Bei Fragen, für eine Terminvereinbarung zur Besichtigung oder bei Änderungswünschen melde dich jederzeit.
+              Bei Fragen, für eine Terminvereinbarung zur Besichtigung oder bei Änderungswünschen stehen wir Ihnen gerne zur Verfügung.
             </p>
             <p style="margin:0 0 8px 0;color:#4b5563;font-size:15px;line-height:1.6;">
               Mit freundlichen Grüßen<br />
@@ -246,7 +246,7 @@ export async function POST(_request: NextRequest, context: { params: Promise<{ i
 
     const result = await sendEmail({
       to: quote.email,
-      subject: `Deine unverbindliche Preisindikation von High-End Homes – ${quote.type}`,
+      subject: `Ihre unverbindliche Preisindikation von High-End Homes – ${quote.type}`,
       html: emailHtml,
       attachments,
     })

@@ -42,10 +42,10 @@ export function ProcessFlow() {
       <div className="relative z-10 px-4 sm:px-6 lg:px-8 w-full max-w-6xl mx-auto">
         <div className="text-center mb-12">
           <h2 className="heading-glow text-3xl sm:text-4xl font-bold text-white mb-4">
-            So läuft deine Entrümpelung, Hausauflösung oder Entkernung ab
+            So läuft Ihre Entrümpelung, Hausauflösung oder Entkernung ab
           </h2>
           <p className="text-white/60 text-lg">
-            Dein Projekt in 5 einfachen Schritten - von der Anfrage bis zur sauberen Übergabe
+            Ihr Projekt in 5 einfachen Schritten - von der Anfrage bis zur sauberen Übergabe
           </p>
         </div>
 

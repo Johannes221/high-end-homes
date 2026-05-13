@@ -52,15 +52,15 @@ export default function HausaufloesungPage() {
       ]}
       faqs={[
         {
-          question: "Wie geht ihr mit persönlichen Gegenständen um?",
-          answer: "Wir behandeln alle persönlichen Gegenstände mit größtem Respekt. Wichtige Dokumente, Fotos und Erinnerungsstücke werden sorgfältig sortiert und nach deinen Wünschen aufbewahrt oder übergeben.",
+          question: "Wie gehen Sie mit persönlichen Gegenständen um?",
+          answer: "Wir behandeln alle persönlichen Gegenstände mit größtem Respekt. Wichtige Dokumente, Fotos und Erinnerungsstücke werden sorgfältig sortiert und nach Ihren Wünschen aufbewahrt oder übergeben.",
         },
         {
           question: "Was passiert mit Möbeln und Wertgegenständen?",
           answer: "Möbel und Wertgegenstände können nach Absprache verkauft oder gespendet werden. Der Erlös wird mit den Kosten verrechnet.",
         },
         {
-          question: "Übernehmt ihr auch Hausauflösungen im Erbfall?",
+          question: "Übernehmen Sie auch Hausauflösungen im Erbfall?",
           answer: "Ja, wir haben viel Erfahrung mit Hausauflösungen im Erbfall und arbeiten diskret und sensibel mit allen Beteiligten zusammen.",
         },
       ]}

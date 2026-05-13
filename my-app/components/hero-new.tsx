@@ -45,7 +45,7 @@ export function Hero() {
               color: 'white'
             }}
           >
-            Dein Haus.<br />
+            Ihr Haus.<br />
             <span style={{ fontWeight: 400 }}>Eine Adresse.</span>
           </h1>
 

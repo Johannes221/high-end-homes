@@ -53,14 +53,14 @@ export default function WohnungsaufloesungPage() {
       faqs={[
         {
           question: "Wie schnell kann die Wohnungsauflösung erfolgen?",
-          answer: "Nach Auftragserteilung können wir in der Regel innerhalb von 2-5 Tagen starten, abhängig von unserer Auslastung und deinem Wunschtermin.",
+          answer: "Nach Auftragserteilung können wir in der Regel innerhalb von 2-5 Tagen starten, abhängig von unserer Auslastung und Ihrem Wunschtermin.",
         },
         {
           question: "Was passiert mit noch verwertbaren Gegenständen?",
           answer: "Verwertbare Gegenstände können nach Absprache verkauft oder gespendet werden. Der Erlös wird mit den Kosten verrechnet.",
         },
         {
-          question: "Übernehmt ihr auch die Endreinigung?",
+          question: "Übernehmen Sie auch die Endreinigung?",
           answer: "Ja, wir hinterlassen die Wohnung besenrein. Eine Grundreinigung ist im Leistungsumfang enthalten.",
         },
       ]}

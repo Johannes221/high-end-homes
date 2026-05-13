@@ -52,16 +52,16 @@ export default function SanitaerPage() {
       ]}
       faqs={[
         {
-          question: "Sind eure Installateure zertifiziert?",
+          question: "Sind Ihre Installateure zertifiziert?",
           answer: "Ja, alle unsere Sanitär- und Elektroinstallateure sind zertifizierte Fachkräfte mit entsprechenden Qualifikationen.",
         },
         {
-          question: "Übernehmt ihr auch Notdienste?",
+          question: "Übernehmen Sie auch Notdienste?",
           answer: "Für Bestandskunden bieten wir einen Notdienst für dringende Reparaturen an.",
         },
         {
-          question: "Könnt ihr Smart-Home-Systeme installieren?",
-          answer: "Ja, wir installieren und konfigurieren moderne Smart-Home-Lösungen nach deinen Wünschen.",
+          question: "Können Sie Smart-Home-Systeme installieren?",
+          answer: "Ja, wir installieren und konfigurieren moderne Smart-Home-Lösungen nach Ihren Wünschen.",
         },
       ]}
       quoteTab="ausbau"

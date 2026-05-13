@@ -97,7 +97,7 @@ export function ImageUpload({ id, label = "Bilder hochladen", onChange }: ImageU
       >
         <Upload className="w-8 h-8 text-white/40 mx-auto mb-3" />
         <p className="text-white/60 text-sm mb-1">
-          Klick hier oder zieh Bilder hierher
+          Klicken Sie hier oder ziehen Sie Bilder hierher
         </p>
         <p className="text-white/40 text-xs">
           Max. 10 Bilder, je max. 10MB (JPG, PNG, WebP)

@@ -25,7 +25,7 @@ export function Footer() {
                 HIGH-END HOMES
               </h3>
               <p className="text-white/60 mb-6 text-sm" style={{ fontFamily: 'var(--font-body)', fontWeight: 300 }}>
-                Dein zuverlässiger Partner für Entrümpelung, Hausauflösung, Entkernung und Ausbau in Heidelberg, Mannheim und Umgebung.
+                Ihr zuverlässiger Partner für Entrümpelung, Hausauflösung, Entkernung und Ausbau in Heidelberg, Mannheim und Umgebung.
               </p>
             </div>
 

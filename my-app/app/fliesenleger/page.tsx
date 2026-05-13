@@ -52,11 +52,11 @@ export default function FliesenlegerPage() {
       ]}
       faqs={[
         {
-          question: "Welche Fliesen könnt ihr verlegen?",
+          question: "Welche Fliesen können Sie verlegen?",
           answer: "Wir verlegen alle Arten von Fliesen: Keramik, Feinsteinzeug, Naturstein, Mosaik und Großformatfliesen.",
         },
         {
-          question: "Übernehmt ihr auch die Abdichtung?",
+          question: "Übernehmen Sie auch die Abdichtung?",
           answer: "Ja, wir führen alle Abdichtungsarbeiten nach aktueller DIN-Norm durch, besonders wichtig in Nassbereichen.",
         },
         {
