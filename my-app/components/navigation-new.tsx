@@ -36,10 +36,10 @@ export function Navigation() {
   return (
     <>
       <nav
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 backdrop-blur-xl ${
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled
-            ? "bg-[rgba(10,10,10,0.95)] border-b border-[rgba(255,255,255,0.06)]"
-            : "bg-[rgba(10,10,10,0.95)]"
+            ? "bg-[rgba(10,10,10,0.92)] backdrop-blur-xl border-b border-[rgba(255,255,255,0.08)]"
+            : "bg-transparent"
         }`}
       >
         <div className="section-padding">
