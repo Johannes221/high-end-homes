@@ -19,7 +19,7 @@ export default function ImpressumPage() {
               Angaben gemäß § 5 TMG
             </h2>
             <p className="leading-relaxed">
-              High-End Homes GmbH
+              Bennet Pfeifer
               <br />
               Gerhard-Hauptmann-Straße 38
               <br />
@@ -28,40 +28,9 @@ export default function ImpressumPage() {
           </section>
 
           <section>
-            <h2 className="text-2xl font-semibold text-white mb-4">
-              Vertreten durch
-            </h2>
-            <p className="leading-relaxed">Geschäftsführer: Bennet Pfeifer</p>
-          </section>
-
-          <section>
             <h2 className="text-2xl font-semibold text-white mb-4">Kontakt</h2>
             <p className="leading-relaxed">
               E-Mail: bennet.pfeifer@highendhomes.de
-            </p>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-semibold text-white mb-4">
-              Registereintrag
-            </h2>
-            <p className="leading-relaxed">
-              Eintragung im Handelsregister
-              <br />
-              Registergericht: Amtsgericht Mannheim
-              <br />
-              Registernummer: HRB 123456
-            </p>
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-semibold text-white mb-4">
-              Umsatzsteuer-ID
-            </h2>
-            <p className="leading-relaxed">
-              Umsatzsteuer-Identifikationsnummer gemäß § 27 a Umsatzsteuergesetz:
-              <br />
-              DE123456789
             </p>
           </section>
 
