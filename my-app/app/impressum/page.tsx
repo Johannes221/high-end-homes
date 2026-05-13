@@ -21,9 +21,9 @@ export default function ImpressumPage() {
             <p className="leading-relaxed">
               High-End Homes GmbH
               <br />
-              Musterstraße 123
+              Gerhard-Hauptmann-Straße 38
               <br />
-              69115 Heidelberg
+              69221 Dossenheim
             </p>
           </section>
 
@@ -72,9 +72,9 @@ export default function ImpressumPage() {
             <p className="leading-relaxed">
               Bennet Pfeifer
               <br />
-              Musterstraße 123
+              Gerhard-Hauptmann-Straße 38
               <br />
-              69115 Heidelberg
+              69221 Dossenheim
             </p>
           </section>
 
