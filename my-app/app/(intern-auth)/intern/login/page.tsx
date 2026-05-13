@@ -25,7 +25,6 @@ export default function InternLoginPage() {
     setLaedt(true);
 
     try {
-      console.log("Versuche Login mit:", email);
       const ergebnis = await signIn("credentials", {
         email,
         password: passwort,
@@ -33,18 +32,13 @@ export default function InternLoginPage() {
         redirect: false,
       });
 
-      console.log("Login Ergebnis:", ergebnis);
-
       if (ergebnis?.error) {
-        console.error("Login Fehler:", ergebnis.error);
         setFehler("Ungültige E-Mail oder Passwort");
       } else {
-        console.log("Login erfolgreich, leite weiter");
         router.push("/intern");
         router.refresh();
       }
-    } catch (error) {
-      console.error("Login Exception:", error);
+    } catch {
       setFehler("Anmeldung fehlgeschlagen.");
     } finally {
       setLaedt(false);

@@ -27,6 +27,27 @@ function UserInitialen(name: string | null | undefined, email: string | null | u
   return (email?.[0] || "U").toUpperCase();
 }
 
+const AVATAR_COLORS = [
+  "bg-blue-600",
+  "bg-emerald-600",
+  "bg-amber-600",
+  "bg-rose-600",
+  "bg-violet-600",
+  "bg-cyan-600",
+  "bg-orange-600",
+  "bg-teal-600",
+];
+
+function avatarColor(seed: string | null | undefined): string {
+  if (!seed) return AVATAR_COLORS[0];
+  let hash = 0;
+  for (let i = 0; i < seed.length; i++) {
+    hash = (hash << 5) - hash + seed.charCodeAt(i);
+    hash |= 0;
+  }
+  return AVATAR_COLORS[Math.abs(hash) % AVATAR_COLORS.length];
+}
+
 export default function Navbar({ userName, userEmail }: NavbarProps) {
   const pathname = usePathname();
   const [mobileOffen, setMobileOffen] = useState(false);
@@ -74,7 +95,7 @@ export default function Navbar({ userName, userEmail }: NavbarProps) {
               onClick={() => setDropdownOffen(!dropdownOffen)}
               className="flex items-center gap-2 p-1.5 rounded-lg hover:bg-gray-50 transition-colors"
             >
-              <div className="w-8 h-8 rounded-full bg-blue-600 text-white text-sm font-medium flex items-center justify-center">
+              <div className={`w-8 h-8 rounded-full ${avatarColor(userEmail)} text-white text-sm font-medium flex items-center justify-center`}>
                 {UserInitialen(userName, userEmail)}
               </div>
               <ChevronDown className="w-4 h-4 text-gray-400" />
@@ -122,7 +143,7 @@ export default function Navbar({ userName, userEmail }: NavbarProps) {
       {mobileOffen && (
         <div className="md:hidden border-t border-gray-100 bg-white px-4 py-3">
           <div className="flex items-center gap-3 mb-3 pb-3 border-b border-gray-100">
-            <div className="w-9 h-9 rounded-full bg-blue-600 text-white text-sm font-medium flex items-center justify-center">
+            <div className={`w-9 h-9 rounded-full ${avatarColor(userEmail)} text-white text-sm font-medium flex items-center justify-center`}>
               {UserInitialen(userName, userEmail)}
             </div>
             <div>

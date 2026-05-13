@@ -1,8 +1,11 @@
 "use client"
 
 import { useEffect, useMemo, useState } from "react"
+import { useSearchParams } from "next/navigation"
 import { ConfirmDialog } from "@/components/ConfirmDialog"
 import { AlertDialog } from "@/components/AlertDialog"
+
+const PAGE_SIZE = 25
 
 type QuoteLineItemOverride = {
   key: string
@@ -238,6 +241,8 @@ function openPdfOffer(quoteId: string) {
 }
 
 export default function QuotesPage() {
+  const searchParams = useSearchParams()
+  const initialFilter = searchParams.get("filter") ?? "all"
   const [quotes, setQuotes] = useState<LoadedQuoteItem[]>([])
   const [loading, setLoading] = useState(true)
   const [loadError, setLoadError] = useState("")
@@ -255,9 +260,26 @@ export default function QuotesPage() {
   const [, setLightboxOffset] = useState({ x: 0, y: 0 })
   const [touchStart, setTouchStart] = useState<{ x: number; y: number } | null>(null)
   const [searchQuery, setSearchQuery] = useState("")
+  const [debouncedSearch, setDebouncedSearch] = useState("")
   const [filterType, setFilterType] = useState<string>("all")
-  const [filterStatus, setFilterStatus] = useState<string>("all")
+  const [filterStatus, setFilterStatus] = useState<string>(
+    initialFilter === "pending" || initialFilter === "approved" || initialFilter === "rejected"
+      ? initialFilter
+      : "all",
+  )
   const [sortBy, setSortBy] = useState<string>("date-desc")
+  const [currentPage, setCurrentPage] = useState(0)
+
+  // Debounce search input (300 ms) to avoid filtering on every keystroke
+  useEffect(() => {
+    const t = setTimeout(() => setDebouncedSearch(searchQuery), 300)
+    return () => clearTimeout(t)
+  }, [searchQuery])
+
+  // Reset to first page when filter/search/sort change
+  useEffect(() => {
+    setCurrentPage(0)
+  }, [debouncedSearch, filterType, filterStatus, sortBy])
   const [confirmDialog, setConfirmDialog] = useState<{
     open: boolean
     title: string
@@ -607,9 +629,9 @@ export default function QuotesPage() {
       filtered = filtered.filter((q) => q.approvalStatus === filterStatus)
     }
 
-    // Search
-    if (searchQuery.trim()) {
-      const query = searchQuery.toLowerCase()
+    // Search (debounced)
+    if (debouncedSearch.trim()) {
+      const query = debouncedSearch.toLowerCase()
       filtered = filtered.filter((q) =>
         q.name.toLowerCase().includes(query) ||
         q.email.toLowerCase().includes(query) ||
@@ -646,7 +668,13 @@ export default function QuotesPage() {
     }
 
     return sorted
-  }, [quotes, searchQuery, filterType, filterStatus, sortBy])
+  }, [quotes, debouncedSearch, filterType, filterStatus, sortBy])
+
+  const totalPages = Math.max(1, Math.ceil(sortedQuotes.length / PAGE_SIZE))
+  const pagedQuotes = useMemo(
+    () => sortedQuotes.slice(currentPage * PAGE_SIZE, (currentPage + 1) * PAGE_SIZE),
+    [sortedQuotes, currentPage],
+  )
 
   const openLightbox = (images: string[], startIndex: number = 0) => {
     setLightboxImages(images)
@@ -976,7 +1004,7 @@ export default function QuotesPage() {
         <div className="bg-white rounded-xl border border-gray-200 p-6 text-sm text-gray-500">Noch keine Anfragen vorhanden.</div>
       ) : (
         <div className="space-y-4">
-          {sortedQuotes.map((quote) => {
+          {pagedQuotes.map((quote) => {
             const preview = getPreviewSummary(quote)
             const isExpanded = expandedId === quote.id
             return (
@@ -1366,6 +1394,32 @@ export default function QuotesPage() {
               </div>
             )
           })}
+
+          {totalPages > 1 && (
+            <nav className="flex items-center justify-between bg-white rounded-xl border border-gray-200 px-4 py-3 mt-4">
+              <p className="text-sm text-gray-500">
+                Seite {currentPage + 1} von {totalPages} · {sortedQuotes.length} Anfragen
+              </p>
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => setCurrentPage((p) => Math.max(0, p - 1))}
+                  disabled={currentPage === 0}
+                  className="px-3 py-1.5 text-sm border border-gray-200 rounded-md hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed"
+                >
+                  ← Zurück
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setCurrentPage((p) => Math.min(totalPages - 1, p + 1))}
+                  disabled={currentPage >= totalPages - 1}
+                  className="px-3 py-1.5 text-sm border border-gray-200 rounded-md hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed"
+                >
+                  Weiter →
+                </button>
+              </div>
+            </nav>
+          )}
         </div>
       )}
 
