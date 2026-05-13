@@ -343,11 +343,11 @@ export function ServicePageLayout({
                         E-Mail
                       </p>
                       <a 
-                        href="mailto:info@high-end-homes.de" 
+                        href="mailto:info@highendhomes.de" 
                         className="text-white hover:text-white/80 transition-colors"
                         style={{ fontFamily: 'var(--font-body)', fontWeight: 400 }}
                       >
-                        info@high-end-homes.de
+                        info@highendhomes.de
                       </a>
                     </div>
                   </div>

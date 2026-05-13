@@ -11,7 +11,7 @@ async function resetAdminPassword() {
     authToken: DATABASE_AUTH_TOKEN,
   });
 
-  const email = 'admin@high-end-homes.de';
+  const email = 'admin@highendhomes.de';
   const newPassword = 'HighEnd2025!Secure';
 
   try {

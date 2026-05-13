@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next"
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://high-end-homes.de"
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://highendhomes.de"
 const staticRoutes = [
   "",
   "/entruempelung-heidelberg",

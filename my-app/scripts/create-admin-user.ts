@@ -11,7 +11,7 @@ async function createAdminUser() {
     authToken: DATABASE_AUTH_TOKEN,
   });
 
-  const email = 'admin@high-end-homes.de';
+  const email = 'admin@highendhomes.de';
   const password = 'HighEnd2025!Secure';
   const name = 'Admin';
 

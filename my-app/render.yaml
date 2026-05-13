@@ -29,9 +29,9 @@ services:
       - key: ALLOWED_ORIGIN
         value: ""
       - key: PUBLIC_APP_URL
-        value: https://www.high-end-homes.de
+        value: https://www.highendhomes.de
       - key: NOTIFICATION_EMAIL
-        value: info@high-end-homes.de
+        value: info@highendhomes.de
       - key: SMTP_HOST
         value: smtp.gmail.com
       - key: SMTP_PORT
@@ -41,7 +41,7 @@ services:
       - key: SMTP_PASS
         sync: false
       - key: SMTP_FROM
-        value: High-End Homes <noreply@high-end-homes.de>
+        value: High-End Homes <noreply@highendhomes.de>
       - key: CRON_SECRET
         value: ec8a18c146c1411588ad53600c4efd29c9d5b38c099baf2724e72b8fdc72c52c
       - key: SERPAPI_KEY

@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import type { LocalSeoPage } from "@/lib/local-seo-pages"
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://high-end-homes.de"
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://highendhomes.de"
 
 export function LocalServicePage({ page }: { page: LocalSeoPage }) {
   const structuredData = {

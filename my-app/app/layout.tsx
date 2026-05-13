@@ -10,7 +10,7 @@ const geist = Geist({
   display: 'swap',
 });
 
- const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://high-end-homes.de";
+ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://highendhomes.de";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),

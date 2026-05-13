@@ -3,7 +3,7 @@ import bcrypt from "bcryptjs";
 import { prisma } from "../lib/prisma";
 
 async function resetPassword() {
-  const email = "admin@high-end-homes.de";
+  const email = "admin@highendhomes.de";
   const newPassword = "HighEnd2026!";
 
   const gehashtesPasswort = await bcrypt.hash(newPassword, 12);
