@@ -76,17 +76,17 @@ export async function POST(req: NextRequest) {
 
     await sendEmail({
       to: email,
-      subject: "Ihre Bewerbung bei High-End Homes",
+      subject: "Deine Bewerbung bei High-End Homes",
       html: `
         <div style="font-family:Arial,sans-serif;max-width:600px;padding:32px;background:#fff;border:1px solid #eee;border-radius:12px;">
           <h2 style="margin:0 0 16px 0;">Bewerbung erhalten</h2>
-          <p style="line-height:1.6;color:#444;">Sehr geehrte/r ${escape(name)},</p>
+          <p style="line-height:1.6;color:#444;">Hi ${escape(name)},</p>
           <p style="line-height:1.6;color:#444;">
-            vielen Dank für Ihre Bewerbung auf die Position <strong>${escape(position)}</strong>.
-            Wir prüfen Ihre Unterlagen und melden uns innerhalb weniger Tage bei Ihnen.
+            danke für deine Bewerbung auf die Position <strong>${escape(position)}</strong>.
+            Wir schauen uns deine Unterlagen an und melden uns innerhalb weniger Tage bei dir.
           </p>
           <p style="line-height:1.6;color:#444;margin-top:24px;">
-            Mit freundlichen Grüßen<br/>
+            Viele Grüße<br/>
             <strong>High-End Homes</strong><br/>
             Bennet Pfeifer
           </p>

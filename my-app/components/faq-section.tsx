@@ -5,24 +5,24 @@ import { ChevronDown } from "lucide-react"
 
 const faqs = [
   {
-    question: "Welche Leistungen bieten Sie in Heidelberg und Mannheim?",
+    question: "Welche Leistungen bietet ihr in Heidelberg und Mannheim?",
     answer: "Entrümpelung, Hausauflösung und Entkernung sowie alle Ausbau-Gewerke: Maler, Trockenbau, Fliesenleger, Sanitär, Elektro und Fensterbau. Für privat und gewerblich.",
   },
   {
     question: "Wie schnell kann eine Entrümpelung starten?",
-    answer: "Kurzfristige Termine sind möglich. Nach Ihrer Anfrage melden wir uns zeitnah mit Einschätzung und möglichen Startterminen.",
+    answer: "Kurzfristige Termine sind möglich. Nach deiner Anfrage melden wir uns zeitnah mit Einschätzung und möglichen Startterminen.",
   },
   {
-    question: "Übernehmen Sie auch Entkernungen vor Sanierungen?",
+    question: "Übernehmt ihr auch Entkernungen vor Sanierungen?",
     answer: "Ja – für Wohnungen, Häuser und Gewerbe, inklusive fachgerechter Entsorgung. Wir bereiten das Objekt für die nächsten Bauphasen vor.",
   },
   {
-    question: "In welchen Orten sind Sie tätig?",
+    question: "In welchen Orten seid ihr tätig?",
     answer: "Heidelberg, Mannheim, Dossenheim, Schriesheim, Weinheim, Leimen, Eppelheim, Schwetzingen, Hockenheim, Ladenburg und Umgebung.",
   },
   {
     question: "Was kostet eine Entrümpelung?",
-    answer: "Abhängig von Größe, Umfang, Stockwerk und Materialien. Sie erhalten ein transparentes, unverbindliches Angebot nach Ihrer Anfrage.",
+    answer: "Abhängig von Größe, Umfang, Stockwerk und Materialien. Du bekommst nach deiner Anfrage ein transparentes, unverbindliches Angebot.",
   },
 ]
 

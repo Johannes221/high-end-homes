@@ -76,7 +76,7 @@ export default function Home() {
         mainEntity: [
           {
             "@type": "Question",
-            name: "Welche Leistungen bieten Sie in Heidelberg und Mannheim an?",
+            name: "Welche Leistungen bietet ihr in Heidelberg und Mannheim an?",
             acceptedAnswer: {
               "@type": "Answer",
               text: "Wir bieten Entrümpelung, Hausauflösung, Wohnungsauflösung und Entkernung für private und gewerbliche Objekte in Heidelberg, Mannheim und der gesamten Rhein-Neckar-Region an.",
@@ -87,12 +87,12 @@ export default function Home() {
             name: "Wie schnell kann eine Entrümpelung oder Hausauflösung starten?",
             acceptedAnswer: {
               "@type": "Answer",
-              text: "Je nach Umfang sind kurzfristige Besichtigungen und schnelle Termine möglich. Nach Ihrer Anfrage melden wir uns zeitnah mit einer Einschätzung zum Aufwand und möglichen Startterminen.",
+              text: "Je nach Umfang sind kurzfristige Besichtigungen und schnelle Termine möglich. Nach deiner Anfrage melden wir uns zeitnah mit einer Einschätzung zum Aufwand und möglichen Startterminen.",
             },
           },
           {
             "@type": "Question",
-            name: "Übernehmen Sie auch Entkernungen vor Sanierungen?",
+            name: "Übernehmt ihr auch Entkernungen vor Sanierungen?",
             acceptedAnswer: {
               "@type": "Answer",
               text: "Ja. Wir übernehmen Entkernungen für Wohnungen, Häuser, Büros und Gewerbeeinheiten und bereiten das Objekt strukturiert auf die nächsten Bau- oder Sanierungsschritte vor.",

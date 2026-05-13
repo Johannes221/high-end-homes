@@ -45,7 +45,7 @@ export function ContactForm() {
       setPhone("")
       setMessage("")
     } catch (err) {
-      setError("Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.")
+      setError("Es ist ein Fehler aufgetreten. Bitte versuch es erneut.")
     } finally {
       setSubmitting(false)
     }
@@ -59,7 +59,7 @@ export function ContactForm() {
           Nachricht gesendet!
         </h3>
         <p className="mb-6" style={{ fontFamily: 'var(--font-body)', fontWeight: 300, color: 'rgba(255,255,255,0.55)' }}>
-          Vielen Dank für Ihre Nachricht. Wir melden uns zeitnah bei Ihnen.
+          Vielen Dank für deine Nachricht. Wir melden uns zeitnah bei dir.
         </p>
         <button
           onClick={() => setSubmitted(false)}

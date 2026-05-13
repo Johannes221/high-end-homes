@@ -31,7 +31,7 @@ export function Hero() {
 
           {/* Description */}
           <p className="text-lg text-white/60 max-w-2xl">
-            Ihr zuverlässiger Partner für professionelle Entrümpelung, Hausauflösung und Entkernung 
+            Dein zuverlässiger Partner für professionelle Entrümpelung, Hausauflösung und Entkernung
             in Heidelberg, Mannheim und Umgebung. Schnell vor Ort, transparent kalkuliert und auf Wunsch mit besenreiner Übergabe.
           </p>
 

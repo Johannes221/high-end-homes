@@ -85,7 +85,7 @@ export function KarriereForm({ defaultPosition }: { defaultPosition?: string }) 
           Bewerbung gesendet
         </h3>
         <p style={{ color: "rgba(255,255,255,0.65)" }}>
-          Vielen Dank! Wir melden uns innerhalb weniger Tage bei Ihnen.
+          Vielen Dank! Wir melden uns innerhalb weniger Tage bei dir.
         </p>
       </div>
     )
@@ -150,7 +150,7 @@ export function KarriereForm({ defaultPosition }: { defaultPosition?: string }) 
         <label className="block text-xs uppercase tracking-[0.2em] mb-2" style={{ color: "rgba(255,255,255,0.5)" }}>
           Nachricht
         </label>
-        <textarea name="message" rows={5} className={inputCls} placeholder="Worauf legen Sie Wert? Was sollen wir wissen?" />
+        <textarea name="message" rows={5} className={inputCls} placeholder="Worauf legst du Wert? Was sollen wir wissen?" />
       </div>
 
       <div>

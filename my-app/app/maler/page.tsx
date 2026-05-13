@@ -52,15 +52,15 @@ export default function MalerPage() {
       ]}
       faqs={[
         {
-          question: "Welche Farben verwenden Sie?",
-          answer: "Wir verwenden hochwertige Markenfarben und beraten Sie gerne bei der Auswahl. Auf Wunsch auch ökologische Farben.",
+          question: "Welche Farben verwendet ihr?",
+          answer: "Wir verwenden hochwertige Markenfarben und beraten dich gern bei der Auswahl. Auf Wunsch auch ökologische Farben.",
         },
         {
           question: "Wie lange dauern Malerarbeiten?",
           answer: "Die Dauer hängt vom Umfang ab. Eine Wohnung kann in 2-5 Tagen gestrichen werden.",
         },
         {
-          question: "Übernehmen Sie auch Tapezierarbeiten?",
+          question: "Übernehmt ihr auch Tapezierarbeiten?",
           answer: "Ja, wir übernehmen alle Arten von Tapezierarbeiten und Wandgestaltung.",
         },
       ]}

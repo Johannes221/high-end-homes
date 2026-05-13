@@ -168,19 +168,19 @@ async function sendQuoteNotificationEmail({
         <head>
           <meta charSet="UTF-8" />
           <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-          <title>Ihre Anfrage bei High-End Homes</title>
+          <title>Deine Anfrage bei High-End Homes</title>
         </head>
         <body style="margin:0;padding:24px;background:#f9fafb;font-family:Arial,sans-serif;">
           <div style="max-width:600px;margin:0 auto;background:#ffffff;border:1px solid #e5e7eb;border-radius:16px;padding:32px;">
-            <h1 style="margin:0 0 16px 0;color:#111827;font-size:24px;">Ihre Anfrage bei High-End Homes</h1>
+            <h1 style="margin:0 0 16px 0;color:#111827;font-size:24px;">Deine Anfrage bei High-End Homes</h1>
             <p style="margin:0 0 16px 0;color:#4b5563;font-size:15px;line-height:1.6;">
-              Sehr geehrte/r ${escapeHtml(submission.name)},
+              Hi ${escapeHtml(submission.name)},
             </p>
             <p style="margin:0 0 16px 0;color:#4b5563;font-size:15px;line-height:1.6;">
-              vielen Dank für Ihre Anfrage bezüglich <strong>${escapeHtml(submission.type || "Ihrem Projekt")}</strong>. Wir haben Ihre Angaben erhalten und werden uns zeitnah bei Ihnen melden.
+              danke für deine Anfrage zu <strong>${escapeHtml(submission.type || "deinem Projekt")}</strong>. Wir haben deine Angaben erhalten und melden uns zeitnah bei dir.
             </p>
             <div style="background:#f9fafb;border:1px solid #e5e7eb;border-radius:12px;padding:20px;margin:24px 0;">
-              <h2 style="margin:0 0 12px 0;color:#111827;font-size:16px;">Ihre Angaben</h2>
+              <h2 style="margin:0 0 12px 0;color:#111827;font-size:16px;">Deine Angaben</h2>
               <table style="width:100%;border-collapse:collapse;">
                 <tr>
                   <td style="padding:8px 0;color:#6b7280;font-size:14px;">Service:</td>
@@ -197,10 +197,10 @@ async function sendQuoteNotificationEmail({
               </table>
             </div>
             <p style="margin:0 0 16px 0;color:#4b5563;font-size:15px;line-height:1.6;">
-              Wir prüfen Ihre Anfrage und setzen uns in Kürze mit Ihnen in Verbindung, um weitere Details zu besprechen und Ihnen ein unverbindliches Angebot zu unterbreiten.
+              Wir prüfen deine Anfrage und melden uns in Kürze, um die Details zu besprechen und dir ein unverbindliches Angebot zu schicken.
             </p>
             <p style="margin:0 0 8px 0;color:#4b5563;font-size:15px;line-height:1.6;">
-              Mit freundlichen Grüßen<br />
+              Viele Grüße<br />
               <strong>High-End Homes</strong><br />
               Bennet Pfeifer<br />
               bennet.pfeifer@highendhomes.de
@@ -218,7 +218,7 @@ async function sendQuoteNotificationEmail({
 
     await sendEmail({
       to: submission.email,
-      subject: `Ihre Anfrage bei High-End Homes - ${submission.type || "Bestätigung"}`,
+      subject: `Deine Anfrage bei High-End Homes - ${submission.type || "Bestätigung"}`,
       html: customerHtml,
     })
   }
@@ -265,7 +265,7 @@ export async function POST(request: Request) {
     if (!submission.name || !submission.email) {
       return jsonWithCors(
         request,
-        { success: false, error: "Bitte füllen Sie alle Pflichtfelder aus." },
+        { success: false, error: "Bitte füll alle Pflichtfelder aus." },
         { status: 400 }
       )
     }

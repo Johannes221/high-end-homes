@@ -725,7 +725,7 @@ export function QuoteForm() {
         <div style={{ display: "flex", flexDirection: "column", gap: 12, textAlign: "center" }}>
           <h2 style={{ color: colors.text, fontSize: 32, margin: 0 }}>Angebot anfragen</h2>
           <p style={{ color: colors.muted, fontSize: 16, margin: 0 }}>
-            Wählen Sie die passende Leistung und senden Sie uns Ihre Angaben für ein schnelles Angebot.
+            Wähl die passende Leistung und schick uns deine Angaben für ein schnelles Angebot.
           </p>
         </div>
 
@@ -781,7 +781,7 @@ export function QuoteForm() {
             <div style={cardStyle}>
               <h3 style={{ color: colors.gold, fontSize: 24, margin: "0 0 12px 0" }}>Vielen Dank!</h3>
               <p style={{ color: colors.text, fontSize: 16, margin: 0 }}>
-                Vielen Dank! Wir melden uns innerhalb von 30 Minuten mit Ihrem Angebot.
+                Vielen Dank! Wir melden uns innerhalb von 30 Minuten mit deinem Angebot.
               </p>
             </div>
           ) : (
@@ -945,7 +945,7 @@ export function QuoteForm() {
             <div style={cardStyle}>
               <h3 style={{ color: colors.gold, fontSize: 24, margin: "0 0 12px 0" }}>Vielen Dank!</h3>
               <p style={{ color: colors.text, fontSize: 16, margin: 0 }}>
-                Vielen Dank! Wir melden uns innerhalb von 30 Minuten mit Ihrem Angebot.
+                Vielen Dank! Wir melden uns innerhalb von 30 Minuten mit deinem Angebot.
               </p>
             </div>
           ) : (
@@ -1112,7 +1112,7 @@ export function QuoteForm() {
             <div style={cardStyle}>
               <h3 style={{ color: colors.gold, fontSize: 24, margin: "0 0 12px 0" }}>Vielen Dank!</h3>
               <p style={{ color: colors.text, fontSize: 16, margin: 0 }}>
-                Vielen Dank! Wir melden uns innerhalb von 30 Minuten mit Ihrem Angebot.
+                Vielen Dank! Wir melden uns innerhalb von 30 Minuten mit deinem Angebot.
               </p>
             </div>
           ) : (

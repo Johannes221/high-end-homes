@@ -42,7 +42,7 @@ export function BeforeAfterSection() {
             className="text-sm md:text-base max-w-2xl mx-auto"
             style={{ fontFamily: "var(--font-body)", color: "rgba(255,255,255,0.55)" }}
           >
-            Schieben Sie den Regler, um den Unterschied zu sehen.
+            Schieb den Regler, um den Unterschied zu sehen.
           </p>
         </div>
 

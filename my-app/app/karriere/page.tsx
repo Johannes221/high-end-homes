@@ -59,7 +59,7 @@ export default function KarrierePage() {
               className="heading-glow text-4xl md:text-5xl lg:text-6xl mb-6"
               style={{ fontFamily: "var(--font-headline)", fontWeight: 300, letterSpacing: "0.02em" }}
             >
-              Verstärken Sie unser Team
+              Verstärk unser Team
             </h1>
             <p
               className="text-base md:text-lg max-w-2xl mx-auto"
@@ -128,7 +128,7 @@ export default function KarrierePage() {
                 className="text-3xl md:text-4xl"
                 style={{ fontFamily: "var(--font-headline)", fontWeight: 300, letterSpacing: "0.02em" }}
               >
-                Schicken Sie uns Ihre Bewerbung
+                Schick uns deine Bewerbung
               </h2>
             </div>
             <div className="max-w-2xl mx-auto">

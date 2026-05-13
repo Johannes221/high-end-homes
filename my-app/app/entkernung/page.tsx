@@ -11,7 +11,7 @@ export default function EntkernungPage() {
     <ServicePageLayout
       title="Entkernung"
       subtitle="Professionelle Entkernung"
-      description="Schnelle und präzise Entkernung für Ihre Sanierung in Heidelberg, Mannheim und der Rhein-Neckar-Region"
+      description="Schnelle und präzise Entkernung für deine Sanierung in Heidelberg, Mannheim und der Rhein-Neckar-Region"
       whatWeDo={[
         "Komplette Entkernung von Wohnungen, Häusern und Gewerbeeinheiten",
         "Entfernung von Böden, Wänden, Decken, Sanitär und Elektro",
@@ -29,7 +29,7 @@ export default function EntkernungPage() {
         },
         {
           title: "Präzise",
-          description: "Fachgerechte Entkernung nach Ihren Vorgaben",
+          description: "Fachgerechte Entkernung nach deinen Vorgaben",
         },
       ]}
       process={[
@@ -60,8 +60,8 @@ export default function EntkernungPage() {
           answer: "Die Dauer hängt von der Größe und dem Umfang ab. Eine Wohnung kann in 1-3 Tagen entkernt werden, größere Objekte benötigen entsprechend mehr Zeit.",
         },
         {
-          question: "Übernehmen Sie auch Asbest-Sanierung?",
-          answer: "Asbest-Sanierung erfordert spezielle Zertifizierungen. Wir arbeiten mit zertifizierten Partnern zusammen und koordinieren die Arbeiten für Sie.",
+          question: "Übernehmt ihr auch Asbest-Sanierung?",
+          answer: "Asbest-Sanierung erfordert spezielle Zertifizierungen. Wir arbeiten mit zertifizierten Partnern zusammen und koordinieren die Arbeiten für dich.",
         },
       ]}
       quoteTab="entkernung"

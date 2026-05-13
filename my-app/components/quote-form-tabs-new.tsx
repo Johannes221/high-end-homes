@@ -46,7 +46,7 @@ async function readJsonResponse<T>(response: Response) {
   const contentType = response.headers.get("content-type") ?? ""
 
   if (!contentType.toLowerCase().includes("application/json")) {
-    throw new Error(response.status === 524 ? "Der Server hat zu lange gebraucht. Bitte versuchen Sie es erneut." : "Der Server hat unerwartet geantwortet. Bitte versuchen Sie es erneut.")
+    throw new Error(response.status === 524 ? "Der Server hat zu lange gebraucht. Bitte versuch es erneut." : "Der Server hat unerwartet geantwortet. Bitte versuch es erneut.")
   }
 
   return (await response.json()) as T
@@ -120,7 +120,7 @@ export function QuoteFormTabs() {
 
     // Manuelle Validierung der Pflichtfelder
     if (!formData.name.trim() || !formData.email.trim()) {
-      setError("Bitte füllen Sie alle Pflichtfelder aus.")
+      setError("Bitte füll alle Pflichtfelder aus.")
       setSubmitting(false)
       return
     }
@@ -128,7 +128,7 @@ export function QuoteFormTabs() {
     // Validierung für Entrümpelung und Entkernung: Quadratmeter und Gebäudetyp erforderlich
     if ((type === "Entrümpelung" || type === "Entkernung") && 
         (!formData.squareMeters.trim() || !formData.buildingType.trim())) {
-      setError("Bitte füllen Sie alle Pflichtfelder aus.")
+      setError("Bitte füll alle Pflichtfelder aus.")
       setSubmitting(false)
       return
     }
@@ -136,7 +136,7 @@ export function QuoteFormTabs() {
     // Validierung für Kombi und Ausbau: Quadratmeter und Projektbeschreibung erforderlich
     if ((type === "Kombi" || type === "Ausbau") && 
         (!formData.squareMeters.trim() || !formData.notes.trim())) {
-      setError("Bitte füllen Sie alle Pflichtfelder aus.")
+      setError("Bitte füll alle Pflichtfelder aus.")
       setSubmitting(false)
       return
     }
@@ -220,7 +220,7 @@ export function QuoteFormTabs() {
           Anfrage gesendet!
         </h3>
         <p className="mb-6" style={{ fontFamily: 'var(--font-body)', fontWeight: 300, color: 'rgba(255,255,255,0.55)' }}>
-          Vielen Dank für Ihre Anfrage. Wir melden uns zeitnah bei Ihnen mit einem unverbindlichen Angebot.
+          Vielen Dank für deine Anfrage. Wir melden uns zeitnah bei dir mit einem unverbindlichen Angebot.
         </p>
         <button
           onClick={() => setSubmitted(false)}
@@ -324,7 +324,7 @@ export function QuoteFormTabs() {
                     onValueChange={(value) => setFormData(prev => ({ ...prev, buildingType: value }))}
                   >
                     <SelectTrigger className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)] text-white">
-                      <SelectValue placeholder="Wählen Sie..." />
+                      <SelectValue placeholder="Wähl..." />
                     </SelectTrigger>
                     <SelectContent className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)]">
                       {buildingTypes.map((type) => (
@@ -343,7 +343,7 @@ export function QuoteFormTabs() {
                     onValueChange={(value) => setFormData(prev => ({ ...prev, floor: value }))}
                   >
                     <SelectTrigger className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)] text-white">
-                      <SelectValue placeholder="Wählen Sie..." />
+                      <SelectValue placeholder="Wähl..." />
                     </SelectTrigger>
                     <SelectContent className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)]">
                       {floorOptions.map((floor) => (
@@ -359,7 +359,7 @@ export function QuoteFormTabs() {
                     onValueChange={(value) => setFormData(prev => ({ ...prev, elevator: value }))}
                   >
                     <SelectTrigger className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)] text-white">
-                      <SelectValue placeholder="Wählen Sie..." />
+                      <SelectValue placeholder="Wähl..." />
                     </SelectTrigger>
                     <SelectContent className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)]">
                       <SelectItem value="ja" className="text-white">Ja</SelectItem>
@@ -392,7 +392,7 @@ export function QuoteFormTabs() {
                 <Label htmlFor="valuables" className="text-white">Wertgegenstände vorhanden?</Label>
                 <Textarea 
                   id="valuables" 
-                  placeholder="Beschreiben Sie eventuelle Wertgegenstände..." 
+                  placeholder="Beschreib eventuelle Wertgegenstände..." 
                   value={formData.valuables}
                   onChange={(e) => setFormData(prev => ({ ...prev, valuables: e.target.value }))}
                   className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)] text-white" 
@@ -494,7 +494,7 @@ export function QuoteFormTabs() {
                     onValueChange={(value) => setFormData(prev => ({ ...prev, buildingType: value }))}
                   >
                     <SelectTrigger className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)] text-white">
-                      <SelectValue placeholder="Wählen Sie..." />
+                      <SelectValue placeholder="Wähl..." />
                     </SelectTrigger>
                     <SelectContent className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)]">
                       {buildingTypes.map((type) => (
@@ -531,7 +531,7 @@ export function QuoteFormTabs() {
                   onValueChange={(value) => setFormData(prev => ({ ...prev, asbestosRequired: value === "ja" }))}
                 >
                   <SelectTrigger className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)] text-white">
-                    <SelectValue placeholder="Wählen Sie..." />
+                    <SelectValue placeholder="Wähl..." />
                   </SelectTrigger>
                   <SelectContent className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)]">
                     <SelectItem value="ja" className="text-white">Ja</SelectItem>
@@ -581,7 +581,7 @@ export function QuoteFormTabs() {
               <p className="text-white/80 text-sm">Unverbindliche Preiseinschätzung – der finale Preis wird vor Ort festgelegt.</p>
             </div>
             <form onSubmit={(e) => handleSubmit(e, "Kombi")} className="space-y-6 bg-[var(--bg-2)] border p-8" style={{ borderColor: 'rgba(255,255,255,0.08)', borderRadius: '3px' }}>
-              <p className="text-white/70 text-sm mb-4">Kombinieren Sie Entkernung und Entrümpelung für ein Komplettpaket.</p>
+              <p className="text-white/70 text-sm mb-4">Kombinier Entkernung und Entrümpelung für ein Komplettpaket.</p>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
@@ -623,7 +623,7 @@ export function QuoteFormTabs() {
                 <Label htmlFor="notes-k" className="text-white">Projektbeschreibung *</Label>
                 <Textarea 
                   id="notes-k" 
-                  placeholder="Beschreiben Sie Ihr Projekt..." 
+                  placeholder="Beschreib dein Projekt..." 
                   value={formData.notes}
                   onChange={(e) => setFormData(prev => ({ ...prev, notes: e.target.value }))}
                   className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)] text-white" 
@@ -718,7 +718,7 @@ export function QuoteFormTabs() {
                 <Label htmlFor="notes-a" className="text-white">Projektbeschreibung *</Label>
                 <Textarea 
                   id="notes-a" 
-                  placeholder="Beschreiben Sie Ihr Projekt..." 
+                  placeholder="Beschreib dein Projekt..." 
                   value={formData.notes}
                   onChange={(e) => setFormData(prev => ({ ...prev, notes: e.target.value }))}
                   className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)] text-white" 
@@ -754,7 +754,7 @@ export function QuoteFormTabs() {
       <div className="lg:col-span-1">
         <div className="bg-[var(--bg-2)] border p-8 sticky top-24" style={{ borderColor: 'rgba(255,255,255,0.08)', borderRadius: '3px' }}>
           <h3 className="text-2xl text-white mb-6" style={{ fontFamily: 'var(--font-headline)', fontWeight: 400 }}>
-            Ihre Vorteile
+            Deine Vorteile
           </h3>
           <div className="space-y-6">
             <div className="flex items-start gap-4">

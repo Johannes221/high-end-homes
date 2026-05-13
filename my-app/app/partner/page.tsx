@@ -21,7 +21,7 @@ const benefits = [
   },
   {
     title: "Ein Ansprechpartner",
-    text: "Koordination, Termine und Übergabe laufen über uns. Sie machen Ihre Arbeit.",
+    text: "Koordination, Termine und Übergabe laufen über uns. Du machst deine Arbeit.",
   },
 ]
 
@@ -44,7 +44,7 @@ export default function PartnerPage() {
               className="heading-glow text-4xl md:text-5xl lg:text-6xl mb-6"
               style={{ fontFamily: "var(--font-headline)", fontWeight: 300, letterSpacing: "0.02em" }}
             >
-              Lassen Sie uns zusammenarbeiten
+              Lass uns zusammenarbeiten
             </h1>
             <p
               className="text-base md:text-lg max-w-2xl mx-auto"
@@ -85,7 +85,7 @@ export default function PartnerPage() {
                 className="text-3xl md:text-4xl"
                 style={{ fontFamily: "var(--font-headline)", fontWeight: 300, letterSpacing: "0.02em" }}
               >
-                Stellen Sie sich vor
+                Stell dich vor
               </h2>
             </div>
             <div className="max-w-2xl mx-auto">

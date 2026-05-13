@@ -52,16 +52,16 @@ export default function FensterbauPage() {
       ]}
       faqs={[
         {
-          question: "Welche Fenstersysteme bieten Sie an?",
+          question: "Welche Fenstersysteme bietet ihr an?",
           answer: "Wir bieten Kunststoff-, Holz- und Aluminiumfenster von führenden Herstellern an.",
         },
         {
-          question: "Übernehmen Sie auch den Gerüstbau?",
+          question: "Übernehmt ihr auch den Gerüstbau?",
           answer: "Ja, wir stellen das Gerüst für alle Arbeiten und garantieren höchste Sicherheitsstandards.",
         },
         {
           question: "Gibt es Förderungen für neue Fenster?",
-          answer: "Ja, für energieeffiziente Fenster gibt es verschiedene Förderprogramme. Wir beraten Sie gerne.",
+          answer: "Ja, für energieeffiziente Fenster gibt es verschiedene Förderprogramme. Wir beraten dich gern.",
         },
       ]}
       quoteTab="ausbau"

@@ -21,7 +21,7 @@ const coreTopics = [
   {
     icon: Trash2,
     title: "Entrümpelung in Heidelberg & Mannheim",
-    text: "Wir übernehmen Entrümpelungen von Wohnungen, Häusern, Kellern, Garagen und Gewerbeflächen. Von einzelnen Räumen bis zur kompletten Räumung erhalten Sie eine zügige, sauber geplante und fachgerechte Ausführung.",
+    text: "Wir übernehmen Entrümpelungen von Wohnungen, Häusern, Kellern, Garagen und Gewerbeflächen. Von einzelnen Räumen bis zur kompletten Räumung bekommst du eine zügige, sauber geplante und fachgerechte Ausführung.",
   },
   {
     icon: Home,
@@ -44,19 +44,19 @@ const reasons = [
 
 const faqs = [
   {
-    question: "Welche Leistungen bieten Sie in Heidelberg und Mannheim an?",
+    question: "Welche Leistungen bietet ihr in Heidelberg und Mannheim an?",
     answer: "Wir bieten Entrümpelung, Hausauflösung, Wohnungsauflösung und Entkernung für private und gewerbliche Objekte in Heidelberg, Mannheim und der gesamten Rhein-Neckar-Region an.",
   },
   {
     question: "Wie schnell kann eine Entrümpelung oder Hausauflösung starten?",
-    answer: "Je nach Umfang sind kurzfristige Besichtigungen und schnelle Termine möglich. Nach Ihrer Anfrage melden wir uns zeitnah mit einer Einschätzung zum Aufwand und möglichen Startterminen.",
+    answer: "Je nach Umfang sind kurzfristige Besichtigungen und schnelle Termine möglich. Nach deiner Anfrage melden wir uns zeitnah mit einer Einschätzung zum Aufwand und möglichen Startterminen.",
   },
   {
-    question: "Übernehmen Sie auch Entkernungen vor Sanierungen?",
+    question: "Übernehmt ihr auch Entkernungen vor Sanierungen?",
     answer: "Ja. Wir übernehmen Entkernungen für Wohnungen, Häuser, Büros und Gewerbeeinheiten und bereiten das Objekt strukturiert auf die nächsten Bau- oder Sanierungsschritte vor.",
   },
   {
-    question: "In welchen Orten rund um Heidelberg sind Sie tätig?",
+    question: "In welchen Orten rund um Heidelberg seid ihr tätig?",
     answer: "Neben Heidelberg und Mannheim sind wir unter anderem in Dossenheim, Schriesheim, Weinheim, Leimen, Eppelheim, Schwetzingen, Ladenburg, Hockenheim und im gesamten Rhein-Neckar-Kreis im Einsatz.",
   },
 ]
@@ -91,7 +91,7 @@ export function SeoContent() {
             Entrümpelung, Hausauflösung und Entkernung in <span className="text-[#c9a45c]">Heidelberg, Mannheim und Umgebung</span>
           </h2>
           <p className="text-lg text-white/70 leading-relaxed">
-            Wenn Sie einen zuverlässigen Fachbetrieb für Entrümpelung, Hausauflösung oder Entkernung suchen, ist High-End Homes Ihr Ansprechpartner in Heidelberg und der Metropolregion Rhein-Neckar. Wir unterstützen Eigentümer, Verwaltungen, Familien und Unternehmen bei Räumungen, Rückbauarbeiten und der professionellen Vorbereitung von Sanierungsprojekten.
+            Wenn du einen zuverlässigen Fachbetrieb für Entrümpelung, Hausauflösung oder Entkernung suchst, ist High-End Homes dein Ansprechpartner in Heidelberg und der Metropolregion Rhein-Neckar. Wir unterstützen Eigentümer, Verwaltungen, Familien und Unternehmen bei Räumungen, Rückbauarbeiten und der professionellen Vorbereitung von Sanierungsprojekten.
           </p>
         </div>
 
@@ -148,7 +148,7 @@ export function SeoContent() {
                 ))}
               </div>
               <p className="mt-4 text-sm text-white/60 leading-6">
-                Sie sind nicht sicher, ob Ihr Ort dazugehört? Fragen Sie einfach an. Wir betreuen Projekte im gesamten Umkreis von Heidelberg und Mannheim.
+                Du bist dir nicht sicher, ob dein Ort dazugehört? Frag einfach an. Wir betreuen Projekte im gesamten Umkreis von Heidelberg und Mannheim.
               </p>
             </CardContent>
           </Card>
@@ -180,7 +180,7 @@ export function SeoContent() {
           <div className="text-center max-w-3xl mx-auto space-y-3">
             <h3 className="text-2xl sm:text-3xl font-bold text-white">Spezielle Landingpages für unsere Kernleistungen</h3>
             <p className="text-white/65">
-              Für noch gezieltere Informationen zu Leistung und Ort finden Sie hier unsere lokalen Themenseiten.
+              Für noch gezieltere Informationen zu Leistung und Ort findest du hier unsere lokalen Themenseiten.
             </p>
           </div>
 
@@ -212,7 +212,7 @@ export function SeoContent() {
           </div>
           <h3 className="text-2xl font-bold text-white">Jetzt Angebot für Ihr Projekt in Heidelberg oder Mannheim anfragen</h3>
           <p className="max-w-3xl mx-auto text-white/65 leading-7">
-            Ob Entrümpelung, Hausauflösung oder Entkernung: Über das Formular können Sie Ihr Projekt direkt anfragen. Je klarer die Angaben, desto schneller können wir den Aufwand einschätzen und Ihnen ein passendes Angebot erstellen.
+            Ob Entrümpelung, Hausauflösung oder Entkernung: Über das Formular kannst du dein Projekt direkt anfragen. Je klarer die Angaben, desto schneller können wir den Aufwand einschätzen und dir ein passendes Angebot erstellen.
           </p>
           <a
             href="#quote"

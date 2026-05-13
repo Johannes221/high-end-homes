@@ -21,7 +21,7 @@ export default function TrockenbauPage() {
       benefits={[
         {
           title: "Flexibel",
-          description: "Individuelle Raumgestaltung nach Ihren Wünschen",
+          description: "Individuelle Raumgestaltung nach deinen Wünschen",
         },
         {
           title: "Schnell",
@@ -52,15 +52,15 @@ export default function TrockenbauPage() {
       ]}
       faqs={[
         {
-          question: "Welche Trockenbau-Systeme verwenden Sie?",
+          question: "Welche Trockenbau-Systeme verwendet ihr?",
           answer: "Wir verwenden hochwertige Systeme von Markenherstellern wie Knauf und Rigips, je nach Anforderung.",
         },
         {
-          question: "Können Sie auch Schallschutz-Wände bauen?",
-          answer: "Ja, wir bauen Trockenbau-Wände mit verschiedenen Schallschutzklassen nach Ihren Anforderungen.",
+          question: "Könnt ihr auch Schallschutz-Wände bauen?",
+          answer: "Ja, wir bauen Trockenbau-Wände mit verschiedenen Schallschutzklassen nach deinen Anforderungen.",
         },
         {
-          question: "Übernehmen Sie auch Stuckarbeiten?",
+          question: "Übernehmt ihr auch Stuckarbeiten?",
           answer: "Ja, wir führen alle Arten von Stuckarbeiten aus, von klassischen Profilen bis zu modernen Designs.",
         },
       ]}

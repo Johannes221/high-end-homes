@@ -124,7 +124,7 @@ export function Services() {
           className="text-center mb-8"
         >
           <h3 className="text-2xl font-semibold mb-2">Zusätzliche Dienstleistungen</h3>
-          <p className="text-[#fafafa]/60">Auch diese Services bieten wir Ihnen professionell an</p>
+          <p className="text-[#fafafa]/60">Auch diese Services bieten wir dir professionell an</p>
         </div>
 
         <div

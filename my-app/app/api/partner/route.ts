@@ -61,13 +61,13 @@ export async function POST(req: NextRequest) {
 
     await sendEmail({
       to: email,
-      subject: "Ihre Partner-Anfrage bei High-End Homes",
+      subject: "Deine Partner-Anfrage bei High-End Homes",
       html: `
         <div style="font-family:Arial,sans-serif;max-width:600px;padding:32px;background:#fff;border:1px solid #eee;border-radius:12px;">
           <h2 style="margin:0 0 16px 0;">Anfrage erhalten</h2>
-          <p style="line-height:1.6;color:#444;">Hallo ${escape(contact)},</p>
+          <p style="line-height:1.6;color:#444;">Hi ${escape(contact)},</p>
           <p style="line-height:1.6;color:#444;">
-            danke für Ihre Anfrage. Wir melden uns innerhalb weniger Tage bei <strong>${escape(company)}</strong>, um die nächsten Schritte zu besprechen.
+            danke für deine Anfrage. Wir melden uns innerhalb weniger Tage bei <strong>${escape(company)}</strong>, um die nächsten Schritte zu besprechen.
           </p>
           <p style="line-height:1.6;color:#444;margin-top:24px;">
             Viele Grüße<br/>

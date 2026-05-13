@@ -147,7 +147,7 @@ export function ServicePageLayout({
         <div className="section-padding">
           <div className="max-w-6xl mx-auto">
             <h2 className="heading-glow text-3xl md:text-4xl font-bold text-white mb-12 text-center" style={{ fontFamily: 'var(--font-headline)' }}>
-              Ihre Vorteile
+              Deine Vorteile
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {benefits.map((benefit, index) => (
@@ -245,7 +245,7 @@ export function ServicePageLayout({
         <div className="section-padding">
           <div className="max-w-6xl mx-auto">
             <h2 className="heading-glow text-3xl md:text-4xl text-white mb-12 text-center" style={{ fontFamily: 'var(--font-headline)', fontWeight: 400, letterSpacing: '0.02em' }}>
-              Kontaktieren Sie uns
+              Kontaktier uns
             </h2>
             
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
@@ -289,7 +289,7 @@ export function ServicePageLayout({
                   </div>
                   <div>
                     <textarea
-                      placeholder="Ihre Nachricht *"
+                      placeholder="Deine Nachricht *"
                       required
                       rows={5}
                       value={contactForm.message}
@@ -301,13 +301,13 @@ export function ServicePageLayout({
                   
                   {submitStatus === "success" && (
                     <div className="p-4 bg-green-900/20 border border-green-500/30 text-green-400 text-sm" style={{ fontFamily: 'var(--font-body)', borderRadius: '3px' }}>
-                      Vielen Dank! Ihre Nachricht wurde erfolgreich gesendet.
+                      Vielen Dank! Deine Nachricht wurde erfolgreich gesendet.
                     </div>
                   )}
                   
                   {submitStatus === "error" && (
                     <div className="p-4 bg-red-900/20 border border-red-500/30 text-red-400 text-sm" style={{ fontFamily: 'var(--font-body)', borderRadius: '3px' }}>
-                      Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut oder kontaktieren Sie uns direkt per E-Mail.
+                      Es ist ein Fehler aufgetreten. Bitte versuch es erneut oder schreib uns direkt eine E-Mail.
                     </div>
                   )}
                   
@@ -372,8 +372,8 @@ export function ServicePageLayout({
 
                   <div className="mt-8 p-6 bg-[#111111] border border-[rgba(255,255,255,0.06)]" style={{ borderRadius: '3px' }}>
                     <p className="text-sm leading-relaxed" style={{ fontFamily: 'var(--font-body)', fontWeight: 300, color: 'rgba(255,255,255,0.6)' }}>
-                      Wir sind Montag bis Freitag von 8:00 bis 18:00 Uhr für Sie erreichbar. 
-                      Gerne beantworten wir Ihre Fragen zu unseren Dienstleistungen und erstellen Ihnen ein individuelles Angebot.
+                      Wir sind Montag bis Freitag von 8:00 bis 18:00 Uhr für dich erreichbar. 
+                      Wir beantworten gern deine Fragen und erstellen dir ein individuelles Angebot.
                     </p>
                   </div>
                 </div>

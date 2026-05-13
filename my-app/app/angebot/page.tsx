@@ -6,7 +6,7 @@ import { QuoteFormTabs } from "@/components/quote-form-tabs-new"
 
 export const metadata: Metadata = {
   title: "Angebot einholen | High-End Homes",
-  description: "Holen Sie sich jetzt ein unverbindliches Angebot für Entrümpelung, Entkernung oder Ausbau-Leistungen in Heidelberg und Mannheim.",
+  description: "Hol dir jetzt ein unverbindliches Angebot für Entrümpelung, Entkernung oder Ausbau-Leistungen in Heidelberg und Mannheim.",
 }
 
 export default function AngebotPage() {
@@ -32,7 +32,7 @@ export default function AngebotPage() {
                 Jetzt Angebot einholen
               </h1>
               <p className="text-xl max-w-3xl mx-auto" style={{ fontFamily: 'var(--font-body)', fontWeight: 300, color: 'rgba(255,255,255,0.65)', lineHeight: 1.7 }}>
-                Füllen Sie das Formular aus und erhalten Sie ein transparentes und unverbindliches Angebot.
+                Füll das Formular aus und bekomm ein transparentes, unverbindliches Angebot.
               </p>
             </div>
 

@@ -5,7 +5,7 @@ import { ContactForm } from "@/components/contact-form"
 
 export const metadata: Metadata = {
   title: "Kontakt | High-End Homes",
-  description: "Kontaktieren Sie uns für Entrümpelung, Entkernung und Ausbau-Leistungen in Heidelberg und Mannheim.",
+  description: "Kontaktier uns für Entrümpelung, Entkernung und Ausbau-Leistungen in Heidelberg und Mannheim.",
 }
 
 export default function KontaktPage() {
@@ -20,7 +20,7 @@ export default function KontaktPage() {
                 Kontakt
               </h1>
               <p className="text-xl" style={{ fontFamily: 'var(--font-body)', fontWeight: 300, color: 'rgba(255,255,255,0.65)', lineHeight: 1.7 }}>
-                Haben Sie Fragen? Wir sind für Sie da.
+                Hast du Fragen? Wir sind für dich da.
               </p>
             </div>
             

@@ -68,7 +68,7 @@ export function PartnerForm() {
           Anfrage gesendet
         </h3>
         <p style={{ color: "rgba(255,255,255,0.65)" }}>
-          Danke! Wir melden uns innerhalb weniger Tage bei Ihnen.
+          Danke! Wir melden uns innerhalb weniger Tage bei dir.
         </p>
       </div>
     )

@@ -8,32 +8,32 @@ import { ChevronDown } from "lucide-react"
 
 const generalFaqs = [
   {
-    question: "Welche Leistungen bieten Sie in Heidelberg und Mannheim an?",
+    question: "Welche Leistungen bietet ihr in Heidelberg und Mannheim an?",
     answer: "Wir bieten Entrümpelung, Hausauflösung, Wohnungsauflösung und Entkernung für private und gewerbliche Objekte in Heidelberg, Mannheim und der gesamten Rhein-Neckar-Region an. Zusätzlich übernehmen wir alle Ausbau-Leistungen wie Maler, Trockenbau, Fliesenleger, Sanitär & Elektro sowie Fensterbau.",
   },
   {
     question: "Wie schnell kann eine Entrümpelung oder Hausauflösung starten?",
-    answer: "Je nach Umfang sind kurzfristige Besichtigungen und schnelle Termine möglich. Nach Ihrer Anfrage melden wir uns zeitnah mit einer Einschätzung zum Aufwand und möglichen Startterminen. Unser Express-Service ermöglicht einen Start innerhalb von 24-48 Stunden.",
+    answer: "Je nach Umfang sind kurzfristige Besichtigungen und schnelle Termine möglich. Nach deiner Anfrage melden wir uns zeitnah mit einer Einschätzung zum Aufwand und möglichen Startterminen. Unser Express-Service ermöglicht einen Start innerhalb von 24-48 Stunden.",
   },
   {
-    question: "Übernehmen Sie auch Entkernungen vor Sanierungen?",
+    question: "Übernehmt ihr auch Entkernungen vor Sanierungen?",
     answer: "Ja. Wir übernehmen Entkernungen für Wohnungen, Häuser, Büros und Gewerbeeinheiten und bereiten das Objekt strukturiert auf die nächsten Bau- oder Sanierungsschritte vor. Inklusive fachgerechter Entsorgung aller Materialien.",
   },
   {
     question: "Was kostet eine Entrümpelung oder Entkernung?",
-    answer: "Die Kosten hängen von verschiedenen Faktoren ab: Größe des Objekts, Umfang der Arbeiten, Stockwerk, Aufzug vorhanden, Art der Materialien etc. Nach Ihrer Anfrage erstellen wir Ihnen ein transparentes und unverbindliches Angebot innerhalb von 24 Stunden.",
+    answer: "Die Kosten hängen von verschiedenen Faktoren ab: Größe des Objekts, Umfang der Arbeiten, Stockwerk, Aufzug vorhanden, Art der Materialien etc. Nach deiner Anfrage erstellen wir dir ein transparentes und unverbindliches Angebot innerhalb von 24 Stunden.",
   },
   {
-    question: "In welchen Regionen sind Sie tätig?",
-    answer: "Wir sind in der gesamten Rhein-Neckar-Region tätig, insbesondere in Heidelberg, Mannheim, Dossenheim, Schriesheim, Weinheim, Leimen, Eppelheim, Schwetzingen, Ladenburg und Hockenheim. Kontaktieren Sie uns gerne, wenn Ihr Standort nicht aufgelistet ist.",
+    question: "In welchen Regionen seid ihr tätig?",
+    answer: "Wir sind in der gesamten Rhein-Neckar-Region tätig, insbesondere in Heidelberg, Mannheim, Dossenheim, Schriesheim, Weinheim, Leimen, Eppelheim, Schwetzingen, Ladenburg und Hockenheim. Frag uns gern an, wenn dein Standort nicht aufgelistet ist.",
   },
   {
     question: "Wie läuft eine Anfrage ab?",
-    answer: "Sie füllen unser Anfrageformular aus oder kontaktieren uns direkt. Wir melden uns zeitnah für eine Besichtigung vor Ort. Nach der Besichtigung erhalten Sie ein transparentes, unverbindliches Angebot. Bei Beauftragung vereinbaren wir einen Termin und führen die Arbeiten professionell durch.",
+    answer: "Du füllst unser Anfrageformular aus oder kontaktierst uns direkt. Wir melden uns zeitnah für eine Besichtigung vor Ort. Nach der Besichtigung bekommst du ein transparentes, unverbindliches Angebot. Bei Beauftragung vereinbaren wir einen Termin und führen die Arbeiten professionell durch.",
   },
   {
-    question: "Übernehmen Sie auch die Entsorgung?",
-    answer: "Ja, wir übernehmen die komplette fachgerechte Entsorgung aller Materialien und Gegenstände. Sie erhalten die Räumlichkeiten besenrein zurück.",
+    question: "Übernehmt ihr auch die Entsorgung?",
+    answer: "Ja, wir übernehmen die komplette fachgerechte Entsorgung aller Materialien und Gegenstände. Du bekommst die Räumlichkeiten besenrein zurück.",
   },
   {
     question: "Kann ich bei der Entrümpelung Wertgegenstände behalten?",
@@ -59,7 +59,7 @@ export default function FAQPage() {
                 Häufig gestellte Fragen
               </h1>
               <p className="text-xl text-white/70" style={{ fontFamily: 'var(--font-body)', fontWeight: 300 }}>
-                Hier finden Sie Antworten auf die wichtigsten Fragen zu unseren Leistungen.
+                Hier findest du Antworten auf die wichtigsten Fragen zu unseren Leistungen.
               </p>
             </div>
 

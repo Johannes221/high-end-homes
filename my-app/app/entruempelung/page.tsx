@@ -35,7 +35,7 @@ export default function EntruempelungPage() {
       process={[
         {
           title: "Anfrage",
-          description: "Sie kontaktieren uns über das Formular oder per E-Mail",
+          description: "Du kontaktierst uns über das Formular oder per E-Mail",
         },
         {
           title: "Besichtigung",
@@ -43,7 +43,7 @@ export default function EntruempelungPage() {
         },
         {
           title: "Angebot",
-          description: "Sie erhalten ein transparentes und unverbindliches Angebot",
+          description: "Du bekommst ein transparentes und unverbindliches Angebot",
         },
         {
           title: "Ausführung",
@@ -52,15 +52,15 @@ export default function EntruempelungPage() {
       ]}
       faqs={[
         {
-          question: "Wie schnell können Sie mit der Entrümpelung starten?",
-          answer: "Je nach Verfügbarkeit können wir kurzfristige Termine vereinbaren. Nach der Besichtigung erstellen wir Ihnen ein Angebot und können dann zeitnah starten.",
+          question: "Wie schnell könnt ihr mit der Entrümpelung starten?",
+          answer: "Je nach Verfügbarkeit können wir kurzfristige Termine vereinbaren. Nach der Besichtigung erstellen wir dir ein Angebot und können dann zeitnah starten.",
         },
         {
           question: "Was passiert mit Wertgegenständen?",
           answer: "Wertgegenstände werden sortiert und können nach Absprache verwertet werden. Dies kann die Kosten der Entrümpelung reduzieren.",
         },
         {
-          question: "Übernehmen Sie auch die Entsorgung?",
+          question: "Übernehmt ihr auch die Entsorgung?",
           answer: "Ja, wir übernehmen die komplette fachgerechte Entsorgung aller Gegenstände und hinterlassen besenreine Räume.",
         },
       ]}
