@@ -108,7 +108,7 @@ export function Footer() {
                   <MapPin className="w-4 h-4 text-white flex-shrink-0 mt-1" />
                   <div>
                     <p className="text-white/60 text-sm" style={{ fontFamily: 'var(--font-body)', fontWeight: 300 }}>
-                      Gerhard-Hauptmann Straße 38<br />
+                      Gerhard-Hauptmann-Straße 38<br />
                       69221 Dossenheim
                     </p>
                   </div>

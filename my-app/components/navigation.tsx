@@ -63,10 +63,6 @@ export function Navigation() {
 
             {/* CTA Button */}
             <div className="hidden md:flex items-center gap-4">
-              <a href="tel:+491234567890" className="flex items-center gap-2 text-sm text-[#fafafa]/80 hover:text-[#c9a45c] transition-colors">
-                <Phone className="w-4 h-4" />
-                <span>Kontakt</span>
-              </a>
               <Button asChild className="bg-[#c9a45c] text-[#0a0a0a] hover:bg-[#d4af37] font-semibold">
                 <Link href="/#quote">Angebot einholen</Link>
               </Button>

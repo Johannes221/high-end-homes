@@ -57,17 +57,6 @@ export function Hero() {
                 <ArrowRight className="w-5 h-5" />
               </a>
             </Button>
-            <Button
-              asChild
-              variant="outline"
-              size="lg"
-              className="border-white/30 text-white hover:bg-white/10 h-12 px-6 text-lg"
-            >
-              <a href="tel:+491234567890" className="flex items-center gap-2">
-                <Phone className="w-5 h-5" />
-                Direkt anrufen
-              </a>
-            </Button>
           </div>
 
         </div>

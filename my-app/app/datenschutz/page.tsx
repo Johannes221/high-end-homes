@@ -25,7 +25,7 @@ export default function DatenschutzPage() {
             </p>
             <p className="text-white/80 mt-2">
               Bennet Pfeifer<br />
-              Gerhard-Hauptmann Straße 38<br />
+              Gerhard-Hauptmann-Straße 38<br />
               69221 Dossenheim<br />
               Deutschland<br />
               E-Mail: bennet.pfeifer@highendhomes.de

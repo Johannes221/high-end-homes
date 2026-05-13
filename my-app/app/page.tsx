@@ -33,7 +33,7 @@ export default function Home() {
         email: "bennet.pfeifer@highendhomes.de",
         address: {
           "@type": "PostalAddress",
-          streetAddress: "Gerhard-Hauptmann Straße 38",
+          streetAddress: "Gerhard-Hauptmann-Straße 38",
           postalCode: "69221",
           addressLocality: "Dossenheim",
           addressCountry: "DE",

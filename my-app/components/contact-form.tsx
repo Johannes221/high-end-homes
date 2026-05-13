@@ -154,7 +154,7 @@ export function ContactForm() {
           <div>
             <p className="text-sm mb-1" style={{ fontFamily: 'var(--font-headline)', color: 'rgba(255,255,255,0.5)' }}>Adresse</p>
             <p style={{ fontFamily: 'var(--font-body)', fontWeight: 300, color: 'rgba(255,255,255,0.7)' }}>
-              Gerhard-Hauptmann Straße 38<br />
+              Gerhard-Hauptmann-Straße 38<br />
               69221 Dossenheim
             </p>
           </div>

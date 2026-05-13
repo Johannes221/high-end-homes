@@ -70,13 +70,6 @@ export function LocalServicePage({ page }: { page: LocalSeoPage }) {
                 >
                   Angebot anfragen
                 </Link>
-                <a
-                  href="tel:+491234567890"
-                  className="inline-flex items-center justify-center gap-2 rounded-lg border border-white/20 px-6 py-3 font-semibold text-white transition-colors hover:bg-white/5"
-                >
-                  <Phone className="w-4 h-4" />
-                  Direkt anrufen
-                </a>
               </div>
             </div>
           </div>

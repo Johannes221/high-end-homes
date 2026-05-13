@@ -352,24 +352,6 @@ export function ServicePageLayout({
                     </div>
                   </div>
 
-                  <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 rounded-full bg-[#111111] border border-[rgba(255,255,255,0.1)] flex items-center justify-center flex-shrink-0">
-                      <Phone className="w-5 h-5 text-white" />
-                    </div>
-                    <div>
-                      <p className="text-sm mb-2" style={{ fontFamily: 'var(--font-body)', color: 'rgba(255,255,255,0.5)' }}>
-                        Telefon
-                      </p>
-                      <a 
-                        href="tel:+4962219999999" 
-                        className="text-white hover:text-white/80 transition-colors"
-                        style={{ fontFamily: 'var(--font-body)', fontWeight: 400 }}
-                      >
-                        +49 6221 999 99 99
-                      </a>
-                    </div>
-                  </div>
-
                   <div className="mt-8 p-6 bg-[#111111] border border-[rgba(255,255,255,0.06)]" style={{ borderRadius: '3px' }}>
                     <p className="text-sm leading-relaxed" style={{ fontFamily: 'var(--font-body)', fontWeight: 300, color: 'rgba(255,255,255,0.6)' }}>
                       Wir sind Montag bis Freitag von 8:00 bis 18:00 Uhr für Sie erreichbar. 

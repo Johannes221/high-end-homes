@@ -37,8 +37,6 @@ export default function ImpressumPage() {
           <section>
             <h2 className="text-2xl font-semibold text-white mb-4">Kontakt</h2>
             <p className="leading-relaxed">
-              Telefon: +49 (0) 6221 123456
-              <br />
               E-Mail: bennet.pfeifer@highendhomes.de
             </p>
           </section>

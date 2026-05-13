@@ -89,7 +89,7 @@ export function Footer() {
               <li className="flex items-start gap-3">
                 <MapPin className="w-5 h-5 text-[#c9a45c] shrink-0 mt-0.5" />
                 <span className="text-[#fafafa]/60 text-sm">
-                  Gerhard-Hauptmann Straße 38<br />
+                  Gerhard-Hauptmann-Straße 38<br />
                   69221 Dossenheim
                 </span>
               </li>
@@ -100,15 +100,6 @@ export function Footer() {
                   className="text-[#fafafa]/60 hover:text-[#c9a45c] transition-colors text-sm"
                 >
                   bennet.pfeifer@highendhomes.de
-                </a>
-              </li>
-              <li className="flex items-center gap-3">
-                <Phone className="w-5 h-5 text-[#c9a45c] shrink-0" />
-                <a
-                  href="tel:+491234567890"
-                  className="text-[#fafafa]/60 hover:text-[#c9a45c] transition-colors text-sm"
-                >
-                  +49 123 456 7890
                 </a>
               </li>
             </ul>
@@ -124,7 +115,7 @@ export function Footer() {
             <h4 className="font-semibold mb-2 text-sm">Impressum</h4>
             <p className="text-[#fafafa]/40 text-xs leading-relaxed">
               Bennet Pfeifer<br />
-              Gerhard-Hauptmann Straße 38<br />
+              Gerhard-Hauptmann-Straße 38<br />
               69221 Dossenheim<br />
               Deutschland
             </p>
