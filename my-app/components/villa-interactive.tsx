@@ -12,7 +12,7 @@ const floors = [
     desc: "Vorbereitung · Rückbau · Beräumung",
     href: "/entruempelung",
     top: "0%",
-    height: "20%",
+    height: "18%",
   },
   {
     id: "og3",
@@ -20,8 +20,8 @@ const floors = [
     label: "Trockenbau & Stuckateur",
     desc: "Wände · Decken · Stuck",
     href: "/trockenbau",
-    top: "20%",
-    height: "20%",
+    top: "18%",
+    height: "17%",
   },
   {
     id: "og2",
@@ -29,8 +29,8 @@ const floors = [
     label: "Sanitär & Elektro",
     desc: "Installation · Leitungen",
     href: "/sanitaer",
-    top: "40%",
-    height: "20%",
+    top: "35%",
+    height: "17%",
   },
   {
     id: "og1",
@@ -38,8 +38,8 @@ const floors = [
     label: "Maler & Lackierer",
     desc: "Innen · Außen · Spachteln",
     href: "/maler",
-    top: "60%",
-    height: "20%",
+    top: "52%",
+    height: "15%",
   },
   {
     id: "eg",
@@ -47,8 +47,8 @@ const floors = [
     label: "Fliesenleger",
     desc: "Bad · Küche · Terrasse",
     href: "/fliesenleger",
-    top: "80%",
-    height: "20%",
+    top: "67%",
+    height: "33%",
   },
 ]
 
@@ -103,7 +103,8 @@ export function VillaInteractive() {
             objectPosition: 'center center'
           }}
           sizes="100vw"
-          loading="lazy"
+          priority
+          fetchPriority="high"
         />
 
         {/* Hover Zones */}
