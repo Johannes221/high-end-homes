@@ -108,7 +108,7 @@ export function VillaInteractive() {
         />
 
         {/* Hover Zones */}
-        {floors.map((floor) => (
+        {floors.map((floor, idx) => (
           <Link
             key={floor.id}
             href={floor.href}
@@ -125,7 +125,7 @@ export function VillaInteractive() {
           >
             {/* Horizontal Line at Top - Mobile/Tablet: immer sichtbar & zentriert, Desktop: nur bei Hover */}
             <div
-              className={`absolute top-0 h-[1px] 
+              className={`absolute top-0 h-[1px]
                 scale-x-100
                 lg:scale-x-0 lg:transition-transform lg:duration-500
                 ${hoveredFloor === floor.id ? 'lg:scale-x-100' : ''}`}
@@ -138,20 +138,23 @@ export function VillaInteractive() {
               }}
             />
 
-            {/* Label - Mobile/Tablet: immer sichtbar, Desktop: nur bei Hover */}
+            {/* Label — auf Desktop sitzt die Box mittig auf der Stockwerks-Grenzlinie.
+               Auf Mobile bleibt sie in der Mitte der Zone, damit nichts überlappt.
+               Dach hat keine Linie oben → bleibt immer in der Mitte seiner Zone. */}
             <div
-              className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none whitespace-nowrap z-10 
+              className={`absolute left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none whitespace-nowrap z-10
+                top-1/2 ${idx === 0 ? '' : 'lg:top-0'}
                 opacity-100
-                lg:opacity-0 lg:transition-all lg:duration-[400ms]
-                ${hoveredFloor === floor.id ? 'lg:opacity-100 lg:translate-y-0' : 'lg:translate-y-3.5'}`}
+                lg:opacity-0 lg:transition-opacity lg:duration-[400ms]
+                ${hoveredFloor === floor.id ? 'lg:opacity-100' : ''}`}
               style={{
                 transitionTimingFunction: "cubic-bezier(0.34, 1.3, 0.64, 1)",
               }}
             >
               <div
-                className="w-[240px] md:w-[340px] px-4 py-3 md:px-8 md:py-5 text-center"
+                className="w-[290px] md:w-[420px] px-4 py-3 md:px-8 md:py-5 text-center"
                 style={{
-                  background: "rgba(8,8,8,0.75)",
+                  background: "rgba(8,8,8,0.78)",
                   border: "1px solid rgba(255,255,255,0.4)",
                 }}
               >
