@@ -7,8 +7,8 @@ type View = "aussen" | "innen"
 
 const SAMPLES: Record<View, { beforeSrc: string; afterSrc: string; caption: string }> = {
   aussen: {
-    beforeSrc: "/before-after/aussen-before.webp",
-    afterSrc: "/before-after/aussen-after.webp",
+    beforeSrc: "/before-after/aussen-before-v2.webp",
+    afterSrc: "/before-after/aussen-after-v2.webp",
     caption: "Fassade & Außenbereich – nach Sanierung und Reinigung",
   },
   innen: {
