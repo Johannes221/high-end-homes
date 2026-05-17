@@ -108,7 +108,7 @@ export function VillaInteractive() {
         />
 
         {/* Hover Zones */}
-        {floors.map((floor, idx) => (
+        {floors.map((floor) => (
           <Link
             key={floor.id}
             href={floor.href}
@@ -138,12 +138,9 @@ export function VillaInteractive() {
               }}
             />
 
-            {/* Label — auf Desktop sitzt die Box mittig auf der Stockwerks-Grenzlinie.
-               Auf Mobile bleibt sie in der Mitte der Zone, damit nichts überlappt.
-               Dach hat keine Linie oben → bleibt immer in der Mitte seiner Zone. */}
+            {/* Label — sitzt mittig in seiner Stockwerks-Zone (genauso wie Mobile). */}
             <div
-              className={`absolute left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none whitespace-nowrap z-10
-                top-1/2 ${idx === 0 ? '' : 'lg:top-0'}
+              className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none whitespace-nowrap z-10
                 opacity-100
                 lg:opacity-0 lg:transition-opacity lg:duration-[400ms]
                 ${hoveredFloor === floor.id ? 'lg:opacity-100' : ''}`}
