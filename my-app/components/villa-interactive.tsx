@@ -52,14 +52,6 @@ const floors = [
   },
 ]
 
-const tabs = [
-  { nr: "01", name: "Entrümpelung & Entkernung", href: "/entkernung" },
-  { nr: "02", name: "Trockenbau & Stuckateur", href: "/trockenbau" },
-  { nr: "03", name: "Sanitär & Elektro", href: "/sanitaer" },
-  { nr: "04", name: "Maler & Lackierer", href: "/maler" },
-  { nr: "05", name: "Fliesenleger", href: "/fliesenleger" },
-]
-
 export function VillaInteractive() {
   const [hoveredFloor, setHoveredFloor] = useState<string | null>(null)
 
@@ -192,50 +184,6 @@ export function VillaInteractive() {
           </Link>
         ))}
       </section>
-
-      {/* Leistungs-Tabs - Directly Below Image, No Gap */}
-      <div
-        className="grid grid-cols-1 md:grid-cols-5 bg-[var(--bg-2)]"
-        style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }}
-      >
-        {tabs.map((tab, idx) => (
-          <Link
-            key={tab.nr}
-            href={tab.href}
-            className="flex flex-col gap-1.5 p-5 md:p-6 transition-all duration-300 hover:bg-[rgba(255,255,255,0.04)]"
-            style={{
-              borderRight: idx < tabs.length - 1 ? "1px solid rgba(255,255,255,0.06)" : "none",
-              textDecoration: "none",
-              color: "white",
-            }}
-          >
-            <span
-              className="text-[10px] tracking-[0.2em]"
-              style={{
-                fontFamily: "var(--font-headline)",
-                color: "rgba(255,255,255,0.25)",
-              }}
-            >
-              {tab.nr}
-            </span>
-            <span
-              className="text-[13px]"
-              style={{
-                fontFamily: "var(--font-headline)",
-                fontWeight: 500,
-              }}
-            >
-              {tab.name}
-            </span>
-            <span
-              className="text-sm mt-2"
-              style={{ color: "rgba(255,255,255,0.3)" }}
-            >
-              →
-            </span>
-          </Link>
-        ))}
-      </div>
     </>
   )
 }
