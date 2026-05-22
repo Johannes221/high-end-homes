@@ -15,21 +15,29 @@ const geist = Geist({
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "High-End Homes | Entrümpelung, Hausauflösung & Entkernung in Heidelberg",
+    default: "High-End Homes — Ihr Haus. Eine Adresse. | Sanierung & Ausbau in Heidelberg & Mannheim",
     template: "%s | High-End Homes",
   },
-  description: "High-End Homes ist Ihr Ansprechpartner für professionelle Entrümpelung, Hausauflösung und Entkernung in Heidelberg, Mannheim, Dossenheim und der gesamten Rhein-Neckar-Region.",
+  description:
+    "Alles aus einer Hand: Sanierung, Ausbau, Renovierung. Maler, Trockenbau, Fliesen, Sanitär, Elektro und Fensterbau — plus Entrümpelung und Entkernung. Ein Ansprechpartner für Heidelberg, Mannheim und die Rhein-Neckar-Region.",
   keywords: [
+    "Sanierung Heidelberg",
+    "Sanierung Mannheim",
+    "Ausbau Heidelberg",
+    "Ausbau Mannheim",
+    "Renovierung Heidelberg",
+    "Renovierung Mannheim",
+    "Komplettsanierung Rhein-Neckar",
+    "Maler Heidelberg",
+    "Trockenbau Heidelberg",
+    "Fliesenleger Heidelberg",
+    "Sanitär Elektro Heidelberg",
+    "Fensterbau Mannheim",
     "Entrümpelung Heidelberg",
-    "Entrümpelung Mannheim",
     "Hausauflösung Heidelberg",
-    "Hausauflösung Mannheim",
     "Entkernung Heidelberg",
-    "Entkernung Mannheim",
-    "Wohnungsauflösung Heidelberg",
-    "Räumung Rhein-Neckar",
-    "Entsorgung Dossenheim",
-    "Entrümpelung Umgebung Heidelberg",
+    "Handwerker Rhein-Neckar",
+    "Bauunternehmen Heidelberg",
   ],
   applicationName: "High-End Homes",
   alternates: {
@@ -40,21 +48,23 @@ export const metadata: Metadata = {
     locale: "de_DE",
     url: siteUrl,
     siteName: "High-End Homes",
-    title: "Entrümpelung, Hausauflösung & Entkernung in Heidelberg und Mannheim",
-    description: "Professionelle Entrümpelung, Hausauflösung und Entkernung in Heidelberg, Mannheim und Umgebung. Schnell vor Ort, transparent kalkuliert und besenrein ausgeführt.",
+    title: "High-End Homes — Ihr Haus. Eine Adresse.",
+    description:
+      "Sanierung, Ausbau und Renovierung aus einer Hand — Maler, Trockenbau, Fliesen, Sanitär, Elektro, Fensterbau, Entrümpelung und Entkernung. Heidelberg · Mannheim · Rhein-Neckar.",
     images: [
       {
         url: "/logo-main.png",
         width: 1200,
         height: 630,
-        alt: "High-End Homes Entrümpelung und Entkernung in Heidelberg",
+        alt: "High-End Homes — Sanierung und Ausbau aus einer Hand in Heidelberg und Mannheim",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Entrümpelung, Hausauflösung & Entkernung in Heidelberg und Mannheim",
-    description: "High-End Homes übernimmt Entrümpelung, Hausauflösung und Entkernung in Heidelberg, Mannheim und Umgebung.",
+    title: "High-End Homes — Ihr Haus. Eine Adresse.",
+    description:
+      "Sanierung, Ausbau und Renovierung aus einer Hand. Maler, Trockenbau, Fliesen, Sanitär, Elektro, Fensterbau. Heidelberg · Mannheim · Rhein-Neckar.",
     images: ["/logo-main.png"],
   },
   robots: {

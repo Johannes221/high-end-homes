@@ -13,9 +13,9 @@ import { Footer } from "@/components/footer-new"
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://highendhomes.de"
 
 export const metadata: Metadata = {
-  title: "Entrümpelung, Hausauflösung & Entkernung in Heidelberg und Mannheim",
+  title: "High-End Homes — Ihr Haus. Eine Adresse.",
   description:
-    "Professionelle Entrümpelung, Hausauflösung, Wohnungsauflösung und Entkernung in Heidelberg, Mannheim und Umgebung. Schnell vor Ort, transparent kalkuliert und sauber umgesetzt.",
+    "Sanierung, Ausbau und Renovierung aus einer Hand — Maler, Trockenbau, Fliesen, Sanitär, Elektro, Fensterbau, Entrümpelung und Entkernung. Ein Ansprechpartner in Heidelberg, Mannheim und der Rhein-Neckar-Region.",
   alternates: {
     canonical: "/",
   },
@@ -52,15 +52,28 @@ export default function Home() {
           "Rhein-Neckar-Kreis",
         ],
         knowsAbout: [
+          "Sanierung",
+          "Renovierung",
+          "Innenausbau",
+          "Komplettsanierung",
+          "Malerarbeiten",
+          "Trockenbau",
+          "Fliesenarbeiten",
+          "Sanitärinstallation",
+          "Elektroinstallation",
+          "Fensterbau",
           "Entrümpelung",
           "Hausauflösung",
           "Wohnungsauflösung",
           "Entkernung",
         ],
+        description:
+          "Sanierung, Ausbau und Renovierung aus einer Hand — Maler, Trockenbau, Fliesen, Sanitär, Elektro, Fensterbau, Entrümpelung und Entkernung. Ein Ansprechpartner in Heidelberg, Mannheim und der Rhein-Neckar-Region.",
       },
       {
         "@type": "Service",
-        serviceType: "Entrümpelung, Hausauflösung und Entkernung",
+        serviceType: "Sanierung, Ausbau und Renovierung aus einer Hand",
+        name: "Komplettsanierung und Ausbau",
         provider: {
           "@type": "LocalBusiness",
           name: "High-End Homes",
@@ -70,32 +83,46 @@ export default function Home() {
           "Mannheim",
           "Rhein-Neckar-Region",
         ],
+        hasOfferCatalog: {
+          "@type": "OfferCatalog",
+          name: "Leistungen",
+          itemListElement: [
+            { "@type": "Offer", itemOffered: { "@type": "Service", name: "Maler & Lackierer" } },
+            { "@type": "Offer", itemOffered: { "@type": "Service", name: "Trockenbau & Stuckateur" } },
+            { "@type": "Offer", itemOffered: { "@type": "Service", name: "Fliesenleger" } },
+            { "@type": "Offer", itemOffered: { "@type": "Service", name: "Sanitär & Elektro" } },
+            { "@type": "Offer", itemOffered: { "@type": "Service", name: "Fensterbau & Gerüst" } },
+            { "@type": "Offer", itemOffered: { "@type": "Service", name: "Entrümpelung" } },
+            { "@type": "Offer", itemOffered: { "@type": "Service", name: "Hausauflösung" } },
+            { "@type": "Offer", itemOffered: { "@type": "Service", name: "Entkernung" } },
+          ],
+        },
       },
       {
         "@type": "FAQPage",
         mainEntity: [
           {
             "@type": "Question",
-            name: "Welche Leistungen bieten Sie in Heidelberg und Mannheim an?",
+            name: "Welche Leistungen bietet High-End Homes in Heidelberg und Mannheim an?",
             acceptedAnswer: {
               "@type": "Answer",
-              text: "Wir bieten Entrümpelung, Hausauflösung, Wohnungsauflösung und Entkernung für private und gewerbliche Objekte in Heidelberg, Mannheim und der gesamten Rhein-Neckar-Region an.",
+              text: "Wir bieten Sanierung, Ausbau und Renovierung aus einer Hand: Maler, Trockenbau, Fliesen, Sanitär, Elektro, Fensterbau sowie Entrümpelung und Entkernung — für private und gewerbliche Objekte in Heidelberg, Mannheim und der gesamten Rhein-Neckar-Region.",
             },
           },
           {
             "@type": "Question",
-            name: "Wie schnell kann eine Entrümpelung oder Hausauflösung starten?",
+            name: "Wie schnell kann ein Projekt starten?",
             acceptedAnswer: {
               "@type": "Answer",
-              text: "Je nach Umfang sind kurzfristige Besichtigungen und schnelle Termine möglich. Nach Ihrer Anfrage melden wir uns zeitnah mit einer Einschätzung zum Aufwand und möglichen Startterminen.",
+              text: "Je nach Umfang sind kurzfristige Besichtigungen und schnelle Termine möglich. Nach Ihrer Anfrage melden wir uns zeitnah mit einer Einschätzung zu Aufwand, Ablauf und möglichen Startterminen.",
             },
           },
           {
             "@type": "Question",
-            name: "Übernehmen Sie auch Entkernungen vor Sanierungen?",
+            name: "Übernehmen Sie auch Komplettsanierungen?",
             acceptedAnswer: {
               "@type": "Answer",
-              text: "Ja. Wir übernehmen Entkernungen für Wohnungen, Häuser, Büros und Gewerbeeinheiten und bereiten das Objekt strukturiert auf die nächsten Bau- oder Sanierungsschritte vor.",
+              text: "Ja. Wir koordinieren alle Gewerke vom Rückbau über Entkernung bis zum vollständigen Innen- und Außenausbau — Sie haben einen Ansprechpartner für das gesamte Projekt.",
             },
           },
         ],
