@@ -13,9 +13,9 @@ import { Footer } from "@/components/footer-new"
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://highendhomes.de"
 
 export const metadata: Metadata = {
-  title: "High-End Homes — Ihr Haus. Eine Adresse.",
+  title: "High-End Homes (High End Homes) — Sanierung, Ausbau & Renovierung in Heidelberg & Mannheim",
   description:
-    "Sanierung, Ausbau und Renovierung aus einer Hand — Maler, Trockenbau, Fliesen, Sanitär, Elektro, Fensterbau, Entrümpelung und Entkernung. Ein Ansprechpartner in Heidelberg, Mannheim und der Rhein-Neckar-Region.",
+    "High-End Homes — auch geschrieben als High End Homes oder Highendhomes — bietet Sanierung, Ausbau und Renovierung aus einer Hand. Maler, Trockenbau, Fliesen, Sanitär, Elektro, Fensterbau plus Entrümpelung und Entkernung in Heidelberg, Mannheim und der Rhein-Neckar-Region.",
   alternates: {
     canonical: "/",
   },
@@ -28,6 +28,12 @@ export default function Home() {
       {
         "@type": "LocalBusiness",
         name: "High-End Homes",
+        alternateName: [
+          "High End Homes",
+          "Highendhomes",
+          "HighEndHomes",
+          "highendhomes.de",
+        ],
         url: siteUrl,
         image: `${siteUrl}/logo-main.png`,
         email: "bennet.pfeifer@highendhomes.de",

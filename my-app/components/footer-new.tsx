@@ -24,8 +24,11 @@ export function Footer() {
               <h3 className="text-xl font-bold text-white mb-4 tracking-[0.1em]" style={{ fontFamily: 'var(--font-headline)' }}>
                 HIGH-END HOMES
               </h3>
-              <p className="text-white/60 mb-6 text-sm" style={{ fontFamily: 'var(--font-body)', fontWeight: 300 }}>
-                Ihr zuverlässiger Partner für Entrümpelung, Hausauflösung, Entkernung und Ausbau in Heidelberg, Mannheim und Umgebung.
+              <p className="text-white/60 mb-3 text-sm" style={{ fontFamily: 'var(--font-body)', fontWeight: 300 }}>
+                Ihr zuverlässiger Partner für Sanierung, Ausbau und Renovierung — Maler, Trockenbau, Fliesen, Sanitär, Elektro, Fensterbau, Entrümpelung und Entkernung in Heidelberg, Mannheim und Umgebung.
+              </p>
+              <p className="text-white/35 mb-6 text-xs" style={{ fontFamily: 'var(--font-body)', fontWeight: 300 }}>
+                Auch bekannt als <span className="text-white/55">High End Homes</span> oder <span className="text-white/55">Highendhomes</span>.
               </p>
             </div>
 
