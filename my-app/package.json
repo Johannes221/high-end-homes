@@ -7,7 +7,6 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "postinstall": "prisma generate",
     "pages:build": "npx @cloudflare/next-on-pages",
     "preview": "npx wrangler pages dev .vercel/output/static",
     "prisma:generate": "prisma generate",
