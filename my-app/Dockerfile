@@ -1,6 +1,7 @@
 FROM node:22-bookworm-slim
 
 # Chromium-Abhängigkeiten für @sparticuz/chromium / puppeteer
+# + build-essential + python3 für native node modules (lightningcss/tailwind v4)
 RUN apt-get update && apt-get install -y --no-install-recommends \
     libnss3 \
     libatk1.0-0 \
@@ -15,6 +16,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libcairo2 \
     libasound2 \
     openssl \
+    build-essential \
+    python3 \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
