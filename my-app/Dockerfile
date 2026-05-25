@@ -22,12 +22,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 WORKDIR /app
 
-# Dependencies installieren (einmalig — native binaries bleiben erhalten)
-# --include=optional zwingt npm, platform-spezifische optional deps wie
-# lightningcss-linux-x64-gnu zu ziehen (Tailwind v4 hängt davon ab)
-COPY package.json package-lock.json* ./
-RUN npm install --legacy-peer-deps --include=optional \
-    && npm install --legacy-peer-deps lightningcss-linux-x64-gnu --no-save
+# Dependencies installieren — package-lock.json bewusst NICHT kopieren,
+# weil npm Bug #4828 dafür sorgt, dass platform-spezifische optionalDeps
+# (lightningcss-linux-x64-gnu) übersprungen werden, wenn der Lock von
+# einer anderen Plattform stammt. Fresh resolve auf der Build-Plattform.
+COPY package.json ./
+RUN npm install --legacy-peer-deps --include=optional
 
 # Prisma schema + config kopieren, Client generieren
 COPY prisma ./prisma
