@@ -23,8 +23,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 WORKDIR /app
 
 # Dependencies installieren (einmalig — native binaries bleiben erhalten)
+# --include=optional zwingt npm, platform-spezifische optional deps wie
+# lightningcss-linux-x64-gnu zu ziehen (Tailwind v4 hängt davon ab)
 COPY package.json package-lock.json* ./
-RUN npm install --legacy-peer-deps
+RUN npm install --legacy-peer-deps --include=optional \
+    && npm install --legacy-peer-deps lightningcss-linux-x64-gnu --no-save
 
 # Prisma schema + config kopieren, Client generieren
 COPY prisma ./prisma
