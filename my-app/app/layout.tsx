@@ -15,11 +15,11 @@ const geist = Geist({
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "High-End Homes (High End Homes) — Sanierung, Ausbau & Renovierung in Heidelberg & Mannheim",
+    default: "High-End Sanierung & Ausbau in Heidelberg & Mannheim | High-End Homes",
     template: "%s | High-End Homes",
   },
   description:
-    "High-End Homes (auch: High End Homes, Highendhomes) — Sanierung, Ausbau und Renovierung aus einer Hand in Heidelberg, Mannheim und der Rhein-Neckar-Region. Maler, Trockenbau, Fliesen, Sanitär, Elektro, Fensterbau plus Entrümpelung und Entkernung. Ein Ansprechpartner für alles.",
+    "Komplettsanierung, Ausbau und Renovierung aus einer Hand — Maler, Trockenbau, Fliesen, Sanitär, Elektro, Fensterbau. High-End Homes ist Ihr Ansprechpartner für hochwertige Sanierungsprojekte in Heidelberg, Mannheim und der Rhein-Neckar-Region.",
   keywords: [
     // Brand-Varianten
     "High-End Homes",
@@ -84,9 +84,9 @@ export const metadata: Metadata = {
     locale: "de_DE",
     url: siteUrl,
     siteName: "High-End Homes",
-    title: "High-End Homes — Sanierung, Ausbau & Renovierung | Heidelberg · Mannheim",
+    title: "High-End Sanierung & Ausbau | Heidelberg & Mannheim",
     description:
-      "Sanierung, Ausbau und Renovierung aus einer Hand. Maler, Trockenbau, Fliesen, Sanitär, Elektro, Fensterbau, Entrümpelung und Entkernung — High-End Homes in Heidelberg, Mannheim und der Rhein-Neckar-Region.",
+      "Komplettsanierung, Ausbau und Renovierung aus einer Hand — High-End Homes in Heidelberg, Mannheim und der Rhein-Neckar-Region. Ein Ansprechpartner für Maler, Trockenbau, Fliesen, Sanitär, Elektro und Fensterbau.",
     images: [
       {
         url: "/logo-main.png",
@@ -98,9 +98,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "High-End Homes — Sanierung, Ausbau & Renovierung | Heidelberg · Mannheim",
+    title: "High-End Sanierung & Ausbau | Heidelberg & Mannheim",
     description:
-      "Sanierung, Ausbau und Renovierung aus einer Hand. Maler, Trockenbau, Fliesen, Sanitär, Elektro, Fensterbau. Heidelberg · Mannheim · Rhein-Neckar.",
+      "Komplettsanierung, Ausbau und Renovierung aus einer Hand. Ein Ansprechpartner in Heidelberg, Mannheim und der Rhein-Neckar-Region.",
     images: ["/logo-main.png"],
   },
   robots: {
