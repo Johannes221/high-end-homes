@@ -1,10 +1,32 @@
-// Middleware – schützt interne /intern/* Routen + /api/admin/* (nicht öffentlich)
+// Middleware – schützt /intern/* + /api/admin/* + Wartungsmodus (MAINTENANCE_MODE)
 
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
+// Pfade die auch im Wartungsmodus erreichbar bleiben müssen:
+// - /coming-soon (die Wartungsseite selbst)
+// - /intern/* (Backend muss für Inhaber zugänglich bleiben)
+// - /api/* (Coolify-Healthcheck, Form-Endpoints falls jemand sie kennt)
+// - Statische Assets (_next, favicon, robots, sitemap, Bilder)
+function isAllowedDuringMaintenance(pathname: string): boolean {
+  if (pathname === "/coming-soon") return true;
+  if (pathname.startsWith("/intern")) return true;
+  if (pathname.startsWith("/api/")) return true;
+  if (pathname.startsWith("/_next/")) return true;
+  if (pathname === "/favicon.ico") return true;
+  if (pathname === "/robots.txt") return true;
+  if (pathname === "/sitemap.xml") return true;
+  if (/\.(webp|png|jpg|jpeg|svg|ico|woff2|css|js)$/i.test(pathname)) return true;
+  return false;
+}
+
 export function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
+
+  // Wartungsmodus: alles außer Allowlist auf /coming-soon umleiten
+  if (process.env.MAINTENANCE_MODE === "true" && !isAllowedDuringMaintenance(pathname)) {
+    return NextResponse.rewrite(new URL("/coming-soon", req.url));
+  }
 
   // Session-Cookie prüfen (NextAuth v5)
   const sessionToken =
@@ -40,9 +62,8 @@ export function middleware(req: NextRequest) {
 }
 
 export const config = {
-  // /api/admin zusätzlich gaten (vorher war /api komplett ausgenommen)
-  matcher: [
-    "/intern/:path*",
-    "/api/admin/:path*",
-  ],
+  // Breit matchen damit der Wartungsmodus alle öffentlichen Pfade abfangen kann.
+  // Statische Optimierungs-Endpoints sind ausgenommen damit Next.js Assets
+  // ungebremst ausliefern kann.
+  matcher: ["/((?!_next/static|_next/image|favicon.ico).*)"],
 };
