@@ -1,4 +1,4 @@
-// Middleware – schützt interne /intern/* Routen (nicht öffentlich zugänglich)
+// Middleware – schützt interne /intern/* Routen + /api/admin/* (nicht öffentlich)
 
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
@@ -12,6 +12,14 @@ export function middleware(req: NextRequest) {
     req.cookies.get("__Secure-authjs.session-token")?.value;
 
   const isLoggedIn = !!sessionToken;
+
+  // Admin-API: niemals ohne gültige Session — fail closed mit 401 (kein Redirect)
+  if (pathname.startsWith("/api/admin")) {
+    if (!isLoggedIn) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+    return NextResponse.next();
+  }
 
   // Interne Dashboard-Routen schützen (alles außer /intern/login und /intern/register)
   const isInternRoute = pathname.startsWith("/intern");
@@ -32,5 +40,9 @@ export function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
+  // /api/admin zusätzlich gaten (vorher war /api komplett ausgenommen)
+  matcher: [
+    "/intern/:path*",
+    "/api/admin/:path*",
+  ],
 };

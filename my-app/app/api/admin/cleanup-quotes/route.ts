@@ -4,10 +4,17 @@ import { prisma } from "@/lib/prisma"
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
 
-const CLEANUP_SECRET = process.env.CLEANUP_SECRET || "default-secret-change-in-production"
+const CLEANUP_SECRET = process.env.CLEANUP_SECRET
 
 export async function POST(request: Request) {
-  // Secret aus Header prüfen
+  // Fail closed: ohne gesetztes Secret ist der Endpoint deaktiviert (kein Default!)
+  // Zusätzlich greift die Middleware (/api/admin/* erfordert Session).
+  if (!CLEANUP_SECRET) {
+    return NextResponse.json(
+      { success: false, error: "Endpoint disabled (CLEANUP_SECRET not set)" },
+      { status: 503 }
+    )
+  }
   const authHeader = request.headers.get("x-cleanup-secret")
   if (authHeader !== CLEANUP_SECRET) {
     return NextResponse.json(

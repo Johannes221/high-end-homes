@@ -1,4 +1,7 @@
 // API-Route: POST /api/auth/register – Neuen User registrieren
+// SICHERHEIT: Offene Registrierung ist standardmäßig DEAKTIVIERT.
+// Zum Anlegen des ersten Admins temporär ALLOW_REGISTRATION=true als Env setzen,
+// User anlegen, danach Env wieder entfernen.
 
 import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
@@ -8,11 +11,24 @@ export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
 
 export async function POST(req: NextRequest) {
+  // Registrierung nur erlaubt wenn explizit per Env aktiviert
+  if (process.env.ALLOW_REGISTRATION !== "true") {
+    return NextResponse.json(
+      { fehler: "Registrierung deaktiviert" },
+      { status: 403 }
+    );
+  }
+
   try {
     const body = await req.json() as { name?: string; email?: string; password?: string };
 
     if (!body.email || !body.password) {
       return NextResponse.json({ fehler: "E-Mail und Passwort erforderlich" }, { status: 400 });
+    }
+
+    // Mindest-Passwortlänge erzwingen
+    if (body.password.length < 12) {
+      return NextResponse.json({ fehler: "Passwort muss mindestens 12 Zeichen haben" }, { status: 400 });
     }
 
     const existierenderUser = await prisma.user.findUnique({
