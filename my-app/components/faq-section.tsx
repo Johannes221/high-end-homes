@@ -5,24 +5,24 @@ import { ChevronDown } from "lucide-react"
 
 const faqs = [
   {
-    question: "Welche Leistungen bieten Sie in Heidelberg und Mannheim?",
-    answer: "Entrümpelung, Hausauflösung und Entkernung sowie alle Ausbau-Gewerke: Maler, Trockenbau, Fliesenleger, Sanitär, Elektro und Fensterbau. Für privat und gewerblich.",
+    question: "Welche Leistungen bietet die High-End Homes GmbH an?",
+    answer: "Innenausbau, Komplettsanierung und Renovierung — inklusive Wand- und Deckenausbau, Spachtelarbeiten, Bodenverlegung, Maler- und Lackierarbeiten sowie Montage. Dazu Rückbau, Entkernung, Entrümpelung und Hausauflösung. Für private und gewerbliche Objekte.",
   },
   {
-    question: "Wie schnell kann eine Entrümpelung starten?",
-    answer: "Kurzfristige Termine sind möglich. Nach Ihrer Anfrage melden wir uns zeitnah mit Einschätzung und möglichen Startterminen.",
+    question: "Wie schnell kann ein Projekt starten?",
+    answer: "Kurzfristige Termine sind möglich. Nach Ihrer Anfrage melden wir uns zeitnah mit einer Einschätzung zu Aufwand und möglichen Startterminen.",
   },
   {
-    question: "Übernehmen Sie auch Entkernungen vor Sanierungen?",
-    answer: "Ja – für Wohnungen, Häuser und Gewerbe, inklusive fachgerechter Entsorgung. Wir bereiten das Objekt für die nächsten Bauphasen vor.",
+    question: "Übernehmen Sie auch Komplettsanierungen?",
+    answer: "Ja — wir begleiten Komplettsanierungen vom ersten Rückbau über Entkernung und Innenausbau bis zur fertigen Übergabe. Ein Ansprechpartner für das gesamte Projekt.",
   },
   {
     question: "In welchen Orten sind Sie tätig?",
     answer: "Heidelberg, Mannheim, Dossenheim, Schriesheim, Weinheim, Leimen, Eppelheim, Schwetzingen, Hockenheim, Ladenburg und Umgebung.",
   },
   {
-    question: "Was kostet eine Entrümpelung?",
-    answer: "Abhängig von Größe, Umfang, Stockwerk und Materialien. Sie erhalten ein transparentes, unverbindliches Angebot nach Ihrer Anfrage.",
+    question: "Was kostet ein Innenausbau-Projekt?",
+    answer: "Abhängig von Umfang, Größe und Material. Sie erhalten nach der Anfrage und Besichtigung ein transparentes, unverbindliches Angebot.",
   },
 ]
 

@@ -13,9 +13,9 @@ import { Footer } from "@/components/footer-new"
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://highendhomes.de"
 
 export const metadata: Metadata = {
-  title: "High-End Sanierung & Ausbau in Heidelberg & Mannheim",
+  title: "High-End Homes GmbH — Innenausbau & Sanierung in Heidelberg & Mannheim",
   description:
-    "Komplettsanierung, Ausbau und Renovierung aus einer Hand — Maler, Trockenbau, Fliesen, Sanitär, Elektro, Fensterbau. High-End Homes ist Ihr Ansprechpartner für hochwertige Sanierungsprojekte in Heidelberg, Mannheim und der Rhein-Neckar-Region.",
+    "Innenausbau, Komplettsanierung und Renovierung in Heidelberg, Mannheim und der Rhein-Neckar-Region. Wand- und Deckenausbau, Spachtelarbeiten, Bodenverlegung, Maler- und Lackierarbeiten, Montage — Ihr Projekt aus einer Hand.",
   alternates: {
     canonical: "/",
   },
@@ -27,11 +27,11 @@ export default function Home() {
     "@graph": [
       {
         "@type": "LocalBusiness",
-        name: "High-End Homes",
+        name: "High-End Homes GmbH",
         alternateName: [
+          "High-End Homes",
           "High End Homes",
           "Highendhomes",
-          "HighEndHomes",
           "highendhomes.de",
         ],
         url: siteUrl,
@@ -58,31 +58,32 @@ export default function Home() {
           "Rhein-Neckar-Kreis",
         ],
         knowsAbout: [
-          "Sanierung",
-          "Renovierung",
           "Innenausbau",
+          "Sanierung",
           "Komplettsanierung",
+          "Renovierung",
+          "Wand- und Deckenausbau",
+          "Spachtelarbeiten",
+          "Bodenverlegung",
           "Malerarbeiten",
-          "Trockenbau",
-          "Fliesenarbeiten",
-          "Sanitärinstallation",
-          "Elektroinstallation",
-          "Fensterbau",
+          "Lackierarbeiten",
+          "Tapezieren",
+          "Montagearbeiten",
+          "Entkernung",
           "Entrümpelung",
           "Hausauflösung",
           "Wohnungsauflösung",
-          "Entkernung",
         ],
         description:
-          "Sanierung, Ausbau und Renovierung aus einer Hand — Maler, Trockenbau, Fliesen, Sanitär, Elektro, Fensterbau, Entrümpelung und Entkernung. Ein Ansprechpartner in Heidelberg, Mannheim und der Rhein-Neckar-Region.",
+          "Innenausbau, Komplettsanierung und Renovierung in Heidelberg, Mannheim und der Rhein-Neckar-Region. Wand- und Deckenausbau, Spachtelarbeiten, Bodenverlegung, Maler- und Lackierarbeiten, Montage — Ihr Projekt aus einer Hand.",
       },
       {
         "@type": "Service",
-        serviceType: "Sanierung, Ausbau und Renovierung aus einer Hand",
-        name: "Komplettsanierung und Ausbau",
+        serviceType: "Innenausbau, Sanierung und Renovierung",
+        name: "Innenausbau und Komplettsanierung",
         provider: {
           "@type": "LocalBusiness",
-          name: "High-End Homes",
+          name: "High-End Homes GmbH",
         },
         areaServed: [
           "Heidelberg",
@@ -93,14 +94,17 @@ export default function Home() {
           "@type": "OfferCatalog",
           name: "Leistungen",
           itemListElement: [
+            { "@type": "Offer", itemOffered: { "@type": "Service", name: "Komplettsanierung" } },
+            { "@type": "Offer", itemOffered: { "@type": "Service", name: "Innenausbau" } },
+            { "@type": "Offer", itemOffered: { "@type": "Service", name: "Renovierung" } },
+            { "@type": "Offer", itemOffered: { "@type": "Service", name: "Wand- und Deckenausbau" } },
+            { "@type": "Offer", itemOffered: { "@type": "Service", name: "Spachtelarbeiten" } },
+            { "@type": "Offer", itemOffered: { "@type": "Service", name: "Bodenverlegung" } },
             { "@type": "Offer", itemOffered: { "@type": "Service", name: "Maler & Lackierer" } },
-            { "@type": "Offer", itemOffered: { "@type": "Service", name: "Trockenbau & Stuckateur" } },
-            { "@type": "Offer", itemOffered: { "@type": "Service", name: "Fliesenleger" } },
-            { "@type": "Offer", itemOffered: { "@type": "Service", name: "Sanitär & Elektro" } },
-            { "@type": "Offer", itemOffered: { "@type": "Service", name: "Fensterbau & Gerüst" } },
+            { "@type": "Offer", itemOffered: { "@type": "Service", name: "Montagearbeiten" } },
+            { "@type": "Offer", itemOffered: { "@type": "Service", name: "Entkernung" } },
             { "@type": "Offer", itemOffered: { "@type": "Service", name: "Entrümpelung" } },
             { "@type": "Offer", itemOffered: { "@type": "Service", name: "Hausauflösung" } },
-            { "@type": "Offer", itemOffered: { "@type": "Service", name: "Entkernung" } },
           ],
         },
       },
@@ -109,10 +113,10 @@ export default function Home() {
         mainEntity: [
           {
             "@type": "Question",
-            name: "Welche Leistungen bietet High-End Homes in Heidelberg und Mannheim an?",
+            name: "Welche Leistungen bietet die High-End Homes GmbH in Heidelberg und Mannheim?",
             acceptedAnswer: {
               "@type": "Answer",
-              text: "Wir bieten Sanierung, Ausbau und Renovierung aus einer Hand: Maler, Trockenbau, Fliesen, Sanitär, Elektro, Fensterbau sowie Entrümpelung und Entkernung — für private und gewerbliche Objekte in Heidelberg, Mannheim und der gesamten Rhein-Neckar-Region.",
+              text: "Wir bieten Innenausbau, Komplettsanierung und Renovierung aus einer Hand: Wand- und Deckenausbau, Spachtelarbeiten, Bodenverlegung, Maler- und Lackierarbeiten sowie Montage. Dazu Rückbau, Entrümpelung und Hausauflösung. Für private und gewerbliche Objekte in Heidelberg, Mannheim und der gesamten Rhein-Neckar-Region.",
             },
           },
           {
@@ -128,7 +132,7 @@ export default function Home() {
             name: "Übernehmen Sie auch Komplettsanierungen?",
             acceptedAnswer: {
               "@type": "Answer",
-              text: "Ja. Wir koordinieren alle Gewerke vom Rückbau über Entkernung bis zum vollständigen Innen- und Außenausbau — Sie haben einen Ansprechpartner für das gesamte Projekt.",
+              text: "Ja. Wir begleiten Komplettsanierungen vom ersten Rückbau über Entkernung und Innenausbau bis zur fertigen Übergabe — Sie haben einen festen Ansprechpartner für das gesamte Projekt.",
             },
           },
         ],

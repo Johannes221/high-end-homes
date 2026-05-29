@@ -1,8 +1,8 @@
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Impressum | High-End Homes",
-  description: "Impressum und rechtliche Informationen von High-End Homes",
+  title: "Impressum | High-End Homes GmbH",
+  description: "Impressum und rechtliche Informationen der High-End Homes GmbH",
 }
 
 export default function ImpressumPage() {
@@ -19,7 +19,9 @@ export default function ImpressumPage() {
               Angaben gemäß § 5 TMG
             </h2>
             <p className="leading-relaxed">
-              Bennet Pfeifer
+              High-End Homes GmbH
+              <br />
+              vertreten durch den Geschäftsführer Bennet Pfeifer
               <br />
               Gerhard-Hauptmann-Straße 38
               <br />
@@ -39,7 +41,9 @@ export default function ImpressumPage() {
               Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV
             </h2>
             <p className="leading-relaxed">
-              Bennet Pfeifer
+              High-End Homes GmbH
+              <br />
+              vertreten durch den Geschäftsführer Bennet Pfeifer
               <br />
               Gerhard-Hauptmann-Straße 38
               <br />

@@ -21,21 +21,21 @@ const jobs = [
     ],
   },
   {
-    title: "Trockenbauer (m/w/d)",
-    summary: "Wände, Decken, abgehängte Konstruktionen, Stuckarbeiten.",
+    title: "Innenausbauer (m/w/d)",
+    summary: "Wand- und Deckenausbau, Spachtelarbeiten, Bodenverlegung, Montage.",
     bullets: [
-      "Erfahrung mit Metallständer- und Massivbau",
-      "Akkurates Arbeiten nach Plan",
+      "Erfahrung mit Ständerwerk, Gipsplatten, abgehängten Decken",
+      "Akkurates Arbeiten nach Plan, sauberes Spachtelbild",
       "Eigenverantwortliche Baustellenbetreuung möglich",
     ],
   },
   {
-    title: "Fliesenleger (m/w/d)",
-    summary: "Bäder, Küchen, Terrassen – im Neubau und in der Sanierung.",
+    title: "Allround-Handwerker / Helfer (m/w/d)",
+    summary: "Renovierung, Bodenverlegung, Montage, Vorbereitungsarbeiten.",
     bullets: [
-      "Groß- und Kleinformat-Erfahrung",
-      "Sauberes, präzises Fugenbild",
-      "Selbstständige Arbeitsweise",
+      "Praktische Erfahrung in mehreren Gewerken von Vorteil",
+      "Zuverlässig, sauber, teamfähig",
+      "Führerschein Klasse B von Vorteil",
     ],
   },
 ]

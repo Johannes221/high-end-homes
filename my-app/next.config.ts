@@ -23,6 +23,16 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  async redirects() {
+    return [
+      // Alte Service-URLs auf neue Namen umlenken (SEO-Schutz)
+      { source: "/trockenbau", destination: "/innenausbau", permanent: true },
+      { source: "/fliesenleger", destination: "/bodenverlegung", permanent: true },
+      // Sub-Gewerke werden nicht mehr selbst angeboten — auf Kontakt umlenken
+      { source: "/sanitaer", destination: "/kontakt", permanent: true },
+      { source: "/fensterbau", destination: "/kontakt", permanent: true },
+    ];
+  },
   async headers() {
     return [
       {

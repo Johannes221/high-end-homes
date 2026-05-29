@@ -4,8 +4,8 @@ import { useState, useRef } from "react"
 
 const POSITIONS = [
   "Maler & Lackierer (m/w/d)",
-  "Trockenbauer (m/w/d)",
-  "Fliesenleger (m/w/d)",
+  "Innenausbauer (m/w/d)",
+  "Allround-Handwerker / Helfer (m/w/d)",
   "Initiativbewerbung",
 ] as const
 

@@ -7,20 +7,26 @@ import {
   Hammer,
   Paintbrush,
   Box,
-  Droplet,
   Wrench,
-  Frame,
   Building2,
   Sparkles,
   Layers,
+  PaintBucket,
+  PackageOpen,
 } from "lucide-react"
 
 const sanierungServices = [
   {
     icon: Building2,
     title: "Komplettsanierung",
-    description: "Vom Rohzustand bis schlüsselfertig — alle Gewerke aus einer Hand, ein Ansprechpartner.",
-    href: "/entkernung",
+    description: "Vom Rohzustand bis schlüsselfertig — alle Schritte koordiniert, ein Ansprechpartner.",
+    href: "/innenausbau",
+  },
+  {
+    icon: Layers,
+    title: "Innenausbau",
+    description: "Wand- und Deckenausbau, Spachtelarbeiten, Boden-, Wand- und Deckenarbeiten nach Maß.",
+    href: "/innenausbau",
   },
   {
     icon: Sparkles,
@@ -28,44 +34,38 @@ const sanierungServices = [
     description: "Wohnung, Haus, Gewerbe. Mit Auge fürs Detail und höchstem Qualitätsanspruch.",
     href: "/maler",
   },
-  {
-    icon: Layers,
-    title: "Innenausbau",
-    description: "Trockenbau, Bodenarbeiten, Wände nach Maß. Modernisierung im Bestand.",
-    href: "/trockenbau",
-  },
 ]
 
-const constructionServices = [
+const eigenleistungen = [
+  {
+    icon: Box,
+    title: "Wand- & Deckenausbau",
+    description: "Ständerwerk, Gipsplatten, abgehängte Decken.",
+    href: "/innenausbau",
+  },
+  {
+    icon: PaintBucket,
+    title: "Spachtelarbeiten",
+    description: "Untergrundvorbereitung, Glätte, Q1–Q4.",
+    href: "/innenausbau",
+  },
+  {
+    icon: Layers,
+    title: "Bodenverlegung",
+    description: "Laminat, Vinyl, Bodenbeläge.",
+    href: "/bodenverlegung",
+  },
   {
     icon: Paintbrush,
     title: "Maler & Lackierer",
-    description: "Innen, außen, Spachtelarbeiten.",
+    description: "Streichen, Tapezieren, Lackieren.",
     href: "/maler",
   },
   {
-    icon: Box,
-    title: "Trockenbau & Stuckateur",
-    description: "Wände, Decken, Stuck.",
-    href: "/trockenbau",
-  },
-  {
-    icon: Frame,
-    title: "Fliesenleger",
-    description: "Bad, Küche, Terrasse.",
-    href: "/fliesenleger",
-  },
-  {
-    icon: Droplet,
-    title: "Sanitär & Elektro",
-    description: "Installation und Leitungen.",
-    href: "/sanitaer",
-  },
-  {
     icon: Wrench,
-    title: "Fensterbau & Gerüst",
-    description: "Fenster, Türen, Gerüstbau.",
-    href: "/fensterbau",
+    title: "Montagearbeiten",
+    description: "Türen, Zargen, Möbel, Trennwände.",
+    href: "/innenausbau",
   },
 ]
 
@@ -83,7 +83,7 @@ const rueckbauServices = [
     href: "/entruempelung",
   },
   {
-    icon: Home,
+    icon: PackageOpen,
     title: "Hausauflösung",
     description: "Komplett – inkl. Sortierung und fachgerechter Entsorgung.",
     href: "/hausaufloesung",
@@ -95,7 +95,7 @@ export function ServiceCards() {
     <section className="py-20 bg-[#0a0a0a]">
       <div className="section-padding">
         <div className="max-w-6xl mx-auto">
-          {/* Sanierung & Ausbau — High-End Positioning. Erste Sektion, höchste SEO-Priorität */}
+          {/* Sanierung & Innenausbau — Fokus & High-End-Positionierung */}
           <div className="mb-20">
             <p
               className="text-center text-[11px] font-semibold tracking-[0.3em] uppercase mb-3"
@@ -104,13 +104,13 @@ export function ServiceCards() {
               UNSER FOKUS
             </p>
             <h2 className="heading-glow text-3xl md:text-4xl text-white text-center mb-4" style={{ fontFamily: 'var(--font-headline)', fontWeight: 400, letterSpacing: '0.02em' }}>
-              High-End Sanierung & Ausbau
+              Innenausbau & Sanierung
             </h2>
             <p
               className="text-center text-base md:text-lg max-w-2xl mx-auto mb-12"
               style={{ fontFamily: 'var(--font-body)', color: 'rgba(255,255,255,0.55)' }}
             >
-              Komplettsanierung, Renovierung und Innenausbau aus einer Hand — für Eigentümer, Investoren und Bauträger in Heidelberg, Mannheim und der Rhein-Neckar-Region.
+              Komplettsanierung, Innenausbau und Renovierung aus einer Hand — für Eigentümer, Investoren und Bauträger in Heidelberg, Mannheim und der Rhein-Neckar-Region.
             </p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {sanierungServices.map((service, index) => {
@@ -139,14 +139,13 @@ export function ServiceCards() {
             </div>
           </div>
 
-          {/* Einzel-Gewerke */}
+          {/* Eigene Leistungen im Detail */}
           <div className="mb-20">
             <h2 className="heading-glow text-3xl md:text-4xl text-white text-center mb-12" style={{ fontFamily: 'var(--font-headline)', fontWeight: 400, letterSpacing: '0.02em' }}>
-              Einzel-Gewerke
+              Unsere Leistungen
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
-              {constructionServices.map((service, index) => {
-                const Icon = service.icon
+              {eigenleistungen.map((service, index) => {
                 return (
                   <Link
                     key={index}

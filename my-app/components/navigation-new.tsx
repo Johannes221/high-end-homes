@@ -7,17 +7,15 @@ import Image from "next/image"
 import { Button } from "@/components/ui/button"
 
 const mainServices = [
-  { href: "/entruempelung", label: "Entrümpelung" },
-  { href: "/entkernung", label: "Entkernung" },
-  { href: "/hausaufloesung", label: "Hausauflösung" },
+  { href: "/innenausbau", label: "Innenausbau" },
+  { href: "/maler", label: "Maler & Lackierer" },
+  { href: "/bodenverlegung", label: "Bodenverlegung" },
 ]
 
 const constructionServices = [
-  { href: "/maler", label: "Maler & Lackierer" },
-  { href: "/trockenbau", label: "Trockenbau & Stuckateur" },
-  { href: "/fliesenleger", label: "Fliesenleger" },
-  { href: "/sanitaer", label: "Sanitär & Elektro" },
-  { href: "/fensterbau", label: "Fensterbau & Gerüst" },
+  { href: "/entkernung", label: "Entkernung" },
+  { href: "/entruempelung", label: "Entrümpelung" },
+  { href: "/hausaufloesung", label: "Hausauflösung" },
 ]
 
 export function Navigation() {
@@ -71,10 +69,10 @@ export function Navigation() {
                   <div className="absolute left-0 min-w-[320px]" style={{ top: '100%', paddingTop: '8px' }}>
                     <div className="bg-[#111] border border-[rgba(255,255,255,0.1)] py-2">
                     <div className="space-y-0">
-                      {/* Hauptleistungen */}
+                      {/* Innenausbau & Sanierung */}
                       <div className="px-5 py-2">
                         <h3 className="text-[10px] font-semibold mb-2 uppercase tracking-wider" style={{ fontFamily: 'var(--font-headline)', color: 'rgba(255,255,255,0.4)' }}>
-                          Hauptleistungen
+                          Innenausbau & Sanierung
                         </h3>
                         <div className="space-y-0">
                           {mainServices.map((service) => (
@@ -88,11 +86,11 @@ export function Navigation() {
                           ))}
                         </div>
                       </div>
-                      
-                      {/* Ausbau-Leistungen */}
+
+                      {/* Rückbau & Räumung */}
                       <div className="px-5 py-2 border-t" style={{ borderColor: 'rgba(255,255,255,0.08)' }}>
                         <h3 className="text-[10px] font-semibold mb-2 uppercase tracking-wider" style={{ fontFamily: 'var(--font-headline)', color: 'rgba(255,255,255,0.4)' }}>
-                          Ausbau-Leistungen
+                          Rückbau & Räumung
                         </h3>
                         <div className="space-y-0">
                           {constructionServices.map((service) => (
@@ -134,13 +132,6 @@ export function Navigation() {
               </Link>
 
               <Link
-                href="/partner"
-                className="text-sm hover:text-white transition-colors duration-300" style={{ fontFamily: 'var(--font-body)', color: 'rgba(255,255,255,0.7)' }}
-              >
-                Partner
-              </Link>
-
-              <Link
                 href="/kontakt"
                 className="text-sm hover:text-white transition-colors duration-300" style={{ fontFamily: 'var(--font-body)', color: 'rgba(255,255,255,0.7)' }}
               >
@@ -171,10 +162,10 @@ export function Navigation() {
         <div className="fixed inset-0 z-40 bg-[#0a0a0a] pt-24 lg:hidden overflow-y-auto">
           <div className="section-padding py-8">
             <div className="flex flex-col gap-6">
-              {/* Hauptleistungen */}
+              {/* Innenausbau & Sanierung */}
               <div>
                 <h3 className="text-xs font-semibold text-white/40 mb-3 uppercase tracking-wider" style={{ fontFamily: 'var(--font-headline)' }}>
-                  Hauptleistungen
+                  Innenausbau & Sanierung
                 </h3>
                 <div className="space-y-3">
                   {mainServices.map((service) => (
@@ -190,10 +181,10 @@ export function Navigation() {
                 </div>
               </div>
 
-              {/* Ausbau-Leistungen */}
+              {/* Rückbau & Räumung */}
               <div className="pt-4 border-t border-white/10">
                 <h3 className="text-xs font-semibold text-white/40 mb-3 uppercase tracking-wider" style={{ fontFamily: 'var(--font-headline)' }}>
-                  Ausbau-Leistungen
+                  Rückbau & Räumung
                 </h3>
                 <div className="space-y-3">
                   {constructionServices.map((service) => (
@@ -231,13 +222,6 @@ export function Navigation() {
                   className="block text-lg font-medium text-white hover:text-white/60 transition-colors" style={{ fontFamily: 'var(--font-body)' }}
                 >
                   Karriere
-                </Link>
-                <Link
-                  href="/partner"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="block text-lg font-medium text-white hover:text-white/60 transition-colors" style={{ fontFamily: 'var(--font-body)' }}
-                >
-                  Partner
                 </Link>
                 <Link
                   href="/kontakt"

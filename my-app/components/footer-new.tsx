@@ -4,13 +4,12 @@ import Link from "next/link"
 import { Mail, MapPin } from "lucide-react"
 
 const allServices = [
-  { href: "/entruempelung", label: "Entrümpelung" },
-  { href: "/entkernung", label: "Entkernung" },
-  { href: "/hausaufloesung", label: "Hausauflösung" },
+  { href: "/innenausbau", label: "Innenausbau" },
   { href: "/maler", label: "Maler & Lackierer" },
-  { href: "/trockenbau", label: "Trockenbau" },
-  { href: "/fliesenleger", label: "Fliesenleger" },
-  { href: "/sanitaer", label: "Sanitär & Elektro" },
+  { href: "/bodenverlegung", label: "Bodenverlegung" },
+  { href: "/entkernung", label: "Entkernung" },
+  { href: "/entruempelung", label: "Entrümpelung" },
+  { href: "/hausaufloesung", label: "Hausauflösung" },
 ]
 
 export function Footer() {
@@ -22,10 +21,10 @@ export function Footer() {
             {/* Company Info */}
             <div>
               <h3 className="text-xl font-bold text-white mb-4 tracking-[0.1em]" style={{ fontFamily: 'var(--font-headline)' }}>
-                HIGH-END HOMES
+                HIGH-END HOMES GmbH
               </h3>
               <p className="text-white/60 mb-3 text-sm" style={{ fontFamily: 'var(--font-body)', fontWeight: 300 }}>
-                Ihr zuverlässiger Partner für Sanierung, Ausbau und Renovierung — Maler, Trockenbau, Fliesen, Sanitär, Elektro, Fensterbau, Entrümpelung und Entkernung in Heidelberg, Mannheim und Umgebung.
+                Ihr Ansprechpartner für Innenausbau, Sanierung und Renovierung — Wand- und Deckenausbau, Spachtelarbeiten, Bodenverlegung, Maler- und Lackierarbeiten, Entkernung und Entrümpelung in Heidelberg, Mannheim und Umgebung.
               </p>
               <p className="text-white/35 mb-6 text-xs" style={{ fontFamily: 'var(--font-body)', fontWeight: 300 }}>
                 Auch bekannt als <span className="text-white/55">High End Homes</span> oder <span className="text-white/55">Highendhomes</span>.
@@ -145,7 +144,7 @@ export function Footer() {
           {/* Copyright */}
           <div className="border-t border-[rgba(255,255,255,0.08)] pt-8 text-center">
             <p className="text-white/35 text-sm" style={{ fontFamily: 'var(--font-body)', fontWeight: 300 }}>
-              © {new Date().getFullYear()} High-End Homes. Alle Rechte vorbehalten.
+              © {new Date().getFullYear()} High-End Homes GmbH. Alle Rechte vorbehalten.
             </p>
           </div>
         </div>
