@@ -59,7 +59,7 @@ export function Hero() {
               lineHeight: 1.7
             }}
           >
-            Entrümpelung bis Ausbau – alles aus einer Hand.<br />
+            Innenausbau, Sanierung & Renovierung – aus einer Hand koordiniert.<br />
             Heidelberg · Mannheim · Rhein-Neckar.
           </p>
 

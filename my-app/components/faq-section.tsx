@@ -5,16 +5,20 @@ import { ChevronDown } from "lucide-react"
 
 const faqs = [
   {
-    question: "Welche Leistungen bietet die High-End Homes GmbH an?",
-    answer: "Innenausbau, Komplettsanierung und Renovierung — inklusive Wand- und Deckenausbau, Spachtelarbeiten, Bodenverlegung, Maler- und Lackierarbeiten sowie Montage. Dazu Rückbau, Entkernung, Entrümpelung und Hausauflösung. Für private und gewerbliche Objekte.",
+    question: "Welche Leistungen führt die High-End Homes GmbH selbst aus?",
+    answer: "Unser eigenes Team übernimmt den Innenausbau: Trockenbau, Spachtelarbeiten, Fliesen- und Bodenarbeiten, Maler- und Lackierarbeiten sowie Montage. Dazu Rückbau, Entkernung, Entrümpelung und Hausauflösung. Für private und gewerbliche Objekte.",
+  },
+  {
+    question: "Wie funktioniert eine Komplettsanierung bei Ihnen?",
+    answer: "Bei Komplettprojekten übernehmen wir die Planung, Koordination und Projektsteuerung. Die Einzelgewerke führen wir teils selbst aus, meisterpflichtige Arbeiten wie Elektro, Sanitär und Heizung über unser Netzwerk geprüfter Fachbetriebe. Für Sie bleibt es bei einem Ansprechpartner.",
+  },
+  {
+    question: "Welche Arbeiten laufen über Partnerbetriebe?",
+    answer: "Genehmigungs- und meisterpflichtige Gewerke — insbesondere Elektroinstallation, Sanitär und Heizung sowie Statik — vergeben wir an konzessionierte Fachbetriebe und koordinieren die Ausführung. So ist jedes Gewerk fachgerecht abgedeckt.",
   },
   {
     question: "Wie schnell kann ein Projekt starten?",
     answer: "Kurzfristige Termine sind möglich. Nach Ihrer Anfrage melden wir uns zeitnah mit einer Einschätzung zu Aufwand und möglichen Startterminen.",
-  },
-  {
-    question: "Übernehmen Sie auch Komplettsanierungen?",
-    answer: "Ja — wir begleiten Komplettsanierungen vom ersten Rückbau über Entkernung und Innenausbau bis zur fertigen Übergabe. Ein Ansprechpartner für das gesamte Projekt.",
   },
   {
     question: "In welchen Orten sind Sie tätig?",
