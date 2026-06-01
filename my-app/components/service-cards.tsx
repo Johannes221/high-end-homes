@@ -22,7 +22,7 @@ import {
 const fokusServices = [
   {
     icon: Building2,
-    title: "Komplettsanierung",
+    title: "Sanierung",
     description: "Wir planen, koordinieren und steuern Ihr Gesamtprojekt — eigene Gewerke plus geprüftes Partnernetzwerk. Ein Ansprechpartner.",
     href: "/angebot",
   },
