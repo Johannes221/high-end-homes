@@ -1,5 +1,4 @@
 import type { Metadata } from "next"
-import { Suspense } from "react"
 import { Navigation } from "@/components/navigation-new"
 import { Hero } from "@/components/hero-new"
 import { AblaufSection } from "@/components/ablauf-section"
@@ -13,7 +12,7 @@ import { Footer } from "@/components/footer-new"
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://highendhomes.de"
 
 export const metadata: Metadata = {
-  title: "High-End Homes GmbH — Innenausbau & Sanierung in Heidelberg & Mannheim",
+  title: "High-End Homes — Innenausbau & Sanierung in Heidelberg & Mannheim",
   description:
     "Innenausbau, Komplettsanierung und Renovierung in Heidelberg, Mannheim und der Rhein-Neckar-Region. Wand- und Deckenausbau, Spachtelarbeiten, Bodenverlegung, Maler- und Lackierarbeiten, Montage — Ihr Projekt aus einer Hand.",
   alternates: {
@@ -27,9 +26,9 @@ export default function Home() {
     "@graph": [
       {
         "@type": "LocalBusiness",
-        name: "High-End Homes GmbH",
+        name: "High-End Homes",
+        legalName: "High-End Homes GmbH i. G.",
         alternateName: [
-          "High-End Homes",
           "High End Homes",
           "Highendhomes",
           "highendhomes.de",
@@ -84,7 +83,7 @@ export default function Home() {
         name: "Innenausbau, Renovierung und Sanierungskoordination",
         provider: {
           "@type": "LocalBusiness",
-          name: "High-End Homes GmbH",
+          name: "High-End Homes",
         },
         areaServed: [
           "Heidelberg",
@@ -111,7 +110,7 @@ export default function Home() {
         mainEntity: [
           {
             "@type": "Question",
-            name: "Welche Leistungen führt die High-End Homes GmbH selbst aus?",
+            name: "Welche Leistungen führt High-End Homes selbst aus?",
             acceptedAnswer: {
               "@type": "Answer",
               text: "Unser eigenes Team übernimmt den Innenausbau: Trockenbau, Spachtelarbeiten, Fliesen- und Bodenarbeiten, Maler- und Lackierarbeiten sowie Montage. Dazu Rückbau, Entkernung, Entrümpelung und Hausauflösung. Für private und gewerbliche Objekte in Heidelberg, Mannheim und der gesamten Rhein-Neckar-Region.",

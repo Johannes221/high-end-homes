@@ -21,7 +21,7 @@ export function Footer() {
             {/* Company Info */}
             <div>
               <h3 className="text-xl font-bold text-white mb-4 tracking-[0.1em]" style={{ fontFamily: 'var(--font-headline)' }}>
-                HIGH-END HOMES GmbH
+                HIGH-END HOMES
               </h3>
               <p className="text-white/60 mb-3 text-sm" style={{ fontFamily: 'var(--font-body)', fontWeight: 300 }}>
                 Ihr Ansprechpartner für Innenausbau, Sanierung und Renovierung — Wand- und Deckenausbau, Spachtelarbeiten, Bodenverlegung, Maler- und Lackierarbeiten, Entkernung und Entrümpelung in Heidelberg, Mannheim und Umgebung.
@@ -144,7 +144,7 @@ export function Footer() {
           {/* Copyright */}
           <div className="border-t border-[rgba(255,255,255,0.08)] pt-8 text-center">
             <p className="text-white/35 text-sm" style={{ fontFamily: 'var(--font-body)', fontWeight: 300 }}>
-              © {new Date().getFullYear()} High-End Homes GmbH. Alle Rechte vorbehalten.
+              © {new Date().getFullYear()} High-End Homes GmbH i. G. Alle Rechte vorbehalten.
             </p>
           </div>
         </div>

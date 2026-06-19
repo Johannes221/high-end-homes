@@ -1,11 +1,10 @@
 "use client"
 
 import { useState } from "react"
-import { ChevronDown } from "lucide-react"
 
 const faqs = [
   {
-    question: "Welche Leistungen führt die High-End Homes GmbH selbst aus?",
+    question: "Welche Leistungen führt High-End Homes selbst aus?",
     answer: "Unser eigenes Team übernimmt den Innenausbau: Trockenbau, Spachtelarbeiten, Fliesen- und Bodenarbeiten, Maler- und Lackierarbeiten sowie Montage. Dazu Rückbau, Entkernung, Entrümpelung und Hausauflösung. Für private und gewerbliche Objekte.",
   },
   {
