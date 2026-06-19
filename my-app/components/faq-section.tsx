@@ -5,15 +5,15 @@ import { useState } from "react"
 const faqs = [
   {
     question: "Welche Leistungen führt High-End Homes selbst aus?",
-    answer: "Unser eigenes Team übernimmt den Innenausbau: Trockenbau, Spachtelarbeiten, Fliesen- und Bodenarbeiten, Maler- und Lackierarbeiten sowie Montage. Dazu Rückbau, Entkernung, Entrümpelung und Hausauflösung. Für private und gewerbliche Objekte.",
+    answer: "Unser eigenes Team übernimmt Renovierungs- und Innenausbauarbeiten: Maler- und Lackierarbeiten, Bodenverlegung, Wand- und Deckenausbau, Spachtelarbeiten und Montage. Dazu Entrümpelung, Hausauflösung und Rückbau. Für private und gewerbliche Objekte.",
   },
   {
-    question: "Wie funktioniert eine Komplettsanierung bei Ihnen?",
-    answer: "Bei Komplettprojekten übernehmen wir die Planung, Koordination und Projektsteuerung. Die Einzelgewerke führen wir teils selbst aus, meisterpflichtige Arbeiten wie Elektro, Sanitär und Heizung über unser Netzwerk geprüfter Fachbetriebe. Für Sie bleibt es bei einem Ansprechpartner.",
+    question: "Bieten Sie auch komplette Sanierungsprojekte an?",
+    answer: "Ja. Bei Komplettprojekten übernehmen wir die Planung, Koordination und Projektsteuerung. Die Ausbau- und Renovierungsgewerke führen wir teils selbst aus, meisterpflichtige Arbeiten wie Elektro, Sanitär und Heizung über unser Netzwerk geprüfter Fachbetriebe. Für Sie bleibt es bei einem Ansprechpartner.",
   },
   {
     question: "Welche Arbeiten laufen über Partnerbetriebe?",
-    answer: "Genehmigungs- und meisterpflichtige Gewerke — insbesondere Elektroinstallation, Sanitär und Heizung sowie Statik — vergeben wir an konzessionierte Fachbetriebe und koordinieren die Ausführung. So ist jedes Gewerk fachgerecht abgedeckt.",
+    answer: "Genehmigungs- und meisterpflichtige Gewerke — insbesondere Elektroinstallation, Sanitär und Heizung sowie Statik — führen wir nicht selbst aus. Wir vergeben sie an konzessionierte Fachbetriebe und koordinieren deren Einsatz, damit jedes Gewerk fachgerecht abgedeckt ist.",
   },
   {
     question: "Wie schnell kann ein Projekt starten?",

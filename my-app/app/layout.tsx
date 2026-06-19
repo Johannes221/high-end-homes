@@ -19,7 +19,7 @@ export const metadata: Metadata = {
     template: "%s | High-End Homes",
   },
   description:
-    "Innenausbau, Komplettsanierung und Renovierung in Heidelberg, Mannheim und der Rhein-Neckar-Region. Wand- und Deckenausbau, Spachtelarbeiten, Bodenverlegung, Maler- und Lackierarbeiten, Montage. Wir koordinieren Ihr Projekt von der Beratung bis zur Übergabe.",
+    "Innenausbau- und Renovierungsbetrieb in Heidelberg, Mannheim und der Rhein-Neckar-Region. Maler- und Lackierarbeiten, Bodenverlegung, Wand- und Deckenausbau, Spachtelarbeiten und Montage aus eigener Hand. Größere Sanierungsprojekte koordinieren wir mit geprüften Fachbetrieben.",
   keywords: [
     // Brand-Varianten
     "High-End Homes",
@@ -64,10 +64,10 @@ export const metadata: Metadata = {
     "Räumung Rhein-Neckar",
     // Generisch
     "Handwerker Rhein-Neckar",
-    "Bauunternehmen Heidelberg",
-    "Sanierungsbetrieb Heidelberg",
+    "Innenausbaubetrieb Heidelberg",
+    "Renovierungsbetrieb Heidelberg",
     "Innenausbau-Betrieb Rhein-Neckar",
-    "alles aus einer Hand Heidelberg",
+    "Modernisierung Rhein-Neckar",
   ],
   applicationName: "High-End Homes",
   alternates: {
@@ -80,7 +80,7 @@ export const metadata: Metadata = {
     siteName: "High-End Homes",
     title: "High-End Homes — Innenausbau & Sanierung in Heidelberg & Mannheim",
     description:
-      "Innenausbau, Komplettsanierung und Renovierung in Heidelberg, Mannheim und der Rhein-Neckar-Region. Wand- und Deckenausbau, Spachtelarbeiten, Bodenverlegung, Maler- und Lackierarbeiten — Ihr Projekt aus einer Hand.",
+      "Innenausbau- und Renovierungsbetrieb in Heidelberg, Mannheim und der Rhein-Neckar-Region. Maler, Bodenverlegung, Wand- und Deckenausbau, Spachtelarbeiten und Montage aus eigener Hand — größere Projekte mit geprüften Fachbetrieben koordiniert.",
     images: [
       {
         url: "/logo-main.png",
@@ -94,7 +94,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "High-End Homes — Innenausbau & Sanierung",
     description:
-      "Innenausbau, Komplettsanierung und Renovierung in Heidelberg, Mannheim und der Rhein-Neckar-Region. Ein Ansprechpartner für Ihr Projekt.",
+      "Innenausbau- und Renovierungsbetrieb in Heidelberg, Mannheim und der Rhein-Neckar-Region. Ein Ansprechpartner für Ihr Projekt.",
     images: ["/logo-main.png"],
   },
   robots: {

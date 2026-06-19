@@ -4,7 +4,7 @@ import { Footer } from "@/components/footer-new"
 
 export const metadata: Metadata = {
   title: "Über uns | High-End Homes",
-  description: "Erfahren Sie mehr über High-End Homes - Ihr Partner für Entrümpelung, Entkernung und Ausbau in Heidelberg und Mannheim.",
+  description: "High-End Homes – Ihr Innenausbau- und Renovierungsbetrieb in Heidelberg, Mannheim und der Rhein-Neckar-Region.",
 }
 
 export default function UeberUnsPage() {
@@ -19,13 +19,22 @@ export default function UeberUnsPage() {
             </h1>
             <div className="space-y-6" style={{ fontFamily: 'var(--font-body)', fontWeight: 300, color: 'rgba(255,255,255,0.65)' }}>
               <p className="text-xl leading-relaxed">
-                High-End Homes ist Ihr zuverlässiger Partner für Entrümpelung, Hausauflösung, Entkernung und Ausbau-Leistungen in der Rhein-Neckar-Region.
+                High-End Homes ist Ihr Innenausbau- und Renovierungsbetrieb in der Rhein-Neckar-Region. Unser Schwerpunkt liegt auf Renovierung, Modernisierung und Innenausbau für Wohn- und Gewerbeobjekte.
               </p>
               <p className="text-lg leading-relaxed">
-                Wir stehen für Qualität, Professionalität und Detailgenauigkeit. Unser Anspruch: Modern, transparent und zuverlässig – von der ersten Anfrage bis zur besenreinen Übergabe.
+                Wir stehen für Qualität, Professionalität und Detailgenauigkeit. Unser Anspruch: modern, transparent und zuverlässig – von der ersten Anfrage bis zur sauberen Übergabe.
               </p>
+              <h2 className="text-2xl text-white mt-12 mb-4" style={{ fontFamily: 'var(--font-headline)', fontWeight: 400 }}>
+                Unsere Eigenleistungen
+              </h2>
               <p className="text-lg leading-relaxed">
-                Wir bieten Ihnen alles aus einer Hand: Von der Entrümpelung über die Entkernung bis hin zu allen Ausbau-Leistungen wie Maler, Trockenbau, Fliesenleger, Sanitär & Elektro sowie Fensterbau.
+                Unser eigenes Team übernimmt Renovierungs- und Innenausbauarbeiten: Maler- und Lackierarbeiten, Bodenverlegung, Wand- und Deckenausbau, Spachtelarbeiten und Montage. Dazu kommen Entrümpelung, Hausauflösung und Rückbau.
+              </p>
+              <h2 className="text-2xl text-white mt-12 mb-4" style={{ fontFamily: 'var(--font-headline)', fontWeight: 400 }}>
+                Komplettprojekte über unser Partnernetzwerk
+              </h2>
+              <p className="text-lg leading-relaxed">
+                Bei größeren Vorhaben übernehmen wir Planung und Koordination. Genehmigungs- und meisterpflichtige Gewerke wie Elektro, Sanitär und Heizung führen wir nicht selbst aus, sondern vergeben sie an geprüfte Fachbetriebe und steuern deren Einsatz. Für Sie bleibt es bei einem Ansprechpartner.
               </p>
               <h2 className="text-2xl text-white mt-12 mb-4" style={{ fontFamily: 'var(--font-headline)', fontWeight: 400 }}>
                 Unsere Zielgruppe

@@ -1,6 +1,5 @@
 "use client"
 
-import type { Metadata } from "next"
 import { useState } from "react"
 import { Navigation } from "@/components/navigation-new"
 import { Footer } from "@/components/footer-new"
@@ -8,20 +7,24 @@ import { ChevronDown } from "lucide-react"
 
 const generalFaqs = [
   {
-    question: "Welche Leistungen bieten Sie in Heidelberg und Mannheim an?",
-    answer: "Wir bieten Entrümpelung, Hausauflösung, Wohnungsauflösung und Entkernung für private und gewerbliche Objekte in Heidelberg, Mannheim und der gesamten Rhein-Neckar-Region an. Zusätzlich übernehmen wir alle Ausbau-Leistungen wie Maler, Trockenbau, Fliesenleger, Sanitär & Elektro sowie Fensterbau.",
+    question: "Welche Leistungen führt High-End Homes selbst aus?",
+    answer: "Unser eigenes Team übernimmt Renovierungs- und Innenausbauarbeiten: Maler- und Lackierarbeiten, Bodenverlegung, Wand- und Deckenausbau, Spachtelarbeiten und Montage. Dazu Entrümpelung, Hausauflösung und Rückbau. Für private und gewerbliche Objekte in der Rhein-Neckar-Region.",
   },
   {
-    question: "Wie schnell kann eine Entrümpelung oder Hausauflösung starten?",
-    answer: "Je nach Umfang sind kurzfristige Besichtigungen und schnelle Termine möglich. Nach Ihrer Anfrage melden wir uns zeitnah mit einer Einschätzung zum Aufwand und möglichen Startterminen. Unser Express-Service ermöglicht einen Start innerhalb von 24-48 Stunden.",
+    question: "Bieten Sie auch komplette Sanierungsprojekte an?",
+    answer: "Ja. Bei Komplettprojekten übernehmen wir die Planung, Koordination und Projektsteuerung. Die Ausbau- und Renovierungsgewerke führen wir teils selbst aus, meisterpflichtige Arbeiten über unser Netzwerk geprüfter Fachbetriebe. Für Sie bleibt es bei einem Ansprechpartner.",
   },
   {
-    question: "Übernehmen Sie auch Entkernungen vor Sanierungen?",
-    answer: "Ja. Wir übernehmen Entkernungen für Wohnungen, Häuser, Büros und Gewerbeeinheiten und bereiten das Objekt strukturiert auf die nächsten Bau- oder Sanierungsschritte vor. Inklusive fachgerechter Entsorgung aller Materialien.",
+    question: "Welche Arbeiten laufen über Partnerbetriebe?",
+    answer: "Genehmigungs- und meisterpflichtige Gewerke — insbesondere Elektroinstallation, Sanitär und Heizung sowie Statik — führen wir nicht selbst aus. Wir vergeben sie an konzessionierte Fachbetriebe und koordinieren deren Einsatz, damit jedes Gewerk fachgerecht abgedeckt ist.",
   },
   {
-    question: "Was kostet eine Entrümpelung oder Entkernung?",
-    answer: "Die Kosten hängen von verschiedenen Faktoren ab: Größe des Objekts, Umfang der Arbeiten, Stockwerk, Aufzug vorhanden, Art der Materialien etc. Nach Ihrer Anfrage erstellen wir Ihnen ein transparentes und unverbindliches Angebot innerhalb von 24 Stunden.",
+    question: "Wie schnell kann ein Projekt starten?",
+    answer: "Je nach Umfang sind kurzfristige Besichtigungen und schnelle Termine möglich. Nach Ihrer Anfrage melden wir uns zeitnah mit einer Einschätzung zu Aufwand und möglichen Startterminen.",
+  },
+  {
+    question: "Übernehmen Sie auch Entkernung und Rückbau?",
+    answer: "Ja. Wir übernehmen Entkernung und Rückbau für Wohnungen, Häuser und Gewerbe und bereiten das Objekt für die anschließenden Renovierungs- und Ausbauarbeiten vor — inklusive fachgerechter Entsorgung.",
   },
   {
     question: "In welchen Regionen sind Sie tätig?",
@@ -29,15 +32,11 @@ const generalFaqs = [
   },
   {
     question: "Wie läuft eine Anfrage ab?",
-    answer: "Sie füllen unser Anfrageformular aus oder kontaktieren uns direkt. Wir melden uns zeitnah für eine Besichtigung vor Ort. Nach der Besichtigung erhalten Sie ein transparentes, unverbindliches Angebot. Bei Beauftragung vereinbaren wir einen Termin und führen die Arbeiten professionell durch.",
+    answer: "Sie füllen unser Anfrageformular aus oder kontaktieren uns direkt. Wir melden uns zeitnah für eine Besichtigung vor Ort. Nach der Besichtigung erhalten Sie ein transparentes, unverbindliches Angebot. Bei Beauftragung vereinbaren wir einen Termin und führen die Arbeiten professionell aus.",
   },
   {
-    question: "Übernehmen Sie auch die Entsorgung?",
-    answer: "Ja, wir übernehmen die komplette fachgerechte Entsorgung aller Materialien und Gegenstände. Sie erhalten die Räumlichkeiten besenrein zurück.",
-  },
-  {
-    question: "Kann ich bei der Entrümpelung Wertgegenstände behalten?",
-    answer: "Selbstverständlich. Wertgegenstände werden sortiert und können nach Absprache behalten oder verwertet werden. Die Verwertung kann die Kosten der Entrümpelung reduzieren.",
+    question: "Was kostet ein Innenausbau- oder Renovierungsprojekt?",
+    answer: "Die Kosten hängen von Umfang, Größe und Material ab. Nach Ihrer Anfrage und einer Besichtigung erhalten Sie ein transparentes, unverbindliches Angebot.",
   },
 ]
 

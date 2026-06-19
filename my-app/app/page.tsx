@@ -14,7 +14,7 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://highendhomes.de"
 export const metadata: Metadata = {
   title: "High-End Homes — Innenausbau & Sanierung in Heidelberg & Mannheim",
   description:
-    "Innenausbau, Komplettsanierung und Renovierung in Heidelberg, Mannheim und der Rhein-Neckar-Region. Wand- und Deckenausbau, Spachtelarbeiten, Bodenverlegung, Maler- und Lackierarbeiten, Montage — Ihr Projekt aus einer Hand.",
+    "Innenausbau- und Renovierungsbetrieb in Heidelberg, Mannheim und der Rhein-Neckar-Region. Maler- und Lackierarbeiten, Bodenverlegung, Wand- und Deckenausbau, Spachtelarbeiten und Montage aus eigener Hand. Komplettprojekte koordinieren wir mit geprüften Fachbetrieben.",
   alternates: {
     canonical: "/",
   },
@@ -58,24 +58,24 @@ export default function Home() {
         ],
         knowsAbout: [
           "Innenausbau",
-          "Trockenbau",
+          "Renovierung",
+          "Modernisierung",
+          "Wand- und Deckenausbau",
           "Spachtelarbeiten",
-          "Fliesenarbeiten",
           "Bodenverlegung",
           "Malerarbeiten",
           "Lackierarbeiten",
           "Tapezieren",
           "Montagearbeiten",
-          "Renovierung",
           "Entkernung",
           "Entrümpelung",
           "Hausauflösung",
           "Wohnungsauflösung",
-          "Sanierungskoordination",
-          "Projektsteuerung Bau",
+          "Projektkoordination",
+          "Projektsteuerung",
         ],
         description:
-          "Innenausbau und Renovierung in Heidelberg, Mannheim und der Rhein-Neckar-Region. Eigenes Team für Trockenbau, Spachtel-, Fliesen-, Boden-, Maler- und Montagearbeiten. Komplettsanierungen koordinieren wir über ein Netzwerk geprüfter Fachbetriebe — ein Ansprechpartner für Ihr Projekt.",
+          "Innenausbau- und Renovierungsbetrieb in Heidelberg, Mannheim und der Rhein-Neckar-Region. Eigenes Team für Maler- und Lackierarbeiten, Bodenverlegung, Wand- und Deckenausbau, Spachtelarbeiten und Montage. Komplettprojekte koordinieren wir über ein Netzwerk geprüfter Fachbetriebe — ein Ansprechpartner für Ihr Projekt.",
       },
       {
         "@type": "Service",
@@ -94,12 +94,12 @@ export default function Home() {
           "@type": "OfferCatalog",
           name: "Eigenleistungen",
           itemListElement: [
-            { "@type": "Offer", itemOffered: { "@type": "Service", name: "Trockenbau" } },
-            { "@type": "Offer", itemOffered: { "@type": "Service", name: "Spachtelarbeiten" } },
-            { "@type": "Offer", itemOffered: { "@type": "Service", name: "Fliesen- und Bodenarbeiten" } },
             { "@type": "Offer", itemOffered: { "@type": "Service", name: "Maler & Lackierer" } },
+            { "@type": "Offer", itemOffered: { "@type": "Service", name: "Bodenverlegung" } },
+            { "@type": "Offer", itemOffered: { "@type": "Service", name: "Wand- & Deckenausbau" } },
+            { "@type": "Offer", itemOffered: { "@type": "Service", name: "Spachtelarbeiten" } },
             { "@type": "Offer", itemOffered: { "@type": "Service", name: "Montagearbeiten" } },
-            { "@type": "Offer", itemOffered: { "@type": "Service", name: "Entkernung" } },
+            { "@type": "Offer", itemOffered: { "@type": "Service", name: "Entkernung & Rückbau" } },
             { "@type": "Offer", itemOffered: { "@type": "Service", name: "Entrümpelung" } },
             { "@type": "Offer", itemOffered: { "@type": "Service", name: "Hausauflösung" } },
           ],
@@ -113,15 +113,15 @@ export default function Home() {
             name: "Welche Leistungen führt High-End Homes selbst aus?",
             acceptedAnswer: {
               "@type": "Answer",
-              text: "Unser eigenes Team übernimmt den Innenausbau: Trockenbau, Spachtelarbeiten, Fliesen- und Bodenarbeiten, Maler- und Lackierarbeiten sowie Montage. Dazu Rückbau, Entkernung, Entrümpelung und Hausauflösung. Für private und gewerbliche Objekte in Heidelberg, Mannheim und der gesamten Rhein-Neckar-Region.",
+              text: "Unser eigenes Team übernimmt Renovierungs- und Innenausbauarbeiten: Maler- und Lackierarbeiten, Bodenverlegung, Wand- und Deckenausbau, Spachtelarbeiten und Montage. Dazu Entrümpelung, Hausauflösung und Rückbau. Für private und gewerbliche Objekte in Heidelberg, Mannheim und der gesamten Rhein-Neckar-Region.",
             },
           },
           {
             "@type": "Question",
-            name: "Wie funktioniert eine Komplettsanierung bei Ihnen?",
+            name: "Bieten Sie auch komplette Sanierungsprojekte an?",
             acceptedAnswer: {
               "@type": "Answer",
-              text: "Bei Komplettprojekten übernehmen wir Planung, Koordination und Projektsteuerung. Die Einzelgewerke führen wir teils selbst aus, meisterpflichtige Arbeiten wie Elektro, Sanitär und Heizung über unser Netzwerk geprüfter Fachbetriebe. Für Sie bleibt es bei einem Ansprechpartner.",
+              text: "Ja. Bei Komplettprojekten übernehmen wir Planung, Koordination und Projektsteuerung. Die Ausbau- und Renovierungsgewerke führen wir teils selbst aus, meisterpflichtige Arbeiten wie Elektro, Sanitär und Heizung über unser Netzwerk geprüfter Fachbetriebe. Für Sie bleibt es bei einem Ansprechpartner.",
             },
           },
           {
@@ -129,7 +129,7 @@ export default function Home() {
             name: "Welche Arbeiten laufen über Partnerbetriebe?",
             acceptedAnswer: {
               "@type": "Answer",
-              text: "Genehmigungs- und meisterpflichtige Gewerke — insbesondere Elektroinstallation, Sanitär und Heizung sowie Statik — vergeben wir an konzessionierte Fachbetriebe und koordinieren deren Ausführung.",
+              text: "Genehmigungs- und meisterpflichtige Gewerke — insbesondere Elektroinstallation, Sanitär und Heizung sowie Statik — führen wir nicht selbst aus, sondern vergeben sie an konzessionierte Fachbetriebe und koordinieren deren Einsatz.",
             },
           },
         ],
