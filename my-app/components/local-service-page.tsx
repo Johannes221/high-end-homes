@@ -40,12 +40,12 @@ export function LocalServicePage({ page }: { page: LocalSeoPage }) {
   }
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-[#fafafa]">
+    <div className="min-h-screen bg-[#050A20] text-[#fafafa]">
       <Navigation />
       <main>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
-        <section className="relative overflow-hidden bg-[#0a0a0a] pt-28 pb-14">
-          <div className="absolute inset-0 pointer-events-none bg-gradient-to-br from-[#1a1a1a] via-[#0a0a0a] to-[#0a0a0a]" />
+        <section className="relative overflow-hidden bg-[#050A20] pt-28 pb-14">
+          <div className="absolute inset-0 pointer-events-none bg-gradient-to-br from-[#141B3A] via-[#050A20] to-[#050A20]" />
           <div className="relative z-10 section-padding max-w-6xl mx-auto space-y-8">
             <div className="flex flex-wrap items-center gap-3 text-sm text-white/60">
               <Link href="/" className="hover:text-[#c9a45c] transition-colors">Startseite</Link>
@@ -66,7 +66,7 @@ export function LocalServicePage({ page }: { page: LocalSeoPage }) {
               <div className="flex flex-col sm:flex-row gap-4 pt-2">
                 <Link
                   href="/#quote"
-                  className="inline-flex items-center justify-center rounded-lg bg-[#c9a45c] px-6 py-3 font-semibold text-[#0a0a0a] transition-colors hover:bg-[#d4af37]"
+                  className="inline-flex items-center justify-center rounded-lg bg-[#c9a45c] px-6 py-3 font-semibold text-[#050A20] transition-colors hover:bg-[#d4af37]"
                 >
                   Angebot anfragen
                 </Link>
@@ -75,9 +75,9 @@ export function LocalServicePage({ page }: { page: LocalSeoPage }) {
           </div>
         </section>
 
-        <section className="bg-[#0a0a0a] py-16">
+        <section className="bg-[#050A20] py-16">
           <div className="section-padding max-w-6xl mx-auto grid lg:grid-cols-[1.1fr_0.9fr] gap-6 items-start">
-            <Card className="bg-[#1a1a1a] border-[#2a2a2a]">
+            <Card className="bg-[#141B3A] border-[#2a2a2a]">
               <CardHeader>
                 <CardTitle className="text-2xl text-white">{page.introTitle}</CardTitle>
               </CardHeader>
@@ -94,7 +94,7 @@ export function LocalServicePage({ page }: { page: LocalSeoPage }) {
               </CardContent>
             </Card>
 
-            <Card className="bg-[#1a1a1a] border-[#2a2a2a]">
+            <Card className="bg-[#141B3A] border-[#2a2a2a]">
               <CardHeader>
                 <CardTitle className="text-2xl text-white">Regionale Abdeckung</CardTitle>
               </CardHeader>
@@ -118,9 +118,9 @@ export function LocalServicePage({ page }: { page: LocalSeoPage }) {
           </div>
         </section>
 
-        <section className="bg-[#0a0a0a] py-4">
+        <section className="bg-[#050A20] py-4">
           <div className="section-padding max-w-6xl mx-auto grid lg:grid-cols-2 gap-6">
-            <Card className="bg-[#1a1a1a] border-[#2a2a2a] h-full">
+            <Card className="bg-[#141B3A] border-[#2a2a2a] h-full">
               <CardHeader>
                 <CardTitle className="text-2xl text-white">{page.reasonsTitle}</CardTitle>
               </CardHeader>
@@ -136,7 +136,7 @@ export function LocalServicePage({ page }: { page: LocalSeoPage }) {
               </CardContent>
             </Card>
 
-            <Card className="bg-[#1a1a1a] border-[#2a2a2a] h-full">
+            <Card className="bg-[#141B3A] border-[#2a2a2a] h-full">
               <CardHeader>
                 <CardTitle className="text-2xl text-white">{page.processTitle}</CardTitle>
               </CardHeader>
@@ -144,7 +144,7 @@ export function LocalServicePage({ page }: { page: LocalSeoPage }) {
                 <ol className="space-y-3">
                   {page.processSteps.map((step, index) => (
                     <li key={step} className="flex items-start gap-3 text-white/80">
-                      <div className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#c9a45c] text-sm font-bold text-[#0a0a0a]">
+                      <div className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#c9a45c] text-sm font-bold text-[#050A20]">
                         {index + 1}
                       </div>
                       <span className="leading-7">{step}</span>
@@ -156,7 +156,7 @@ export function LocalServicePage({ page }: { page: LocalSeoPage }) {
           </div>
         </section>
 
-        <section className="bg-[#0a0a0a] py-16">
+        <section className="bg-[#050A20] py-16">
           <div className="section-padding max-w-6xl mx-auto space-y-6">
             <div className="max-w-3xl space-y-3">
               <h2 className="heading-glow text-3xl sm:text-4xl font-bold text-white">{page.faqTitle}</h2>
@@ -167,7 +167,7 @@ export function LocalServicePage({ page }: { page: LocalSeoPage }) {
 
             <div className="grid md:grid-cols-2 gap-6">
               {page.faqs.map((faq) => (
-                <Card key={faq.question} className="bg-[#1a1a1a] border-[#2a2a2a] h-full">
+                <Card key={faq.question} className="bg-[#141B3A] border-[#2a2a2a] h-full">
                   <CardHeader>
                     <CardTitle className="text-lg text-white leading-7">{faq.question}</CardTitle>
                   </CardHeader>
@@ -180,7 +180,7 @@ export function LocalServicePage({ page }: { page: LocalSeoPage }) {
           </div>
         </section>
 
-        <section className="bg-[#0a0a0a] pb-16">
+        <section className="bg-[#050A20] pb-16">
           <div className="section-padding max-w-6xl mx-auto grid lg:grid-cols-[1fr_auto] gap-6 items-start">
             <Card className="bg-[#121212] border-[#2a2a2a]">
               <CardHeader>
@@ -189,7 +189,7 @@ export function LocalServicePage({ page }: { page: LocalSeoPage }) {
               <CardContent className="flex flex-wrap gap-3">
                 <Link
                   href="/"
-                  className="inline-flex items-center justify-center rounded-lg border border-[#2a2a2a] bg-[#1a1a1a] px-4 py-2 text-sm text-white/80 transition-colors hover:border-[#c9a45c]/40 hover:text-[#c9a45c]"
+                  className="inline-flex items-center justify-center rounded-lg border border-[#2a2a2a] bg-[#141B3A] px-4 py-2 text-sm text-white/80 transition-colors hover:border-[#c9a45c]/40 hover:text-[#c9a45c]"
                 >
                   Startseite
                 </Link>
@@ -197,7 +197,7 @@ export function LocalServicePage({ page }: { page: LocalSeoPage }) {
                   <Link
                     key={link.href}
                     href={link.href}
-                    className="inline-flex items-center justify-center rounded-lg border border-[#2a2a2a] bg-[#1a1a1a] px-4 py-2 text-sm text-white/80 transition-colors hover:border-[#c9a45c]/40 hover:text-[#c9a45c]"
+                    className="inline-flex items-center justify-center rounded-lg border border-[#2a2a2a] bg-[#141B3A] px-4 py-2 text-sm text-white/80 transition-colors hover:border-[#c9a45c]/40 hover:text-[#c9a45c]"
                   >
                     {link.label}
                   </Link>
@@ -207,7 +207,7 @@ export function LocalServicePage({ page }: { page: LocalSeoPage }) {
 
             <Link
               href="/#quote"
-              className="inline-flex min-w-[220px] items-center justify-center rounded-lg bg-[#c9a45c] px-6 py-4 font-semibold text-[#0a0a0a] transition-colors hover:bg-[#d4af37]"
+              className="inline-flex min-w-[220px] items-center justify-center rounded-lg bg-[#c9a45c] px-6 py-4 font-semibold text-[#050A20] transition-colors hover:bg-[#d4af37]"
             >
               Projekt anfragen
             </Link>

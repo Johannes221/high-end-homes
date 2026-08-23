@@ -39,7 +39,7 @@ const uspItems = [
 
 export function About() {
   return (
-    <section id="about" className="py-16 bg-[#0a0a0a]">
+    <section id="about" className="py-16 bg-[#050A20]">
       <div className="section-padding max-w-7xl mx-auto">
         {/* USP Section */}
         <div
@@ -63,7 +63,7 @@ export function About() {
               key={item.title}
               
             >
-              <Card className="bg-[#1a1a1a] border-[#2a2a2a] h-full hover:border-[#c9a45c]/30 transition-colors duration-300">
+              <Card className="bg-[#141B3A] border-[#2a2a2a] h-full hover:border-[#c9a45c]/30 transition-colors duration-300">
                 <CardContent className="p-6">
                   <div className="w-12 h-12 bg-[#c9a45c]/10 rounded-xl flex items-center justify-center mb-4">
                     <item.icon className="w-6 h-6 text-[#c9a45c]" />

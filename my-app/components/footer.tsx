@@ -12,7 +12,7 @@ export function Footer() {
   }
 
   return (
-    <footer className="bg-[#0a0a0a] border-t border-[#2a2a2a]">
+    <footer className="bg-[#050A20] border-t border-[#2a2a2a]">
       <div className="section-padding max-w-7xl mx-auto py-12">
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Logo & Info */}

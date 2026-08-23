@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 export default function DatenschutzPage() {
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-white py-16">
+    <div className="min-h-screen bg-[#050A20] text-white py-16">
       <div className="max-w-4xl mx-auto px-4 sm:px-6">
         <h1 className="text-4xl font-bold mb-8 tracking-[0.1em]" style={{ fontFamily: 'var(--font-headline)' }}>
           Datenschutzerklärung

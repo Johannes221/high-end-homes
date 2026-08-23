@@ -92,7 +92,7 @@ export function KarriereForm({ defaultPosition }: { defaultPosition?: string }) 
   }
 
   const inputCls =
-    "w-full bg-[#111] border border-[rgba(255,255,255,0.12)] px-4 py-3 text-white placeholder-[rgba(255,255,255,0.35)] focus:outline-none focus:border-[#c9a45c] transition-colors"
+    "w-full bg-[#0A1330] border border-[rgba(255,255,255,0.12)] px-4 py-3 text-white placeholder-[rgba(255,255,255,0.35)] focus:outline-none focus:border-[#c9a45c] transition-colors"
 
   return (
     <form onSubmit={onSubmit} className="space-y-5">

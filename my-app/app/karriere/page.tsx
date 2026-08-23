@@ -42,7 +42,7 @@ const jobs = [
 
 export default function KarrierePage() {
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-white">
+    <div className="min-h-screen bg-[#050A20] text-white">
       <Navigation />
 
       <main className="pt-32 pb-24">

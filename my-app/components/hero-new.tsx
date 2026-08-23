@@ -16,7 +16,7 @@ export function Hero() {
           priority
         />
         {/* Overlay Gradient */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[rgba(10,10,10,0.3)] to-[rgba(10,10,10,0.8)]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[rgba(5,10,32,0.3)] to-[rgba(5,10,32,0.8)]" />
       </div>
 
       {/* Content */}

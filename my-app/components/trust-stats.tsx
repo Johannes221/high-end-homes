@@ -25,7 +25,7 @@ const stats = [
 
 export function TrustStats() {
   return (
-    <section className="py-24 bg-[#0a0a0a]">
+    <section className="py-24 bg-[#050A20]">
       <div className="section-padding">
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-0 border-y border-[rgba(255,255,255,0.08)]">

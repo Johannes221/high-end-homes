@@ -62,7 +62,7 @@ const additionalServices = [
 
 export function Services() {
   return (
-    <section id="services" className="hidden md:block py-16 bg-[#0a0a0a]">
+    <section id="services" className="hidden md:block py-16 bg-[#050A20]">
       <div className="section-padding max-w-7xl mx-auto">
         {/* Header */}
         <div
@@ -88,7 +88,7 @@ export function Services() {
         >
           {mainServices.map((service) => (
             <div key={service.title} >
-              <Card className="bg-[#1a1a1a] border-[#2a2a2a] h-full hover:border-[#c9a45c]/50 transition-colors duration-300 group">
+              <Card className="bg-[#141B3A] border-[#2a2a2a] h-full hover:border-[#c9a45c]/50 transition-colors duration-300 group">
                 <CardHeader>
                   <div className="flex items-start justify-between mb-4">
                     <div className="w-12 h-12 bg-[#c9a45c]/10 rounded-xl flex items-center justify-center group-hover:bg-[#c9a45c]/20 transition-colors">
@@ -134,7 +134,7 @@ export function Services() {
         >
           {additionalServices.map((service) => (
             <div key={service.title} >
-              <Card className="bg-[#1a1a1a]/50 border-[#2a2a2a] hover:bg-[#1a1a1a] transition-colors duration-300">
+              <Card className="bg-[#141B3A]/50 border-[#2a2a2a] hover:bg-[#141B3A] transition-colors duration-300">
                 <CardContent className="p-6">
                   <div className="w-10 h-10 bg-[#2a2a2a] rounded-lg flex items-center justify-center mb-4">
                     <service.icon className="w-5 h-5 text-[#c9a45c]" />

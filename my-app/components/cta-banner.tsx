@@ -6,7 +6,7 @@ import { ArrowRight } from "lucide-react"
 
 export function CTABanner() {
   return (
-    <section className="py-20 bg-[#0a0a0a] border-t border-b border-[rgba(255,255,255,0.08)]">
+    <section className="py-20 bg-[#050A20] border-t border-b border-[rgba(255,255,255,0.08)]">
       <div className="section-padding">
         <div className="max-w-4xl mx-auto text-center">
           <p 

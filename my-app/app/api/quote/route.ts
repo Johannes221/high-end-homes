@@ -106,11 +106,11 @@ function buildEmailHtml(submission: QuoteSubmission, complexityScore: number, co
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Neues Angebot</title>
       </head>
-      <body style="margin:0;padding:24px;background:#0a0a0a;font-family:Arial,sans-serif;">
-        <div style="max-width:760px;margin:0 auto;background:#1a1a1a;border:1px solid #2a2a2a;border-radius:16px;padding:24px;">
+      <body style="margin:0;padding:24px;background:#050A20;font-family:Arial,sans-serif;">
+        <div style="max-width:760px;margin:0 auto;background:#141B3A;border:1px solid #2a2a2a;border-radius:16px;padding:24px;">
           <h1 style="margin:0 0 16px 0;color:#c9a45c;font-size:24px;">Neues Angebot</h1>
           <table style="width:100%;border-collapse:collapse;margin-bottom:24px;">${rows}</table>
-          <div style="border:1px solid #2a2a2a;border-radius:12px;padding:16px;background:#0a0a0a;">
+          <div style="border:1px solid #2a2a2a;border-radius:12px;padding:16px;background:#050A20;">
             <h2 style="margin:0 0 12px 0;color:#c9a45c;font-size:18px;">Automatische Bewertung</h2>
             <p style="margin:0 0 8px 0;color:#ffffff;">Komplexität: <strong>${escapeHtml(complexityLevel)}</strong> (Score: ${complexityScore})</p>
             <p style="margin:0 0 8px 0;color:#ffffff;">Geschätzter Aufwand: <strong>${escapeHtml(effortRange)}</strong></p>

@@ -5,9 +5,9 @@ import { Button } from "@/components/ui/button"
 
 export function Hero() {
   return (
-    <section id="hero" className="relative bg-[#0a0a0a] pt-16 pb-8 overflow-hidden">
+    <section id="hero" className="relative bg-[#050A20] pt-16 pb-8 overflow-hidden">
       {/* Subtle gradient background - no images */}
-      <div className="absolute inset-0 pointer-events-none bg-gradient-to-br from-[#1a1a1a] via-[#0a0a0a] to-[#0a0a0a]" />
+      <div className="absolute inset-0 pointer-events-none bg-gradient-to-br from-[#141B3A] via-[#050A20] to-[#050A20]" />
       
       {/* Gold accent line at top */}
       <div className="absolute top-0 left-0 right-0 h-1 pointer-events-none bg-gradient-to-r from-transparent via-[#c9a45c] to-transparent" />
@@ -40,7 +40,7 @@ export function Hero() {
             <Button
               asChild
               size="lg"
-              className="bg-[#c9a45c] text-[#0a0a0a] hover:bg-[#d4af37] font-bold text-lg px-8 h-12 shadow-lg shadow-[#c9a45c]/20"
+              className="bg-[#c9a45c] text-[#050A20] hover:bg-[#d4af37] font-bold text-lg px-8 h-12 shadow-lg shadow-[#c9a45c]/20"
             >
               <a href="?tab=entruempelung#quote" className="flex items-center gap-2">
                 Angebot Entrümpelung
@@ -50,7 +50,7 @@ export function Hero() {
             <Button
               asChild
               size="lg"
-              className="bg-[#c9a45c] text-[#0a0a0a] hover:bg-[#d4af37] font-bold text-lg px-8 h-12 shadow-lg shadow-[#c9a45c]/20"
+              className="bg-[#c9a45c] text-[#050A20] hover:bg-[#d4af37] font-bold text-lg px-8 h-12 shadow-lg shadow-[#c9a45c]/20"
             >
               <a href="?tab=entkernung#quote" className="flex items-center gap-2">
                 Angebot Entkernung

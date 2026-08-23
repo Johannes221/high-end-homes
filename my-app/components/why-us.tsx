@@ -37,7 +37,7 @@ const benefits = [
 
 export function WhyUs() {
   return (
-    <section className="py-20 bg-[#0a0a0a]">
+    <section className="py-20 bg-[#050A20]">
       <div className="section-padding">
         <div className="max-w-6xl mx-auto">
           {/* Section Header */}
@@ -54,7 +54,7 @@ export function WhyUs() {
               return (
                 <div
                   key={index}
-                  className="flex flex-col items-start p-6 bg-[#111111] border border-[rgba(255,255,255,0.06)] hover:border-[rgba(255,255,255,0.2)] transition-all duration-300"
+                  className="flex flex-col items-start p-6 bg-[#0A1330] border border-[rgba(255,255,255,0.06)] hover:border-[rgba(255,255,255,0.2)] transition-all duration-300"
                 >
                   <Icon className="w-6 h-6 text-white mb-4" />
                   <h3 className="text-lg font-semibold text-white mb-2" style={{ fontFamily: 'var(--font-headline)' }}>

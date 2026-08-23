@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 
 export default function ComingSoonPage() {
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center px-6 bg-[#0a0a0a] text-white">
+    <div className="min-h-screen flex flex-col items-center justify-center px-6 bg-[#050A20] text-white">
       <div className="max-w-xl w-full text-center">
         <Image
           src="/logo.webp"

@@ -32,9 +32,9 @@ const steps = [
 
 export function ProcessFlow() {
   return (
-    <section className="relative bg-[#0a0a0a] py-16 overflow-hidden">
+    <section className="relative bg-[#050A20] py-16 overflow-hidden">
       {/* Subtle gradient background */}
-      <div className="absolute inset-0 pointer-events-none bg-gradient-to-br from-[#1a1a1a] via-[#0a0a0a] to-[#0a0a0a]" />
+      <div className="absolute inset-0 pointer-events-none bg-gradient-to-br from-[#141B3A] via-[#050A20] to-[#050A20]" />
       
       {/* Gold accent line */}
       <div className="absolute top-0 left-0 right-0 h-1 pointer-events-none bg-gradient-to-r from-transparent via-[#c9a45c] to-transparent" />
@@ -59,12 +59,12 @@ export function ProcessFlow() {
               return (
                 <div key={index} className="relative flex flex-col items-center text-center">
                   {/* Icon circle */}
-                  <div className="relative z-10 w-24 h-24 rounded-full bg-[#1a1a1a] border-2 border-[#c9a45c] flex items-center justify-center mb-4 shadow-lg shadow-[#c9a45c]/20 shrink-0">
+                  <div className="relative z-10 w-24 h-24 rounded-full bg-[#141B3A] border-2 border-[#c9a45c] flex items-center justify-center mb-4 shadow-lg shadow-[#c9a45c]/20 shrink-0">
                     <Icon className="w-10 h-10 text-[#c9a45c]" />
                   </div>
 
                   {/* Step number */}
-                  <div className="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-[#c9a45c] text-[#0a0a0a] font-bold text-sm flex items-center justify-center shrink-0">
+                  <div className="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-[#c9a45c] text-[#050A20] font-bold text-sm flex items-center justify-center shrink-0">
                     {index + 1}
                   </div>
 

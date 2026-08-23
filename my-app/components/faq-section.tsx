@@ -37,7 +37,7 @@ export function FAQSection() {
   }
 
   return (
-    <section className="py-20 bg-[#0a0a0a]">
+    <section className="py-20 bg-[#050A20]">
       <div className="section-padding">
         <div className="max-w-4xl mx-auto">
           {/* Section Header */}

@@ -66,37 +66,37 @@ export function QuoteFormTabs() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <Label htmlFor="name" className="text-white">Name *</Label>
-                  <Input id="name" required className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)] text-white" />
+                  <Input id="name" required className="bg-[#050A20] border-[rgba(255,255,255,0.1)] text-white" />
                 </div>
                 <div>
                   <Label htmlFor="email" className="text-white">E-Mail *</Label>
-                  <Input id="email" type="email" required className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)] text-white" />
+                  <Input id="email" type="email" required className="bg-[#050A20] border-[rgba(255,255,255,0.1)] text-white" />
                 </div>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <Label htmlFor="phone" className="text-white">Telefon</Label>
-                  <Input id="phone" type="tel" className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)] text-white" />
+                  <Input id="phone" type="tel" className="bg-[#050A20] border-[rgba(255,255,255,0.1)] text-white" />
                 </div>
                 <div>
                   <Label htmlFor="company" className="text-white">Firma (optional)</Label>
-                  <Input id="company" className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)] text-white" />
+                  <Input id="company" className="bg-[#050A20] border-[rgba(255,255,255,0.1)] text-white" />
                 </div>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <Label htmlFor="sqm" className="text-white">Quadratmeter *</Label>
-                  <Input id="sqm" type="number" required className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)] text-white" />
+                  <Input id="sqm" type="number" required className="bg-[#050A20] border-[rgba(255,255,255,0.1)] text-white" />
                 </div>
                 <div>
                   <Label htmlFor="building-type" className="text-white">Gebäudetyp *</Label>
                   <Select required>
-                    <SelectTrigger className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)] text-white">
+                    <SelectTrigger className="bg-[#050A20] border-[rgba(255,255,255,0.1)] text-white">
                       <SelectValue placeholder="Wählen Sie..." />
                     </SelectTrigger>
-                    <SelectContent className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)]">
+                    <SelectContent className="bg-[#050A20] border-[rgba(255,255,255,0.1)]">
                       {buildingTypes.map((type) => (
                         <SelectItem key={type} value={type} className="text-white">{type}</SelectItem>
                       ))}
@@ -109,10 +109,10 @@ export function QuoteFormTabs() {
                 <div>
                   <Label htmlFor="floor" className="text-white">Stockwerk</Label>
                   <Select>
-                    <SelectTrigger className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)] text-white">
+                    <SelectTrigger className="bg-[#050A20] border-[rgba(255,255,255,0.1)] text-white">
                       <SelectValue placeholder="Wählen Sie..." />
                     </SelectTrigger>
-                    <SelectContent className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)]">
+                    <SelectContent className="bg-[#050A20] border-[rgba(255,255,255,0.1)]">
                       {floorOptions.map((floor) => (
                         <SelectItem key={floor} value={floor} className="text-white">{floor}</SelectItem>
                       ))}
@@ -122,10 +122,10 @@ export function QuoteFormTabs() {
                 <div>
                   <Label htmlFor="elevator" className="text-white">Aufzug vorhanden?</Label>
                   <Select>
-                    <SelectTrigger className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)] text-white">
+                    <SelectTrigger className="bg-[#050A20] border-[rgba(255,255,255,0.1)] text-white">
                       <SelectValue placeholder="Wählen Sie..." />
                     </SelectTrigger>
-                    <SelectContent className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)]">
+                    <SelectContent className="bg-[#050A20] border-[rgba(255,255,255,0.1)]">
                       <SelectItem value="ja" className="text-white">Ja</SelectItem>
                       <SelectItem value="nein" className="text-white">Nein</SelectItem>
                     </SelectContent>
@@ -149,17 +149,17 @@ export function QuoteFormTabs() {
 
               <div>
                 <Label htmlFor="valuables" className="text-white">Wertgegenstände vorhanden?</Label>
-                <Textarea id="valuables" placeholder="Beschreiben Sie eventuelle Wertgegenstände..." className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)] text-white" />
+                <Textarea id="valuables" placeholder="Beschreiben Sie eventuelle Wertgegenstände..." className="bg-[#050A20] border-[rgba(255,255,255,0.1)] text-white" />
               </div>
 
               <div>
                 <Label htmlFor="date" className="text-white">Wunschtermin</Label>
-                <Input id="date" type="date" className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)] text-white" />
+                <Input id="date" type="date" className="bg-[#050A20] border-[rgba(255,255,255,0.1)] text-white" />
               </div>
 
               <div>
                 <Label htmlFor="notes" className="text-white">Anmerkungen</Label>
-                <Textarea id="notes" placeholder="Weitere Informationen..." className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)] text-white" rows={4} />
+                <Textarea id="notes" placeholder="Weitere Informationen..." className="bg-[#050A20] border-[rgba(255,255,255,0.1)] text-white" rows={4} />
               </div>
 
               <ImageUpload id="images-entruempelung" label="Bilder hochladen (optional)" />
@@ -180,26 +180,26 @@ export function QuoteFormTabs() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <Label htmlFor="name-g" className="text-white">Name *</Label>
-                  <Input id="name-g" required className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)] text-white" />
+                  <Input id="name-g" required className="bg-[#050A20] border-[rgba(255,255,255,0.1)] text-white" />
                 </div>
                 <div>
                   <Label htmlFor="email-g" className="text-white">E-Mail *</Label>
-                  <Input id="email-g" type="email" required className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)] text-white" />
+                  <Input id="email-g" type="email" required className="bg-[#050A20] border-[rgba(255,255,255,0.1)] text-white" />
                 </div>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <Label htmlFor="sqm-g" className="text-white">Quadratmeter *</Label>
-                  <Input id="sqm-g" type="number" required className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)] text-white" />
+                  <Input id="sqm-g" type="number" required className="bg-[#050A20] border-[rgba(255,255,255,0.1)] text-white" />
                 </div>
                 <div>
                   <Label htmlFor="building-type-g" className="text-white">Gebäudetyp *</Label>
                   <Select required>
-                    <SelectTrigger className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)] text-white">
+                    <SelectTrigger className="bg-[#050A20] border-[rgba(255,255,255,0.1)] text-white">
                       <SelectValue placeholder="Wählen Sie..." />
                     </SelectTrigger>
-                    <SelectContent className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)]">
+                    <SelectContent className="bg-[#050A20] border-[rgba(255,255,255,0.1)]">
                       {buildingTypes.map((type) => (
                         <SelectItem key={type} value={type} className="text-white">{type}</SelectItem>
                       ))}
@@ -225,10 +225,10 @@ export function QuoteFormTabs() {
               <div>
                 <Label htmlFor="asbestos" className="text-white">Asbest vorhanden?</Label>
                 <Select>
-                  <SelectTrigger className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)] text-white">
+                  <SelectTrigger className="bg-[#050A20] border-[rgba(255,255,255,0.1)] text-white">
                     <SelectValue placeholder="Wählen Sie..." />
                   </SelectTrigger>
-                  <SelectContent className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)]">
+                  <SelectContent className="bg-[#050A20] border-[rgba(255,255,255,0.1)]">
                     <SelectItem value="ja" className="text-white">Ja</SelectItem>
                     <SelectItem value="nein" className="text-white">Nein</SelectItem>
                     <SelectItem value="unbekannt" className="text-white">Unbekannt</SelectItem>
@@ -238,7 +238,7 @@ export function QuoteFormTabs() {
 
               <div>
                 <Label htmlFor="notes-g" className="text-white">Anmerkungen</Label>
-                <Textarea id="notes-g" placeholder="Weitere Informationen..." className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)] text-white" rows={4} />
+                <Textarea id="notes-g" placeholder="Weitere Informationen..." className="bg-[#050A20] border-[rgba(255,255,255,0.1)] text-white" rows={4} />
               </div>
 
               <ImageUpload id="images-entkernung" label="Bilder hochladen (optional)" />
@@ -261,22 +261,22 @@ export function QuoteFormTabs() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <Label htmlFor="name-k" className="text-white">Name *</Label>
-                  <Input id="name-k" required className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)] text-white" />
+                  <Input id="name-k" required className="bg-[#050A20] border-[rgba(255,255,255,0.1)] text-white" />
                 </div>
                 <div>
                   <Label htmlFor="email-k" className="text-white">E-Mail *</Label>
-                  <Input id="email-k" type="email" required className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)] text-white" />
+                  <Input id="email-k" type="email" required className="bg-[#050A20] border-[rgba(255,255,255,0.1)] text-white" />
                 </div>
               </div>
 
               <div>
                 <Label htmlFor="sqm-k" className="text-white">Quadratmeter *</Label>
-                <Input id="sqm-k" type="number" required className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)] text-white" />
+                <Input id="sqm-k" type="number" required className="bg-[#050A20] border-[rgba(255,255,255,0.1)] text-white" />
               </div>
 
               <div>
                 <Label htmlFor="notes-k" className="text-white">Projektbeschreibung *</Label>
-                <Textarea id="notes-k" placeholder="Beschreiben Sie Ihr Projekt..." className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)] text-white" rows={6} required />
+                <Textarea id="notes-k" placeholder="Beschreiben Sie Ihr Projekt..." className="bg-[#050A20] border-[rgba(255,255,255,0.1)] text-white" rows={6} required />
               </div>
 
               <ImageUpload id="images-kombi" label="Bilder hochladen (optional)" />
@@ -297,11 +297,11 @@ export function QuoteFormTabs() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <Label htmlFor="name-a" className="text-white">Name *</Label>
-                  <Input id="name-a" required className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)] text-white" />
+                  <Input id="name-a" required className="bg-[#050A20] border-[rgba(255,255,255,0.1)] text-white" />
                 </div>
                 <div>
                   <Label htmlFor="email-a" className="text-white">E-Mail *</Label>
-                  <Input id="email-a" type="email" required className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)] text-white" />
+                  <Input id="email-a" type="email" required className="bg-[#050A20] border-[rgba(255,255,255,0.1)] text-white" />
                 </div>
               </div>
 
@@ -321,12 +321,12 @@ export function QuoteFormTabs() {
 
               <div>
                 <Label htmlFor="sqm-a" className="text-white">Quadratmeter</Label>
-                <Input id="sqm-a" type="number" className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)] text-white" />
+                <Input id="sqm-a" type="number" className="bg-[#050A20] border-[rgba(255,255,255,0.1)] text-white" />
               </div>
 
               <div>
                 <Label htmlFor="notes-a" className="text-white">Projektbeschreibung *</Label>
-                <Textarea id="notes-a" placeholder="Beschreiben Sie Ihr Projekt..." className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)] text-white" rows={6} required />
+                <Textarea id="notes-a" placeholder="Beschreiben Sie Ihr Projekt..." className="bg-[#050A20] border-[rgba(255,255,255,0.1)] text-white" rows={6} required />
               </div>
 
               <ImageUpload id="images-ausbau" label="Bilder hochladen (optional)" />

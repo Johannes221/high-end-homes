@@ -116,7 +116,7 @@ const rueckbauServices = [
 
 export function ServiceCards() {
   return (
-    <section className="py-20 bg-[#0a0a0a]">
+    <section className="py-20 bg-[#050A20]">
       <div className="section-padding">
         <div className="max-w-6xl mx-auto">
           {/* FOKUS — Sanierung & Innenausbau */}

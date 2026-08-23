@@ -83,11 +83,11 @@ export function ServicePageLayout({
   }
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a]">
+    <div className="min-h-screen bg-[#050A20]">
       <Navigation />
       
       {/* Hero Section */}
-      <section className="relative bg-[#0a0a0a] pt-32 pb-16 overflow-hidden">
+      <section className="relative bg-[#050A20] pt-32 pb-16 overflow-hidden">
         <div className="relative z-10 section-padding">
           <div className="max-w-4xl mx-auto">
             {/* Breadcrumb */}
@@ -122,7 +122,7 @@ export function ServicePageLayout({
       </section>
 
       {/* Was wir machen */}
-      <section className="py-20 bg-[#0a0a0a]">
+      <section className="py-20 bg-[#050A20]">
         <div className="section-padding">
           <div className="max-w-4xl mx-auto">
             <h2 className="heading-glow text-3xl md:text-4xl text-white mb-12" style={{ fontFamily: 'var(--font-headline)', fontWeight: 400, letterSpacing: '0.02em' }}>
@@ -143,7 +143,7 @@ export function ServicePageLayout({
       </section>
 
       {/* Vorteile */}
-      <section className="py-16 bg-[#0a0a0a]">
+      <section className="py-16 bg-[#050A20]">
         <div className="section-padding">
           <div className="max-w-6xl mx-auto">
             <h2 className="heading-glow text-3xl md:text-4xl font-bold text-white mb-12 text-center" style={{ fontFamily: 'var(--font-headline)' }}>
@@ -153,7 +153,7 @@ export function ServicePageLayout({
               {benefits.map((benefit, index) => (
                 <div
                   key={index}
-                  className="bg-[#111111] border border-[rgba(255,255,255,0.06)] p-8 text-center hover:border-[rgba(255,255,255,0.2)] transition-all duration-300"
+                  className="bg-[#0A1330] border border-[rgba(255,255,255,0.06)] p-8 text-center hover:border-[rgba(255,255,255,0.2)] transition-all duration-300"
                 >
                   <h3 className="text-2xl font-bold text-white mb-4" style={{ fontFamily: 'var(--font-headline)' }}>
                     {benefit.title}
@@ -169,7 +169,7 @@ export function ServicePageLayout({
       </section>
 
       {/* Ablauf */}
-      <section className="py-20 bg-[#0a0a0a]">
+      <section className="py-20 bg-[#050A20]">
         <div className="section-padding">
           <div className="max-w-4xl mx-auto">
             <h2 className="heading-glow text-3xl md:text-4xl text-white mb-12" style={{ fontFamily: 'var(--font-headline)', fontWeight: 400, letterSpacing: '0.02em' }}>
@@ -197,7 +197,7 @@ export function ServicePageLayout({
       </section>
 
       {/* FAQ */}
-      <section className="py-20 bg-[#0a0a0a]">
+      <section className="py-20 bg-[#050A20]">
         <div className="section-padding">
           <div className="max-w-4xl mx-auto">
             <h2 className="heading-glow text-3xl md:text-4xl text-white mb-12" style={{ fontFamily: 'var(--font-headline)', fontWeight: 400, letterSpacing: '0.02em' }}>
@@ -241,7 +241,7 @@ export function ServicePageLayout({
       </section>
 
       {/* Kontakt */}
-      <section className="py-20 bg-[#0a0a0a] border-t border-[rgba(255,255,255,0.08)]">
+      <section className="py-20 bg-[#050A20] border-t border-[rgba(255,255,255,0.08)]">
         <div className="section-padding">
           <div className="max-w-6xl mx-auto">
             <h2 className="heading-glow text-3xl md:text-4xl text-white mb-12 text-center" style={{ fontFamily: 'var(--font-headline)', fontWeight: 400, letterSpacing: '0.02em' }}>
@@ -262,7 +262,7 @@ export function ServicePageLayout({
                       required
                       value={contactForm.name}
                       onChange={(e) => setContactForm({ ...contactForm, name: e.target.value })}
-                      className="w-full px-4 py-3 bg-[#111111] border border-[rgba(255,255,255,0.1)] text-white placeholder:text-white/40 focus:border-white/30 focus:outline-none transition-colors"
+                      className="w-full px-4 py-3 bg-[#0A1330] border border-[rgba(255,255,255,0.1)] text-white placeholder:text-white/40 focus:border-white/30 focus:outline-none transition-colors"
                       style={{ fontFamily: 'var(--font-body)', borderRadius: '3px' }}
                     />
                   </div>
@@ -273,7 +273,7 @@ export function ServicePageLayout({
                       required
                       value={contactForm.email}
                       onChange={(e) => setContactForm({ ...contactForm, email: e.target.value })}
-                      className="w-full px-4 py-3 bg-[#111111] border border-[rgba(255,255,255,0.1)] text-white placeholder:text-white/40 focus:border-white/30 focus:outline-none transition-colors"
+                      className="w-full px-4 py-3 bg-[#0A1330] border border-[rgba(255,255,255,0.1)] text-white placeholder:text-white/40 focus:border-white/30 focus:outline-none transition-colors"
                       style={{ fontFamily: 'var(--font-body)', borderRadius: '3px' }}
                     />
                   </div>
@@ -283,7 +283,7 @@ export function ServicePageLayout({
                       placeholder="Telefon"
                       value={contactForm.phone}
                       onChange={(e) => setContactForm({ ...contactForm, phone: e.target.value })}
-                      className="w-full px-4 py-3 bg-[#111111] border border-[rgba(255,255,255,0.1)] text-white placeholder:text-white/40 focus:border-white/30 focus:outline-none transition-colors"
+                      className="w-full px-4 py-3 bg-[#0A1330] border border-[rgba(255,255,255,0.1)] text-white placeholder:text-white/40 focus:border-white/30 focus:outline-none transition-colors"
                       style={{ fontFamily: 'var(--font-body)', borderRadius: '3px' }}
                     />
                   </div>
@@ -294,7 +294,7 @@ export function ServicePageLayout({
                       rows={5}
                       value={contactForm.message}
                       onChange={(e) => setContactForm({ ...contactForm, message: e.target.value })}
-                      className="w-full px-4 py-3 bg-[#111111] border border-[rgba(255,255,255,0.1)] text-white placeholder:text-white/40 focus:border-white/30 focus:outline-none transition-colors resize-none"
+                      className="w-full px-4 py-3 bg-[#0A1330] border border-[rgba(255,255,255,0.1)] text-white placeholder:text-white/40 focus:border-white/30 focus:outline-none transition-colors resize-none"
                       style={{ fontFamily: 'var(--font-body)', borderRadius: '3px' }}
                     />
                   </div>
@@ -335,7 +335,7 @@ export function ServicePageLayout({
                 
                 <div className="space-y-6">
                   <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 rounded-full bg-[#111111] border border-[rgba(255,255,255,0.1)] flex items-center justify-center flex-shrink-0">
+                    <div className="w-12 h-12 rounded-full bg-[#0A1330] border border-[rgba(255,255,255,0.1)] flex items-center justify-center flex-shrink-0">
                       <Mail className="w-5 h-5 text-white" />
                     </div>
                     <div>
@@ -352,7 +352,7 @@ export function ServicePageLayout({
                     </div>
                   </div>
 
-                  <div className="mt-8 p-6 bg-[#111111] border border-[rgba(255,255,255,0.06)]" style={{ borderRadius: '3px' }}>
+                  <div className="mt-8 p-6 bg-[#0A1330] border border-[rgba(255,255,255,0.06)]" style={{ borderRadius: '3px' }}>
                     <p className="text-sm leading-relaxed" style={{ fontFamily: 'var(--font-body)', fontWeight: 300, color: 'rgba(255,255,255,0.6)' }}>
                       Wir sind Montag bis Freitag von 8:00 bis 18:00 Uhr für Sie erreichbar. 
                       Gerne beantworten wir Ihre Fragen zu unseren Dienstleistungen und erstellen Ihnen ein individuelles Angebot.
@@ -366,7 +366,7 @@ export function ServicePageLayout({
       </section>
 
       {/* CTA */}
-      <section className="py-20 bg-[#0a0a0a] border-t border-[rgba(255,255,255,0.08)]">
+      <section className="py-20 bg-[#050A20] border-t border-[rgba(255,255,255,0.08)]">
         <div className="section-padding">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="heading-glow text-4xl md:text-5xl text-white mb-8" style={{ fontFamily: 'var(--font-headline)', fontWeight: 400, letterSpacing: '0.02em' }}>

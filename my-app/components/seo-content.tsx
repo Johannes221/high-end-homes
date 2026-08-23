@@ -81,7 +81,7 @@ const localLandingPages = [
 
 export function SeoContent() {
   return (
-    <section id="region" className="bg-[#0a0a0a] py-16">
+    <section id="region" className="bg-[#050A20] py-16">
       <div className="section-padding max-w-7xl mx-auto space-y-12">
         <div className="text-center max-w-4xl mx-auto space-y-5">
           <Badge className="bg-[#c9a45c]/10 text-[#c9a45c] border border-[#c9a45c]/30 hover:bg-[#c9a45c]/10">
@@ -97,7 +97,7 @@ export function SeoContent() {
 
         <div className="grid lg:grid-cols-3 gap-6">
           {coreTopics.map((topic) => (
-            <Card key={topic.title} className="bg-[#1a1a1a] border-[#2a2a2a] h-full">
+            <Card key={topic.title} className="bg-[#141B3A] border-[#2a2a2a] h-full">
               <CardHeader>
                 <div className="w-12 h-12 rounded-xl bg-[#c9a45c]/10 flex items-center justify-center mb-4">
                   <topic.icon className="w-6 h-6 text-[#c9a45c]" />
@@ -112,7 +112,7 @@ export function SeoContent() {
         </div>
 
         <div className="grid lg:grid-cols-[1.2fr_0.8fr] gap-6 items-start">
-          <Card className="bg-[#1a1a1a] border-[#2a2a2a]">
+          <Card className="bg-[#141B3A] border-[#2a2a2a]">
             <CardHeader>
               <CardTitle className="text-2xl text-white">Warum Kunden aus Heidelberg, Mannheim und Umgebung uns wählen</CardTitle>
             </CardHeader>
@@ -131,7 +131,7 @@ export function SeoContent() {
             </CardContent>
           </Card>
 
-          <Card className="bg-[#1a1a1a] border-[#2a2a2a]">
+          <Card className="bg-[#141B3A] border-[#2a2a2a]">
             <CardHeader>
               <CardTitle className="text-2xl text-white">Einsatzgebiet</CardTitle>
             </CardHeader>
@@ -164,7 +164,7 @@ export function SeoContent() {
 
           <div className="grid md:grid-cols-2 gap-6">
             {faqs.map((faq) => (
-              <Card key={faq.question} className="bg-[#1a1a1a] border-[#2a2a2a] h-full">
+              <Card key={faq.question} className="bg-[#141B3A] border-[#2a2a2a] h-full">
                 <CardHeader>
                   <CardTitle className="text-lg text-white leading-7">{faq.question}</CardTitle>
                 </CardHeader>
@@ -186,7 +186,7 @@ export function SeoContent() {
 
           <div className="grid md:grid-cols-3 gap-6">
             {localLandingPages.map((page) => (
-              <Card key={page.href} className="bg-[#1a1a1a] border-[#2a2a2a] h-full">
+              <Card key={page.href} className="bg-[#141B3A] border-[#2a2a2a] h-full">
                 <CardHeader>
                   <CardTitle className="text-xl text-white">{page.title}</CardTitle>
                 </CardHeader>
@@ -216,7 +216,7 @@ export function SeoContent() {
           </p>
           <a
             href="#quote"
-            className="inline-flex items-center justify-center rounded-lg bg-[#c9a45c] px-6 py-3 font-semibold text-[#0a0a0a] transition-colors hover:bg-[#d4af37]"
+            className="inline-flex items-center justify-center rounded-lg bg-[#c9a45c] px-6 py-3 font-semibold text-[#050A20] transition-colors hover:bg-[#d4af37]"
           >
             Unverbindlich anfragen
           </a>

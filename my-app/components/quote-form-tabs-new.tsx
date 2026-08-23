@@ -266,7 +266,7 @@ export function QuoteFormTabs() {
                     required 
                     value={formData.name}
                     onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
-                    className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)] text-white" 
+                    className="bg-[#050A20] border-[rgba(255,255,255,0.1)] text-white" 
                   />
                 </div>
                 <div>
@@ -277,7 +277,7 @@ export function QuoteFormTabs() {
                     required 
                     value={formData.email}
                     onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
-                    className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)] text-white" 
+                    className="bg-[#050A20] border-[rgba(255,255,255,0.1)] text-white" 
                   />
                 </div>
               </div>
@@ -290,7 +290,7 @@ export function QuoteFormTabs() {
                     type="tel" 
                     value={formData.phone}
                     onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value }))}
-                    className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)] text-white" 
+                    className="bg-[#050A20] border-[rgba(255,255,255,0.1)] text-white" 
                   />
                 </div>
                 <div>
@@ -299,7 +299,7 @@ export function QuoteFormTabs() {
                     id="company" 
                     value={formData.company}
                     onChange={(e) => setFormData(prev => ({ ...prev, company: e.target.value }))}
-                    className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)] text-white" 
+                    className="bg-[#050A20] border-[rgba(255,255,255,0.1)] text-white" 
                   />
                 </div>
               </div>
@@ -313,7 +313,7 @@ export function QuoteFormTabs() {
                     required 
                     value={formData.squareMeters}
                     onChange={(e) => setFormData(prev => ({ ...prev, squareMeters: e.target.value }))}
-                    className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)] text-white" 
+                    className="bg-[#050A20] border-[rgba(255,255,255,0.1)] text-white" 
                   />
                 </div>
                 <div>
@@ -323,10 +323,10 @@ export function QuoteFormTabs() {
                     value={formData.buildingType}
                     onValueChange={(value) => setFormData(prev => ({ ...prev, buildingType: value }))}
                   >
-                    <SelectTrigger className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)] text-white">
+                    <SelectTrigger className="bg-[#050A20] border-[rgba(255,255,255,0.1)] text-white">
                       <SelectValue placeholder="Wählen Sie..." />
                     </SelectTrigger>
-                    <SelectContent className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)]">
+                    <SelectContent className="bg-[#050A20] border-[rgba(255,255,255,0.1)]">
                       {buildingTypes.map((type) => (
                         <SelectItem key={type} value={type} className="text-white">{type}</SelectItem>
                       ))}
@@ -342,10 +342,10 @@ export function QuoteFormTabs() {
                     value={formData.floor}
                     onValueChange={(value) => setFormData(prev => ({ ...prev, floor: value }))}
                   >
-                    <SelectTrigger className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)] text-white">
+                    <SelectTrigger className="bg-[#050A20] border-[rgba(255,255,255,0.1)] text-white">
                       <SelectValue placeholder="Wählen Sie..." />
                     </SelectTrigger>
-                    <SelectContent className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)]">
+                    <SelectContent className="bg-[#050A20] border-[rgba(255,255,255,0.1)]">
                       {floorOptions.map((floor) => (
                         <SelectItem key={floor} value={floor} className="text-white">{floor}</SelectItem>
                       ))}
@@ -358,10 +358,10 @@ export function QuoteFormTabs() {
                     value={formData.elevator}
                     onValueChange={(value) => setFormData(prev => ({ ...prev, elevator: value }))}
                   >
-                    <SelectTrigger className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)] text-white">
+                    <SelectTrigger className="bg-[#050A20] border-[rgba(255,255,255,0.1)] text-white">
                       <SelectValue placeholder="Wählen Sie..." />
                     </SelectTrigger>
-                    <SelectContent className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)]">
+                    <SelectContent className="bg-[#050A20] border-[rgba(255,255,255,0.1)]">
                       <SelectItem value="ja" className="text-white">Ja</SelectItem>
                       <SelectItem value="nein" className="text-white">Nein</SelectItem>
                     </SelectContent>
@@ -395,7 +395,7 @@ export function QuoteFormTabs() {
                   placeholder="Beschreiben Sie eventuelle Wertgegenstände..." 
                   value={formData.valuables}
                   onChange={(e) => setFormData(prev => ({ ...prev, valuables: e.target.value }))}
-                  className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)] text-white" 
+                  className="bg-[#050A20] border-[rgba(255,255,255,0.1)] text-white" 
                 />
               </div>
 
@@ -406,7 +406,7 @@ export function QuoteFormTabs() {
                   type="date" 
                   value={formData.desiredDate}
                   onChange={(e) => setFormData(prev => ({ ...prev, desiredDate: e.target.value }))}
-                  className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)] text-white" 
+                  className="bg-[#050A20] border-[rgba(255,255,255,0.1)] text-white" 
                 />
               </div>
 
@@ -417,7 +417,7 @@ export function QuoteFormTabs() {
                   placeholder="Weitere Informationen..." 
                   value={formData.notes}
                   onChange={(e) => setFormData(prev => ({ ...prev, notes: e.target.value }))}
-                  className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)] text-white" 
+                  className="bg-[#050A20] border-[rgba(255,255,255,0.1)] text-white" 
                   rows={4} 
                 />
               </div>
@@ -458,7 +458,7 @@ export function QuoteFormTabs() {
                     required 
                     value={formData.name}
                     onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
-                    className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)] text-white" 
+                    className="bg-[#050A20] border-[rgba(255,255,255,0.1)] text-white" 
                   />
                 </div>
                 <div>
@@ -469,7 +469,7 @@ export function QuoteFormTabs() {
                     required 
                     value={formData.email}
                     onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
-                    className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)] text-white" 
+                    className="bg-[#050A20] border-[rgba(255,255,255,0.1)] text-white" 
                   />
                 </div>
               </div>
@@ -483,7 +483,7 @@ export function QuoteFormTabs() {
                     required 
                     value={formData.squareMeters}
                     onChange={(e) => setFormData(prev => ({ ...prev, squareMeters: e.target.value }))}
-                    className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)] text-white" 
+                    className="bg-[#050A20] border-[rgba(255,255,255,0.1)] text-white" 
                   />
                 </div>
                 <div>
@@ -493,10 +493,10 @@ export function QuoteFormTabs() {
                     value={formData.buildingType}
                     onValueChange={(value) => setFormData(prev => ({ ...prev, buildingType: value }))}
                   >
-                    <SelectTrigger className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)] text-white">
+                    <SelectTrigger className="bg-[#050A20] border-[rgba(255,255,255,0.1)] text-white">
                       <SelectValue placeholder="Wählen Sie..." />
                     </SelectTrigger>
-                    <SelectContent className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)]">
+                    <SelectContent className="bg-[#050A20] border-[rgba(255,255,255,0.1)]">
                       {buildingTypes.map((type) => (
                         <SelectItem key={type} value={type} className="text-white">{type}</SelectItem>
                       ))}
@@ -530,10 +530,10 @@ export function QuoteFormTabs() {
                   value={formData.asbestosRequired ? "ja" : "nein"}
                   onValueChange={(value) => setFormData(prev => ({ ...prev, asbestosRequired: value === "ja" }))}
                 >
-                  <SelectTrigger className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)] text-white">
+                  <SelectTrigger className="bg-[#050A20] border-[rgba(255,255,255,0.1)] text-white">
                     <SelectValue placeholder="Wählen Sie..." />
                   </SelectTrigger>
-                  <SelectContent className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)]">
+                  <SelectContent className="bg-[#050A20] border-[rgba(255,255,255,0.1)]">
                     <SelectItem value="ja" className="text-white">Ja</SelectItem>
                     <SelectItem value="nein" className="text-white">Nein</SelectItem>
                     <SelectItem value="unbekannt" className="text-white">Unbekannt</SelectItem>
@@ -548,7 +548,7 @@ export function QuoteFormTabs() {
                   placeholder="Weitere Informationen..." 
                   value={formData.notes}
                   onChange={(e) => setFormData(prev => ({ ...prev, notes: e.target.value }))}
-                  className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)] text-white" 
+                  className="bg-[#050A20] border-[rgba(255,255,255,0.1)] text-white" 
                   rows={4} 
                 />
               </div>
@@ -591,7 +591,7 @@ export function QuoteFormTabs() {
                     required 
                     value={formData.name}
                     onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
-                    className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)] text-white" 
+                    className="bg-[#050A20] border-[rgba(255,255,255,0.1)] text-white" 
                   />
                 </div>
                 <div>
@@ -602,7 +602,7 @@ export function QuoteFormTabs() {
                     required 
                     value={formData.email}
                     onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
-                    className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)] text-white" 
+                    className="bg-[#050A20] border-[rgba(255,255,255,0.1)] text-white" 
                   />
                 </div>
               </div>
@@ -615,7 +615,7 @@ export function QuoteFormTabs() {
                   required 
                   value={formData.squareMeters}
                   onChange={(e) => setFormData(prev => ({ ...prev, squareMeters: e.target.value }))}
-                  className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)] text-white" 
+                  className="bg-[#050A20] border-[rgba(255,255,255,0.1)] text-white" 
                 />
               </div>
 
@@ -626,7 +626,7 @@ export function QuoteFormTabs() {
                   placeholder="Beschreiben Sie Ihr Projekt..." 
                   value={formData.notes}
                   onChange={(e) => setFormData(prev => ({ ...prev, notes: e.target.value }))}
-                  className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)] text-white" 
+                  className="bg-[#050A20] border-[rgba(255,255,255,0.1)] text-white" 
                   rows={6} 
                   required 
                 />
@@ -668,7 +668,7 @@ export function QuoteFormTabs() {
                     required 
                     value={formData.name}
                     onChange={(e) => setFormData(prev => ({ ...prev, name: e.target.value }))}
-                    className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)] text-white" 
+                    className="bg-[#050A20] border-[rgba(255,255,255,0.1)] text-white" 
                   />
                 </div>
                 <div>
@@ -679,7 +679,7 @@ export function QuoteFormTabs() {
                     required 
                     value={formData.email}
                     onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
-                    className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)] text-white" 
+                    className="bg-[#050A20] border-[rgba(255,255,255,0.1)] text-white" 
                   />
                 </div>
               </div>
@@ -710,7 +710,7 @@ export function QuoteFormTabs() {
                   type="number" 
                   value={formData.squareMeters}
                   onChange={(e) => setFormData(prev => ({ ...prev, squareMeters: e.target.value }))}
-                  className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)] text-white" 
+                  className="bg-[#050A20] border-[rgba(255,255,255,0.1)] text-white" 
                 />
               </div>
 
@@ -721,7 +721,7 @@ export function QuoteFormTabs() {
                   placeholder="Beschreiben Sie Ihr Projekt..." 
                   value={formData.notes}
                   onChange={(e) => setFormData(prev => ({ ...prev, notes: e.target.value }))}
-                  className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)] text-white" 
+                  className="bg-[#050A20] border-[rgba(255,255,255,0.1)] text-white" 
                   rows={6} 
                   required 
                 />

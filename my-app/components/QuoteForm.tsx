@@ -20,8 +20,8 @@ type GuttingErrors = {
 }
 
 const colors = {
-  page: "#0a0a0a",
-  card: "#1a1a1a",
+  page: "#050A20",
+  card: "#141B3A",
   border: "#2a2a2a",
   gold: "#c9a45c",
   text: "#ffffff",

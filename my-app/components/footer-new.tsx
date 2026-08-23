@@ -14,7 +14,7 @@ const allServices = [
 
 export function Footer() {
   return (
-    <footer id="kontakt" className="bg-[#0a0a0a] border-t border-[rgba(255,255,255,0.08)]">
+    <footer id="kontakt" className="bg-[#050A20] border-t border-[rgba(255,255,255,0.08)]">
       <div className="section-padding py-16">
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-12 mb-12">

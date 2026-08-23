@@ -30,8 +30,8 @@ export function Navigation() {
       <nav
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 backdrop-blur-2xl ${
           isScrolled
-            ? "bg-[#0a0a0a]/20 border-b border-white/10"
-            : "bg-[#0a0a0a]/10"
+            ? "bg-[#050A20]/20 border-b border-white/10"
+            : "bg-[#050A20]/10"
         }`}
       >
         <div className="section-padding">
@@ -63,7 +63,7 @@ export function Navigation() {
 
             {/* CTA Button */}
             <div className="hidden md:flex items-center gap-4">
-              <Button asChild className="bg-[#c9a45c] text-[#0a0a0a] hover:bg-[#d4af37] font-semibold">
+              <Button asChild className="bg-[#c9a45c] text-[#050A20] hover:bg-[#d4af37] font-semibold">
                 <Link href="/#quote">Angebot einholen</Link>
               </Button>
             </div>
@@ -81,7 +81,7 @@ export function Navigation() {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="fixed inset-0 z-40 bg-[#0a0a0a] pt-24 md:hidden">
+        <div className="fixed inset-0 z-40 bg-[#050A20] pt-24 md:hidden">
             <div className="section-padding py-8">
               <div className="flex flex-col gap-6">
                 {navLinks.map((link) => (
@@ -95,7 +95,7 @@ export function Navigation() {
                   </Link>
                 ))}
                 <div className="pt-6 border-t border-[#2a2a2a]">
-                  <Button asChild className="w-full bg-[#c9a45c] text-[#0a0a0a] hover:bg-[#d4af37] font-semibold">
+                  <Button asChild className="w-full bg-[#c9a45c] text-[#050A20] hover:bg-[#d4af37] font-semibold">
                     <Link href="/#quote" onClick={() => setIsMobileMenuOpen(false)}>
                       Angebot einholen
                     </Link>

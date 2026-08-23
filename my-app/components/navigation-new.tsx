@@ -36,7 +36,7 @@ export function Navigation() {
       <nav
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled
-            ? "bg-[rgba(10,10,10,0.92)] backdrop-blur-xl border-b border-[rgba(255,255,255,0.08)]"
+            ? "bg-[rgba(5,10,32,0.92)] backdrop-blur-xl border-b border-[rgba(255,255,255,0.08)]"
             : "bg-transparent"
         }`}
       >
@@ -67,7 +67,7 @@ export function Navigation() {
                 
                 {isServicesOpen && (
                   <div className="absolute left-0 min-w-[320px]" style={{ top: '100%', paddingTop: '8px' }}>
-                    <div className="bg-[#111] border border-[rgba(255,255,255,0.1)] py-2">
+                    <div className="bg-[#0A1330] border border-[rgba(255,255,255,0.1)] py-2">
                     <div className="space-y-0">
                       {/* Innenausbau & Sanierung */}
                       <div className="px-5 py-2">
@@ -159,7 +159,7 @@ export function Navigation() {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="fixed inset-0 z-40 bg-[#0a0a0a] pt-24 lg:hidden overflow-y-auto">
+        <div className="fixed inset-0 z-40 bg-[#050A20] pt-24 lg:hidden overflow-y-auto">
           <div className="section-padding py-8">
             <div className="flex flex-col gap-6">
               {/* Innenausbau & Sanierung */}

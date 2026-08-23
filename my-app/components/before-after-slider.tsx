@@ -139,7 +139,7 @@ export function BeforeAfterSlider({
         }}
       >
         <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-          <path d="M7 4L3 10l4 6M13 4l4 6-4 6" stroke="#0a0a0a" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+          <path d="M7 4L3 10l4 6M13 4l4 6-4 6" stroke="#050A20" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
       </button>
     </div>

@@ -84,7 +84,7 @@ export function ContactForm() {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 required
-                className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)] text-white"
+                className="bg-[#050A20] border-[rgba(255,255,255,0.1)] text-white"
               />
             </div>
             <div>
@@ -95,7 +95,7 @@ export function ContactForm() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)] text-white"
+                className="bg-[#050A20] border-[rgba(255,255,255,0.1)] text-white"
               />
             </div>
           </div>
@@ -107,7 +107,7 @@ export function ContactForm() {
               type="tel"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
-              className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)] text-white"
+              className="bg-[#050A20] border-[rgba(255,255,255,0.1)] text-white"
             />
           </div>
 
@@ -119,7 +119,7 @@ export function ContactForm() {
               onChange={(e) => setMessage(e.target.value)}
               required
               rows={6}
-              className="bg-[#0a0a0a] border-[rgba(255,255,255,0.1)] text-white"
+              className="bg-[#050A20] border-[rgba(255,255,255,0.1)] text-white"
             />
           </div>
 

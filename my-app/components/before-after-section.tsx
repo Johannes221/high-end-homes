@@ -23,7 +23,7 @@ export function BeforeAfterSection() {
   const sample = SAMPLES[view]
 
   return (
-    <section className="py-20 md:py-28 bg-[#0a0a0a]">
+    <section className="py-20 md:py-28 bg-[#050A20]">
       <div className="section-padding mx-auto max-w-6xl">
         <div className="text-center mb-12 mx-auto max-w-3xl">
           <p
