@@ -33,6 +33,7 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+RENDER_ENV_VARS.txt
 
 # vercel
 .vercel
